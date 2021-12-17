@@ -8,9 +8,9 @@ from .forms import NameForm, IPForm, LoginForm, CompareForm, TrafficForm, IP_XR_
 from .tests import json_data
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from class2_device import BaseDevice, DeviceIOS, DeviceNXOS, DeviceIOSXR
-from scripts_all import parse, Compare_flows, parse_interface, parse_arp, parse_igmp, parse_mcast
-from scripts_all import parse_xr, Create_Excel_Table_xr
+from helpers.class2_device import BaseDevice, DeviceIOS, DeviceNXOS, DeviceIOSXR
+from .scripts_all import parse, Compare_flows, parse_interface, parse_arp, parse_igmp, parse_mcast
+from .scripts_all import parse_xr, Create_Excel_Table_xr
 from datetime import datetime as dt
 import time
 from django.contrib.auth.decorators import login_required
@@ -99,7 +99,7 @@ def parse_cdp(nodes,links,host,f):
                 if enlace not in links:
                     links.append(enlace)
 
-    print 'Numero Total de Nodes: ' + str(len(nodes))
+    print ('Numero Total de Nodes: ' + str(len(nodes)) )
     return nodes,links
 
 @login_required(login_url='/nxos/login/')
@@ -109,7 +109,7 @@ def d3_graph(request):
         if form.is_valid():
             site = form.cleaned_data.get('sites')
             device_list = [ x.ip_address for x in Devices.objects.filter(hostname__icontains=site)]
-            print device_list
+            print (device_list)
             nodes = {}
             links=[] ; nodes2=[]
             for ip in device_list:

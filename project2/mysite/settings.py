@@ -15,6 +15,11 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+if os.name == 'nt':
+    POSTGRES_DB = 'localhost'
+else:
+    POSTGRES_DB = 'mega-postgres'
+
 #CUSTOM ROOT VARIABLES ###
 ## JOC VARS ###
 MEDIA_ROOT = './nxos/session_logs/'
@@ -125,7 +130,7 @@ DATABASES = {
         'NAME': 'mega_data',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': POSTGRES_DB,
         'PORT': '',
     }
 }

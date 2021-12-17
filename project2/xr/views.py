@@ -13,9 +13,9 @@ from django import forms
 from django.utils import timezone
 from .forms import NameForm, IPForm, LoginForm, CompareForm, TrafficForm, IP_XR_Form
 from .models import Devices, Mcast_flows, Script_logs, Traffic_interfaces, ARP_data, IGMP_data
-from scripts_all import parse_mcast, parse_xr, Create_Excel_Table_xr, parse_interface, parse_arp, parse_mcast_igmp
-from scripts_all import parse_igmp
-from class2_device import BaseDevice
+from .scripts_all import parse_mcast, parse_xr, Create_Excel_Table_xr, parse_interface, parse_arp, parse_mcast_igmp
+from .scripts_all import parse_igmp
+from helpers.class2_device import BaseDevice
 import uuid
 import json
 from django.conf import settings

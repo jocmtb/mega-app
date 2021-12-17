@@ -82,20 +82,20 @@ def parse(f):
 					,'out_intf_count':OUT_INTF
 					,'out_intfs':jose2
 					,'stat_flow':STAT_FLOW}
-  print 'Numero Total de Prefijos: ' + str(len(jose))
+  print ('Numero Total de Prefijos: ' + str(len(jose)))
   return jose,jose3
 
 def Compare_flows(dict_MCAST_GRP,dict_MCAST_GRP2):
     joc=[]
     for x in dict_MCAST_GRP.keys():
       if x not in dict_MCAST_GRP2.keys():
-        print "Missing Mcast route : " + str(x)
+        print ("Missing Mcast route : " + str(x) )
         joc.append({'mcast_grp':str(x)
                     ,'diff_type':'Missing Mcast route'
 					,'input_intf':str(dict_MCAST_GRP[x]['in_intf'])
 					,'description':'mcast route exist in first file now it is gone'})
       elif dict_MCAST_GRP[x]['in_intf'] != dict_MCAST_GRP2[x]['in_intf']:
-        print "INPUT Intf Mcast route : " + str(x) + " Missmatched " + str(dict_MCAST_GRP[x]['in_intf']) + "/" + str(dict_MCAST_GRP2[x]['in_intf'])
+        print ("INPUT Intf Mcast route : " + str(x) + " Missmatched " + str(dict_MCAST_GRP[x]['in_intf']) + "/" + str(dict_MCAST_GRP2[x]['in_intf']) )
         joc.append({'mcast_grp':str(x)
                     ,'diff_type':'INPUT Intf Mcast route'
 					,'input_intf':str(dict_MCAST_GRP[x]['in_intf'])
@@ -103,21 +103,21 @@ def Compare_flows(dict_MCAST_GRP,dict_MCAST_GRP2):
       else:
         for y in dict_MCAST_GRP[x]['out_intfs']:
           if y not in dict_MCAST_GRP2[x]['out_intfs'] and y is not 'none':
-            print "OUTPUT Intf Mcast route : " + str(x) +" Missing "+ str(y)
+            print ("OUTPUT Intf Mcast route : " + str(x) +" Missing "+ str(y) )
             joc.append({'mcast_grp':str(x)
                     ,'diff_type':'OUTPUT Intf Mcast route'
 					,'input_intf':str(dict_MCAST_GRP[x]['in_intf'])
 					,'description':'Missing '+ str(y)})
       if x in dict_MCAST_GRP2.keys():
         if dict_MCAST_GRP[x]['stat_flow'] != dict_MCAST_GRP2[x]['stat_flow']:
-          print "Status Flow Change : " + str(x) + " It went from " + str(dict_MCAST_GRP[x]['stat_flow']) + " to " + str(dict_MCAST_GRP2[x]['stat_flow'])
+          print ("Status Flow Change : " + str(x) + " It went from " + str(dict_MCAST_GRP[x]['stat_flow']) + " to " + str(dict_MCAST_GRP2[x]['stat_flow']) )
           joc.append({'mcast_grp':str(x)
                     ,'diff_type':'Status Flow Change'
 					,'input_intf':str(dict_MCAST_GRP[x]['in_intf'])
 					,'description':"It went from " + str(dict_MCAST_GRP[x]['stat_flow']) + " to " + str(dict_MCAST_GRP2[x]['stat_flow'])})
     for x in dict_MCAST_GRP2.keys():
       if x not in dict_MCAST_GRP.keys():
-        print "New Mcast route : " + str(x)
+        print ("New Mcast route : " + str(x) )
         joc.append({'mcast_grp':str(x)
                     ,'diff_type':'New Multicast route'
 					,'input_intf':str(dict_MCAST_GRP2[x]['in_intf'])
@@ -125,7 +125,7 @@ def Compare_flows(dict_MCAST_GRP,dict_MCAST_GRP2):
       else:
         for y in dict_MCAST_GRP2[x]['out_intfs']:
           if y not in dict_MCAST_GRP[x]['out_intfs'] and y is not 'none':
-            print "New OUTPUT Intferface in OIL : " + str(x) +" New "+ str(y)
+            print ("New OUTPUT Intferface in OIL : " + str(x) +" New "+ str(y) )
             joc.append({'mcast_grp':str(x)
                     ,'diff_type':'New OUTPUT Intferface in OIL'
 					,'input_intf':str(dict_MCAST_GRP2[x]['in_intf'])
@@ -185,7 +185,7 @@ def parse_arp(f):
       MAC_ip=line.split()[0]
       MAC_vlan=line.split()[3]
       lista_arp[(MAC_add,MAC_vlan)]={'mac_ip':MAC_ip,'mac_vlan':MAC_vlan}
-  print '# Total de MACs aprendidas: ' + str(len(lista_macs))
+  print ('# Total de MACs aprendidas: ' + str(len(lista_macs)) )
   for x in lista_macs:
       if (x['mac_add'],x['mac_vlan']) in lista_arp.keys():
         x['mac_ip']=lista_arp[x['mac_add'],x['mac_vlan']]['mac_ip']
@@ -222,7 +222,7 @@ def parse_mcast(buffer):
          lista.append(x.split()[0])
    lista2 = [ 'show mrib vrf ' + x + ' route\n' for x in lista]
    lista2.insert(0,'\n')
-   print lista2
+   print (lista2)
    return lista2
 
 def parse_xr(f):
@@ -285,7 +285,7 @@ def parse_xr(f):
       elif OUT_INTF=='ON':
         jose_out.append(OUT_INTFS)
 
-  print 'Numero Total de Prefijos: ' + str(len(dict_vrf.keys()))
+  print ('Numero Total de Prefijos: ' + str(len(dict_vrf.keys())) )
   return dict_vrf,jose3
 
 def Create_Excel_Table_xr(ip1,date1,data):
@@ -340,7 +340,7 @@ def Create_Excel_Table_xr(ip1,date1,data):
                 worksheet.write(i, 5, datax['out_intfs'], ordenar_left)
                 i+=1
           i=1
-          print"Excel Done"
+          print ("Excel Done")
         workbook.close()
         return filename2
         #os.system('start excel.exe doc2.xlsx')
@@ -351,5 +351,5 @@ if __name__=='__main__':
       docfile1=sys.argv[1]
       docfile2=sys.argv[2]
     else:
-      print 'python isis_tdp.py <file-before> <file-after>'
+      print ('python isis_tdp.py <file-before> <file-after>')
     exit()

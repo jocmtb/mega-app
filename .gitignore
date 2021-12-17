@@ -1,0 +1,17 @@
+postgres-data/
+*.pyc
+project2/.scannerwork/*
+project2/project2/__pycache__/
+project2/api/__pycache__/
+project2/portal/__pycache__/
+project2/nxos/migrations/0*
+project2/portal/migrations/0*
+project2/xr/migrations/0*
+project2/polls/migrations/0*
+project2/**/migrations/0*
+project2/logs/
+project2/project_noa.log
+project2/.coverage
+project2/geckodriver.log
+node_modules
+mega-proxy/node_modules/

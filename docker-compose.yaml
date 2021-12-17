@@ -21,8 +21,7 @@ services:
     build:
       context: ./project2/docker-config/
     depends_on:
-      - noa-postgres
-      - noa-mongo
+      - mega-postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -53,7 +52,7 @@ services:
       - ./mega-proxy/static:/vol/static
     restart: unless-stopped
 networks:
-  noa-network:
+  mega-network:
     driver: bridge
     name: mega-network
     ipam:
