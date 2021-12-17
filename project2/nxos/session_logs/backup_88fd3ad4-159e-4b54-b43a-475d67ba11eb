@@ -1,0 +1,2244 @@
+
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Copyright (C) 2002-2018, Cisco and/or its affiliates.
+All rights reserved.
+The copyrights to certain works contained in this software are
+owned by other third parties and used and distributed under their own
+licenses, such as open source.  This software is provided "as is," and unless
+otherwise stated, there is no warranty, express or implied, including but not
+limited to warranties of merchantability and fitness for a particular purpose.
+Certain components of this software are licensed under
+the GNU General Public License (GPL) version 2.0 or 
+GNU General Public License (GPL) version 3.0  or the GNU
+Lesser General Public License (LGPL) Version 2.1 or 
+Lesser General Public License (LGPL) Version 2.0. 
+A copy of each such license is available at
+http://www.opensource.org/licenses/gpl-2.0.php and
+http://opensource.org/licenses/gpl-3.0.html and
+http://www.opensource.org/licenses/lgpl-2.1.php and
+http://www.gnu.org/licenses/old-licenses/library.txt.
+TVD-SW-N9K-VIDEO2-TOL# terminal length 0
+TVD-SW-N9K-VIDEO2-TOL# terminal width 510
+TVD-SW-N9K-VIDEO2-TOL# show clock
+01:42:07.384 Mexico Wed Jun 03 2020
+Time source is NTP
+TVD-SW-N9K-VIDEO2-TOL# show running-config
+
+!Command: show running-config
+!Time: Wed Jun  3 01:42:07 2020
+
+version 7.0(3)I7(5a) Bios:version 08.34 
+hostname TVD-SW-N9K-VIDEO2-TOL
+policy-map type network-qos Jumbo-nq-policy
+  class type network-qos c-nq3
+    mtu 9216
+  class type network-qos c-nq2
+    mtu 9216
+  class type network-qos c-nq1
+    mtu 9216
+  class type network-qos c-nq-default
+    mtu 9216
+vdc TVD-SW-N9K-VIDEO2-TOL id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature tacacs+
+cfs eth distribute
+feature ospf
+feature bgp
+feature pim
+feature pbr
+feature port-security
+feature udld
+feature interface-vlan
+feature hsrp
+feature lacp
+feature dhcp
+feature tunnel
+feature vpc
+feature vtp
+feature bfd
+clock timezone Mexico -6 0
+clock summer-time Mexico 1 Sun Apr 2:00 4 Sun Oct 2:00 60
+
+username admin password 5 $5$DCGPAA$bBsjMK7e8HeWbLpdHEvFEV3esXZ.t1pBzqjM4fRBRI/  role network-admin
+username recovery password 5 $5$Xvdj7UT9$7IJLZtFlPF6cTPrTCi8iDE6h6N6z3IV0BI3UWKg6wf.  role priv-15
+username recovery2 password 5 $5$ohhAcwfP$CA.BK2f7fDNLreFW7P5zJtEf75otuIwPlMXBj5wVS4B  role priv-15
+
+banner motd ^C
+Advertencia: Este es un equipo de Acceso Restringido.
+Acceso no autorizado sera severamente penalizado.
+La sesion esta siendo registrada.
+Warning: This is a restricted access device. Unauthorized
+access will be vigorously prosecuted.
+The session is being logged.
+=====================
+= M E G A C A B L E =
+=====================
+^
+
+no ip domain-lookup
+ip domain-name megacable.com.mx
+ip tacacs source-interface Vlan14
+tacacs-server host 10.1.63.12 key 7 "pakflog" 
+tacacs-server host 10.1.63.11 key 7 "pakflog" 
+aaa group server tacacs+ ISE-MEGACABLE 
+    server 10.1.63.12 
+    server 10.1.63.11 
+errdisable recovery interval 180
+errdisable recovery cause udld
+errdisable recovery cause bpduguard
+errdisable recovery cause storm-control
+ip access-list 105
+  10 permit ip 192.168.196.253/32 any 
+  20 permit ip 172.20.197.30/32 any 
+  30 permit ip 10.1.197.80 0.0.0.15 any 
+  40 permit ip 10.0.196.128 0.0.0.63 any 
+  50 permit tcp 10.0.70.0 0.0.0.255 any eq 22 
+  60 deny ip any any 
+ip access-list 98
+  10 permit ip 10.0.70.179/32 any 
+  20 permit ip 10.0.70.180/32 any 
+ip access-list 99
+  10 permit ip 200.52.193.14/32 any 
+  15 permit ip 10.0.70.0 0.0.0.255 any 
+  20 permit ip 10.0.196.133/32 any 
+  25 permit ip 10.0.196.130/32 any 
+  30 permit ip 10.0.196.129/32 any 
+  40 permit ip 10.0.196.158/32 any 
+  50 permit ip 10.0.196.156/32 any 
+  60 permit ip 10.0.196.146/32 any 
+  70 permit ip 10.0.196.175/32 any 
+  80 permit ip 10.0.196.184/32 any 
+  90 permit ip 10.0.196.183/32 any 
+  100 permit ip 10.0.196.181/32 any 
+  110 permit ip 10.0.196.178/32 any 
+  120 permit ip 10.0.196.179/32 any 
+  130 permit ip 200.52.196.176/32 any 
+  140 permit ip 189.194.248.20/32 any 
+  150 permit ip 200.52.196.172/32 any 
+  160 permit ip 200.52.196.173/32 any 
+  170 permit ip 200.52.196.174/32 any 
+  180 permit ip 200.52.196.175/32 any 
+  190 permit ip 200.52.196.155/32 any 
+  200 permit ip 200.52.193.144/32 any 
+  210 permit ip 200.52.193.141/32 any 
+  220 permit ip 200.52.193.142/32 any 
+  230 permit ip 200.52.193.136 0.0.0.7 any 
+  240 deny ip any any 
+ip access-list MCAST-GROUP-NSG
+  5 permit udp 192.168.197.92/32 any 
+ip access-list MEGA_NTP_SERVERS
+  10 permit ip 10.1.63.13/32 any 
+  20 permit ip 10.1.63.121/32 any 
+ipv6 access-list VTY-MGMT-ACCESO-IPv6
+  statistics per-entry
+  10 deny tcp any any eq telnet log 
+  20 deny tcp any any eq 22 log 
+class-map type qos match-any video
+  match dscp 32,34
+class-map type qos match-any datos-high
+  match dscp 24
+class-map type qos match-any management
+  match dscp 8
+class-map type qos match-any CM_QOS_Video
+  match cos 4
+  match dscp 32,34
+class-map type qos match-any datos-medium
+  match dscp 16
+class-map type qos match-any Real_Time_Video
+  match dscp 32,34,46-47
+class-map type qos match-any network-control
+  match dscp 48,56
+class-map type qos match-any real-time-class
+  match dscp 46
+class-map type qos match-any CM_QOS_Real_Time
+  match cos 5
+  match dscp 46-47
+class-map type qos match-any CM_QOS_Datos_High
+  match cos 3
+  match dscp 24
+class-map type qos match-any CM_QOS_Management
+  match cos 1
+  match dscp 8
+class-map type qos match-any CM_QOS_Datos_Medium
+  match cos 2
+  match dscp 16
+class-map type qos match-any CM_QOS_Network_Control
+  match cos 6-7
+  match dscp 48,56
+policy-map type qos QSP_QOS_REMARK_IN
+  class CM_QOS_Network_Control
+    set qos-group 1
+  class CM_QOS_Real_Time
+    set qos-group 3
+  class CM_QOS_Video
+    set qos-group 3
+  class CM_QOS_Datos_High
+    set qos-group 2
+  class CM_QOS_Datos_Medium
+    set qos-group 2
+  class CM_QOS_Management
+    set qos-group 1
+policy-map type qos QSP-ALL-IN-TRAFFIC
+  class datos-high
+    set dscp 24
+    set qos-group 2
+  class datos-medium
+    set dscp 16
+    set qos-group 2
+  class management
+    set dscp 8
+    set qos-group 1
+  class network-control
+    set dscp 48
+    set qos-group 1
+  class real-time-class
+    set dscp 32
+    set qos-group 3
+  class Real_Time_Video
+    set dscp 32
+    set qos-group 3
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-MGMT
+  class class-default
+    set dscp 8
+    set qos-group 1
+policy-map type qos QSP-IN-RMK-TRAFFIC-VOICE
+  class class-default
+    set dscp 46
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-DEFAULT
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-SDV
+  class class-default
+    set dscp 32
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  class class-default
+    set dscp 34
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  class class-default
+    set dscp 24
+    set qos-group 2
+policy-map type qos QSP-IN-TRAFFIC-RMK-DATOS-HIGH
+  class class-default
+    set cos 3
+    set qos-group 2
+    set dscp 24
+policy-map type qos QSP-IN-TRAFFIC-RMK-MANAGEMENT
+  class class-default
+    set cos 1
+    set qos-group 1
+    set dscp 8
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  class class-default
+    set dscp 16
+    set qos-group 2
+policy-map type qos QSP-IN-TRAFFIC-RMK-DATOS-MEDIUM
+  class class-default
+    set cos 2
+    set qos-group 2
+    set dscp 16
+policy-map type queuing PM_QUEUING_SYSTEM_OUT
+  class type queuing c-out-q3
+    priority level 1
+    queue-limit 2516582 bytes
+  class type queuing c-out-q2
+    bandwidth remaining percent 75
+    queue-limit 2516582 bytes
+  class type queuing c-out-q1
+    bandwidth remaining percent 15
+    queue-limit 2516582 bytes
+  class type queuing c-out-q-default
+    bandwidth remaining percent 10
+    random-detect threshold burst-optimized
+system qos
+  service-policy type queuing output PM_QUEUING_SYSTEM_OUT
+copp profile strict
+vtp domain MEGA
+snmp-server user recovery priv-15 auth md5 0xc75b9727bc66e70b5f7b2aad3904628a priv 0xc75b9727bc66e70b5f7b2aad3904628a localizedkey
+snmp-server user recovery2 priv-15 auth md5 0x710fd0de0e3978e0c124e413e867c2a1 priv 0x710fd0de0e3978e0c124e413e867c2a1 localizedkey
+snmp-server host 10.0.196.130 traps version 2c toluKsunM691
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+snmp-server enable traps bgp
+snmp-server enable traps hsrp state-change
+snmp-server community toluKsunM691 group network-operator
+snmp-server community TolThoR691X group network-admin
+snmp-server community T0LU_4cc3s0_c0!l3cT0r group network-operator
+snmp-server community toluKsunM691 use-acl 99
+snmp-server community TolThoR691X use-acl 99
+snmp-server community T0LU_4cc3s0_c0!l3cT0r use-ipv4acl 98
+ntp server 10.1.63.13 prefer use-vrf default
+ntp server 10.1.63.121 use-vrf default
+ntp source-interface  Vlan14
+ntp access-group peer MEGA_NTP_SERVERS
+aaa authentication login default group ISE-MEGACABLE 
+aaa authorization config-commands default group ISE-MEGACABLE local 
+aaa authorization commands default group ISE-MEGACABLE local 
+aaa accounting default group ISE-MEGACABLE 
+tacacs-server directed-request 
+system login block-for 45 attempts 3 within 60 
+
+ip route 0.0.0.0/0 10.0.198.254
+ip route 192.168.60.64/27 10.0.82.78 name NGV_CAS_NEW
+ip route 192.168.65.48/28 10.0.82.78
+ip route 192.168.65.64/27 10.0.82.78 name NGV_CAS
+ip route 192.168.80.32/29 192.168.80.78
+ip pim rp-address 192.168.57.161 prefix-list PWK-HD-GDL
+ip pim rp-address 192.168.58.254 prefix-list MCAST-MASTERHEADEND
+ip pim rp-address 192.168.65.30 prefix-list PWK-CTRL-GDL
+ip pim rp-address 192.168.197.148 prefix-list MCAST-ANY
+ip pim ssm prefix-list SSM
+ip pim bsr forward listen
+vlan 1,8,14-15,17-18,30,35,37-38,53,57,59,61-65,70,75,78,87-91,99,120,198-201,267,269,290,292-296,298-299,373,387,392,410,501-508,559
+vlan 8
+  name MOT-NETWORK
+vlan 14
+  name GESTION-HUBS
+vlan 15
+  name SCHG_CTRL
+vlan 17
+  name SCHG_VDO
+vlan 18
+  name ADINSERTION-TVD
+vlan 30
+  name Back2Back-OSPF
+vlan 35
+  name HD-Adinsertion
+vlan 37
+  name TVD-BNP_SEM_SEP
+vlan 38
+  name HUB8-MGT
+vlan 57
+  name IXN-2HUBS
+vlan 59
+  name Vlan_59-PCG
+vlan 61
+  name DCM1-IN
+vlan 62
+  name DCM1-OUT
+vlan 63
+  name RFGW1-IN
+vlan 64
+  name DCM3-IN
+vlan 65
+  name DCM3-OUT
+vlan 70
+  name ROSA-SIM-MGT
+vlan 75
+  name ROSA-SIM-PUBLIC
+vlan 78
+  name DEK-TEC
+vlan 87
+  name DCM2-IN
+vlan 88
+  name DCM2-OUT
+vlan 89
+  name RFGW2-IN
+vlan 90
+  name DCM4-IN
+vlan 91
+  name DCM4-OUT
+vlan 99
+  name PUBLICA
+vlan 120
+  name TVD-P1-ATSC-LOCALES-SD-HD
+vlan 198
+  name MCAST-LOCA-to-HUB7
+vlan 199
+  name MCAST-LOCA-to-HUB10
+vlan 200
+  name MCAST-LOCA-to-HUB11
+vlan 201
+  name MCAST-LOCA-to-HUB09
+vlan 267
+  name TVD-Megacanal-Ctrl
+vlan 269
+  name TVD-CISCO-CTRL
+vlan 290
+  name MHE-VIDEO-1
+vlan 292
+  name MHE-VIDEO-2
+vlan 293
+  name TVD-PDS-VOD
+vlan 294
+  name TVD-Megacanal-Telepto
+vlan 295
+  name VPN-POWERKEY-UNICAST
+vlan 296
+  name TVD-NGV-CAS
+vlan 299
+  name TVD-MLB-RAC
+vlan 373
+  name Unicast-VGHE-Resp
+vlan 387
+  name TVD-CANAL-LC-IPTV-TO-PUE
+vlan 392
+  name TVD-CANAL-LOCAL-NGV-XVIEW
+vlan 410
+  name TVD-NGV-OTA_SPOOLER
+vlan 501
+  name TVD-BPK-MGMT
+vlan 502
+  name TVD-BPK-IMM
+vlan 503
+  name TVD-BPK-BACK_OFFICE
+vlan 504
+  name TVD-BPK-VIDEO-INPUT
+vlan 505
+  name TVD-BPK-VIDEO-INTERCON
+vlan 506
+  name TVD-BPK-STREAMING
+vlan 507
+  name TVD-BPK-MCAST-ABR
+vlan 508
+  name TVD-BPK-LIFE-LINK
+vlan 559
+  name EXFO-PRUEBA
+
+spanning-tree pathcost method long
+spanning-tree vlan 8,15,17-18,30,37-38,54,57,59,61-65,70,75,78,87-91,198-201,267,269,290,292-296,298-299,410,559 priority 8192
+spanning-tree vlan 14 priority 61440
+spanning-tree vlan 373 priority 4096
+ip prefix-list CTRL-VIDEO seq 5 permit 10.0.82.72/29 
+ip prefix-list CTRL-VIDEO seq 10 permit 192.168.196.160/29 
+ip prefix-list DIGITAL-TLANE seq 5 permit 192.168.197.128/26 
+ip prefix-list MCAST-ANY seq 5 deny 239.57.20.0/27 le 32 
+ip prefix-list MCAST-ANY seq 10 deny 239.57.20.32/29 le 32 
+ip prefix-list MCAST-ANY seq 15 deny 239.20.10.0/27 le 32 
+ip prefix-list MCAST-ANY seq 20 deny 239.20.10.32/29 le 32 
+ip prefix-list MCAST-ANY seq 25 permit 224.0.0.0/4 le 32 
+ip prefix-list MCAST-MASTERHEADEND seq 15 permit 239.20.10.0/27 le 32 
+ip prefix-list MCAST-MASTERHEADEND seq 20 permit 239.20.10.32/29 le 32 
+ip prefix-list PWK-CTRL-GDL seq 5 permit 239.56.1.0/24 le 32 
+ip prefix-list PWK-HD-GDL seq 5 permit 239.57.3.65/32 
+ip prefix-list PWK-HD-GDL seq 10 permit 239.57.3.20/32 
+ip prefix-list PWK-HD-GDL seq 15 permit 239.57.3.17/32 
+ip prefix-list PWK-HD-GDL seq 20 permit 239.57.3.16/32 
+ip prefix-list PWK-HD-GDL seq 25 permit 239.57.3.19/32 
+ip prefix-list PWK-HD-GDL seq 30 permit 239.57.3.18/32 
+ip prefix-list PWK-HD-GDL seq 35 permit 239.57.3.5/32 
+ip prefix-list PWK-HD-GDL seq 40 permit 239.57.3.4/32 
+ip prefix-list PWK-HD-GDL seq 45 permit 239.57.3.7/32 
+ip prefix-list PWK-HD-GDL seq 50 permit 239.57.3.6/32 
+ip prefix-list PWK-HD-GDL seq 55 permit 239.57.3.1/32 
+ip prefix-list PWK-HD-GDL seq 60 permit 239.57.3.3/32 
+ip prefix-list PWK-HD-GDL seq 65 permit 239.57.3.2/32 
+ip prefix-list PWK-HD-GDL seq 70 permit 239.57.3.13/32 
+ip prefix-list PWK-HD-GDL seq 75 permit 239.57.3.12/32 
+ip prefix-list PWK-HD-GDL seq 80 permit 239.57.3.15/32 
+ip prefix-list PWK-HD-GDL seq 85 permit 239.57.3.14/32 
+ip prefix-list PWK-HD-GDL seq 90 permit 239.57.3.9/32 
+ip prefix-list PWK-HD-GDL seq 95 permit 239.57.3.8/32 
+ip prefix-list PWK-HD-GDL seq 100 permit 239.57.3.11/32 
+ip prefix-list PWK-HD-GDL seq 105 permit 239.57.3.10/32 
+ip prefix-list SSM seq 5 permit 239.2.1.0/24 le 32 
+ip prefix-list SSM seq 10 permit 239.57.3.0/24 le 32 
+ip prefix-list SSM seq 15 permit 239.45.2.0/24 le 32 
+ip prefix-list SSM seq 20 permit 239.56.1.0/24 le 32 
+ip prefix-list SSM seq 25 permit 232.0.0.0/8 le 32 
+ip prefix-list SSM seq 30 permit 239.57.20.22/31 le 32 
+ip prefix-list SSM seq 40 permit 239.20.10.0/27 le 32 
+ip prefix-list SSM seq 45 permit 239.20.10.32/29 le 32 
+ip prefix-list SSM seq 50 permit 239.57.30.0/28 le 32 
+ip prefix-list SSM seq 60 permit 239.197.71.1/32 
+ip prefix-list SSM seq 65 permit 239.57.20.24/30 le 32 
+ip prefix-list SSM seq 70 permit 239.57.20.28/31 le 32 
+ip prefix-list SSM seq 75 permit 239.57.20.30/32 
+ip prefix-list SSM seq 80 permit 239.57.20.32/31 le 32 
+ip prefix-list SSM seq 85 permit 239.57.20.35/32 
+ip prefix-list SSM seq 90 permit 239.57.20.36/31 le 32 
+ip prefix-list SSM seq 95 permit 239.57.20.42/31 le 32 
+ip prefix-list SSM seq 100 permit 239.57.20.44/31 le 32 
+ip prefix-list VIDEO-1 seq 5 permit 192.168.197.0/26 
+ip prefix-list VIDEO-1 seq 10 permit 192.168.80.72/29 
+ip prefix-list VIDEO-1 seq 15 permit 192.168.196.0/27 
+ip prefix-list VIDEO-2 seq 5 permit 172.20.196.0/24 
+ip prefix-list VIDEO-CISCO-CTRL seq 5 permit 192.168.65.128/29 
+ip prefix-list VIDEO-MEGACANAL-CTRL seq 5 permit 172.22.6.120/29 
+ip prefix-list VIDEO-MHE seq 5 permit 172.20.197.0/27 
+ip prefix-list VIDEO-MHE seq 10 permit 172.20.197.32/27 
+ip prefix-list VIDEO-PK-UNICAST seq 5 permit 192.168.64.8/30 
+ip prefix-list VIDEO-PK-UNICAST seq 10 permit 10.1.197.80/28 
+ip prefix-list VIDEO-PK-UNICAST seq 15 permit 10.1.197.96/28 
+ip prefix-list VIDEO-TELEPTO-TRAFICO seq 5 permit 192.168.66.56/29 
+ip prefix-list VOD-CONTROL seq 5 permit 10.0.197.0/25 
+ip prefix-list VOD-CONTROL seq 10 permit 10.1.197.240/28 
+ip prefix-list VOD-CONTROL seq 15 permit 10.2.196.224/28 
+ip prefix-list VOD-CONTROL seq 20 permit 172.15.196.0/24 
+ip prefix-list VOD-CONTROL seq 25 permit 10.208.0.0/13 
+ip prefix-list VOD-CONTROL seq 30 permit 15.42.0.0/15 
+ip prefix-list VOD-TRAFICO seq 5 permit 172.17.196.0/24 
+route-map IN_VRF_CTRL-VIDEO permit 10
+route-map IN_VRF_DIGITAL-TLANE permit 10
+route-map IN_VRF_VIDEO-1 permit 10
+route-map IN_VRF_VIDEO-2 permit 10
+route-map IN_VRF_VIDEO-CISCO-CTRL permit 10
+route-map IN_VRF_VIDEO-MEGACANAL-CTRL permit 10
+route-map IN_VRF_VIDEO-MHE permit 10
+route-map IN_VRF_VIDEO-PK-UNICAST permit 10
+route-map IN_VRF_VIDEO-TELEPTO-TRAFICO permit 10
+route-map IN_VRF_VOD-CONTROL permit 10
+route-map IN_VRF_VOD-TRAFICO permit 10
+route-map OUT_VRF_CTRL-VIDEO permit 10
+  match ip address prefix-list CTRL-VIDEO 
+  set community 65196:108 
+route-map OUT_VRF_DIGITAL-TLANE permit 10
+  match ip address prefix-list DIGITAL-TLANE 
+  set community 65196:65 
+route-map OUT_VRF_VIDEO-1 permit 10
+  match ip address prefix-list VIDEO-1 
+  set community 65196:98 
+route-map OUT_VRF_VIDEO-2 permit 10
+  match ip address prefix-list VIDEO-2 
+  set community 65196:96 
+route-map OUT_VRF_VIDEO-CISCO-CTRL permit 10
+  match ip address prefix-list VIDEO-CISCO-CTRL 
+  set community 65196:91 
+route-map OUT_VRF_VIDEO-MEGACANAL-CTRL permit 10
+  match ip address prefix-list VIDEO-MEGACANAL-CTRL 
+  set community 65196:90 
+route-map OUT_VRF_VIDEO-MHE permit 10
+  match ip address prefix-list VIDEO-MHE 
+  set community 65196:74 
+route-map OUT_VRF_VIDEO-PK-UNICAST permit 10
+  match ip address prefix-list VIDEO-PK-UNICAST 
+  set community 65196:85 
+route-map OUT_VRF_VIDEO-TELEPTO-TRAFICO permit 10
+  match ip address prefix-list VIDEO-TELEPTO-TRAFICO 
+  set community 65196:75 
+route-map OUT_VRF_VOD-CONTROL permit 10
+  match ip address prefix-list VOD-CONTROL 
+  set community 65196:94 
+route-map OUT_VRF_VOD-TRAFICO permit 10
+  match ip address prefix-list VOD-TRAFICO 
+  set community 65196:95 
+service dhcp
+ip dhcp relay
+ip dhcp relay information option
+ipv6 dhcp relay
+vrf context management
+hardware access-list tcam region racl 512
+hardware access-list tcam region qos-lite 1024
+hardware rate-limiter access-list-log 2000 
+vlan configuration 87
+
+
+interface Vlan1
+
+interface Vlan14
+  description MEGARED-VLAN-HUBS
+  no shutdown
+  no ip redirects
+  ip address 10.0.198.250/26
+
+interface Vlan30
+  description Back2Back-OSPF
+  no shutdown
+  ip address 192.168.197.5/31
+  ip ospf message-digest-key 1 md5 7 141A310A23173A2D
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 13999 area 0.0.0.8
+
+interface Vlan37
+  description BNP-SEM 
+  ip address 192.168.197.181/26
+  ip pim sparse-mode
+  ip pim dr-priority 50
+  ip igmp version 3
+
+interface Vlan38
+  no shutdown
+  no ip redirects
+  ip address 10.1.197.94/28
+  ip address 10.1.197.146/28 secondary
+
+interface Vlan57
+  description TVD-CISCO_IXN_GDL
+  no shutdown
+  ip address 192.168.196.253/30
+  ip pim sparse-mode
+
+interface Vlan61
+  description DCM1-IN
+  ip address 192.168.196.2/27
+  ip router ospf 13999 area 0.0.0.8
+  ip pim sparse-mode
+  ip pim dr-priority 50
+  ip igmp version 3
+
+interface Vlan62
+  description DCM1-OUT
+  ip address 192.168.196.50/28
+  ip pim sparse-mode
+  ip pim dr-priority 50
+  ip igmp version 3
+
+interface Vlan63
+
+interface Vlan67
+
+interface Vlan78
+  description HUB-DEK-TEC
+  ip address 10.1.197.142/28
+  ip pim sparse-mode
+
+interface Vlan87
+  description DCM2-IN
+  ip address 192.168.197.194/27
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan88
+  description DCM2-OUT
+  ip address 192.168.197.242/28
+  ip pim dr-priority 50
+  ip igmp version 3
+
+interface Vlan89
+  description RFGW-1
+  ip address 192.168.197.226/28
+  ip pim dr-priority 50
+  ip igmp version 3
+
+interface Vlan120
+  description TVD-P1-ATSC-LOCALES-SD-HD
+  no shutdown
+  ip address 192.168.120.1/28
+  ip pim sparse-mode
+  ip igmp version 3
+
+interface Vlan269
+  description TVD-CISCO-CTRL 
+  ip address 192.168.65.132/29
+  ip pim sparse-mode
+
+interface Vlan290
+  description MHE-VIDEO-1
+  ip address 172.20.197.28/27
+
+interface Vlan296
+  description TVD-NGV-CAS
+  no shutdown
+  ip address 10.0.82.76/29
+
+interface Vlan373
+  description Unicast-VGHE
+  no shutdown
+  ip address 192.168.197.3/31
+  ip ospf message-digest-key 1 md5 7 0456280720325C48
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 13999 area 0.0.0.8
+
+interface Vlan392
+  description TVD-CANALES-LOCALES-NGV-XVIEW
+  no shutdown
+  ip address 192.168.198.2/29
+  ip pim bfd-instance
+  ip pim sparse-mode
+  ip pim dr-priority 50
+
+interface Vlan410
+  description TVD-NGV-OTA_SPOOLER
+  no shutdown
+  ip address 192.168.80.76/29
+  ip pim sparse-mode
+
+interface Vlan501
+  description SVI-Broadpeak-MGMT
+  no ip redirects
+  ip address 10.9.53.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 501 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.53.222
+
+interface Vlan502
+  description SVI-Broadpeak-IMM
+  no ip redirects
+  ip address 10.9.55.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 502 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.55.222
+
+interface Vlan503
+  description SVI-Broadpeak-Back_Off
+  no ip redirects
+  ip address 10.9.57.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 503 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.57.222
+
+interface Vlan504
+  description SVI-Broadpeak-Video-In
+  no ip redirects
+  ip address 10.9.59.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 504 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.59.222
+
+interface Vlan505
+  description SVI-Broadpeak-Video-Intercon
+  no ip redirects
+  ip address 10.9.61.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 505 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.61.222
+
+interface Vlan506
+  description SVI-Broadpeak-Streaming
+  no ip redirects
+  ip address 10.9.63.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 506 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.63.222
+
+interface Vlan507
+  description SVI-Broadpeak-Mcast-ABR
+  no ip redirects
+  ip address 10.9.65.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 507 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.65.222
+
+interface Vlan508
+  description SVI-Broadpeak-Life-Link
+  no ip redirects
+  ip address 10.9.67.221/27
+  no ipv6 redirects
+  hsrp version 2
+  hsrp 508 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 10.9.67.222
+
+interface port-channel2
+  description ACC-P1-N9K-VIDEO2-TOL<>N9K-VIDEO1-TOL
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,30,35,37-38,57,59,63-65,70,75,78,87-91,99,120,198-201,267,269,290,292-296,299,387,392,410,559
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel12
+  description ACC-P1-TVD-SW-N9K-VIDEO1-TOL-Po12<>TVD-SW-VIDEO-TOLUCA-1-Po12--20GB
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,18,35,37,57,96,99,269,290,295-296,299,370,410
+  flowcontrol receive on
+  storm-control broadcast level 20.00
+
+interface port-channel32
+  description ACC-P1-N9K-VIDEO2-TOL<>RAC_ASR9K10_Tol_CTC-2
+  shutdown
+  logging event port link-status
+  mtu 9216
+
+interface port-channel32.10
+  description vrf video-pk-unicast
+  mtu 9216
+  encapsulation dot1q 10
+  ip address 10.5.198.43/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.11
+  description vrf video-1
+  mtu 9216
+  encapsulation dot1q 11
+  ip address 10.5.198.45/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.12
+  description vrf video-mhe
+  mtu 9216
+  encapsulation dot1q 12
+  ip address 10.5.198.47/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.13
+  description vrf ctrl-video
+  mtu 9216
+  encapsulation dot1q 13
+  ip address 10.5.198.49/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.14
+  description vrf video-cisco-ctrl
+  mtu 9216
+  encapsulation dot1q 14
+  ip address 10.5.198.51/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.15
+  description vrf EVO_VGHE
+  mtu 9216
+  encapsulation dot1q 15
+  ip address 10.5.198.53/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.16
+  description vrf vod-control
+  mtu 9216
+  encapsulation dot1q 16
+  ip address 10.5.198.55/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.17
+  description vrf vod-trafico
+  mtu 9216
+  encapsulation dot1q 17
+  ip address 10.5.198.57/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.18
+  description vrf digital-tlane
+  mtu 9216
+  encapsulation dot1q 18
+  ip address 10.5.198.59/31
+  no shutdown
+
+interface port-channel32.20
+  description vrf video-megacanal-ctrl
+  mtu 9216
+  encapsulation dot1q 20
+  ip address 10.5.198.63/31
+  no shutdown
+
+interface port-channel32.21
+  description vrf video-2
+  mtu 9216
+  encapsulation dot1q 21
+  ip address 10.5.198.65/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel32.22
+  description vrf video-telepto-trafico
+  mtu 9216
+  encapsulation dot1q 22
+  ip address 10.5.198.67/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel51
+  description ACC-P1-Po51-N9K-VIDEO2-TOL<>P1-Po51-N9K-DATOS2-TOL
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,35,57,96,99,152,199-201,267,269,290,292-296,299,370,410,559
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel52
+  description ACC-P1-N9K-VIDEO2-TOL<>CAT6K-TOL-2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 14,290
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface Ethernet1/1
+  description TVD-P1-DCM4-IN1/1
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/2
+  description TVD-P1-DCM4-IN1/2
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/3
+  description TVD-P1-DCM4-IN1/3
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/4
+  description TVD-P1-DCM4-IN1/4
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/5
+  description TVD-P1-DCM4-OUT2/1
+  switchport
+  switchport access vlan 91
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/6
+  description IMP-TVD_P1-DCM4-OUT2/2
+  switchport
+  switchport access vlan 91
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet1/7
+  description TVD-P1-DCM4-OUT2/3
+  switchport
+  switchport access vlan 91
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/8
+  description TVD-P1-DCM4-OUT2/4
+  switchport
+  switchport access vlan 91
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/9
+  description TVD-P3-DCM4-MGMT
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/10
+  description TVD-P3-DCM#2_MGT_10/100-080514
+  no cdp enable
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/11
+  description TVD-P1-DCM-STBY-HUB8
+  no cdp enable
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/12
+  description TVD-P3-DCM#2_GB1/1_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/13
+  description TVD-P3-DCM#2_GB1/2_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/14
+  description TVD-P3-DCM#2_GB1/3_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/15
+  description TVD-P3-DCM#2_GB1/4_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/16
+  description TVD-P3-DCM#2_GB2/1_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/17
+  description TVD-P3-DCM#2_GB2/2_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/18
+  description TVD-P3-DCM#2_GB2/3_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/19
+  description TVD-P3-DCM#2_GB2/4_OUT_Vlan_88
+  no cdp enable
+  switchport
+  switchport access vlan 88
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/20
+  description TVD-P3-RFGW2_Gig1_Vlan_89
+  no cdp enable
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/21
+  description TVD-P3-RFGW2_Gig3_Vlan_89
+  no cdp enable
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/22
+  description TVD-P1-ROSA-SIM-REG1_HUB2_E2_vlan_MGT
+  switchport
+  switchport access vlan 70
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/23
+  description TVD-P1-ROSA_SIM_REG1-HUB2_DekTec
+  switchport
+  switchport access vlan 78
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/24
+  description TVD-P3-NSG-V38-STBY-MGT
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/25
+  description test_NSG_HUMBERTO
+  switchport
+  switchport monitor
+  no shutdown
+
+interface Ethernet1/26
+  description LIBRE
+
+interface Ethernet1/27
+  description TVD-P1-RTR3825
+  switchport
+  switchport access vlan 99
+  spanning-tree bpduguard enable
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/28
+  description DTV_SEP3Temp-Digitalizacion-v290-071117
+  switchport
+  switchport access vlan 290
+  spanning-tree bpduguard enable
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/29
+  description LIBRE
+
+interface Ethernet1/30
+  description TVD-P5_OTTLOCALES02-V392-STBY_052518
+  switchport
+  switchport access vlan 392
+  spanning-tree port type edge
+  logging event port link-status
+  no shutdown
+
+interface Ethernet1/31
+  description TVD-P1-CAP2-SV-LOCAL_020119
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/32
+  description LIBRE
+
+interface Ethernet1/33
+  description LIBRE
+
+interface Ethernet1/34
+  description LIBRE
+
+interface Ethernet1/35
+  description LIBRE
+
+interface Ethernet1/36
+  description LIBRE
+
+interface Ethernet1/37
+  description LIBRE
+
+interface Ethernet1/38
+  description LIBRE
+
+interface Ethernet1/39
+  description LIBRE
+
+interface Ethernet1/40
+  description LIBRE
+
+interface Ethernet1/41
+  description LIBRE
+
+interface Ethernet1/42
+  description LIBRE
+
+interface Ethernet1/43
+  description LIBRE
+
+interface Ethernet1/44
+  description ACC-P1- Gi1/44TVD-SW-VIDEO-TOLUCA-1 
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,18,35,37,57,96,99,269,290,295-296,299,370,410
+  flowcontrol receive on
+  storm-control broadcast level 20.00
+  channel-group 12
+  no shutdown
+
+interface Ethernet1/45
+  description LIBRE
+
+interface Ethernet1/46
+  description LIBRE
+
+interface Ethernet1/47
+  description PRUEBAS_CAPTURAS_NSG
+  switchport
+  switchport monitor
+
+interface Ethernet1/48
+  description IMP-TVD_P5-PRUEBAS-VIDEO-HUMBERTO-MARQUEZ_Vlan_89
+  no cdp enable
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet1/49
+  description LIBRE
+
+interface Ethernet1/50
+  description LIBRE
+
+interface Ethernet1/51
+  description LIBRE
+
+interface Ethernet1/52
+  description LIBRE
+
+interface Ethernet2/1
+  description TVD-P1-DCM4-IN3/1
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/2
+  description TVD-P1-DCM4-IN3/2
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/3
+  description TVD-P1-DCM4-IN3/3
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/4
+  description TVD-P1-DCM4-IN3/4
+  switchport
+  switchport access vlan 90
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/5
+  description TVD-P3-SIS#2_MGT-V38-052020
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/6
+  description TVD-P3-SIS#2_ILO-V38-052020
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/7
+  description TVD-P3-DVB-SIS#2-V78-052020
+  switchport
+  switchport access vlan 78
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/8
+  description TVD-P3-FTP-SIS#2-V75-052020
+  switchport
+  switchport access vlan 75
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/9
+  description TVD-P1-DCM4-PCG
+  switchport
+  switchport access vlan 59
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/10
+  description TVD-P3-DCM#2_MHE-PCG_Vlan_59
+  switchport
+  switchport access vlan 59
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/11
+  description TVD-P1-PCG-STBY-HUB8
+  no cdp enable
+  switchport
+  switchport access vlan 59
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/12
+  description TVD-P3-DCM#2_GB3/1_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/13
+  description TVD-P3-DCM#2_GB3/2_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/14
+  description TVD-P3-DCM#2_GB3/3_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/15
+  description TVD-P3-DCM#2_GB3/4_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/16
+  description TVD-P3-DCM#2_GB4/1_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/17
+  description TVD-P3-DCM#2_GB4/2_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/18
+  description TVD-P3-DCM#2_GB4/3_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/19
+  description TVD-P3-DCM#2_GB4/4_IN_Vlan_87
+  no cdp enable
+  switchport
+  switchport access vlan 87
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/20
+  description TVD-P3-RFGW2_Gig2_Vlan_89
+  no cdp enable
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/21
+  description TVD-P3-RFGW2_Gig4_Vlan_89
+  no cdp enable
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/22
+  description TVD-P1-ROSA_SIM_REG1_HUB2_E1
+  switchport
+  switchport access vlan 75
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/23
+  description TVD-P1-ROSASIM-REG1-HUB2
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/24
+  description TVD_P3-RFGW2_CTRL_Vlan_38
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet2/25
+  description TVD-P1-ROSA_SIM_REG1_HUB2_E1
+  switchport
+  switchport access vlan 75
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/26
+  description LIBRE
+
+interface Ethernet2/27
+  description IMP_TVD-P3-IPTV_MMC1_OUT-V387-051419
+  switchport
+  switchport access vlan 387
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/28
+  description IMP_TVD-P3-IPTV_SUMA_ATSC_OUT-V387-051419
+  switchport
+  switchport access vlan 387
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/29
+  description LIBRE
+  switchport
+  switchport access vlan 37
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/30
+  description TVD-P3-SUMA-ATSC-G1-091018
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/31
+  description TVD-P3-SUMA-ATSC-CTRL-091018
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/32
+  description TVD_P1-CAP2-CTRL-V18_010419
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/33
+  description Carpturas falla IPTV
+  switchport
+  switchport access vlan 387
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/34
+  description LIBRE
+
+interface Ethernet2/35
+  description LIBRE
+
+interface Ethernet2/36
+  description LIBRE
+
+interface Ethernet2/37
+  description LIBRE
+
+interface Ethernet2/38
+  description LIBRE
+
+interface Ethernet2/39
+  description APARTADO PROYECTO SONDAS IXIA
+
+interface Ethernet2/40
+  description LIBRE
+
+interface Ethernet2/41
+  description TVD-PRUEBAS_NSG_STA_JUANA_V63_G2
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/42
+  description TVD-PRUEBAS_NSG_STA_JUANA_V89_G4
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/43
+  description LIBRE
+
+interface Ethernet2/44
+  description ACC-P2- GI1/44TVD-SW-VIDEO-TOLUCA-1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,18,35,37,57,96,99,269,290,295-296,299,370,410
+  flowcontrol receive on
+  storm-control broadcast level 20.00
+  channel-group 12
+  no shutdown
+
+interface Ethernet2/45
+  description LIBRE
+
+interface Ethernet2/46
+  description LIBRE
+
+interface Ethernet2/47
+  description LIBRE
+
+interface Ethernet2/48
+  description LIBRE
+
+interface Ethernet2/49
+  description LIBRE
+
+interface Ethernet2/50
+  description LIBRE
+
+interface Ethernet2/51
+  description LIBRE
+
+interface Ethernet2/52
+  description LIBRE
+
+interface Ethernet7/1
+  description ACC-P1-N9K-VIDEO2-TOL<>N9K-VIDEO1-TOL
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,30,35,37-38,57,59,63-65,70,75,78,87-91,99,120,198-201,267,269,290,292-296,299,387,392,410,559
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/2
+  description ACC-P1-N9K-VIDEO2-TOL<>N9K-VIDEO1-TOL
+
+interface Ethernet7/3
+  description ACC-P1-N9K-VIDEO2-TOL<>CAT6K-2-TOL
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 14,290
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 52 mode active
+  no shutdown
+
+interface Ethernet7/4
+  description TVD-P3_NSG_STBY_GB1_170518
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet7/5
+  description TVD-P3_NSG_STBY_GB3_170518
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet7/6
+  description LIBRE
+
+interface Ethernet7/7
+  description LIBRE
+
+interface Ethernet7/8
+  description LIBRE
+
+interface Ethernet7/9
+  description LIBRE
+
+interface Ethernet7/10
+  description LIBRE
+
+interface Ethernet7/11
+  description LIBRE
+
+interface Ethernet7/12
+  description LIBRE
+
+interface Ethernet7/13
+  description LIBRE
+
+interface Ethernet7/14
+  description LIBRE
+
+interface Ethernet7/15
+  description LIBRE
+
+interface Ethernet7/16
+  description LIBRE
+
+interface Ethernet7/17
+  description LIBRE
+
+interface Ethernet7/18
+  description LIBRE
+
+interface Ethernet7/19
+  description LIBRE
+
+interface Ethernet7/20
+  description LIBRE
+
+interface Ethernet7/21
+  description LIBRE
+
+interface Ethernet7/22
+  description LIBRE
+
+interface Ethernet7/23
+  description LIBRE
+
+interface Ethernet7/24
+  description LIBRE
+
+interface Ethernet7/25
+  description LIBRE
+
+interface Ethernet7/26
+  description LIBRE
+
+interface Ethernet7/27
+  description LIBRE
+
+interface Ethernet7/28
+  description LIBRE
+
+interface Ethernet7/29
+  description LIBRE
+
+interface Ethernet7/30
+  description TVD_P1-CAP2-MHE-V290_010419
+  switchport
+  switchport access vlan 290
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet7/31
+  description TVD_P1-CAP2-MHE-V292_010419
+  switchport
+  switchport access vlan 292
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet7/32
+  description LIBRE
+
+interface Ethernet7/33
+  description ACC-P1-PO51-M1-N9K-DATOS2-TOL-Eth7/33
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,35,57,96,99,152,199-201,267,269,290,292-296,299,370,410,559
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 51 mode active
+  no shutdown
+
+interface Ethernet7/34
+  description ACC-P1-PO51-M2-N9K-DATOS2-VER-Eth7/43
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,35,57,96,99,152,199-201,267,269,290,292-296,299,370,410,559
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 51 mode active
+  no shutdown
+
+interface Ethernet7/35
+  description ACC-P1-VLANS-P2P_MCAST_HUBS_11-13
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 152,200
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet7/36
+  description LIBRE
+
+interface Ethernet7/37
+  description LIBRE
+
+interface Ethernet7/38
+  description LIBRE
+
+interface Ethernet7/39
+  description LIBRE
+
+interface Ethernet7/40
+  description LIBRE
+
+interface Ethernet7/41
+  description LIBRE
+
+interface Ethernet7/42
+  description LIBRE
+
+interface Ethernet7/43
+  description LIBRE
+
+interface Ethernet7/44
+  description TVD_P1-NSG-V89-STBY
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet7/45
+  description TVD_P1-NSG-V89-STBY
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet7/46
+  description LIBRE
+
+interface Ethernet7/47
+  description APARTADO-IXN-NEXUS VIDEO2_ASR_RAC2
+  no shutdown
+
+interface Ethernet7/48
+  description APARTADO-IXN-NEXUS VIDEO2_ASR_RAC2
+  no shutdown
+
+interface Ethernet7/49
+  description LIBRE
+
+interface Ethernet7/50
+  description LIBRE
+
+interface Ethernet7/51
+  description LIBRE
+
+interface Ethernet7/52
+  description LIBRE
+
+interface Ethernet8/1
+  description ACC-P1-N9K-VIDEO2-TOL<>N9K-VIDEO1-TOL
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,30,35,37-38,57,59,63-65,70,75,78,87-91,99,120,198-201,267,269,290,292-296,299,387,392,410,559
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/2
+  description ACC-P1-N9K-VIDEO2-TOL<>N9K-VIDEO1-TOL
+
+interface Ethernet8/3
+  description ACC-P1-N9K-VIDEO2-TOL<>CAT6K-2-TOL
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 14,290
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 52 mode active
+  no shutdown
+
+interface Ethernet8/4
+  description TVD-P3_NSG_STBY_GB1_170518
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet8/5
+  description TVD-P3_NSG_STBY_GB4_170518
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet8/6
+  description LIBRE
+
+interface Ethernet8/7
+  description LIBRE
+
+interface Ethernet8/8
+  description LIBRE
+
+interface Ethernet8/9
+  description LIBRE
+
+interface Ethernet8/10
+  description LIBRE
+
+interface Ethernet8/11
+  description LIBRE
+
+interface Ethernet8/12
+  description LIBRE
+
+interface Ethernet8/13
+  description LIBRE
+
+interface Ethernet8/14
+  description LIBRE
+
+interface Ethernet8/15
+  description LIBRE
+
+interface Ethernet8/16
+  description LIBRE
+
+interface Ethernet8/17
+  description LIBRE
+
+interface Ethernet8/18
+  description LIBRE
+
+interface Ethernet8/19
+  description LIBRE
+
+interface Ethernet8/20
+  description LIBRE
+
+interface Ethernet8/21
+  description LIBRE
+
+interface Ethernet8/22
+  description LIBRE
+
+interface Ethernet8/23
+  description LIBRE
+
+interface Ethernet8/24
+  description LIBRE
+
+interface Ethernet8/25
+  description LIBRE
+
+interface Ethernet8/26
+  description LIBRE
+
+interface Ethernet8/27
+  description LIBRE
+
+interface Ethernet8/28
+  description LIBRE
+
+interface Ethernet8/29
+  description LIBRE
+
+interface Ethernet8/30
+  description TVD_P1-CAP2-OUT-V37_010419
+  switchport
+  switchport access vlan 37
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet8/31
+  description TVD_P1-CAP2-OUT-V35_010419
+  switchport
+  switchport access vlan 35
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet8/32
+  description LIBRE
+
+interface Ethernet8/33
+  description ACC-P1-PO51-M3-N9K-DATOS2-TOL-Eth8/33
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,35,57,96,99,152,199-201,267,269,290,292-296,299,370,410,559
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 51 mode active
+  no shutdown
+
+interface Ethernet8/34
+  description ACC-P1-PO51-M4-N9K-DATOS2-TOL-Eth8/34
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,7-8,14-15,17-18,35,57,96,99,152,199-201,267,269,290,292-296,299,370,410,559
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 51 mode active
+  no shutdown
+
+interface Ethernet8/35
+  description LIBRE
+
+interface Ethernet8/36
+  description LIBRE
+
+interface Ethernet8/37
+  description LIBRE
+
+interface Ethernet8/38
+  description LIBRE
+
+interface Ethernet8/39
+  description LIBRE
+
+interface Ethernet8/40
+  description LIBRE
+
+interface Ethernet8/41
+  description LIBRE
+
+interface Ethernet8/42
+  description LIBRE
+
+interface Ethernet8/43
+  description LIBRE
+
+interface Ethernet8/44
+  description TVD-P1-NSG-V89-STBY
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet8/45
+  description TVD-P1-NSG-V89-STBY
+  switchport
+  switchport access vlan 89
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet8/46
+  description LIBRE
+
+interface Ethernet8/47
+  description APARTADO-IXN-NEXUS VIDEO2_ASR_RAC2
+  no shutdown
+
+interface Ethernet8/48
+  description APARTADO-IXN-NEXUS VIDEO2_ASR_RAC2
+  no shutdown
+
+interface Ethernet8/49
+  description LIBRE
+
+interface Ethernet8/50
+  description LIBRE
+
+interface Ethernet8/51
+  description LIBRE
+
+interface Ethernet8/52
+  description LIBRE
+
+interface mgmt0
+  vrf member management
+cli alias name environment show environment | inc alarm
+cli alias name disponible1 show int status | inc not|dis | include "10g"
+cli alias name image show version | inc image
+cli alias name cpu show process cpu | inc "CPU util"
+cli alias name disponible2 show int status | include "xcvrAbsen"
+cli alias name uptime sh ver | inc uptime
+cli alias name s show ip int brief
+cli alias name wr copy run start
+line console
+  exec-timeout 5
+  speed 38400
+line vty
+  session-limit 15
+  exec-timeout 5
+  access-class 105 in
+  ipv6 access-class VTY-MGMT-ACCESO-IPv6 in
+boot nxos bootflash:/nxos.7.0.3.I7.5a.bin sup-1
+boot nxos bootflash:/nxos.7.0.3.I7.5a.bin sup-2
+router ospf 13999
+  router-id 192.168.197.5
+  area 0.0.0.8 authentication message-digest
+  passive-interface default
+monitor session 2 
+  description CAPTURAS _NSG
+  source interface Ethernet2/42 both
+  destination interface Ethernet1/47
+monitor session 10 
+  source interface Ethernet1/7 both
+  destination interface Ethernet1/25
+
+logging logfile messages 5 size 2000000
+logging server 10.0.196.131
+logging server 10.0.70.179
+logging source-interface Vlan14
+logging timestamp milliseconds
+logging level syslog 5
+logging console 5
+
+
+TVD-SW-N9K-VIDEO2-TOL# show ip arp
+
+Flags: * - Adjacencies learnt on non-active FHRP router
+       + - Adjacencies synced via CFSoE
+       # - Adjacencies Throttled for Glean
+       CP - Added via L2RIB, Control plane Adjacencies
+       PS - Added via L2RIB, Peer Sync
+       RO - Re-Originated Peer Sync Entry
+       D - Static Adjacencies attached to down interface
+
+IP ARP Table for context default
+Total number of entries: 20
+Address         Age       MAC Address     Interface       Flags
+192.168.80.77   00:13:14  cc46.d6b0.4c3f  Vlan410         
+192.168.80.78   00:17:15  70e4.2277.750a  Vlan410         
+192.168.198.1   00:13:57  cc46.d6b0.4c3f  Vlan392         
+10.0.82.78      00:17:18  70e4.2277.750a  Vlan296         
+192.168.120.2   00:00:01  0024.680a.7eab  Vlan120         
+10.1.197.81     00:16:22  cc46.d6b0.4c3f  Vlan38          
+10.1.197.145    00:03:16  cc46.d6b0.4c3f  Vlan38          
+10.1.197.148    00:09:23  843d.c628.b7cb  Vlan38          
+192.168.197.4   00:14:13  cc46.d6b0.4c3f  Vlan30          
+10.0.198.197    00:03:55  5c83.8fe5.d33f  Vlan14          
+10.0.198.201    00:09:25  ecbd.1d3f.59ff  Vlan14          
+10.0.198.202    00:17:30  a89d.2140.18bf  Vlan14          
+10.0.198.203    00:13:39  a89d.2140.17ff  Vlan14          
+10.0.198.206    00:01:02  5c83.8f9d.d3ff  Vlan14          
+10.0.198.230    00:05:57  bc16.65fb.503f  Vlan14          
+10.0.198.249    00:17:16  cc46.d6b0.4c3f  Vlan14          
+10.0.198.251    00:12:14  3cce.7316.1000  Vlan14          
+10.0.198.253    00:12:15  001f.9db7.2800  Vlan14          
+10.0.198.254    00:12:51  7070.8b5c.057f  Vlan14          
+192.168.196.254 00:13:42  cc46.d6b0.4c3f  Vlan57          
+TVD-SW-N9K-VIDEO2-TOL# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD    ECMP Redirect
+                                                         Priority Capable State     Capable
+192.168.80.77   Vlan410              1w0d      00:01:41  1        yes     n/a     no
+192.168.80.78   Vlan410              1w0d      00:01:19  1        yes     n/a     no
+192.168.198.1   Vlan392              1w0d      00:01:32  100      yes     Up     no
+192.168.196.254 Vlan57               12w0d     00:01:38  1        yes     n/a     no
+TVD-SW-N9K-VIDEO2-TOL# show ip igmp groups
+IGMP Connected Group Membership for VRF "default" - 2 total entries
+Type: S - Static, D - Dynamic, L - Local, T - SSM Translated, H - Host Proxy
+Group Address      Type Interface              Uptime    Expires   Last Reporter
+239.197.6.1        D    Vlan120                1w0d      00:03:43  192.168.120.6
+239.197.6.2        D    Vlan120                1w0d      00:03:43  192.168.120.6
+
+TVD-SW-N9K-VIDEO2-TOL# 
+TVD-SW-N9K-VIDEO2-TOL# exit

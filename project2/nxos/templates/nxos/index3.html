@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block head %}
+    <!-- Latest compiled and minified CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <!-- Bootstrap v4.0.0 CSS -->
+    {% load static %}
+    <!-- United theme from https://bootswatch.com/united/ -->
+    <!-- Load Bootstrap  CSS -->
+       <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <!--<link rel="stylesheet" href="{% static 'dataTables.bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />  -->
+    <link rel="stylesheet" href="{% static 'css/jquery.dataTables.joc.css' %}" />
+    <script type="text/javascript"  src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script type="text/javascript"  src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <title>Networking Django App</title>
+   <!-- Code HightCharts -->
+  <!--  <script src="../../static/code/highcharts.js"></script>
+    <script src="../../static/code/modules/series-label.js"></script>  -->
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+     <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <!-- <script src="{% static 'code/highcharts.js' %}"></script>
+    <script src="{% static 'code/modules/series-label.js' %}"></script> -->
+    <script src="{% static 'code/highcharts-3d.js' %}"></script>
+    <script src="{% static 'code/modules/exporting.js' %}"></script>
+    <script src="{% static 'code/modules/export-data.js' %}"></script>
+
+</head>
+
+<style>
+#container{
+  padding : 10px;
+  border : 10px;
+}
+.tabla-arp{
+  padding : 20px;
+  border : 20px;
+  width: 800px;
+  max-height: 800px;
+  max-width: 800px:
+}
+#joc_tabla{
+  padding : 10px;
+  border : 10px;
+  max-height: 800px;
+}
+#tabla_mcast{
+  padding : 20px;
+  border : 20px;
+  max-height: 800px;
+  max-width: 500px:
+}
+body{
+  background-color: #ECECEC;
+}
+.title2{
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #EAEDED;
+  text-decoration-color: #EAEDED;
+  font-size: 40px;
+  text-decoration-style: solid;
+  background-color: #222;
+}
+.title2:hover{
+  text-decoration: underline;
+}
+.title2 .h2:hover{
+  position: relative;
+  left: 20px;
+}
+.joc1 {
+  //padding : 10px;
+  border : 6px solid #ECECEC;
+  text-align: left;
+  max-width: 2200px;
+  background-color: #FFF;
+  border-color: #ECECEC;
+  border-left:5px solid #ECECEC;
+}
+.joc1 .row .col-sm-8,
+.joc1 .row .col-sm-9,
+.joc1 .row .col-sm-3,
+.joc1 .row .col-sm-6,
+.joc1 .row .col-sm-4 {
+  padding : 10px;
+  border : 10px solid #ECECEC;
+  background-color: #FFF;
+  border-color: #ECECEC;
+}
+.joc1 .row .col-sm-4 {
+  padding-bottom : 24px;
+}
+.joc2 {
+  padding : 10px;
+  border : 6px solid #ECECEC;
+  text-align: left;
+  background-color: #FFF;
+  border-color: #ECECEC;
+}
+.joc3 {
+  padding : 10px;
+  border : 6px solid #ECECEC;
+  text-align: left;
+  max-width: 600px;
+  background-color: #FFF;
+  border-color: #ECECEC;
+  border-left:5px solid #ECECEC;
+}
+.joc4 {
+  padding : 5px;
+  border : 6px solid #ECECEC;
+  text-align: left;
+  max-width: 1200px;
+  background-color: #FFF;
+  border-color: #ECECEC;
+  border-left:5px solid #ECECEC;
+}
+/* Main Dashboard */
+h2{
+  font-style: italic
+  font-size: 20px;
+}
+.main_dash {
+  padding-top : 2px;
+  padding-bottom : 2px;
+  padding-right : 1px;
+  padding-left : 1px;
+  font-size: 64px;
+  top: 50%;
+  border : 6px solid #ECECEC;
+  text-align: center;
+  max-width: 1600px;
+  color: black;
+  /* background-color: #FF0000; */
+  border-color: #943126;
+  margin: auto;
+}
+.main_dash .row .col-sm-2,
+.main_dash .row .col-sm-9,
+.main_dash .row .col-sm-3,
+.main_dash .row .col-sm-6,
+.main_dash .row .col-sm-4 {
+  padding-top : 2px;
+  padding-bottom : 2px;
+  padding-right : 1px;
+  padding-left : 1px;
+  border : 4px solid #ECECEC;
+  background-color: #808B96;
+  border-color: #ECECEC;
+  color: black;
+  opacity: 0.5;
+  object-fit: cover;
+  background-image: url("../../static/images/narbik1.jpg");
+  height: 430px;
+  max-width: 800px;
+  position: relative;
+}
+.main_dash .row #nexus {
+  padding-top : 2px;
+  padding-bottom : 2px;
+  padding-right : 1px;
+  padding-left : 5px;
+  border : 4px solid #ECECEC;
+  background-color: #808B96;
+  border-color: #ECECEC;
+  color: black;
+  opacity: 0.5;
+  object-fit: fill;
+  background-image: url("../../static/images/data1.jpg");
+  height: 430px;
+  max-width:800px;
+  position: relative;
+}
+.main_dash .row .col-sm-6:hover{
+  opacity: 1.0;
+}
+.main_dash .row #nexus:hover{
+  opacity: 1.0;
+}
+.main_dash .row #nexus h3{
+  margin: 0;
+  position: absolute;
+  font-size: 84px;
+  color: black;
+  opacity: 1.0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.main_dash .row .col-sm-6 h3{
+  margin: 0;
+  position: absolute;
+  font-size: 84px;
+  color: black;
+  opacity: 1.0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.main_dash .row .col-sm-6 h3 a{
+    color: #F4D03F;
+}
+.main_dash .row #nexus h3:hover{
+  margin: 0;
+  position: absolute;
+  color: #5D6D7E;
+  opacity: 1.0;
+  /* background-color: #FFF; */
+  font-size: 88px;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+.main_dash .row .col-sm-6 h3:hover{
+  margin: 0;
+  position: absolute;
+  color: #5D6D7E;
+  opacity: 1.0;
+  /* background-color: #FFF; */
+  font-size: 88px;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+#custom_color{
+  color: black;
+}
+/* navbar */
+.navbar-default {
+    background-color: #18599A;
+    border-color: #E7E7E7;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #B5BCC3;
+    font-weight: bold;
+    font-size: 20px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #B5BCC3;
+    font-weight: bold;
+    font-size: 16px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #FFFFFF;
+    background-color: #185593;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFFFFF;
+    background-color: #13406C;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #FFFFFF;
+    background-color: #13406C;
+}
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #1A5186;
+    border-bottom-color: #1A5186;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #1A5186;
+    border-bottom-color: #1A5186;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #1A5186;
+    border-bottom-color: #1A5186;
+    background-color: #13406C;
+}
+/* Dropdown */
+.navbar-default .navbar-nav > .dropdown > .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav > .dropdown > .dropdown-menu > li > a:focus  {
+    border-top-color: #1A5186;
+    border-bottom-color: #1A5186;
+}
+</style>
+
+{% endblock %}
+
+<body>
+<div id="container">
+
+    {% block navigation %}
+    <!-- new blue navbar -->
+
+
+
+<!-- Static navbar -->
+
+<header class="site-header">
+    <nav class="navbar navbar-default" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"><img  src="{% static 'images/logo.png' %}"></a>
+                <a class="navbar-brand" href="{% url 'index3'  %}">Django App</a>
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    {% if selected_menu_item == "about" %}
+                    <li class="active"><a href="#">About</a></li>
+                    {% else %}
+                    <li><a href="{% url 'about'  %}">About</a></li>
+                    {% endif %}
+
+                    {% if selected_menu_item == "logout" %}
+                    <li class="active"><a href="#">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'logout_user'  %}">Logout</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+    </nav>
+
+   </header>
+
+    {% endblock %}
+
+    {% block content %}
+
+    <h2>Select platform type</h2>
+    <div class="main_dash">
+          <div class="row">
+                  <div id="nexus" class="col-sm-6">
+
+                      <h3 id="custom_color"><a href="{% url 'index_nxos'  %}">NX-OS</a></h3>
+
+                  </div>
+                  <div class="col-sm-6">
+                    <h3 id="custom_color"><a href="{% url 'index_xr'  %}">IOS-XR</a></h3>
+                  </div>
+               </div>
+
+    </div>
+
+
+    {% endblock %}
+</div>
+
+<footer class="footer">
+    <div class="container">
+        {% block footer %}
+        <p class="text-muted text-center">&copy; Copyright 2020 by <a href="https://github.com/jocmtb">Jocmtb</a>.</p>
+        {% endblock %}
+    </div>
+</footer>
+
+
+
+<!-- jQuery -->
+
+<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+<!-- Latest compiled and minified JavaScript -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript"  src="{% static 'jquery.dataTables.min.js' %}"></script>
+
+<!-- Bootstrap v4.0.0 JS -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+{% block scripts %}
+
+{% endblock %}
+
+
+</body>
+</html>

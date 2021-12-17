@@ -1,0 +1,62 @@
+version: "3"
+services:
+  mega-postgres:
+    image: postgres:latest
+    container_name: mega-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mega_data
+    ports:
+      - 5432:5432
+    networks:
+      - mega-network
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+  mega:
+    image: mega:latest
+    container_name: mega
+    hostname: mega-portal
+    build:
+      context: ./project2/docker-config/
+    depends_on:
+      - noa-postgres
+      - noa-mongo
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DEVELOPMENT=True
+    networks:
+      - mega-network
+    expose:
+      - "8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./project2:/root/project2
+      - ./project2/logs:/var/log/project2
+    restart: unless-stopped
+  mega-proxy:
+    build:
+      context: ./
+      dockerfile: ./mega-proxy/Dockerfile
+    depends_on:
+      - mega
+    image: containers.cisco.com/roa_developers/noa-proxy:latest
+    container_name: mega-proxy
+    ports:
+      - 443:443
+    networks:
+      - mega-network
+    volumes:
+      - ./mega-proxy/static:/vol/static
+    restart: unless-stopped
+networks:
+  noa-network:
+    driver: bridge
+    name: mega-network
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.77.77.0/24

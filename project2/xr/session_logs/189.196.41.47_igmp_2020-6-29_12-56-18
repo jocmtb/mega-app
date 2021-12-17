@@ -1,0 +1,124 @@
+
+
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#terminal length 0
+Mon Jun 29 12:56:16.670 CST
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#terminal width 510
+Mon Jun 29 12:56:16.860 CST
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show mrib vrf ?
+  WORD                   VRF name
+  video-1                VRF name
+  video-2                VRF name
+  video-mhe              VRF name
+  ngv-lc-gdl             VRF name
+  digital-tol            VRF name
+  iptv-lc-pue            VRF name
+  vod-control            VRF name
+  vod-trafico            VRF name
+  digital-tlane          VRF name
+  video-cisco-ctrl       VRF name
+  video-telepto-trafico  VRF name
+  IPTV-MULTICAST-SW      VRF name
+  WORD                   VRF name
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show mrib vrf 
+% Incomplete command.
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#### Connection terminated
+                                   ^
+% Invalid input detected at '^' marker.
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf video-1 group
+Mon Jun 29 12:56:18.020 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.11             3d08h     never     10.5.198.4
+224.0.0.13      Bundle-Ether31.11             3d08h     never     10.5.198.4
+224.0.0.22      Bundle-Ether31.11             3d08h     never     10.5.198.4
+224.0.1.40      Bundle-Ether31.11             3d08h     never     10.5.198.4
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf video-2 group
+Mon Jun 29 12:56:18.219 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.19             3d08h     never     10.5.198.20
+224.0.0.13      Bundle-Ether31.19             3d08h     never     10.5.198.20
+224.0.0.22      Bundle-Ether31.19             3d08h     never     10.5.198.20
+224.0.1.40      Bundle-Ether31.19             3d08h     never     10.5.198.20
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf video-mhe group
+Mon Jun 29 12:56:18.425 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.12             3d08h     never     10.5.198.6
+224.0.0.13      Bundle-Ether31.12             3d08h     never     10.5.198.6
+224.0.0.22      Bundle-Ether31.12             3d08h     never     10.5.198.6
+224.0.1.40      Bundle-Ether31.12             3d08h     never     10.5.198.6
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf ngv-lc-gdl group
+Mon Jun 29 12:56:18.623 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.23             3d08h     never     10.5.198.28
+224.0.0.13      Bundle-Ether31.23             3d08h     never     10.5.198.28
+224.0.0.22      Bundle-Ether31.23             3d08h     never     10.5.198.28
+224.0.1.40      Bundle-Ether31.23             3d08h     never     10.5.198.28
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf digital-tol group
+Mon Jun 29 12:56:18.825 CST
+No matching entries in IGMP
+
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf iptv-lc-pue group
+Mon Jun 29 12:56:19.016 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.22             3d08h     never     10.5.198.26
+224.0.0.13      Bundle-Ether31.22             3d08h     never     10.5.198.26
+224.0.0.22      Bundle-Ether31.22             3d08h     never     10.5.198.26
+224.0.1.40      Bundle-Ether31.22             3d08h     never     10.5.198.26
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf vod-control group
+Mon Jun 29 12:56:19.204 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.16             3d08h     never     10.5.198.14
+224.0.0.13      Bundle-Ether31.16             3d08h     never     10.5.198.14
+224.0.0.22      Bundle-Ether31.16             3d08h     never     10.5.198.14
+224.0.0.2       Bundle-Ether21.471            7w5d      never     10.2.196.240
+224.0.0.13      Bundle-Ether21.471            7w5d      never     10.2.196.240
+224.0.0.22      Bundle-Ether21.471            7w5d      never     10.2.196.240
+224.0.1.40      Bundle-Ether21.471            3w5d      never     10.2.196.240
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf vod-trafico group
+Mon Jun 29 12:56:19.401 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.17             3d08h     never     10.5.198.16
+224.0.0.13      Bundle-Ether31.17             3d08h     never     10.5.198.16
+224.0.0.22      Bundle-Ether31.17             3d08h     never     10.5.198.16
+224.0.1.40      Bundle-Ether31.17             3d08h     never     10.5.198.16
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf digital-tlane group
+Mon Jun 29 12:56:19.606 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.21             3d08h     never     10.5.198.24
+224.0.0.13      Bundle-Ether31.21             3d08h     never     10.5.198.24
+224.0.0.22      Bundle-Ether31.21             3d08h     never     10.5.198.24
+224.0.1.40      Bundle-Ether31.21             3d08h     never     10.5.198.24
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf video-cisco-ctrl group
+Mon Jun 29 12:56:19.818 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.14             3d08h     never     10.5.198.10
+224.0.0.13      Bundle-Ether31.14             3d08h     never     10.5.198.10
+224.0.0.22      Bundle-Ether31.14             3d08h     never     10.5.198.10
+224.0.1.40      Bundle-Ether31.14             3d08h     never     10.5.198.10
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf video-telepto-trafico group
+Mon Jun 29 12:56:20.016 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether31.20             3d08h     never     10.5.198.22
+224.0.0.13      Bundle-Ether31.20             3d08h     never     10.5.198.22
+224.0.0.22      Bundle-Ether31.20             3d08h     never     10.5.198.22
+224.0.1.40      Bundle-Ether31.20             3d08h     never     10.5.198.22
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#show igmp vrf IPTV-MULTICAST-SW group
+Mon Jun 29 12:56:20.218 CST
+IGMP Connected Group Membership
+Group Address   Interface                     Uptime    Expires   Last Reporter
+224.0.0.2       Bundle-Ether21.315            7w5d      never     10.1.197.236
+224.0.0.13      Bundle-Ether21.315            7w5d      never     10.1.197.236
+224.0.0.22      Bundle-Ether21.315            7w5d      never     10.1.197.236
+224.0.1.40      Bundle-Ether21.315            7w5d      never     10.1.197.236
+RP/0/RSP0/CPU0:RAC_ASR9K10_Tol_CTC#exit
+

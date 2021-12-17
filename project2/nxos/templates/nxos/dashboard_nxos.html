@@ -1,0 +1,264 @@
+{% extends "nxos/index.html" %}
+
+{% block content %}
+{% load static %}
+<h2>Please select an option from the menu</h2>
+<div class=joc1>
+<div class="row">
+              <div class="col-sm-8">
+                <h3>Nexus Devices Inventory</h3>
+                <table id="datatableHosts" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+                <thead>
+                    <tr bgcolor="#18599A">
+                        <th><font color="#fff">Hostname</font></th>
+                        <th><font color="#fff">IP Address</font></th>
+                        <th><font color="#fff">Platform</font></th>
+                        <th><font color="#fff">IOS Version</font></th>
+                    </tr>
+                </thead>
+                </table>
+              </div>
+              <div class="col-sm-4">
+                <ul class="nav nav-tabs" id="main-dashboard-tab">
+                    <li><a data-toggle="tab" href="#managed-version">Version</a>  </li>
+                    <li><a data-toggle="tab" href="#managed-platform">Platform</a></li>
+                    <li><a data-toggle="tab" href="#managed-datatype">Data-Type</a></li>
+                </ul>
+
+                 <div class="tab-content" style="margin-top:20px;">
+                     <div id="managed-version" class="tab-pane fade in active">
+                       <h3>Nexus Version Donut-Graph</h3>
+                        <div id="container-donut"></div>
+                     </div>
+                     <div id="managed-platform" class="tab-pane fade">
+                       <h3>Nexus Platform Donut-Graph</h3>
+                        <div id="container-donut2"></div>
+                     </div>
+                     <div id="managed-datatype" class="tab-pane fade">
+                       <h3>Nexus Data Type Donut-Graph</h3>
+                        <div id="container-donut3"></div>
+                       </div>
+                   </div>
+              </div>
+
+
+           </div>
+
+</div>
+<div class=joc2>
+<h3>Multicast Flows on Nexus devices</h3>
+<table id="Mcast_flows_Table" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+<thead>
+    <tr bgcolor="#bee5eb">
+        <th width="10%">Host</th>
+        <th>Mcast Source</th>
+        <th>Mcast Group</th>
+        <th>Input Interface</th>
+        <th>RPF Neighbor</th>
+        <th>Output Interface</th>
+        <th>Flow Status</th>
+        <th width="20%">Datetime</th>
+    </tr>
+</thead>
+</table>
+</div>
+<div class=joc3>
+<h3>Scripts Logs</h3>
+<table id="Script_Logs_Table" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+<thead>
+    <tr bgcolor="#18599A">
+        <th width="10%"><font color="#fff">Host</font></th>
+        <th><font color="#fff">Script Type</font></th>
+        <th><font color="#fff">FileName</font></th>
+        <th width="40%"><font color="#fff">Datetime</font></th>
+    </tr>
+</thead>
+</table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function() {
+  $('#datatableHosts').DataTable( {
+    "processing": true,
+    "paging": true,
+    "ajax": "/nxos/ajax_hostnames",
+    // add column definitions to map your json to the table
+    "columns": [
+      {data: "hostname"},
+      {data: "IP_Address"},
+      {data: "platform"},
+      {data: "version"},
+    ]
+  } );
+  });
+
+  $(document).ready(function() {
+    $('#Mcast_flows_Table').DataTable( {
+      "processing": true,
+      "paging": true,
+      "ajax": "/nxos/ajax_mcast_flows",
+      // add column definitions to map your json to the table
+      "columns": [
+        {data: "host"},
+        {data: "mcast_src"},
+        {data: "mcast_grp"},
+        {data: "in_intf"},
+        {data: "rpf_nei"},
+        {data: "out_intf"},
+        {data: "flow_stat"},
+        {data: "datetime"},
+      ]
+    } );
+    });
+
+    $(document).ready(function() {
+      $('#Script_Logs_Table').DataTable( {
+        "processing": true,
+        "paging": true,
+        "ajax": "/nxos/script_logs",
+        // add column definitions to map your json to the table
+        "columns": [
+          {data: "host"},
+          {data: "sc_type"},
+          {data: "file_name",
+        		"render": function(data, type, row, meta){
+            			if(type === 'display'){
+                		data = '<a href="../session_logs/?file_name=' + data + '"><img src="{% static 'file.png' %}"></a>';
+            			}
+
+            		return data;
+         		}},
+          {data: "datetime"},
+        ]
+      } );
+      });
+
+    $.ajax({
+                            url: '/nxos/api/hosts/statsnxos1',
+                            type: 'GET',
+                            async: true,
+                            dataType: "json",
+                            success: function (data) {
+                          //  document.getElementById("demo").innerHTML = data['data'][0][0]
+                          //  document.getElementById("demo1").innerHTML = data['data'][1][0]
+                                            joc(data['data'])
+                            }
+                    });
+
+    $.ajax({
+                                            url: '/nxos/api/hosts/statsnxos2',
+                                            type: 'GET',
+                                            async: true,
+                                            dataType: "json",
+                                            success: function (data) {
+                                                            joc2(data['data'])
+                                            }
+                                    });
+
+              $.ajax({
+                              url: '/nxos/api/hosts/statsnxos3',
+                              type: 'GET',
+                              async: true,
+                              dataType: "json",
+                              success: function (data) {
+                                        joc3(data['data'])
+                                                                        }
+                              });
+
+    function joc (data) {
+
+                Highcharts.chart('container-donut', {
+                    chart: {
+                        type: 'pie',
+                        options3d: {
+                            enabled: true,
+                            alpha: 45
+                        }
+                    },
+                    title: {
+                        text: 'NX-OS Version Distribution'
+                    },
+                    subtitle: {
+                        text: '3D donut for NX-OS'
+                    },
+                    plotOptions: {
+                        pie: {
+                            innerSize: 100,
+                            depth: 45
+                        }
+                    },
+                    series: [{
+                        name: 'Number amount',
+                        data: data
+                    }]
+                });
+
+                }
+
+        function joc2 (data) {
+
+                            Highcharts.chart('container-donut2', {
+                                chart: {
+                                    type: 'pie',
+                                    options3d: {
+                                        enabled: true,
+                                        alpha: 45
+                                    }
+                                },
+                                title: {
+                                    text: 'NX-OS Platform Distribution'
+                                },
+                                subtitle: {
+                                    text: '3D donut for NX-OS'
+                                },
+                                plotOptions: {
+                                    pie: {
+                                        innerSize: 100,
+                                        depth: 45
+                                    }
+                                },
+                                series: [{
+                                    name: 'Number amount',
+                                    data: data
+                                }]
+                            });
+
+                            }
+
+          function joc3 (data) {
+
+                                                Highcharts.chart('container-donut3', {
+                                                    chart: {
+                                                        type: 'pie',
+                                                        options3d: {
+                                                            enabled: true,
+                                                            alpha: 45
+                                                        }
+                                                    },
+                                                    title: {
+                                                        text: 'Data Type Distribution'
+                                                    },
+                                                    subtitle: {
+                                                        text: '3D donut for NX-OS'
+                                                    },
+                                                    plotOptions: {
+                                                        pie: {
+                                                            innerSize: 100,
+                                                            depth: 45
+                                                        }
+                                                    },
+                                                    series: [{
+                                                        name: 'Number amount',
+                                                        data: data
+                                                    }]
+                                                });
+
+                                                }
+
+  </script>
+
+{% endblock %}

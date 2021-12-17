@@ -1,0 +1,17 @@
+{% extends "nxos/index.html" %}
+
+{% block content %}
+<h1>Otra pagina</h1>
+<ul>
+{% if tiposc == '1' %}
+    <li>You select BGP Script</li>
+    {% else %}
+{% if tiposc == '2' %}
+    <li>You select Log Script</li>
+    {% endif %}
+{% if tiposc == '3' %}
+    <li>You select Memory Script</li>
+    {% endif %}
+{% endif %}
+</ul>
+{% endblock %}

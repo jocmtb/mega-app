@@ -1,0 +1,27 @@
+
+
+RP/0/RSP0/CPU0:RAC_ASR9K10_Hmo_CTC#terminal length 0
+Sat Jun 27 20:19:22.982 CST
+RP/0/RSP0/CPU0:RAC_ASR9K10_Hmo_CTC#terminal width 510
+Sat Jun 27 20:19:23.291 CST
+RP/0/RSP0/CPU0:RAC_ASR9K10_Hmo_CTC#show mrib vrf ?
+  WORD                   VRF name
+  video-1                VRF name
+  video-2                VRF name
+  video-mhe              VRF name
+  ngv-lc-gdl             VRF name
+  iptv-lc-gdl            VRF name
+  iptv-lc-pue            VRF name
+  vod-control            VRF name
+  vod-trafico            VRF name
+  digital-guaymas        VRF name
+  IPTV-MULTICAST-SW      VRF name
+  video-megacanal-son    VRF name
+  video-telepto-trafico  VRF name
+  WORD                   VRF name
+RP/0/RSP0/CPU0:RAC_ASR9K10_Hmo_CTC#show mrib vrf 
+% Incomplete command.
+RP/0/RSP0/CPU0:RAC_ASR9K10_Hmo_CTC#### Connection terminated
+                                   ^
+% Invalid input detected at '^' marker.
+RP/0/RSP0/CPU0:RAC_ASR9K10_Hmo_CTC#

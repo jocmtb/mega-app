@@ -1,0 +1,2040 @@
+
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Copyright (C) 2002-2017, Cisco and/or its affiliates.
+All rights reserved.
+The copyrights to certain works contained in this software are
+owned by other third parties and used and distributed under their own
+licenses, such as open source.  This software is provided "as is," and unless
+otherwise stated, there is no warranty, express or implied, including but not
+limited to warranties of merchantability and fitness for a particular purpose.
+Certain components of this software are licensed under
+the GNU General Public License (GPL) version 2.0 or 
+GNU General Public License (GPL) version 3.0  or the GNU
+Lesser General Public License (LGPL) Version 2.1 or 
+Lesser General Public License (LGPL) Version 2.0. 
+A copy of each such license is available at
+http://www.opensource.org/licenses/gpl-2.0.php and
+http://opensource.org/licenses/gpl-3.0.html and
+http://www.opensource.org/licenses/lgpl-2.1.php and
+http://www.gnu.org/licenses/old-licenses/library.txt.
+TVD-SW-N9K-VIDEO2-GDL# terminal length 0
+TVD-SW-N9K-VIDEO2-GDL# terminal width 510
+TVD-SW-N9K-VIDEO2-GDL# show ip mroute detail
+IP Multicast Routing Table for VRF "default"
+
+Total number of routes: 266
+Total number of (*,G) routes: 2
+Total number of (S,G) routes: 262
+Total number of (*,G-prefix) routes: 2
+
+(192.168.57.178/32, 225.0.0.1/32), uptime: 20w4d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 6670338/337706374 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.178, uptime: 20w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.184/32, 225.0.0.1/32), uptime: 20w4d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 6669873/337700067 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.184, uptime: 20w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.67.240/32, 225.0.0.1/32), uptime: 00:02:37, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/172 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan57, RPF nbr: 192.168.56.253, uptime: 00:02:37
+  Outgoing interface list: (count: 0)
+
+(192.168.67.241/32, 225.0.0.1/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/172 [Packets/Bytes], 45.867  bps
+  Stats: Active Flow
+  Incoming interface: Vlan57, RPF nbr: 192.168.56.253, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(10.2.56.177/32, 225.0.0.2/32), uptime: 48w3d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 17400928/879311731 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan386, RPF nbr: 10.2.56.177, uptime: 48w3d
+  Outgoing interface list: (count: 0)
+
+(10.2.56.178/32, 225.0.0.2/32), uptime: 36w3d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13111507/646823986 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan386, RPF nbr: 10.2.56.178, uptime: 36w3d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.182/32, 225.0.0.2/32), uptime: 1y17w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 24240390/1217272986 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.182, uptime: 1y17w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.183/32, 225.0.0.2/32), uptime: 1y17w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 24250657/1217845898 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.183, uptime: 1y17w
+  Outgoing interface list: (count: 0)
+
+(192.168.67.242/32, 225.0.0.2/32), uptime: 00:02:38, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/172 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan57, RPF nbr: 192.168.56.253, uptime: 00:02:38
+  Outgoing interface list: (count: 0)
+
+(192.168.67.243/32, 225.0.0.2/32), uptime: 00:00:29, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/172 [Packets/Bytes], 47.448  bps
+  Stats: Active Flow
+  Incoming interface: Vlan57, RPF nbr: 192.168.56.253, uptime: 00:00:29
+  Outgoing interface list: (count: 0)
+
+(*, 232.0.0.0/8), uptime: 37w5d, pim(0) ip(0) 
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Null, RPF nbr: 0.0.0.0, uptime: 37w5d
+  Outgoing interface list: (count: 0)
+
+(192.168.120.4/32, 237.57.70.1/32), uptime: 48w3d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 17401439/879763256 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan120, RPF nbr: 192.168.120.4, uptime: 48w3d
+  Outgoing interface list: (count: 0)
+
+(192.168.120.4/32, 237.57.70.2/32), uptime: 48w3d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 17401272/879538808 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan120, RPF nbr: 192.168.120.4, uptime: 48w3d
+  Outgoing interface list: (count: 0)
+
+(*, 238.57.101.1/32), uptime: 37w5d, pim(0) ip(0) 
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 5w6d
+  Outgoing interface list: (count: 0)
+
+(192.168.69.113/32, 238.57.101.1/32), uptime: 37w5d, igmp(1) ip(0) pim(0) mrib(0) 
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan568, RPF nbr: 10.0.69.249, uptime: 5d23h
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.69.114/32, 238.57.101.1/32), uptime: 37w5d, igmp(1) ip(0) pim(0) mrib(0) 
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan568, RPF nbr: 10.0.69.249, uptime: 5d23h
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(*, 239.0.0.1/32), uptime: 37w5d, ip(0) pim(0) 
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 5w6d
+  Outgoing interface list: (count: 0)
+
+(10.0.62.228/32, 239.0.0.1/32), uptime: 32w3d, ip(0) mrib(0) pim(0) igmp(2) 
+  Data Created: Yes
+  Stats: 11565546/605524977 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan78, RPF nbr: 10.0.62.228, uptime: 32w3d
+  Outgoing interface list: (count: 2)
+    Vlan112, uptime: 3d21h, igmp
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.57.167/32, 239.1.50.2/32), uptime: 1y50w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 24604323/1244777049 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.167, uptime: 1y50w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.168/32, 239.1.50.3/32), uptime: 1y50w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 24604346/1244786761 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.168, uptime: 1y50w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.16/32, 239.1.50.4/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan90, RPF nbr: 192.168.57.16, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(192.168.57.16/32, 239.1.50.5/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan90, RPF nbr: 192.168.57.16, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.1/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199251/292483551 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.1/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.2/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199609/292502590 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.2/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.3/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199613/292500208 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.3/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.4/32), uptime: 18w4d, pim(1) ip(0) 
+  Data Created: Yes
+  Stats: 6199611/292498813 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.4/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.5/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199612/292498608 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.5/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.6/32), uptime: 18w4d, pim(1) ip(0) 
+  Data Created: Yes
+  Stats: 6199603/292495307 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.6/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.7/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199609/292498455 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.7/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.8/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199614/292500259 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.8/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.9/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199607/292497060 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.9/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.10/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199607/292498353 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.10/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.11/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199609/292499748 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.11/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.12/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199610/292498762 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.12/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.13/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199667/292504511 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.13/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.14/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199605/292497214 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.14/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.15/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199605/292499288 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.15/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.16/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199613/292497878 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.16/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.17/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199615/292500310 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.17/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.18/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199607/292495767 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.18/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.19/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199604/292497944 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.19/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.20/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199602/292499647 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.20/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.190/32, 239.2.1.21/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 6199608/292498404 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan88, RPF nbr: 10.0.61.190, uptime: 5w6d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.62/32, 239.2.1.21/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.41/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302410/608012340 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.41/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.42/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302424/608022604 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.42/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.43/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302441/608016750 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.43/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.44/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302487/608022463 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.44/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.45/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302437/608017570 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.45/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.46/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302393/608017938 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.46/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.47/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302443/608015303 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.47/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.48/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302510/608019488 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.48/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.49/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302458/608017348 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.49/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.50/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302472/608019624 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.50/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.51/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302403/608013007 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.51/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.52/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302447/608015507 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.52/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.53/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302402/608012444 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.53/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.54/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302508/608021985 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.54/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.55/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302433/608015049 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.55/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.56/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302423/608014795 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.56/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.57/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302451/608018297 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.57/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.58/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302493/608020938 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.58/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.59/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302419/608014092 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.59/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.94/32, 239.2.1.60/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302405/608017769 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.94, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.94/32, 239.2.1.60/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.92/32, 239.2.1.61/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302415/608026805 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.92, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.92/32, 239.2.1.61/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(10.0.61.92/32, 239.2.1.62/32), uptime: 18w4d, ip(0) pim(1) 
+  Data Created: Yes
+  Stats: 12302458/608038561 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan113, RPF nbr: 10.0.61.92, uptime: 18w4d
+  Outgoing interface list: (count: 1)
+    port-channel204.151, uptime: 2w3d, pim
+
+(192.168.56.92/32, 239.2.1.62/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.58.2, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.5.5.5/32), uptime: 5w0d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1207780/36789307 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 5w0d
+  Outgoing interface list: (count: 0)
+
+(*, 239.7.1.0/24), uptime: 37w5d, pim(0) ip(0) 
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Null, RPF nbr: 0.0.0.0, uptime: 37w5d
+  Outgoing interface list: (count: 0)
+
+(192.168.65.2/32, 239.56.1.1/32), uptime: 1y22w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 24322902/1221492862 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.2/32), uptime: 1y22w, igmp(2) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 24322668/1221494496 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 2)
+    Vlan112, uptime: 3d21h, igmp
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.14/32), uptime: 1y22w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 22762531/1178140494 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.50/32), uptime: 1y22w, igmp(2) ip(0) pim(0) mrib(0) 
+  Data Created: Yes
+  Stats: 24321985/1221477071 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 2)
+    Vlan112, uptime: 3d21h, igmp
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.99/32), uptime: 1y22w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.201/32), uptime: 1y22w, igmp(1) ip(0) pim(0) mrib(0) 
+  Data Created: Yes
+  Stats: 24321979/1221480093 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.202/32), uptime: 1y22w, igmp(1) ip(0) pim(0) mrib(0) 
+  Data Created: Yes
+  Stats: 24317026/1221254372 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.211/32), uptime: 1y22w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 24322024/1221481364 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.65.2/32, 239.56.1.240/32), uptime: 1y22w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 24322041/1221478647 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.13, RPF nbr: 10.5.58.52, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.57.49/32, 239.57.2.73/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: Vlan57, RPF nbr: 192.168.56.253, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.57.49/32, 239.57.2.75/32), uptime: 00:02:38, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan57, RPF nbr: 192.168.56.253, uptime: 00:02:38
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.1/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061758/661176525 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.3/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061761/661183143 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.10/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061768/661192551 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.15/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061800/661235559 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.16/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061752/661171047 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.20/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061762/661184487 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.19/32, 239.57.3.25/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 855288/27117590 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.19, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(172.20.56.19/32, 239.57.3.29/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 855299/27124616 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.19, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(172.20.56.19/32, 239.57.3.30/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 855277/27105392 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.19, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(172.20.56.19/32, 239.57.3.36/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 855284/27114800 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.19, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.41/32), uptime: 1y2w, ip(0) pim(0) mrib(0) 
+  Data Created: Yes
+  Stats: 13061805/661160347 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.19/32, 239.57.3.43/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 855282/27112112 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.19, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.45/32), uptime: 1y2w, ip(0) pim(0) mrib(0) 
+  Data Created: Yes
+  Stats: 13061806/661159105 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.50/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061759/661180455 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.55/32, 239.57.3.51/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 848003/26734951 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.55, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.53/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061750/661168359 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.9/32, 239.57.3.55/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan64, RPF nbr: 192.168.57.9, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.62/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061804/661163919 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.63/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061802/661163817 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.64/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061803/661161282 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.67/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061802/661162780 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.68/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061810/661167067 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.69/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061803/661162575 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.71/32), uptime: 5w0d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1207785/36782585 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 5w0d
+  Outgoing interface list: (count: 0)
+
+(172.20.56.23/32, 239.57.3.75/32), uptime: 1y2w, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061815/661173787 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.23, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.101/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852328/26956626 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.110/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061766/661189863 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.111/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061794/661217407 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.144/32, 239.57.3.112/32), uptime: 1y2w, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 13061763/661179366 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.144, uptime: 1y2w
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.117/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852305/26925714 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.118/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852428/27091026 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.119/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852305/26923128 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.120/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852379/27025170 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.121/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852313/26936466 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.122/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852305/26921835 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.135/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852311/26933778 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.136/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852354/26991570 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.131/32, 239.57.3.137/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 852326/26953938 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.131, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.138/32, 239.57.5.1/32), uptime: 43w6d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 10459922/519450007 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.138, uptime: 43w6d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.138/32, 239.57.5.2/32), uptime: 43w6d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 10459905/519441638 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.138, uptime: 43w6d
+  Outgoing interface list: (count: 0)
+
+(10.1.58.228/32, 239.57.7.1/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286416/1348040037 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.1/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.2/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286416/1348038744 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.2/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.3/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286415/1348039986 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.3/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.4/32), uptime: 2y10w, ip(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286415/1348039986 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.4/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.5/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286410/1348038438 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.5/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.6/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 30081063/1529926468 [Packets/Bytes], 108.800 bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.6/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.7/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286411/1348039782 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.7/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.9/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 30080975/1529920175 [Packets/Bytes], 108.800 bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.9/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.10/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286413/1348039884 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.10/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.11/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286417/1348040088 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.11/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.12/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286418/1348041432 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.12/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.14/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286411/1348038489 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.14/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.228/32, 239.57.7.15/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 26286412/1348039833 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.228, uptime: 48w3d
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(10.1.58.229/32, 239.57.7.15/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan35, RPF nbr: 10.1.58.229, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.157/32, 239.57.7.17/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365850/139405326 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.17/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36892517/1866395519 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.18/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365852/139408014 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.18/32), uptime: 1y50w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36902526/1866850244 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.19/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365850/139405326 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.19/32), uptime: 1y50w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 37934743/1915564277 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.20/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365851/139406670 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.20/32), uptime: 1y50w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36902524/1866850142 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.21/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365850/139405326 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.21/32), uptime: 1y50w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36892533/1866406679 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.22/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365850/139405326 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.22/32), uptime: 1y50w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36902528/1866855518 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.23/32), uptime: 2y3w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 1553197/54884327 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y3w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.23/32), uptime: 1y50w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36902532/1866847708 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.24/32), uptime: 37w3d, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 37w3d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.24/32), uptime: 37w4d, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 13513501/659046954 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 37w4d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.35/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 4285834/182315595 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.35/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36902520/1866849938 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.157/32, 239.57.7.36/32), uptime: 2y10w, ip(0) pim(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 3365843/139404969 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 2y10w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.36/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36892521/1866400895 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.57.159/32, 239.57.7.50/32), uptime: 27w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 6542017/335471264 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 27w4d
+  Outgoing interface list: (count: 0)
+
+(192.168.57.157/32, 239.57.7.51/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.159/32, 239.57.7.51/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36901238/1866838880 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.157/32, 239.57.7.52/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.159/32, 239.57.7.52/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36901196/1866840886 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.157/32, 239.57.7.53/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.159/32, 239.57.7.53/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36899164/1866661632 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.157/32, 239.57.7.54/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.159/32, 239.57.7.54/32), uptime: 1y49w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 33142136/1682276086 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y49w
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.157/32, 239.57.7.55/32), uptime: 3d21h, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.157, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.57.159/32, 239.57.7.55/32), uptime: 1y50w, ip(0) mrib(0) pim(0) igmp(1) 
+  Data Created: Yes
+  Stats: 36901178/1866827550 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan37, RPF nbr: 192.168.57.159, uptime: 1y50w
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.58.241/32, 239.57.20.9/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(192.168.58.241/32, 239.57.20.11/32), uptime: 00:01:36, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:01:36
+  Outgoing interface list: (count: 0)
+
+(192.168.58.241/32, 239.57.20.17/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.241/32, 239.57.20.18/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.241/32, 239.57.20.19/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.241/32, 239.57.20.20/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.243/32, 239.57.20.21/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.243/32, 239.57.20.22/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.243/32, 239.57.20.23/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793706/2079044349 [Packets/Bytes], 8.792   kbps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.23/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.24/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40789104/2078896970 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.24/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 460/24228 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.25/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793705/2079043274 [Packets/Bytes], 8.792   kbps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.25/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.26/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40792901/2079036817 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.26/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.27/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793709/2079042953 [Packets/Bytes], 8.792   kbps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.27/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.28/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793686/2079044852 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.28/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.29/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793708/2079043414 [Packets/Bytes], 8.792   kbps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.29/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.30/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793704/2079046026 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.30/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.32/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793697/2079050585 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.32/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.33/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40793720/2079044551 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.33/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.243/32, 239.57.20.35/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.243/32, 239.57.20.36/32), uptime: 00:00:30, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 1/1344 [Packets/Bytes], 358.400 bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 00:00:30
+  Outgoing interface list: (count: 0)
+
+(192.168.58.243/32, 239.57.20.37/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 40784966/2078610376 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.106.162/32, 239.57.20.37/32), uptime: 2y10w, pim(0) ip(0) mrib(0) igmp(1) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 5w6d, igmp
+
+(192.168.58.241/32, 239.57.20.41/32), uptime: 18w4d, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.106.161/32, 239.57.20.41/32), uptime: 18w4d, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.58.241/32, 239.57.20.42/32), uptime: 3d21h, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 89412/4625760 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.106.161/32, 239.57.20.42/32), uptime: 3d21h, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.58.243/32, 239.57.20.43/32), uptime: 3d21h, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 89414/4625606 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.106.162/32, 239.57.20.43/32), uptime: 3d21h, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.58.243/32, 239.57.20.44/32), uptime: 3d21h, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 89412/4625760 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.106.162/32, 239.57.20.44/32), uptime: 3d21h, igmp(1) pim(0) ip(0) 
+  Data Created: Yes
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.50, RPF nbr: 10.5.58.50, uptime: 3d21h
+  Outgoing interface list: (count: 1)
+    Vlan112, uptime: 3d21h, igmp
+
+(192.168.80.34/32, 239.57.30.1/32), uptime: 2y10w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 40401731/2059175272 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: port-channel30.40, RPF nbr: 10.5.58.48, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(192.168.80.35/32, 239.57.30.1/32), uptime: 2y10w, igmp(1) ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 118469/6245126 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel30.40, RPF nbr: 10.5.58.48, uptime: 4w6d
+  Outgoing interface list: (count: 1)
+    Vlan87, uptime: 18w4d, igmp
+
+(10.2.56.178/32, 239.57.70.98/32), uptime: 19w3d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 6860462/364311105 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan386, RPF nbr: 10.2.56.178, uptime: 19w3d
+  Outgoing interface list: (count: 0)
+
+(10.2.56.178/32, 239.57.70.99/32), uptime: 19w3d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 6860453/364306511 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan386, RPF nbr: 10.2.56.178, uptime: 19w3d
+  Outgoing interface list: (count: 0)
+
+(10.2.56.178/32, 239.57.70.100/32), uptime: 4d14h, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 158481/8193596 [Packets/Bytes], 81.600  bps
+  Stats: Active Flow
+  Incoming interface: Vlan386, RPF nbr: 10.2.56.178, uptime: 4d14h
+  Outgoing interface list: (count: 0)
+
+(172.20.56.19/32, 239.57.80.80/32), uptime: 3w4d, ip(0) pim(0) 
+  Data Created: Yes
+  Stats: 855281/27110768 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan53, RPF nbr: 172.20.56.19, uptime: 3w4d
+  Outgoing interface list: (count: 0)
+
+(10.0.62.228/32, 239.255.255.250/32), uptime: 39w4d, ip(0) mrib(0) pim(0) 
+  Data Created: Yes
+  Stats: 2152791/149399029 [Packets/Bytes], 47.733  bps
+  Stats: Active Flow
+  Incoming interface: Vlan78, RPF nbr: 10.0.62.228, uptime: 39w4d
+  Outgoing interface list: (count: 0)
+
+(10.0.62.229/32, 239.255.255.250/32), uptime: 32w3d, ip(0) pim(0) mrib(0) 
+  Data Created: Yes
+  Stats: 2656065/195446111 [Packets/Bytes], 54.533  bps
+  Stats: Active Flow
+  Incoming interface: Vlan78, RPF nbr: 10.0.62.229, uptime: 32w3d
+  Outgoing interface list: (count: 0)
+
+TVD-SW-N9K-VIDEO2-GDL# 
+TVD-SW-N9K-VIDEO2-GDL# exit

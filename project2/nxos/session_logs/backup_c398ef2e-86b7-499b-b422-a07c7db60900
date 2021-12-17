@@ -1,0 +1,4254 @@
+
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Copyright (C) 2002-2018, Cisco and/or its affiliates.
+All rights reserved.
+The copyrights to certain works contained in this software are
+owned by other third parties and used and distributed under their own
+licenses, such as open source.  This software is provided "as is," and unless
+otherwise stated, there is no warranty, express or implied, including but not
+limited to warranties of merchantability and fitness for a particular purpose.
+Certain components of this software are licensed under
+the GNU General Public License (GPL) version 2.0 or 
+GNU General Public License (GPL) version 3.0  or the GNU
+Lesser General Public License (LGPL) Version 2.1 or 
+Lesser General Public License (LGPL) Version 2.0. 
+A copy of each such license is available at
+http://www.opensource.org/licenses/gpl-2.0.php and
+http://opensource.org/licenses/gpl-3.0.html and
+http://www.opensource.org/licenses/lgpl-2.1.php and
+http://www.gnu.org/licenses/old-licenses/library.txt.
+NEXUS9K-CLN-DATOS-1# terminal length 0
+NEXUS9K-CLN-DATOS-1# terminal width 510
+NEXUS9K-CLN-DATOS-1# show clock
+14:33:58.701 Mexico Thu Jun 04 2020
+Time source is NTP
+NEXUS9K-CLN-DATOS-1# show running-config
+
+!Command: show running-config
+!Time: Thu Jun  4 14:33:59 2020
+
+version 7.0(3)I7(5a) Bios:version 08.34 
+hostname NEXUS9K-CLN-DATOS-1
+policy-map type network-qos Jumbo-nq-policy
+  class type network-qos c-nq3
+    mtu 9216
+  class type network-qos c-nq2
+    mtu 9216
+  class type network-qos c-nq1
+    mtu 9216
+  class type network-qos c-nq-default
+    mtu 9216
+vdc NEXUS9K-CLN-DATOS-1 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature tacacs+
+cfs eth distribute
+feature ospf
+feature bgp
+feature ospfv3
+feature pim
+feature pbr
+feature port-security
+feature udld
+feature interface-vlan
+feature hsrp
+feature lacp
+feature tunnel
+feature vpc
+feature lldp
+feature vtp
+clock timezone Mexico -7 0
+clock summer-time Mexico 1 Sun Apr 2:00 4 Sun Oct 2:00 60
+
+username admin password 5 $5$Wo6gr.aS$Zh8JJsbf1tHAP061Ql/.f5KmiMZdfaoj/XwReZYoPG9  role network-admin
+username recovery password 5 $5$s4HW1iNy$gracsypfYldrJ3LXwjK.Cpx/IdXqoL5pgWXhOek5KS5  role network-admin
+username recovery2 password 5 $5$/9G23fDW$puG6G/LRHz7BqUCkP.QTNofSj97qUTiypyXabMXgf78  role network-admin
+
+banner motd ^
+                                   
+                                ###########            
+                             ################            
+                           ############  ######          
+                          ###  #####       ######       
+                         ###  ###        #########     
+                        ###  ###     ##############   
+                        ##  ##    ####### #########               
+                        ## ##   #####       #######                                
+                        # ##   ###      ###########  
+                          ##  ###   ##############     
+                          #  ##   ##############               
+                            ##  ###############          
+                               #############               
+                                 ########                        
+                __  ___                            __    __
+               /  |/  /__  ____ _____ __________ _/ /_  / /__
+              / /|_/ / _ |/ __ `/ __ `/ ___/ __ `/ __ |/ / _ |
+             / /  / /  __/ /_/ / /_/ / /__/ /_/ / /_/ / /  __/
+            /_/  /_/|___/|__, /|__,_/|___/|__,_/_.___/_/|___/
+                        |____/                     EVOLUTION
+
+          Advertencia: Este es un equipo de acceso restringido.
+            Acceso no autorizado sera severamente penalizado.
+             La sesion esta siendo registrada y monitoreada
+              Warning: This is a restricted access device.
+            Unauthorized access will be vigorously prosecuted.
+                The session is being logged & monitored.                     
+                     ==============================
+                           NEXUS9K-CLN-DATOS-1
+                     ==============================
+
+^
+
+ip domain-lookup
+ip domain-name megacable.com.mx
+ip tacacs source-interface Vlan4
+tacacs-server host 10.1.63.12 key 7 "pakfuli" 
+tacacs-server host 10.1.63.11 key 7 "pakfuli" 
+aaa group server tacacs+ ISE-MEGACABLE 
+    server 10.1.63.11 
+    server 10.1.63.12 
+errdisable recovery interval 180
+errdisable recovery cause udld
+errdisable recovery cause bpduguard
+errdisable recovery cause storm-control
+ip access-list 105
+  10 permit tcp 10.0.124.128 0.0.0.63 any eq 22 
+  20 permit tcp 200.52.192.211/32 any eq 22 
+  30 permit tcp 10.0.126.192 0.0.0.63 any eq 22 
+  40 permit tcp 10.0.56.128 0.0.0.63 any eq 22 
+  50 permit tcp 10.0.60.128 0.0.0.127 any eq 22 
+  60 permit tcp 23.92.124.1/32 any eq 22 
+  70 permit tcp 10.0.70.0 0.0.0.255 any eq 22 
+  80 permit tcp 23.92.124.1/32 any eq 22 
+  90 deny ip any any log 
+ip access-list 98
+  10 permit ip 10.0.70.179/32 any 
+  20 permit ip 10.0.70.180/32 any 
+ip access-list 99
+  10 permit ip 200.52.193.14/32 any 
+  20 permit ip 200.52.176.20/32 any 
+  30 permit ip 200.52.196.176/32 any 
+  40 permit ip 200.52.196.172/32 any 
+  50 permit ip 200.52.196.173/32 any 
+  60 permit ip 200.52.196.174/32 any 
+  70 permit ip 200.52.196.175/32 any 
+  80 permit ip 200.52.193.144/32 any 
+  90 permit ip 10.0.124.183/32 any 
+  100 permit ip 10.0.124.181/32 any 
+  110 permit ip 10.0.124.184/32 any 
+  120 permit ip 10.0.124.185/32 any 
+  130 permit ip 10.0.124.175/32 any 
+  140 permit ip 10.0.124.156/32 any 
+  150 permit ip 10.0.124.157/32 any 
+  160 permit ip 10.0.124.129/32 any 
+  170 permit ip 10.0.124.143/32 any 
+  180 permit ip 10.0.124.140/32 any 
+  190 permit ip 10.0.70.0 0.0.0.255 any 
+  200 permit ip 200.52.192.192 0.0.0.63 any 
+  210 permit ip 200.52.193.136 0.0.0.7 any 
+  220 permit ip 10.0.70.0 0.0.0.255 any 
+ipv6 access-list ACCESO
+  10 deny tcp any eq telnet any log 
+ip access-list BCC-to-INET
+  5 permit ip 10.0.124.144/32 8.8.8.8/32 
+  10 permit ip 10.0.124.144/32 any 
+  20 permit ip any 10.0.124.144/32 
+ip access-list CAMARAS
+  5 permit ip 192.168.100.33/32 any 
+ip access-list CM-S-CORTADOS
+  10 permit ip 10.0.48.0 0.255.15.255 any 
+ip access-list DENY-CAMARAS
+  5 permit ip 192.168.100.33/32 10.0.0.0 0.255.255.255 
+  10 permit ip 192.168.100.33/32 192.168.100.32 0.0.0.31 
+ip access-list DENY-TRAFICO-ASASM
+  5 permit ip 100.64.0.0 0.63.255.255 100.64.0.0 0.63.255.255 
+  10 permit ip 10.134.234.151/32 177.247.132.0 0.0.0.255 
+  15 permit ip any 100.64.0.0 0.63.255.255 
+  40 permit ip any 10.0.0.0 0.3.255.255 
+  70 permit ip 10.0.192.0 0.255.31.255 any 
+  75 permit ip 10.0.64.0 0.255.63.255 10.6.70.16 0.0.0.7 
+  80 remark --- direccionamiento CGN ---
+  90 permit ip 10.20.240.0 0.0.15.255 any 
+  100 permit ip 10.21.240.0 0.0.15.255 any 
+  110 permit ip 10.22.240.0 0.0.15.255 any 
+  120 permit ip 10.23.240.0 0.0.15.255 any 
+  130 permit ip 10.24.240.0 0.0.15.255 any 
+  140 permit ip 10.25.240.0 0.0.15.255 any 
+  150 permit ip 10.26.240.0 0.0.15.255 any 
+  160 permit ip 10.27.240.0 0.0.15.255 any 
+  170 permit ip 10.28.240.0 0.0.15.255 any 
+  180 permit ip 10.29.240.0 0.0.15.255 any 
+  190 permit ip 10.30.240.0 0.0.15.255 any 
+  200 permit ip 10.31.240.0 0.0.15.255 any 
+  210 permit ip 10.32.240.0 0.0.15.255 any 
+  220 permit ip 10.33.240.0 0.0.15.255 any 
+  230 permit ip 10.34.240.0 0.0.15.255 any 
+  240 permit ip 10.35.240.0 0.0.15.255 any 
+  250 permit ip 10.36.240.0 0.0.15.255 any 
+  260 permit ip 10.37.240.0 0.0.15.255 any 
+  270 permit ip 10.38.240.0 0.0.15.255 any 
+  280 permit ip 10.39.240.0 0.0.15.255 any 
+  290 permit ip 10.40.240.0 0.0.15.255 any 
+  300 permit ip 10.41.240.0 0.0.15.255 any 
+  310 permit ip 10.42.240.0 0.0.15.255 any 
+  320 permit ip 10.43.240.0 0.0.15.255 any 
+  330 permit ip 10.44.240.0 0.0.15.255 any 
+  340 permit ip 10.45.240.0 0.0.15.255 any 
+  350 permit ip 10.46.240.0 0.0.15.255 any 
+  360 permit ip 10.47.240.0 0.0.15.255 any 
+  370 permit ip 10.48.240.0 0.0.15.255 any 
+  380 permit ip 10.49.240.0 0.0.15.255 any 
+  390 permit ip 10.50.240.0 0.0.15.255 any 
+  400 permit ip 10.51.240.0 0.0.15.255 any 
+  410 permit ip 10.52.240.0 0.0.15.255 any 
+  420 permit ip 10.53.240.0 0.0.15.255 any 
+  430 permit ip 10.54.240.0 0.0.15.255 any 
+  440 permit ip 10.55.240.0 0.0.15.255 any 
+  450 permit ip 10.56.240.0 0.0.15.255 any 
+  460 permit ip 10.57.240.0 0.0.15.255 any 
+  470 permit ip 10.58.240.0 0.0.15.255 any 
+  480 permit ip 10.59.240.0 0.0.15.255 any 
+  490 permit ip 10.60.240.0 0.0.15.255 any 
+  500 permit ip 10.61.240.0 0.0.15.255 any 
+  510 permit ip 10.62.240.0 0.0.15.255 any 
+  520 permit ip 10.63.240.0 0.0.15.255 any 
+  530 permit ip 10.64.240.0 0.0.15.255 any 
+  540 permit ip 10.65.240.0 0.0.15.255 any 
+  550 permit ip 10.66.240.0 0.0.15.255 any 
+  560 permit ip 10.67.240.0 0.0.15.255 any 
+  570 permit ip 10.68.240.0 0.0.15.255 any 
+  580 permit ip 10.69.240.0 0.0.15.255 any 
+  590 permit ip 10.70.240.0 0.0.15.255 any 
+  600 permit ip 10.71.240.0 0.0.15.255 any 
+  610 permit ip 10.72.240.0 0.0.15.255 any 
+  620 permit ip 10.73.240.0 0.0.15.255 any 
+  630 permit ip 10.74.240.0 0.0.15.255 any 
+  640 permit ip 10.75.240.0 0.0.15.255 any 
+  650 permit ip 10.76.240.0 0.0.15.255 any 
+  660 permit ip 10.77.240.0 0.0.15.255 any 
+  670 permit ip 10.78.240.0 0.0.15.255 any 
+  680 permit ip 10.79.240.0 0.0.15.255 any 
+  690 permit ip 10.80.240.0 0.0.15.255 any 
+  700 permit ip 10.81.240.0 0.0.15.255 any 
+  710 permit ip 10.82.240.0 0.0.15.255 any 
+  720 permit ip 10.83.240.0 0.0.15.255 any 
+  730 permit ip 10.84.240.0 0.0.15.255 any 
+  740 permit ip 10.85.240.0 0.0.15.255 any 
+  750 permit ip 10.86.240.0 0.0.15.255 any 
+  760 permit ip 10.87.240.0 0.0.15.255 any 
+  770 permit ip 10.88.240.0 0.0.15.255 any 
+  780 permit ip 10.89.240.0 0.0.15.255 any 
+  790 permit ip 10.90.240.0 0.0.15.255 any 
+  800 permit ip 10.91.240.0 0.0.15.255 any 
+  810 permit ip 10.92.240.0 0.0.15.255 any 
+  820 permit ip 10.93.240.0 0.0.15.255 any 
+  830 permit ip 10.94.240.0 0.0.15.255 any 
+  840 permit ip 10.95.240.0 0.0.15.255 any 
+  850 permit ip 10.96.240.0 0.0.15.255 any 
+  860 permit ip 10.97.240.0 0.0.15.255 any 
+  870 permit ip 10.98.240.0 0.0.15.255 any 
+  880 permit ip 10.99.240.0 0.0.15.255 any 
+  890 permit ip 10.100.240.0 0.0.15.255 any 
+  900 permit ip 10.150.240.0 0.0.15.255 any 
+  910 permit ip 10.151.240.0 0.0.15.255 any 
+  920 permit ip 10.152.240.0 0.0.15.255 any 
+  930 permit ip 10.153.240.0 0.0.15.255 any 
+  940 permit ip 10.154.240.0 0.0.15.255 any 
+  950 permit ip 10.155.240.0 0.0.15.255 any 
+  960 permit ip 10.156.240.0 0.0.15.255 any 
+  970 permit ip 10.157.240.0 0.0.15.255 any 
+  980 permit ip 10.158.240.0 0.0.15.255 any 
+  990 permit ip 10.159.240.0 0.0.15.255 any 
+  1000 permit ip 10.160.240.0 0.0.15.255 any 
+  1010 permit ip 10.161.240.0 0.0.15.255 any 
+  1020 permit ip 10.162.240.0 0.0.15.255 any 
+  1030 permit ip 10.163.240.0 0.0.15.255 any 
+  1040 permit ip 10.164.240.0 0.0.15.255 any 
+  1050 permit ip 10.165.240.0 0.0.15.255 any 
+  1060 permit ip 10.166.240.0 0.0.15.255 any 
+  1070 permit ip 10.167.240.0 0.0.15.255 any 
+  1080 permit ip 10.168.240.0 0.0.15.255 any 
+  1090 permit ip 10.169.240.0 0.0.15.255 any 
+  1100 permit ip 10.170.240.0 0.0.15.255 any 
+  1110 permit ip 10.171.240.0 0.0.15.255 any 
+  1120 permit ip 10.172.240.0 0.0.15.255 any 
+  1130 permit ip 10.173.240.0 0.0.15.255 any 
+  1140 permit ip any 200.52.167.161/32 
+  1150 permit ip any 200.52.167.3/32 
+  1160 permit ip any 200.52.167.7/32 
+ip access-list DENY-fromv22-a-ASA1
+  10 permit ip 10.0.0.0 0.255.255.255 10.0.0.0 0.255.255.255 
+ip access-list DENY-fromv4-a-ASASM
+  10 permit ip any 10.0.0.0 0.255.255.255 
+  20 permit ip 10.0.124.128 0.0.0.63 192.168.127.0 0.0.0.31 
+  30 permit ip 10.0.124.128 0.0.0.63 192.168.51.0 0.0.0.31 
+  40 permit ip 10.0.124.186/32 172.16.0.0 0.15.255.255 
+  50 permit ip 10.0.124.129/32 172.16.0.0 0.15.255.255 
+  60 permit ip 10.0.124.135/32 172.16.0.0 0.15.255.255 
+  70 permit ip 10.0.124.141/32 172.16.0.0 0.15.255.255 
+  80 permit ip 10.0.124.186/32 177.246.96.0 0.0.31.255 
+  90 permit ip 10.0.124.129/32 177.246.96.0 0.0.31.255 
+  100 permit ip 10.0.124.135/32 177.246.96.0 0.0.31.255 
+  110 permit ip 10.0.124.141/32 177.246.96.0 0.0.31.255 
+  120 permit ip 10.0.124.186/32 187.243.0.0 0.0.255.255 
+  130 permit ip 10.0.124.186/32 189.199.32.0 0.0.31.255 
+  140 permit ip 10.0.124.186/32 189.195.176.0 0.0.3.255 
+  150 permit ip 10.0.124.186/32 189.195.188.0 0.0.3.255 
+  160 permit ip 10.0.124.186/32 201.165.88.0 0.0.7.255 
+  170 permit ip 10.0.124.186/32 201.165.96.0 0.0.31.255 
+  180 permit ip 10.0.124.129/32 187.243.0.0 0.0.255.255 
+  190 permit ip 10.0.124.129/32 189.199.32.0 0.0.31.255 
+  200 permit ip 10.0.124.129/32 189.195.176.0 0.0.3.255 
+  210 permit ip 10.0.124.129/32 189.195.188.0 0.0.3.255 
+  220 permit ip 10.0.124.129/32 201.165.88.0 0.0.7.255 
+  230 permit ip 10.0.124.129/32 201.165.96.0 0.0.31.255 
+  240 permit ip 10.0.124.135/32 187.243.0.0 0.0.255.255 
+  250 permit ip 10.0.124.135/32 189.199.32.0 0.0.31.255 
+  260 permit ip 10.0.124.135/32 189.195.176.0 0.0.3.255 
+  270 permit ip 10.0.124.135/32 189.195.188.0 0.0.3.255 
+  280 permit ip 10.0.124.135/32 201.165.88.0 0.0.7.255 
+  290 permit ip 10.0.124.135/32 201.165.96.0 0.0.31.255 
+  300 permit ip 10.0.124.141/32 187.243.0.0 0.0.255.255 
+  310 permit ip 10.0.124.141/32 189.199.32.0 0.0.31.255 
+  320 permit ip 10.0.124.141/32 189.195.176.0 0.0.3.255 
+  330 permit ip 10.0.124.141/32 189.195.188.0 0.0.3.255 
+  340 permit ip 10.0.124.141/32 201.165.88.0 0.0.7.255 
+  350 permit ip 10.0.124.141/32 201.165.96.0 0.0.31.255 
+  360 permit ip 10.0.124.186/32 177.247.128.0 0.0.15.255 
+  370 permit ip 10.0.124.129/32 177.247.128.0 0.0.15.255 
+  380 permit ip 10.0.124.135/32 177.247.128.0 0.0.15.255 
+  390 permit ip 10.0.124.141/32 177.247.128.0 0.0.15.255 
+ip access-list MFON-911-IT
+  10 permit ip 10.2.124.132/32 10.10.56.107/32 
+ip access-list PDS-PUBLIC-NGV
+  10 permit ip 10.0.192.0 0.255.31.255 189.198.130.32 0.0.0.31 
+  20 permit ip 10.0.192.0 0.255.31.255 189.199.123.176 0.0.0.15 
+  30 permit ip 10.0.192.0 0.255.31.255 200.92.212.160 0.0.0.15 
+  40 permit ip 10.0.192.0 0.255.31.255 200.52.205.224/32 
+  50 permit ip 10.0.192.0 0.255.31.255 192.168.60.0 0.0.3.255 
+  60 permit ip 10.0.192.0 0.255.31.255 192.168.69.0 0.0.0.127 
+  70 permit ip 10.0.192.0 0.255.31.255 189.199.71.224 0.0.0.7 
+  80 permit ip 10.0.192.0 0.255.31.255 201.132.200.120 0.0.0.7 
+  90 permit ip 10.0.192.0 0.255.31.255 187.244.19.224 0.0.0.31 
+  100 permit ip 10.0.192.0 0.255.31.255 187.244.48.144 0.0.0.15 
+  110 permit ip 10.0.192.0 0.255.31.255 187.244.27.152 0.0.0.7 
+  115 permit ip 10.0.192.0 0.255.31.255 187.244.27.224 0.0.0.15 
+ip access-list PERICOS
+  10 remark --- Comunicacion Pericos hacia Pueblos GML ---
+  20 permit ip 10.110.160.0 0.0.31.255 10.23.160.0 0.0.31.255 
+  30 permit ip 10.110.160.0 0.0.31.255 10.1.40.33/32 
+  40 permit ip 10.110.160.0 0.0.31.255 10.1.40.35/32 
+  50 permit ip 10.110.160.0 0.0.31.255 10.1.40.36/32 
+  60 permit ip 10.110.160.0 0.0.31.255 10.1.40.37/32 
+  70 permit ip 10.110.160.0 0.0.31.255 10.1.40.38/32 
+ip access-list TRAFICO-ASASM
+  10 remark --- direccionamiento privado ---
+  20 permit ip 10.0.0.0 0.255.255.255 any 
+  30 permit ip 172.16.0.0 0.15.255.255 any 
+  40 permit ip 189.199.183.0 0.0.0.255 any 
+  50 permit ip 187.243.0.0 0.0.255.255 200.52.167.0 0.0.0.255 
+  60 permit ip 201.165.88.0 0.0.7.255 200.52.167.0 0.0.0.255 
+  70 permit ip 201.165.96.0 0.0.31.255 200.52.167.0 0.0.0.255 
+  80 permit ip 189.199.32.0 0.0.31.255 200.52.167.0 0.0.0.255 
+  90 permit ip 177.246.96.0 0.0.31.255 200.52.167.0 0.0.0.255 
+  100 permit ip 189.195.176.0 0.0.3.255 200.52.167.0 0.0.0.255 
+  110 permit ip 189.195.188.0 0.0.3.255 200.52.167.0 0.0.0.255 
+  120 permit ip 187.243.0.0 0.0.255.255 200.52.176.0 0.0.0.255 
+  130 permit ip 201.165.88.0 0.0.7.255 200.52.176.0 0.0.0.255 
+  140 permit ip 201.165.96.0 0.0.31.255 200.52.176.0 0.0.0.255 
+  150 permit ip 177.246.96.0 0.0.31.255 200.52.176.0 0.0.0.255 
+  160 permit ip 189.199.32.0 0.0.31.255 200.52.176.0 0.0.0.255 
+  170 permit ip 189.195.176.0 0.0.3.255 200.52.176.0 0.0.0.255 
+  180 permit ip 189.195.188.0 0.0.3.255 200.52.176.0 0.0.0.255 
+  190 permit ip 187.243.0.0 0.0.255.255 201.165.85.0 0.0.0.255 
+  200 permit ip 201.165.88.0 0.0.7.255 201.165.85.0 0.0.0.255 
+  210 permit ip 177.246.96.0 0.0.31.255 201.165.85.0 0.0.0.255 
+  220 permit ip 201.165.96.0 0.0.31.255 201.165.85.0 0.0.0.255 
+  230 permit ip 189.199.32.0 0.0.31.255 201.165.85.0 0.0.0.255 
+  240 permit ip 189.195.176.0 0.0.3.255 201.165.85.0 0.0.0.255 
+  250 permit ip 189.195.188.0 0.0.3.255 201.165.85.0 0.0.0.255 
+  260 permit ip 187.243.0.0 0.0.255.255 200.52.179.0 0.0.0.255 
+  270 permit ip 201.165.88.0 0.0.7.255 200.52.179.0 0.0.0.255 
+  280 permit ip 177.246.96.0 0.0.31.255 200.52.179.0 0.0.0.255 
+  290 permit ip 201.165.96.0 0.0.31.255 200.52.179.0 0.0.0.255 
+  300 permit ip 189.199.32.0 0.0.31.255 200.52.179.0 0.0.0.255 
+  310 permit ip 189.195.176.0 0.0.3.255 200.52.179.0 0.0.0.255 
+  320 permit ip 189.195.188.0 0.0.3.255 200.52.179.0 0.0.0.255 
+  330 permit ip 177.247.128.0 0.0.15.255 201.165.85.0 0.0.0.255 
+  340 permit ip 177.247.128.0 0.0.15.255 200.52.176.0 0.0.0.255 
+  350 permit ip 177.247.128.0 0.0.15.255 200.52.179.0 0.0.0.255 
+  360 permit ip 177.247.128.0 0.0.15.255 200.52.167.0 0.0.0.255 
+ip access-list fromv22-a-ASA1
+  10 permit ip 10.0.0.0 0.255.255.255 any 
+ip access-list fromv4-a-ASASM
+  10 permit ip 10.0.0.0 0.255.255.255 any 
+ip access-list ld-pueblosgml
+  10 remark --- COMUNICACION VLAN25 A PUEBLOS GML ---
+  20 permit ip 10.1.126.0 0.0.0.127 10.23.160.0 0.0.31.255 
+  30 permit ip 10.1.126.0 0.0.0.127 10.1.40.33/32 
+  40 permit ip 10.1.126.0 0.0.0.127 10.1.40.34/32 
+  50 permit ip 10.1.126.0 0.0.0.127 10.1.40.35/32 
+  60 permit ip 10.1.126.0 0.0.0.127 10.1.40.36/32 
+  70 permit ip 10.1.126.0 0.0.0.127 10.1.40.37/32 
+  80 permit ip 10.1.126.0 0.0.0.127 10.1.40.38/32 
+class-map type qos match-any video
+  match dscp 32,34
+class-map type qos match-any datos-high
+  match dscp 24
+class-map type qos match-any management
+  match dscp 8
+class-map type qos match-any datos-medium
+  match dscp 16
+class-map type qos match-any Real_Time_Video
+  match dscp 32,34,46-47
+class-map type qos match-any network-control
+  match dscp 48,56
+class-map type qos match-any real-time-class
+  match dscp 46
+policy-map type qos QSP-ALL-IN-TRAFFIC
+  class datos-high
+    set dscp 24
+    set qos-group 2
+  class datos-medium
+    set dscp 16
+    set qos-group 2
+  class management
+    set dscp 8
+    set qos-group 1
+  class network-control
+    set dscp 48
+    set qos-group 1
+  class real-time-class
+    set dscp 32
+    set qos-group 3
+  class Real_Time_Video
+    set dscp 32
+    set qos-group 3
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-MGMT
+  class class-default
+    set dscp 8
+    set qos-group 1
+policy-map type qos QSP-IN-RMK-TRAFFIC-VOICE
+  class class-default
+    set dscp 46
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-DEFAULT
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-SDV
+  class class-default
+    set dscp 32
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  class class-default
+    set dscp 34
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  class class-default
+    set dscp 24
+    set qos-group 2
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  class class-default
+    set dscp 16
+    set qos-group 2
+policy-map type queuing PM_QUEUING_SYSTEM_OUT
+  class type queuing c-out-q3
+    priority level 1
+  class type queuing c-out-q2
+    bandwidth remaining percent 75
+  class type queuing c-out-q1
+    bandwidth remaining percent 15
+  class type queuing c-out-q-default
+    bandwidth remaining percent 10
+system qos
+  service-policy type queuing output PM_QUEUING_SYSTEM_OUT
+  service-policy type network-qos Jumbo-nq-policy
+track 1 interface port-channel1 line-protocol
+copp profile strict
+vtp domain MEGAREDCLN
+snmp-server location Pacifico
+snmp-server user admin network-admin auth md5 0xbff9f5beabd97b7b5b3948576938e5e6 priv 0xbff9f5beabd97b7b5b3948576938e5e6 localizedkey
+snmp-server user recovery network-admin auth md5 0xcf74649bf5e12ce77550524f93a0cc6d priv 0xcf74649bf5e12ce77550524f93a0cc6d localizedkey
+snmp-server user recovery2 network-admin auth md5 0xbff9f5beabd97b7b5b3948576938e5e6 priv 0xbff9f5beabd97b7b5b3948576938e5e6 localizedkey
+snmp-server host 10.0.124.143 traps version 2c clnKsunM421
+rmon event 1 description FATAL(1) owner PMON@FATAL
+rmon event 2 description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 description ERROR(3) owner PMON@ERROR
+rmon event 4 description WARNING(4) owner PMON@WARNING
+rmon event 5 description INFORMATION(5) owner PMON@INFO
+snmp-server enable traps bgp
+snmp-server enable traps hsrp state-change
+snmp-server community ClnThoR421X group network-admin
+snmp-server community C!N_4cc3s0_c0!3cT0r group network-operator
+snmp-server community clnKsunM421 group network-admin
+snmp-server community ClnThoR421X use-acl 99
+snmp-server community clnKsunM421 use-acl 99
+snmp-server community C!N_4cc3s0_c0!3cT0r use-ipv4acl 98
+ntp server 10.1.63.13 prefer use-vrf default
+ntp server 10.1.63.121 use-vrf default
+ntp source-interface  Vlan14
+aaa authentication login default group ISE-MEGACABLE 
+aaa authorization config-commands default group ISE-MEGACABLE local 
+aaa authorization commands default group ISE-MEGACABLE local 
+aaa accounting default group ISE-MEGACABLE 
+tacacs-server directed-request 
+system login block-for 45 attempts 3 within 60 
+
+ip route 1.1.53.1/32 192.168.124.2 name Source_Tun-MFON-temp_tunnel53
+ip route 1.1.229.1/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel229
+ip route 10.0.24.0/26 10.1.124.121 250
+ip route 10.0.52.0/22 192.168.124.2 name SEGMENTO-SJC
+ip route 10.0.52.0/26 10.1.124.121 250
+ip route 10.0.70.0/24 10.5.125.240 name NOC-DATAMINER-GDL-VRF-NOC-GESTION-VPN
+ip route 10.0.120.0/24 192.168.124.2
+ip route 10.0.125.128/26 10.0.124.34
+ip route 10.0.128.0/24 192.168.124.2
+ip route 10.0.148.0/24 192.168.124.2
+ip route 10.0.152.0/24 192.168.124.2
+ip route 10.0.160.0/24 192.168.124.2
+ip route 10.0.228.0/22 192.168.124.2 name SEGMENTO-LAPAZ
+ip route 10.0.228.0/26 10.1.124.121 250
+ip route 10.1.1.1/32 10.0.124.129
+ip route 10.1.24.0/25 10.1.124.121 250
+ip route 10.1.37.2/32 192.168.124.2 name Source_Tun-MFON-temp_Tunnel160
+ip route 10.1.37.8/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel52
+ip route 10.1.37.9/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel56
+ip route 10.1.37.11/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel100
+ip route 10.1.37.12/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel108
+ip route 10.1.37.13/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel120
+ip route 10.1.37.14/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel128
+ip route 10.1.37.17/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel148
+ip route 10.1.37.18/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel228
+ip route 10.1.37.19/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel152
+ip route 10.1.37.20/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel168
+ip route 10.1.37.21/32 192.168.124.2 name Source_Tun-MFON-temp-Tunel112
+ip route 10.1.52.0/22 192.168.124.2 name SEGMENTO-SJC
+ip route 10.1.52.0/25 10.1.124.121 250
+ip route 10.1.63.0/25 10.1.63.26
+ip route 10.1.63.91/32 192.168.124.2
+ip route 10.1.125.80/28 10.0.124.34
+ip route 10.1.125.144/28 10.0.124.34
+ip route 10.1.125.224/29 10.1.66.14
+ip route 10.1.125.240/28 10.0.124.34
+ip route 10.1.148.0/25 192.168.124.2
+ip route 10.1.152.0/25 192.168.124.2
+ip route 10.1.228.0/22 192.168.124.2 name SEGMENTO-LAPAZ
+ip route 10.1.228.0/25 10.1.124.121 250
+ip route 10.2.52.0/22 192.168.124.2 name SEGMENTO-SJC
+ip route 10.2.56.224/28 10.2.124.238
+ip route 10.2.228.0/22 192.168.124.2 name SEGMENTO-LAPAZ
+ip route 10.5.52.240/31 192.168.124.2 name SEGMENTO-SJC
+ip route 10.5.228.240/31 192.168.124.2 name SEGMENTO-LAPAZ
+ip route 10.6.52.0/24 192.168.124.2 name GESTION-VLAN251-SJC
+ip route 10.6.70.16/29 10.2.124.209 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.6.124.16/28 10.0.126.197 name VLAN-251-HUB01
+ip route 10.6.124.32/28 10.0.126.199 name VLAN-251-HUB02
+ip route 10.6.124.48/28 10.0.126.200 name VLAN-251-HUB03
+ip route 10.6.124.64/28 10.0.126.201 name VLAN-251-HUB04
+ip route 10.6.228.0/24 192.168.124.2 name GESTION-VLAN251-LPAZ
+ip route 10.16.64.0/28 10.0.124.34
+ip route 10.16.64.18/32 10.0.124.34
+ip route 10.16.64.30/32 10.0.124.34
+ip route 10.24.160.0/19 10.1.124.121 250
+ip route 10.25.160.0/19 10.1.124.121 250
+ip route 10.26.160.0/19 10.1.124.121 250
+ip route 10.27.160.0/19 10.1.124.121 250
+ip route 10.48.160.0/19 192.168.124.2
+ip route 10.52.160.0/19 10.1.124.121 250
+ip route 10.53.160.0/19 10.1.124.121 250
+ip route 10.55.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.59.160.0/19 192.168.124.2
+ip route 10.60.160.0/19 192.168.124.2
+ip route 10.61.160.0/19 192.168.124.2
+ip route 10.62.160.0/19 192.168.124.2
+ip route 10.63.160.0/19 192.168.124.2
+ip route 10.64.160.0/19 192.168.124.2
+ip route 10.65.160.0/19 192.168.124.2
+ip route 10.66.160.0/19 192.168.124.2
+ip route 10.67.160.0/19 192.168.124.2
+ip route 10.68.160.0/19 192.168.124.2
+ip route 10.69.160.0/19 192.168.124.2
+ip route 10.70.160.0/19 192.168.124.2
+ip route 10.71.160.0/19 192.168.124.2
+ip route 10.73.160.0/19 192.168.124.2
+ip route 10.74.160.0/19 192.168.124.2
+ip route 10.75.160.0/19 192.168.124.2
+ip route 10.76.160.0/19 192.168.124.2
+ip route 10.77.160.0/19 192.168.124.2
+ip route 10.78.160.0/19 192.168.124.2
+ip route 10.79.160.0/19 192.168.124.2
+ip route 10.80.160.0/19 192.168.124.2
+ip route 10.81.160.0/19 192.168.124.2
+ip route 10.82.160.0/19 192.168.124.2
+ip route 10.83.160.0/19 192.168.124.2
+ip route 10.84.160.0/19 192.168.124.2
+ip route 10.85.160.0/19 192.168.124.2
+ip route 10.86.160.0/19 192.168.124.2
+ip route 10.87.160.0/19 192.168.124.2
+ip route 10.150.160.172/32 10.1.124.122
+ip route 10.168.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.170.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.171.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.172.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.175.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.184.0.0/19 192.168.124.2
+ip route 10.184.160.0/19 192.168.124.2
+ip route 10.185.0.0/19 192.168.124.2
+ip route 10.185.160.0/19 192.168.124.2
+ip route 10.186.0.0/19 192.168.124.2
+ip route 10.186.160.0/19 192.168.124.2
+ip route 10.187.0.0/19 192.168.124.2
+ip route 10.187.160.0/19 192.168.124.2
+ip route 10.188.0.0/19 192.168.124.2
+ip route 10.188.160.0/19 192.168.124.2
+ip route 10.228.160.0/19 10.1.124.121 250
+ip route 10.229.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.229.160.0/19 10.1.124.121 250
+ip route 10.230.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.231.0.0/19 1.2.228.2 name NOC-DATAMINER-XPONDER-REG-CLN
+ip route 10.253.160.0/19 192.168.124.2
+ip route 10.254.160.0/19 192.168.124.2
+ip route 10.255.160.0/19 192.168.124.2
+ip route 35.209.240.222/32 10.0.124.190 name Source_CM-temp_Incognito
+ip route 62.90.201.74/32 10.0.124.190
+ip route 62.90.235.105/32 10.0.124.190
+ip route 65.120.70.42/32 10.0.124.190
+ip route 72.249.8.160/27 10.0.124.190
+ip route 172.15.56.64/28 10.2.124.238
+ip route 189.195.32.16/32 10.0.124.190 name Tunnel_Dest
+ip route 189.195.32.52/32 10.0.124.190 name Tunnel_Dest
+ip route 189.195.32.90/32 10.0.124.190 name Tunn52-dest-pub-to-FW-cln
+ip route 189.195.44.70/32 10.0.124.190 name Tunn228-dest-pub-to-FW
+ip route 189.195.44.124/32 10.0.124.190 name Tunnel_Dest
+ip route 189.198.208.22/32 10.0.124.190 name Tunnel_Dest
+ip route 189.198.209.22/32 10.0.124.190 name Tunnel_Dest
+ip route 189.198.210.22/32 10.0.124.190 name Tunnel_Dest
+ip route 189.198.211.22/32 10.0.124.190 name Tunnel_Dest
+ip route 189.199.76.1/32 10.0.124.190 name Prueba-82746238
+ip route 189.199.112.22/32 10.0.124.190 name Tunnel_Dest
+ip route 189.199.252.22/32 10.0.124.190 name Tunnel_Dest
+ip route 192.168.1.0/27 192.168.124.2
+ip route 193.22.173.10/32 10.0.124.190
+ip route 193.22.173.23/32 10.0.124.190
+ip route 200.52.161.22/32 10.0.124.190
+ip route 200.52.163.22/32 10.0.124.190
+ip route 200.52.165.22/32 10.0.124.190
+ip route 200.52.166.22/32 10.0.124.190
+ip route 200.52.173.159/32 10.0.124.190 name Tunnel_Dest
+ip route 200.52.182.22/32 10.0.124.190
+ip route 200.52.187.22/32 10.0.124.190
+ip route 200.52.190.22/32 10.0.124.190
+ip route 200.52.192.211/32 10.0.124.190
+ip route 200.52.205.69/32 10.0.124.190 name Tunnel_Dest
+ip route 200.52.207.191/32 10.0.124.190
+ip route 200.56.146.22/32 10.0.124.190 name Tunnel_Dest
+ip route 200.66.32.10/32 10.0.124.190 name PUBASATOR
+ip route 200.66.32.22/32 10.0.124.190 name Tunnel_Dest
+ip route 200.66.32.42/32 10.0.124.190 name Tunnel_Dest_LO124TOR
+ip route 200.66.36.22/32 10.0.124.190
+ip route 200.92.153.22/32 10.0.124.190 name Tunnel_Dest
+ip route 201.122.97.47/32 10.0.124.190
+ip route 201.132.200.1/32 10.0.124.190
+ip route 201.164.68.12/32 10.0.124.190 name Tunnel_Dest
+ip route 201.165.116.224/27 10.2.124.195
+ipv6 route 2806:269::10:0:124:13/128 2806:269:0:100::29
+ipv6 route 2806:269::10:0:124:14/128 2806:269:0:100::21
+ipv6 route 2806:269::10:0:124:15/128 2806:269:0:100::23
+ipv6 route 2806:269::10:0:124:2/128 2806:269:0:100::27
+ipv6 route 2806:269::10:0:124:3/128 2806:269:0:100::b
+ipv6 route 2806:269::10:0:124:6/128 2806:269:0:100::d
+ipv6 route 2806:269::10:0:124:8/128 2806:269:0:100::1f
+ip pim ssm range 232.0.0.0/8
+vlan 1-10,14-18,22-23,25-26,73,92,96,99-101,105,110,112,204,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,666,1000-1001,1018,1021,1035,1221,1800,1954,2002-2003,2006-2008,2011-2019
+vlan 2
+  name MEGARED
+vlan 3
+  name MSFC-ROCO
+vlan 4
+  name MSFC-ALLOT
+vlan 5
+  name ALLOT-PIX
+vlan 6
+  name 6500-ASR-CORE
+vlan 7
+  name MS-NETWORK
+vlan 8
+  name MOT-NETWORK
+vlan 9
+  name MPLS
+vlan 10
+  name CORP-NET
+vlan 14
+  name HUBS-MGNT
+vlan 15
+  name SCHG_CTRL
+vlan 16
+  name SCHG_PROPAGA
+vlan 17
+  name Video_unicast_VOD
+vlan 18
+  name ADINSERTION-TVD
+vlan 22
+  name Gestion-NOC
+vlan 23
+  name MEGAFON
+vlan 25
+  name MFN-UM
+vlan 26
+  name MFN-NFS_UM
+vlan 73
+  name Cache-NETFLIX
+vlan 92
+  name VLAN-GOOGLE-CACHES
+vlan 96
+  name TVD-SEACHANGE-PUB
+vlan 99
+  name PUBLICA
+vlan 100
+  name GESTION-RFGW-3G60
+vlan 101
+  name ETH-CONSTRURAMA
+vlan 105
+  name ETH-MFN-ALESTRA
+vlan 112
+  name FARMACON
+vlan 204
+  name IPV6-CMTS_04
+vlan 251
+  name MTTO-MONIT-CTC-HUBS-MEGA-ALTAN
+vlan 252
+  name MTTO-SONDA-QUAM-PINTERNA
+vlan 260
+  name APROV-SAC-BCC
+vlan 261
+  name APROV-BCC-LEON
+vlan 279
+  name MFN-RAC
+vlan 280
+  name RAC-IT-LAN
+vlan 293
+  name TVD-PDS-VOD
+vlan 352
+  name IRD-MONITORING
+vlan 357
+  name MFN-ACCESS-BORDER
+vlan 359
+  name MFN-BILLING-PROV
+vlan 375
+  name MFN-VLAN-SIG-SIP-CLN
+vlan 376
+  name MFN-SIG-SIP-CLIEN
+vlan 399
+  name IT_CUBES
+vlan 460
+  name MFN-IMS-HUAWEI-GDL-CLN
+vlan 471
+  name MRD-SERVERS-2
+vlan 481
+  name SONDAS-QAM
+vlan 482
+  name R-SONDAS-QAM
+vlan 490
+  name CORE-RAC_VER-VRF-NOC-GESTION
+vlan 500
+  name P2P_MFON
+vlan 650
+  name MRD-CAMARAS
+vlan 666
+  name PROV_FLP
+vlan 1000
+  name ETH-INTERNET
+vlan 1001
+  name ETH-MFN_SIP
+vlan 1018
+  name CORE-LAN-EBGP-MHOP-3
+vlan 1021
+  name MFN-SBC-TRONCAL-SIP-MCA
+vlan 1035
+  name MCA-to-SBC-LPAZ
+vlan 1221
+  name Xponders-Lpaz
+vlan 1800
+  name GESTION-DWDM-CORE-NOKIA
+vlan 1954
+  name TVD-P1_TVDL_Culiacan_Mochis
+vlan 2002
+  name IPV6-CMTS_02
+vlan 2003
+  name IPV6-CMTS_03
+vlan 2006
+  name IPV6-CMTS_06
+vlan 2007
+  name IPV6-CMTS_07
+vlan 2008
+  name IPV6-CMTS_8
+vlan 2011
+  name IPV6-CMTS_11
+vlan 2012
+  name IPV6-CMTS_12
+vlan 2013
+  name IPV6-CMTS_13
+vlan 2014
+  name IPV6-CMTS_14
+vlan 2015
+  name IPV6-CMTS_15
+vlan 2016
+  name IPV6-CMTS_16
+vlan 2017
+  name IPV6-CMTS_17
+vlan 2018
+  name IPV6-CMTS_18
+vlan 2019
+  name IPV6-CMTS_19
+
+spanning-tree pathcost method long
+spanning-tree port type edge bpduguard default
+spanning-tree vlan 1,5-8,10-13,15-21,24,27-72,74-91,93-99,101-250,252-259,262-356,358,360-374,377-470,472-1017,1019-2018,2020-3967 priority 61440
+spanning-tree vlan 2-4,9,14,22-23,25-26,73,92,100,251,260-261,357,359,375-376,471,1018 priority 4096
+spanning-tree vlan 2019 priority 24576
+ip prefix-list MFON_PRFX seq 5 permit 10.0.59.0/24 le 32 
+ip prefix-list MFON_PRFX seq 10 permit 10.208.0.0/14 le 32 
+ip prefix-list MFON_PRFX seq 15 permit 10.0.0.0/16 ge 24 le 32 
+ip prefix-list MFON_PRFX seq 20 permit 10.0.0.0/8 ge 16 le 32 
+ip prefix-list MFON_PRFX seq 25 permit 10.1.0.0/16 le 32 
+ip prefix-list MFON_PRFX seq 30 permit 200.57.0.0/16 le 32 
+ip prefix-list MFON_PRFX seq 35 permit 10.2.0.0/16 le 32 
+ip prefix-list MFON_PRFX seq 40 permit 100.80.0.0/12 le 32 
+ip prefix-list MFON_PRFX seq 45 permit 100.96.0.0/11 le 32 
+ip prefix-list MFON_PRFX seq 50 permit 201.148.13.240/28 le 32 
+ip prefix-list bundle_cmts_cable_modem seq 5 permit 10.0.0.0/8 eq 16 
+ip prefix-list bundle_cmts_cable_modem_lpaz seq 5 permit 10.172.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_lpaz seq 10 permit 10.230.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_lpaz seq 15 permit 10.175.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_lpaz seq 20 permit 10.229.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_lpaz seq 25 permit 10.231.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_sjdc seq 5 permit 10.55.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_sjdc seq 10 permit 10.170.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_sjdc seq 15 permit 10.168.0.0/19 
+ip prefix-list bundle_cmts_cable_modem_sjdc seq 20 permit 10.171.0.0/19 
+ip prefix-list con2ospf seq 5 permit 10.0.124.0/32 
+ip prefix-list con2ospf seq 10 permit 10.0.124.128/32 
+ip prefix-list default seq 5 permit 0.0.0.0/0 
+ip prefix-list no_priv seq 5 permit 10.20.240.0/20 le 32 
+ip prefix-list no_priv seq 6 permit 10.21.240.0/20 le 32 
+ip prefix-list no_priv seq 7 permit 10.22.240.0/20 le 32 
+ip prefix-list no_priv seq 8 permit 10.23.240.0/20 le 32 
+ip prefix-list no_priv seq 9 permit 10.24.240.0/20 le 32 
+ip prefix-list no_priv seq 10 permit 10.25.240.0/20 le 32 
+ip prefix-list no_priv seq 11 permit 10.26.240.0/20 le 32 
+ip prefix-list no_priv seq 12 permit 10.27.240.0/20 le 32 
+ip prefix-list no_priv seq 13 permit 10.28.240.0/20 le 32 
+ip prefix-list no_priv seq 14 permit 10.29.240.0/20 le 32 
+ip prefix-list no_priv seq 15 permit 10.30.240.0/20 le 32 
+ip prefix-list no_priv seq 16 permit 10.31.240.0/20 le 32 
+ip prefix-list no_priv seq 17 permit 10.32.240.0/20 le 32 
+ip prefix-list no_priv seq 18 permit 10.33.240.0/20 le 32 
+ip prefix-list no_priv seq 19 permit 10.34.240.0/20 le 32 
+ip prefix-list no_priv seq 20 permit 10.35.240.0/20 le 32 
+ip prefix-list no_priv seq 21 permit 10.36.240.0/20 le 32 
+ip prefix-list no_priv seq 22 permit 10.37.240.0/20 le 32 
+ip prefix-list no_priv seq 23 permit 10.38.240.0/20 le 32 
+ip prefix-list no_priv seq 24 permit 10.39.240.0/20 le 32 
+ip prefix-list no_priv seq 25 permit 10.40.240.0/20 le 32 
+ip prefix-list no_priv seq 26 permit 10.41.240.0/20 le 32 
+ip prefix-list no_priv seq 27 permit 10.42.240.0/20 le 32 
+ip prefix-list no_priv seq 28 permit 10.43.240.0/20 le 32 
+ip prefix-list no_priv seq 29 permit 10.44.240.0/20 le 32 
+ip prefix-list no_priv seq 30 permit 10.45.240.0/20 le 32 
+ip prefix-list no_priv seq 31 permit 10.46.240.0/20 le 32 
+ip prefix-list no_priv seq 32 permit 10.47.240.0/20 le 32 
+ip prefix-list no_priv seq 33 permit 10.48.240.0/20 le 32 
+ip prefix-list no_priv seq 34 permit 10.49.240.0/20 le 32 
+ip prefix-list no_priv seq 35 permit 10.50.240.0/20 le 32 
+ip prefix-list no_priv seq 36 permit 10.51.240.0/20 le 32 
+ip prefix-list no_priv seq 37 permit 10.52.240.0/20 le 32 
+ip prefix-list no_priv seq 38 permit 10.53.240.0/20 le 32 
+ip prefix-list no_priv seq 39 permit 10.54.240.0/20 le 32 
+ip prefix-list no_priv seq 40 permit 10.55.240.0/20 le 32 
+ip prefix-list no_priv seq 41 permit 10.56.240.0/20 le 32 
+ip prefix-list no_priv seq 42 permit 10.57.240.0/20 le 32 
+ip prefix-list no_priv seq 43 permit 10.58.240.0/20 le 32 
+ip prefix-list no_priv seq 44 permit 10.59.240.0/20 le 32 
+ip prefix-list no_priv seq 45 permit 10.60.240.0/20 le 32 
+ip prefix-list no_priv seq 46 permit 10.61.240.0/20 le 32 
+ip prefix-list no_priv seq 47 permit 10.62.240.0/20 le 32 
+ip prefix-list no_priv seq 48 permit 10.63.240.0/20 le 32 
+ip prefix-list no_priv seq 49 permit 10.64.240.0/20 le 32 
+ip prefix-list no_priv seq 50 permit 10.65.240.0/20 le 32 
+ip prefix-list no_priv seq 51 permit 10.66.240.0/20 le 32 
+ip prefix-list no_priv seq 52 permit 10.67.240.0/20 le 32 
+ip prefix-list no_priv seq 53 permit 10.68.240.0/20 le 32 
+ip prefix-list no_priv seq 54 permit 10.69.240.0/20 le 32 
+ip prefix-list no_priv seq 55 permit 10.70.240.0/20 le 32 
+ip prefix-list no_priv seq 56 permit 10.71.240.0/20 le 32 
+ip prefix-list no_priv seq 57 permit 10.72.240.0/20 le 32 
+ip prefix-list no_priv seq 58 permit 10.73.240.0/20 le 32 
+ip prefix-list no_priv seq 59 permit 10.74.240.0/20 le 32 
+ip prefix-list no_priv seq 60 permit 10.75.240.0/20 le 32 
+ip prefix-list no_priv seq 61 permit 10.76.240.0/20 le 32 
+ip prefix-list no_priv seq 62 permit 10.77.240.0/20 le 32 
+ip prefix-list no_priv seq 63 permit 10.78.240.0/20 le 32 
+ip prefix-list no_priv seq 64 permit 10.79.240.0/20 le 32 
+ip prefix-list no_priv seq 65 permit 10.80.240.0/20 le 32 
+ip prefix-list no_priv seq 66 permit 10.81.240.0/20 le 32 
+ip prefix-list no_priv seq 67 permit 10.82.240.0/20 le 32 
+ip prefix-list no_priv seq 68 permit 10.83.240.0/20 le 32 
+ip prefix-list no_priv seq 69 permit 10.84.240.0/20 le 32 
+ip prefix-list no_priv seq 70 permit 10.85.240.0/20 le 32 
+ip prefix-list no_priv seq 71 permit 10.86.240.0/20 le 32 
+ip prefix-list no_priv seq 72 permit 10.87.240.0/20 le 32 
+ip prefix-list no_priv seq 73 permit 10.88.240.0/20 le 32 
+ip prefix-list no_priv seq 74 permit 10.89.240.0/20 le 32 
+ip prefix-list no_priv seq 75 permit 10.90.240.0/20 le 32 
+ip prefix-list no_priv seq 76 permit 10.91.240.0/20 le 32 
+ip prefix-list no_priv seq 77 permit 10.92.240.0/20 le 32 
+ip prefix-list no_priv seq 78 permit 10.93.240.0/20 le 32 
+ip prefix-list no_priv seq 79 permit 10.94.240.0/20 le 32 
+ip prefix-list no_priv seq 80 permit 10.95.240.0/20 le 32 
+ip prefix-list no_priv seq 81 permit 10.96.240.0/20 le 32 
+ip prefix-list no_priv seq 82 permit 10.97.240.0/20 le 32 
+ip prefix-list no_priv seq 83 permit 10.98.240.0/20 le 32 
+ip prefix-list no_priv seq 84 permit 10.99.240.0/20 le 32 
+ip prefix-list no_priv seq 85 permit 10.100.240.0/20 le 32 
+ip prefix-list no_priv seq 86 permit 10.150.240.0/20 le 32 
+ip prefix-list no_priv seq 87 permit 10.151.240.0/20 le 32 
+ip prefix-list no_priv seq 88 permit 10.152.240.0/20 le 32 
+ip prefix-list no_priv seq 89 permit 10.153.240.0/20 le 32 
+ip prefix-list no_priv seq 90 permit 10.154.240.0/20 le 32 
+ip prefix-list no_priv seq 91 permit 10.155.240.0/20 le 32 
+ip prefix-list no_priv seq 92 permit 10.156.240.0/20 le 32 
+ip prefix-list no_priv seq 93 permit 10.157.240.0/20 le 32 
+ip prefix-list no_priv seq 94 permit 10.158.240.0/20 le 32 
+ip prefix-list no_priv seq 95 permit 10.159.240.0/20 le 32 
+ip prefix-list no_priv seq 96 permit 10.160.240.0/20 le 32 
+ip prefix-list no_priv seq 97 permit 10.161.240.0/20 le 32 
+ip prefix-list no_priv seq 98 permit 10.162.240.0/20 le 32 
+ip prefix-list no_priv seq 99 permit 10.163.240.0/20 le 32 
+ip prefix-list no_priv seq 100 permit 10.164.240.0/20 le 32 
+ip prefix-list no_priv seq 101 permit 10.165.240.0/20 le 32 
+ip prefix-list no_priv seq 102 permit 10.166.240.0/20 le 32 
+ip prefix-list no_priv seq 103 permit 10.167.240.0/20 le 32 
+ip prefix-list no_priv seq 104 permit 10.168.240.0/20 le 32 
+ip prefix-list no_priv seq 105 permit 10.169.240.0/20 le 32 
+ip prefix-list no_priv seq 106 permit 10.170.240.0/20 le 32 
+ip prefix-list no_priv seq 107 permit 10.171.240.0/20 le 32 
+ip prefix-list no_priv seq 108 permit 10.172.240.0/20 le 32 
+ip prefix-list no_priv seq 109 permit 10.173.240.0/20 le 32 
+ip prefix-list no_priv seq 500 deny 10.0.0.0/8 le 24 
+ip prefix-list no_priv seq 605 permit 0.0.0.0/0 le 32 
+ipv6 prefix-list RUTA_DEFAULT_IPv6 seq 100 permit 0::/0 
+ipv6 prefix-list loopback_ipv6 seq 5 permit 2806:269::/64 ge 128 
+ip community-list expanded 1 seq 5 deny "65124:65124"
+ip community-list expanded 1 seq 10 permit ".*"
+route-map CAMARAS deny 5
+  match ip address DENY-CAMARAS 
+route-map CAMARAS permit 10
+  match ip address CAMARAS 
+  set ip next-hop 10.0.124.190   
+route-map CON2OSPF permit 10
+  match ip address prefix-list con2ospf 
+route-map CTES-TO-PROV permit 5
+  match ip address prefix-list bundle_cmts_cable_modem 
+  match tag 124 
+  set community 65124:1064 
+route-map CTES-TO-PROV permit 10
+  match tag 124 
+route-map CTES-TO-PROV-LPAZ-SJDC permit 5
+  match ip address prefix-list bundle_cmts_cable_modem_lpaz 
+  set community 65228:1064 
+route-map CTES-TO-PROV-LPAZ-SJDC permit 10
+  match ip address prefix-list bundle_cmts_cable_modem_sjdc 
+  set community 65052:1064 
+route-map DEFAULT_IPv6 permit 10
+  match ipv6 address prefix-list RUTA_DEFAULT_IPv6 
+route-map LD permit 110
+  match ip address ld-pueblosgml 
+  set ip next-hop 23.124.40.2   
+route-map Trafico-a-ASASM deny 10
+  match ip address DENY-fromv4-a-ASASM 
+route-map Trafico-a-ASASM permit 20
+  match ip address fromv4-a-ASASM 
+  set ip next-hop 10.0.124.190   
+route-map cable-temp permit 10
+  match ip address CM-S-CORTADOS 
+  set ip next-hop 10.2.124.220   
+route-map cable-temp permit 20
+  match ip address PDS-PUBLIC-NGV 
+  set ip next-hop 10.2.124.238   
+route-map cable-temp permit 25
+  match ip address PERICOS 
+  set ip next-hop 23.124.40.2   
+route-map cable-temp deny 30
+  match ip address DENY-TRAFICO-ASASM 
+route-map cable-temp permit 35
+  match ip address TRAFICO-ASASM 
+  set ip next-hop 10.0.124.190   
+route-map hacia-cmts permit 10
+  match community 1 
+route-map hacia-vxr1 permit 10
+  match community 1 
+route-map inet-to-v22 deny 5
+  match ip address DENY-fromv22-a-ASA1 
+route-map inet-to-v22 permit 10
+  match ip address fromv22-a-ASA1 
+  set ip next-hop 10.0.124.190   
+route-map inet-to-v357 permit 10
+  match ip address MFON-911-IT 
+  set ip next-hop 10.2.124.147   
+route-map solo_default permit 10
+  match ip address prefix-list default 
+route-map solo_loopback permit 10
+  match ipv6 address prefix-list loopback_ipv6 
+udld aggressive
+vrf context management
+hardware access-list tcam region ing-racl 768
+hardware access-list tcam region ing-l2-qos 1024
+hardware rate-limiter access-list-log 2000 
+vlan configuration 260
+  ip igmp snooping querier 10.1.125.230
+  ip igmp snooping static-group 224.255.0.125 interface port-channel2
+  ip igmp snooping static-group 224.255.0.125 interface Ethernet1/30
+  ip igmp snooping static-group 224.255.0.125 interface Ethernet2/30
+vlan configuration 261
+  ip igmp snooping querier 10.2.124.212
+
+
+interface Vlan1
+
+interface Vlan2
+  description VLAN-UBRS
+  no shutdown
+  no ip redirects
+  ip address 10.0.124.62/26
+  ip ospf message-digest-key 1 md5 3 94d199387b50ba4d
+  no ip ospf passive-interface
+  ip ospf priority 100
+  ip router ospf 1 area 0.0.0.124
+  ip policy route-map cable-temp
+
+interface Vlan4
+  description VLAN-PIX-SERVERS
+  no shutdown
+  no ip redirects
+  ip address 10.0.124.188/26
+  ip address 10.0.126.129/27 secondary
+  ip router ospf 1 area 0.0.0.124
+  ip policy route-map Trafico-a-ASASM
+
+interface Vlan6
+  description VLAN-6500-ASRCORE
+  no shutdown
+  no ip redirects
+  ip address 10.2.124.193/28
+  ipv6 address 2806:269:100::3/127
+  ipv6 nd suppress-ra
+
+interface Vlan9
+  description VLAN-MPLS
+  no shutdown
+  no ip redirects
+  ip address 10.0.124.125/26
+
+interface Vlan14
+  description MRD-GESTION-HUBS-NX-1
+  no shutdown
+  no ip redirects
+  ip address 10.0.126.254/26
+
+interface Vlan22
+  description MRD-Gestion NOC
+  no shutdown
+  ip address 10.0.127.254/25
+  ip router ospf 1 area 0.0.0.0
+  ip arp 10.0.127.241 0005.9b0d.fe80
+  ip arp 10.0.127.248 0005.9b0d.fe80
+  ip arp 10.0.127.251 0005.9b0d.fe80
+  ip policy route-map inet-to-v22
+
+interface Vlan23
+  description VLAN-MEGAFON
+  no shutdown
+  no ip redirects
+  ip address 10.1.124.126/25
+  ip address 10.1.127.126/25 secondary
+  ip ospf message-digest-key 1 md5 3 94d199387b50ba4d
+  no ip ospf passive-interface
+  ip router ospf 1 area 0.0.0.0
+  ip arp 10.1.124.106 0005.e700.7689
+  ip policy route-map LD
+
+interface Vlan25
+  description MFN-UM_CLN
+  no shutdown
+  no ip redirects
+  ip address 10.1.126.126/25
+  ip router ospf 1 area 0.0.0.0
+  ip policy route-map LD
+
+interface Vlan26
+  description MFN-NFS_UM_CLN
+  no shutdown
+  no ip redirects
+  ip address 192.168.1.62/27
+
+interface Vlan73
+  description VLAN-COR_P2-NETFLIX-CACHE
+  no shutdown
+  no ip redirects
+  ip address 201.165.116.62/28
+  ipv6 address 2806:260:100b:4::1/64
+  ipv6 nd suppress-ra
+
+interface Vlan92
+  description VLAN-92
+  no shutdown
+  no ip redirects
+  ip address 201.165.0.1/26
+  ip address 201.165.118.1/26 secondary
+  ipv6 address 2806:260:100b:1::1/64
+  ipv6 address 2806:260:100b:2::1/64
+  ipv6 address 2806:260:100b::1/64
+  ipv6 nd suppress-ra
+
+interface Vlan100
+  description MRD-GESTION-MRV
+  no shutdown
+  no ip redirects
+  ip address 10.1.124.129/25
+  ip address 10.1.128.129/26 secondary
+  ip address 10.2.126.1/26 secondary
+
+interface Vlan204
+  description IPV6_TO_CMTS04
+  no shutdown
+  ipv6 address 2806:269:0:100::14/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan251
+  description MTTO-INFRAESTRUCTURA-CTC
+  no shutdown
+  no ip redirects
+  ip address 10.6.124.14/28
+
+interface Vlan252
+  description MTTO-SONDAS-QUAM-PINTERNA
+  no shutdown
+  no ip redirects
+  ip address 10.6.125.14/28
+
+interface Vlan260
+  no shutdown
+  ip address 10.1.125.230/29
+
+interface Vlan261
+  description VLAN-APROV-BCC-CLN
+  no shutdown
+  ip address 10.2.124.212/28
+  ipv6 address 2806:269:100::1/127
+  ipv6 nd suppress-ra
+
+interface Vlan293
+  description VLAN-TVD_PDS-VOD
+  no shutdown
+  ip address 10.2.124.236/28
+
+interface Vlan357
+  description MFN-VLAN-ACCESS-BORDER
+  no shutdown
+  ip address 10.2.124.158/27
+  ip router ospf 1 area 0.0.0.0
+  ip policy route-map inet-to-v357
+
+interface Vlan359
+  description MFN-VLAN-BILLING-PROV
+  no shutdown
+  ip address 10.2.124.190/27
+  ip router ospf 1 area 0.0.0.0
+
+interface Vlan375
+  description MFN-VLAN-SIG-SIP-CLIEN2.CLN
+  no shutdown
+  no ip redirects
+  ip address 10.2.123.249/22
+  ip address 10.7.24.254/21 secondary
+  hsrp 4 
+    authentication text mCaHsrp
+    preempt 
+    priority 120
+    timers  1  4
+    ip 10.2.123.254
+    track 1 decrement 50 
+
+interface Vlan376
+  description MFN-VLAN-SIG-SIP-CLIEN
+  no shutdown
+  ip address 10.1.127.254/25
+  ip router ospf 1 area 0.0.0.0
+
+interface Vlan471
+  description Servicios IP
+  no shutdown
+  no ip redirects
+  ip address 10.1.63.27/31
+  ip router ospf 1 area 0.0.0.0
+
+interface Vlan490
+  description CORE-P1-NX9K1-RAC_VER-VRF-NOC-GESTION
+  no shutdown
+  ip address 10.5.125.241/31
+
+interface Vlan500
+  no shutdown
+  ip address 192.168.124.1/30
+  ip ospf message-digest-key 1 md5 3 94d199387b50ba4d
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 1 area 0.0.0.0
+
+interface Vlan1221
+  description LPAZ-to-CLN-Xponder
+  no shutdown
+  no ip redirects
+  ip address 1.2.228.1/30
+
+interface Vlan2002
+  description IPV6_TO_CMTS02
+  no shutdown
+  ipv6 address 2806:269:0:100::26/127
+  ipv6 nd suppress-ra
+
+interface Vlan2003
+  description IPV6_TO_CMTS03
+  no shutdown
+  ipv6 address 2806:269:0:100::a/127
+  ipv6 nd suppress-ra
+
+interface Vlan2006
+  description IPV6_TO_CMTS06
+  no shutdown
+  ipv6 address 2806:269:0:100::c/127
+  ipv6 nd suppress-ra
+
+interface Vlan2007
+  description IPV6_TO_CMTS07
+  no shutdown
+  ipv6 address 2806:269:0:100::e/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan2008
+  description IPV6_TO_CMTS08
+  no shutdown
+  ipv6 address 2806:269:0:100::1e/127
+  ipv6 nd suppress-ra
+
+interface Vlan2011
+  description IPV6_TO_CMTS011
+  no shutdown
+  ipv6 address 2806:269:0:100::16/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan2012
+  description IPV6_TO_CMTS12
+  no shutdown
+  ipv6 address 2806:269:0:100::10/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan2013
+  description IPV6_TO_CMTS13
+  no shutdown
+  ipv6 address 2806:269:0:100::28/127
+  ipv6 nd suppress-ra
+
+interface Vlan2014
+  description IPV6_TO_CMTS14
+  no shutdown
+  ipv6 address 2806:269:0:100::20/127
+  ipv6 nd suppress-ra
+
+interface Vlan2015
+  description IPV6_TO_CMTS15
+  no shutdown
+  ipv6 address 2806:269:0:100::22/127
+  ipv6 nd suppress-ra
+
+interface Vlan2016
+  description IPV6_TO_CMTS016
+  no shutdown
+  ipv6 address 2806:269:0:100::18/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan2017
+  description IPV6_TO_CMTS17
+  no shutdown
+  ipv6 address 2806:269:0:100::12/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan2018
+  description IPV6_TO_CMTS018
+  no shutdown
+  ipv6 address 2806:269:0:100::1a/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface Vlan2019
+  description IPV6_TO_CMTS19
+  no shutdown
+  ipv6 address 2806:269:0:100::24/127
+  ipv6 nd suppress-ra
+  ospfv3 network point-to-point
+  ipv6 router ospfv3 2 area 0.0.0.124
+
+interface port-channel1
+  description ACC-P1-BRD-LAN-CORE-TRUNK-200G
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel2
+  description ACC-P1-Po2-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Po2-130GB
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  spanning-tree port type network
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel5
+  description RAC-Mega-Servicios
+  shutdown
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 260-261,279-280,375,460,471,481,490,1021,1800,1954
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel6
+  description ACC-P1-Po15-CMTS17-CHANNEL-20G-Po1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2017
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel11
+  description ACC-P1-SW-DATOS-CLN-01-NX01
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14,17-18,22-23,25,35,99,251,359,375-376,399,1001,1021,1800
+  no snmp trap link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel13
+  description ACC-P1-Po15-CMTS7-CHANNEL-20G-Po1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2007
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel15
+  description ACC-P1-Po15-CMTS3-CHANNEL-20G-Trunk-2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2003
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel17
+  description ACC-P1-C100G_CLN_CASA6_CTC-PO17-40G
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2006
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel18
+  description ACC-P1-Po15-CMTS12-CHANNEL-20G-Trunk-2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2012
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel33
+  description ACC-P1-HUB03-NAVOLATO_CLN-PO33-20G
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14,17,481-482,650,2014
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel35
+  description P2_MFN-Perimeta-A-Core-Emp
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface port-channel36
+  description P2_MFN-Perimeta-A-Access-Emp
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 399,1021
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface port-channel40
+  description ACC-P1-Eth(Po40)-N9K-DATOS1-CLN<>RAC_ASR9K_CLN
+  shutdown
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 260-261,279-280,375,460,471,481,490,1021
+  logging event port link-status
+  mtu 9216
+  speed 1000
+  duplex full
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel50
+  description ACC-P1-Po50-N9K-DATOS1-CLN<>CAT6K-CLN-01-Po50
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel61
+  description ACC-P1-Po61-N9K-DATOS1-CLN<>CAT4K-HUB01-BAR
+  shutdown
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,481,650,1001
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel62
+  description ACC-P1-CAT4K-HUB04-LAZARO-CARDENAS_CLN-PO62-80G
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  spanning-tree cost 8
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel63
+  description ACC-P1-Po63-N9K-CLN-HUB01-BARRANCO-CHANNEL-80G-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  spanning-tree port type network
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel100
+  description ACC-P1-Po100-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Po100
+  shutdown
+  mtu 9216
+  speed 1000
+  duplex full
+  vrf member peer-keepalive
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+  ip address 1.1.1.1/30
+
+interface port-channel133
+  description ACC-P1-Po133-N9K-DATOS1-CLN<>CACHE-NETFLIX-03
+  switchport
+  switchport access vlan 73
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface port-channel134
+  description ACC-P1-Po134-N9K-DATOS1-CLN<>CACHE-NETFLIX-04
+  switchport
+  switchport access vlan 73
+  spanning-tree port type edge
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface port-channel200
+  description ACC-P1-Po200-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Po200
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2008,2015,2017
+  spanning-tree port type network
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel300
+  description ACC-P1-Po300-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Po300
+  logging event port link-status
+  mtu 9216
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel300.10
+  description L3 Point-to-Point NEXUS9K-CLN-DATOS-1 <> NEXUS9K-CLN-DATOS-2
+  mtu 9216
+  encapsulation dot1q 10
+
+interface port-channel402
+  description ACC-P1- PE-NCS5504-HUB02-HUMAYA-CLN-40G
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,14
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface Ethernet1/1
+  description ACC-P1-PO17-M3_C100G_CLN_CASA6_CTC_XGIGE6/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2006
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 17
+  no shutdown
+
+interface Ethernet1/2
+  description ACC-P1-Eth1/2(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/1/0/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet1/3
+  description INCREMENTO-LAN-WAN-131219
+
+interface Ethernet1/4
+  description ACC-P1-Eth1/4(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/1/0/8
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet1/5
+  description ACC-P1-Eth1/5(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/1/0/9
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet1/6
+  description ACC-P1-Eth1/6(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/23
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet1/7
+  description ACC-P1-Eth1/7(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/24
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet1/8
+  description ACC-P1-Eth1/8(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/25
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet1/9
+  description MFON-P3-iDRAC-RPE-A1-V22-011819
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/10
+  description NO-USAR-CMTS170220
+
+interface Ethernet1/11
+  description P2_MFN-Perimeta-A1-Acceso-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 399,1021
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 36 mode active
+  no shutdown
+
+interface Ethernet1/12
+  description ## LIBRE ##
+
+interface Ethernet1/13
+  description MFN-P2-LAN-SX-NETWORK-SW1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1,22,357
+  spanning-tree port type edge
+  spanning-tree bpduguard disable
+  speed 1000
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/14
+  description MFN-P2-UMG-ACT
+  switchport
+  switchport access vlan 357
+  spanning-tree port type edge
+  spanning-tree bpduguard disable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/15
+  description ACC-SONDA-INTRAWAY-QX1243-160819
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/16
+  description ACC-P1-Po63-M1-N9K-CLN-HUB01-BARRANCO-Eth2/1-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet1/17
+  description ACC-P1-Po63-M5-N9K-CLN-HUB01-BARRANCO-Eth3/1-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet1/18
+  description ACC-P1-Po63-M10-N9K-CLN-HUB01-BARRANCO-Eth2/10-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet1/19
+  description APARTADO_CMTS
+
+interface Ethernet1/20
+  description APARTADO_CMTS
+
+interface Ethernet1/21
+  description P2_MFN-Perimeta-A2-Acceso-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 399,1021
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 36 mode active
+  no shutdown
+
+interface Ethernet1/22
+  description ACC-P1-M1-SW-DATOS-CLN-01-NX01
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14,17-18,22-23,25,35,99,251,359,375-376,399,1001,1021,1800
+  storm-control broadcast level 20.00
+  channel-group 11 mode active
+  no shutdown
+
+interface Ethernet1/23
+  description ## LIBRE ##
+
+interface Ethernet1/24
+  description ## LIBRE ##
+
+interface Ethernet1/25
+  description ## LIBRE ##
+
+interface Ethernet1/26
+  description ## LIBRE ##
+
+interface Ethernet1/27
+  description ## LIBRE ##
+
+interface Ethernet1/28
+  description ACC-P1- PE-NCS5504-HUB02-HUMAYA-CLN-Po402-CH1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,14
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 402 mode active
+  no shutdown
+
+interface Ethernet1/29
+  description ACC-P1- PE-NCS5504-HUB02-HUMAYA-CLN-Po402-CH2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,14
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 402 mode active
+  no shutdown
+
+interface Ethernet1/30
+  description SIP-P2-bcc1v260-01092015
+  switchport
+  switchport access vlan 260
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/31
+  description APARTADO_CMTS
+
+interface Ethernet1/32
+  description ## LIBRE ##
+
+interface Ethernet1/33
+  description TEMPORAL-MFN-P1-RPE_SIPPROXY-A1-V22,23-011819
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 22-23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/34
+  description APARTADO_NETFLIX
+
+interface Ethernet1/35
+  description APARTADO_NETFLIX
+
+interface Ethernet1/36
+  description ## LIBRE ##
+
+interface Ethernet1/37
+  description ## LIBRE ##
+
+interface Ethernet1/38
+  description ## LIBRE ##
+
+interface Ethernet1/39
+  description CORE-P5-DWDM_CLN_ALT-V1800-030920
+  switchport
+  switchport access vlan 1800
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  speed 100
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-MGMT
+  no shutdown
+
+interface Ethernet1/40
+  description MFN-SBC1-S0P0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  speed 100
+  duplex full
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/41
+  description MFN-7604_IXN_MNGT
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 22-23,25,99,105,110,279,460,1001
+  mtu 9216
+  speed 1000
+  duplex full
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/42
+  description MFN-SBC1-S1P0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 99,375-376,399,1001,1021
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  speed 100
+  duplex full
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/43
+  description ## LIBRE ##
+
+interface Ethernet1/44
+  description ## LIBRE ##
+
+interface Ethernet1/45
+  description ## LIBRE ##
+
+interface Ethernet1/46
+  description SIP-P1-bcc3v4
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/47
+  description SIP-P2-bcc2v4-01092015
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/48
+  description ACC-P1-Eth1/48(Po100)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth1/48
+  mtu 9216
+  speed 1000
+  duplex full
+  udld aggressive
+  channel-group 100 mode active
+
+interface Ethernet1/49
+  description ## LIBRE ##
+
+interface Ethernet1/50
+  description ## LIBRE ##
+
+interface Ethernet1/51
+  description ## LIBRE ##
+
+interface Ethernet1/52
+  description ## LIBRE ##
+
+interface Ethernet2/1
+  description ACC-P1-PO17-M4_C100G_CLN_CASA6_CTC_XGIGE7/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2006
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 17
+  no shutdown
+
+interface Ethernet2/2
+  description ## LIBRE ##
+
+interface Ethernet2/3
+  description ACC-P1-Eth2/3(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/4/0/11
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet2/4
+  description INCREMENTO-LAN-WAN-131219
+
+interface Ethernet2/5
+  description ACC-P1-Eth2/5(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/4/0/13
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet2/6
+  description APARTADO_HUB02
+
+interface Ethernet2/7
+  description ACC-P1-Eth2/7(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/4/0/14
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet2/8
+  description ## LIBRE ##
+
+interface Ethernet2/9
+  description APARTADO_HUB02
+
+interface Ethernet2/10
+  description APARTADO_HUB02
+
+interface Ethernet2/11
+  description ACC-P1-Eth2/11(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/12
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet2/12
+  description ACC-P1-Eth2/12(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/13
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet2/13
+  description APARTADO_HUB02
+
+interface Ethernet2/14
+  description MFN-7206_RTP_BSTL
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/15
+  description IT_P2-CUBESOU.TI-2
+  switchport
+  switchport access vlan 399
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-MGMT
+  no shutdown
+
+interface Ethernet2/16
+  description APARTADO HUB1
+
+interface Ethernet2/17
+  description APARTADO HUB1
+
+interface Ethernet2/18
+  description ## LIBRE ##
+
+interface Ethernet2/19
+  description ## LIBRE ##
+
+interface Ethernet2/20
+  description ACC-P1-PO33-M2_HUB03-NAVOLATO_CLN_TE3/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14,17,481-482,650,2014
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 33 mode active
+  no shutdown
+
+interface Ethernet2/21
+  description ## LIBRE ##
+
+interface Ethernet2/22
+  description ACC-P1-M2-SW-DATOS-CLN-01-NX01
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14,17-18,22-23,25,35,99,251,359,375-376,399,1001,1021,1800
+  storm-control broadcast level 20.00
+  channel-group 11 mode active
+  no shutdown
+
+interface Ethernet2/23
+  description APARTADO_NETFLIX
+
+interface Ethernet2/24
+  description APARTADO_NETFLIX
+
+interface Ethernet2/25
+  description ## LIBRE ##
+
+interface Ethernet2/26
+  description ## LIBRE ##
+
+interface Ethernet2/27
+  description ## LIBRE ##
+
+interface Ethernet2/28
+  description ACC-P1- PE-NCS5504-HUB02-HUMAYA-CLN-Po402-CH3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,14
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 402 mode active
+  no shutdown
+
+interface Ethernet2/29
+  description ACC-P1- PE-NCS5504-HUB02-HUMAYA-CLN-Po402-CH4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,14
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 402 mode active
+  no shutdown
+
+interface Ethernet2/30
+  description SIP-P1-bcc3v260
+  switchport
+  switchport access vlan 260
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet2/31
+  description ## LIBRE ##
+
+interface Ethernet2/32
+  description P2_MFN-Perimeta-A1-Core-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 35 mode active
+  no shutdown
+
+interface Ethernet2/33
+  description ## LIBRE ##
+
+interface Ethernet2/34
+  description ## LIBRE ##
+
+interface Ethernet2/35
+  description NO-USAR-CMTS170220
+
+interface Ethernet2/36
+  description MFN-Perimeta-A1-Gestion-Empresarial-221117
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet2/37
+  description MFN-SBC1-wancom0
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet2/38
+  description P2_MFN-Perimeta-A2-Core-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 35 mode active
+  no shutdown
+
+interface Ethernet2/39
+  description MFN-P1-AUDIOCODE-MEDIAN5K1-STB-V23-270520
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  speed 100
+  duplex full
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/40
+  description SIP-P2-bcc2v261-01092015
+  switchport
+  switchport access vlan 261
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet2/41
+  description ## LIBRE ##
+
+interface Ethernet2/42
+  description ## LIBRE ##
+
+interface Ethernet2/43
+  description ## LIBRE ##
+
+interface Ethernet2/44
+  description ## LIBRE ##
+
+interface Ethernet2/45
+  description ## LIBRE ##
+
+interface Ethernet2/46
+  description ## LIBRE ##
+
+interface Ethernet2/47
+  description SIP-P1-bcc3v261
+  switchport
+  switchport access vlan 261
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet2/48
+  description ACC-P1-Eth2/48(Po100)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth2/48
+  mtu 9216
+  speed 1000
+  duplex full
+  udld aggressive
+  channel-group 100 mode active
+
+interface Ethernet2/49
+  description ## LIBRE ##
+
+interface Ethernet2/50
+  description ## LIBRE ##
+
+interface Ethernet2/51
+  description ## LIBRE ##
+
+interface Ethernet2/52
+  description ## LIBRE ##
+
+interface Ethernet7/1
+  description ACC-P1-Eth7/1(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/2
+  description ACC-P1-Eth7/2(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/3
+  description ACC-P1-Eth7/3(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/4
+  description ACC-P1-Eth7/4(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/5
+  description ACC-P1-Eth7/5(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/6
+  description ACC-P1-Eth7/6(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/5
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/7
+  description ACC-P1-Eth7/7(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/8
+  description ACC-P1-Eth7/8(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/9
+  description ACC-P1-Eth7/9(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/20
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/10
+  description ACC-P1-Eth7/10(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/21
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/11
+  description ACC-P1-Eth7/11(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/22
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/12
+  description MFN-MEDIAN5K_1
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet7/13
+  description ## LIBRE ##
+
+interface Ethernet7/14
+  description ACC-P1-Eth7/14(Po40)-N9K-DATOS1-CLN<>RAC_ASR9K_CLN- Gi0/0/1/8
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 260-261,279-280,375,460,471,481,1021,1954
+  mtu 9216
+  speed 1000
+  duplex full
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet7/15
+  description ACC-P1-Eth7/15(Po13)-CMTS7-Ten 5/1/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2007
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 13 mode active
+  no shutdown
+
+interface Ethernet7/16
+  description APARTADO HUB1
+
+interface Ethernet7/17
+  description ACC-P1-Po63-M7-N9K-CLN-HUB01-BARRANCO-Eth3/2-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet7/18
+  description ACC-P1-Eth7/18(Po18)-CMTS12
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2012
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 18 mode active
+  no shutdown
+
+interface Ethernet7/19
+  description ## LIBRE ##
+
+interface Ethernet7/20
+  description ACC-P1-PO17-M1_C100G_CLN_CASA6_CTC_XGIGE6/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2006
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 17
+  no shutdown
+
+interface Ethernet7/21
+  description ACC-P1-Eth7/21Po133)-N9K-DATOS1-CLN<>CACHE-NETFLIX-03
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 133 mode active
+  no shutdown
+
+interface Ethernet7/22
+  description ## LIBRE ##
+
+interface Ethernet7/23
+  description SIP-NETFLIX-CACHE3-Te3
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 133 mode active
+  no shutdown
+
+interface Ethernet7/24
+  description ACC-P1-Po63-M6-N9K-CLN-HUB01-BARRANCO-Eth3/2-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet7/25
+  description ACC-P1-Po63-M9-N9K-CLN-HUB01-BARRANCO-Eth3/10-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet7/26
+  description ACC-P1-PO62-M6_CAT4K-HUB04-LAZARO-CARDENAS_CLN_Ten 2/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet7/27
+  description ACC-P1-PO62-M1_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_3/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet7/28
+  description ACC-P1-PO62-M2_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_5/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet7/29
+  description ACC-P1-PO62-M3_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_5/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet7/30
+  description APARTADO-MIGRACION-NETFLIX
+
+interface Ethernet7/31
+  description APARTADO-MIGRACION-NETFLIX
+
+interface Ethernet7/32
+  description ACC-P1-Eth7/32(Po15)-CMTS3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2003
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 15
+  no shutdown
+
+interface Ethernet7/33
+  description ACC-P1-5585-1-CABLE
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet7/34
+  description APARTADO_CMTS
+
+interface Ethernet7/35
+  description ACC-P1-Eth7/35(Po6)-CMTS17
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 6 mode active
+  no shutdown
+
+interface Ethernet7/36
+  description ## LIBRE ##
+
+interface Ethernet7/37
+  description ACC-P1-Eth7/37(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/37
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/38
+  description ACC-P1-Eth7/38(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/38
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/39
+  description ACC-P1-Eth7/39(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/39
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/40
+  description ACC-P1-Eth7/40(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/40
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/41
+  description ACC-P1-Eth7/41(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/41
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/42
+  description ACC-P1-Eth7/42(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/42
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/43
+  description ACC-P1-Eth7/43(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/43
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/44
+  description ACC-P1-Eth7/44(Po200)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/44
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 200 mode active
+  no shutdown
+
+interface Ethernet7/45
+  description ACC-P1-Eth7/45(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te6/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 50 mode active
+  no shutdown
+
+interface Ethernet7/46
+  description ACC-P1-Eth7/46(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te8/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet7/47
+  description ACC-P1-Eth7/47(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Ten Te4/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet7/48
+  description ACC-P1-Eth7/48(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te4/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet7/49
+  description APARTADO_FACEBOOK_CACHES
+
+interface Ethernet7/50
+
+interface Ethernet7/51
+
+interface Ethernet7/52
+
+interface Ethernet8/1
+  description ACC-P1-Eth8/1(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/2
+  description ACC-P1-Eth8/2(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/3
+  description ACC-P1-Eth8/3(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/4
+  description ACC-P1-Eth8/4(Po2)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/5
+  description ACC-P1-Eth8/5(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/2/0/23
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/6
+  description ACC-P1-Eth8/6(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/5/1/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/7
+  description ACC-P1-Eth8/7(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/7/0/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/8
+  description ACC-P1-Eth8/8(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/7/0/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/9
+  description ACC-P1-Eth8/9(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/7/0/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/10
+  description ACC-P1-Eth8/10(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/7/0/3  
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/11
+  description ACC-P1-Eth8/11(Po1)-N9K-DATOS1-CLN<>Core-ASR9K-CLN-Te0/7/1/2 
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 4,6,60,96,99,1001,1018
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/12
+  description ACC-P1-Eth8/12(Po134)-N9K-DATOS1-CLN<>CACHE-NETFLIX-04
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 134 mode active
+  no shutdown
+
+interface Ethernet8/13
+  description ACC-P1-Eth8/13(Po134)-N9K-DATOS1-CLN<>CACHE-NETFLIX-04
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 134 mode active
+  no shutdown
+
+interface Ethernet8/14
+  description ACC-P1-Eth8/14(Po40)-N9K-DATOS1-CLN<>RAC_ASR9K_CLN-Gi0/0/1/18
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 260-261,279-280,375,460,471,481,1021,1954
+  mtu 9216
+  speed 1000
+  duplex full
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet8/15
+  description ACC-P1-Eth8/15(Po13)-CMTS7-Ten 4/1/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2007
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 13 mode active
+  no shutdown
+
+interface Ethernet8/16
+  description ACC-P1-Po63-M4-N9K-CLN-HUB01-BARRANCO-Eth2/4-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet8/17
+  description ACC-P1-Po63-M2-N9K-CLN-HUB01-BARRANCO-Eth2/2-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet8/18
+  description ACC-P1-Eth8/18(Po18)-CMTS12
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2012
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 18 mode active
+  no shutdown
+
+interface Ethernet8/19
+  description SIP-NETFLIX-CACHE4-Te3
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 134 mode active
+  no shutdown
+
+interface Ethernet8/20
+  description ACC-P1-PO17-M2_C100G_CLN_CASA6_CTC_XGIGE7/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2006
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 17
+  no shutdown
+
+interface Ethernet8/21
+  description ACC-P1-Eth8/21(Po133)-N9K-DATOS1-CLN<>CACHE-NETFLIX-03
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 133 mode active
+  no shutdown
+
+interface Ethernet8/22
+  description ACC-P1-Eth8/22(Po134)-N9K-DATOS1-CLN<>CACHE-NETFLIX-04
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 134 mode active
+  no shutdown
+
+interface Ethernet8/23
+  description SIP-NETFLIX-CACHE3-Te4
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 133 mode active
+  no shutdown
+
+interface Ethernet8/24
+  description ACC-P1-Po63-M8-N9K-CLN-HUB01-BARRANCO-Eth3/4-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet8/25
+  description ACC-P1-Po63-M3-N9K-CLN-HUB01-BARRANCO-Eth2/3-Po61
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,22,95,99-100,204,481,650,1001,2011,2016,2018
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 63 mode active
+  no shutdown
+
+interface Ethernet8/26
+  description ACC-P1-PO62-M8_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_2/10
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet8/27
+  description ACC-P1-PO62-M4_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_2/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet8/28
+  description ACC-P1-PO62-M5_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_5/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet8/29
+  description ACC-P1-PO62-M7_CAT4K-HUB04-LAZARO-CARDENAS_CLN_TEN_5/10
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2002,2013
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 62 mode active
+  no shutdown
+
+interface Ethernet8/30
+  description APARTADO-MIGRACION-NETFLIX
+
+interface Ethernet8/31
+  description APARTADO-MIGRACION-NETFLIX
+
+interface Ethernet8/32
+  description ACC-P1-Eth8/32(Po15)-CMTS3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2003
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 15
+  no shutdown
+
+interface Ethernet8/33
+  description ACC-P1-5585-1-OUTSIDE
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet8/34
+  description ACC-P1-PO33-M1_HUB03-NAVOLATO_CLN_TE2/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14,17,481-482,650,2014
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 33 mode active
+  no shutdown
+
+interface Ethernet8/35
+  description ACC-P1-Eth8/35(Po6)-CMTS17
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,9,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 6 mode active
+  no shutdown
+
+interface Ethernet8/36
+  description RAC-IT-WAN
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 260-261,279-280,375,460,471,481,490,1021,1800,1954
+  storm-control broadcast level 20.00
+  channel-group 5
+
+interface Ethernet8/37
+  description ACC-P1-Eth7/37(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/37
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/38
+  description ACC-P1-Eth7/38(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/38
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/39
+  description ACC-P1-Eth7/39(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/39
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/40
+  description ACC-P1-Eth7/40(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/40
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/41
+  description ACC-P1-Eth7/41(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/41
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/42
+  description ACC-P1-Eth7/42(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/42
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/43
+  description ACC-P1-Eth7/43(Po300)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth7/43
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/44
+  description ACC-P1-Eth8/44(Po200)-N9K-DATOS1-CLN<>N9K-DATOS2-CLN-Eth8/44
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 200 mode active
+  no shutdown
+
+interface Ethernet8/45
+  description ACC-P1-Eth8/45(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te7/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/46
+  description ACC-P1-Eth8/46(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te9/8
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/47
+  description ACC-P1-Eth8/47(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te3/5
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+  no shutdown
+
+interface Ethernet8/48
+  description ACC-P1-Eth8/48(Po50)-N9K-DATOS1-CLN<>CAT6K-CLN-1-Te7/5
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,500,650,1000-1001,1021,1035,1221,1800,2003,2006-2007,2012,2014
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/49
+
+interface Ethernet8/50
+
+interface Ethernet8/51
+
+interface Ethernet8/52
+
+interface mgmt0
+  vrf member management
+
+interface loopback1
+  ipv6 address 2806:269::10:0:124:188/128
+cli alias name image show version | inc image
+cli alias name environment show environment | inc alarm
+cli alias name disponible1 show int status | inc not|dis | include "10g"
+cli alias name cpu show process cpu | inc "CPU util"
+cli alias name uptime sh ver | inc uptime
+cli alias name used1 show inter status up | include Eth | include connected | include -T
+cli alias name s show ip int brief
+cli alias name wr copy running-config startup-config
+cli alias name disponiblec show inter status | in Eth | in xcvrAbsen | exclude /49 |exclude /50 |exclude /51 |exclude /52 | count 
+cli alias name used3 show inter status up | include Eth | include connected | include 10G
+cli alias name used2 show inter status up | include Eth | include connected | include 1000
+cli alias name used1c show inter status up | include Eth | include connected | include -T | count
+cli alias name used3c show inter status up | include Eth | include connected | include 10G | count
+cli alias name used2c show inter status up | include Eth | include connected | include 1000 | count
+cli alias name disponiblen show interface status dow | in Eth | exclude /49 |exclude /50 |exclude /51 |exclude /52 | count
+cli alias name disponible4 show inter desc | in 40G
+cli alias name disponible4c show inter desc | in 40G | count
+cli alias name disponible5 show inter desc | in 100G
+cli alias name disponible5c show inter desc | in 100G | count
+cli alias name disponible show interface status dow | in Eth | exclude /49 |exclude /50 |exclude /51 |exclude /52
+line console
+  exec-timeout 5
+  speed 38400
+line vty
+  session-limit 15
+  exec-timeout 5
+  access-class 105 in
+boot nxos bootflash:/nxos.7.0.3.I7.5a.bin sup-1
+boot nxos bootflash:/nxos.7.0.3.I7.5a.bin sup-2
+router ospf 1
+  router-id 10.1.124.126
+  log-adjacency-changes
+  area 0.0.0.0 authentication message-digest
+  area 0.0.0.124 authentication message-digest
+  table-map MFON_PRFX filter
+  passive-interface default
+router ospfv3 2
+  router-id 10.0.124.188
+  log-adjacency-changes
+  address-family ipv6 unicast
+    area 0.0.0.124 default-cost 0
+    redistribute direct route-map solo_loopback
+router bgp 65124
+  log-neighbor-changes
+  address-family ipv4 unicast
+    redistribute static route-map CTES-TO-PROV-LPAZ-SJDC
+    redistribute ospf 1 route-map CTES-TO-PROV
+  address-family ipv6 unicast
+  neighbor 2806:269::10:0:124:2
+    remote-as 65124
+    description CMTS-02
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:3
+    remote-as 65124
+    description CMTS-03
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:4
+    remote-as 65124
+    description CMTS-12
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:6
+    remote-as 65124
+    description CMTS-06
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:7
+    remote-as 65124
+    description CMTS-07
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:8
+    remote-as 65124
+    description CMTS-8
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:11
+    remote-as 65124
+    description CMTS-011
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:12
+    remote-as 65124
+    description CMTS-12
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:13
+    remote-as 65124
+    description CMTS-13
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:14
+    remote-as 65124
+    description CMTS-14
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:15
+    remote-as 65124
+    description CMTS-15
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:16
+    remote-as 65124
+    description CMTS-016
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:17
+    remote-as 65124
+    description CMTS-17
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:18
+    remote-as 65124
+    description CMTS-011
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269::10:0:124:19
+    remote-as 65124
+    description CMTS-19
+    password 7 11241C11051D290B147B7B
+    update-source loopback1
+    address-family ipv6 unicast
+      send-community
+      route-map DEFAULT_IPv6 out
+      default-originate
+  neighbor 2806:269:100::
+    remote-as 13999
+    description ASR-Core-VRF-aprov-bcc-cln
+    password 7 11241C11051D290B147B7B
+    address-family ipv6 unicast
+      send-community
+  neighbor 2806:269:100::2
+    remote-as 13999
+    description VRF-INTERNET
+    password 7 11241C11051D290B147B7B
+    address-family ipv6 unicast
+      send-community
+  neighbor 10.0.124.1
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.2
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.3
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.4
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.5
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.6
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.7
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.8
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.10
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.11
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.12
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.13
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.14
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.15
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.16
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.17
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.18
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.19
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.0.124.20
+    remote-as 65124
+    address-family ipv4 unicast
+      route-map hacia-cmts out
+  neighbor 10.2.124.195
+    remote-as 13999
+    description eBGP peer to Core_ASR9K
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      prefix-list no_priv out
+      route-map solo_default in
+      route-map hacia-vxr1 out
+  neighbor 10.2.124.209
+    remote-as 13999
+    description VPN-Provisioning-ASR9K-CLN
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+
+logging logfile messages 5 size 2000000
+logging server 10.0.124.136
+logging server 10.0.70.179
+logging server 10.0.70.99
+logging source-interface Vlan14
+logging timestamp milliseconds
+logging level syslog 5
+logging console 5
+
+
+NEXUS9K-CLN-DATOS-1# show ip arp
+
+Flags: * - Adjacencies learnt on non-active FHRP router
+       + - Adjacencies synced via CFSoE
+       # - Adjacencies Throttled for Glean
+       CP - Added via L2RIB, Control plane Adjacencies
+       PS - Added via L2RIB, Peer Sync
+       RO - Re-Originated Peer Sync Entry
+       D - Static Adjacencies attached to down interface
+
+IP ARP Table for context default
+Total number of entries: 779
+Address         Age       MAC Address     Interface       Flags
+1.2.228.2       00:17:35  3cce.7316.3000  Vlan1221        
+192.168.124.2   00:17:35  3cce.7316.3000  Vlan500         
+10.5.125.240    00:16:27  4055.3955.0507  Vlan490         
+10.1.63.26      00:16:28  4055.3955.0507  Vlan471         
+10.1.127.194    00:00:09  INCOMPLETE      Vlan376         
+10.1.127.199    00:00:09  INCOMPLETE      Vlan376         
+10.1.127.203    00:00:09  INCOMPLETE      Vlan376         
+10.1.127.204    00:00:13  INCOMPLETE      Vlan376         
+10.1.127.205    00:00:13  INCOMPLETE      Vlan376         
+10.1.127.206    00:00:19  INCOMPLETE      Vlan376         
+10.1.127.252    00:00:02  0008.25a2.2373  Vlan376         
+10.1.127.253    00:00:04  0008.25a2.234e  Vlan376         
+10.2.121.0      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.1      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.2      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.3      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.4      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.5      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.6      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.7      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.8      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.9      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.10     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.11     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.12     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.13     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.14     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.15     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.16     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.17     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.18     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.19     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.20     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.21     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.22     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.23     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.24     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.25     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.26     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.27     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.28     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.29     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.30     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.31     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.32     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.33     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.34     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.35     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.36     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.37     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.38     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.39     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.40     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.41     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.42     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.43     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.44     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.45     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.46     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.47     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.48     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.49     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.121.50     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.51     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.52     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.53     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.54     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.55     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.56     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.57     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.58     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.59     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.60     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.61     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.121.62     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.1      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.2      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.3      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.4      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.5      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.6      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.7      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.8      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.9      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.10     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.11     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.12     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.13     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.15     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.16     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.17     00:00:18  0013.3e12.4b60  Vlan375         
+10.2.122.18     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.19     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.20     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.21     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.22     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.23     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.24     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.25     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.26     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.27     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.28     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.29     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.30     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.31     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.32     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.33     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.34     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.35     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.36     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.37     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.38     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.39     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.40     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.41     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.42     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.43     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.44     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.45     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.46     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.47     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.48     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.49     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.50     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.51     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.52     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.54     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.55     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.56     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.57     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.58     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.59     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.60     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.61     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.64     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.65     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.66     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.67     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.68     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.69     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.70     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.71     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.72     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.74     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.76     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.77     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.78     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.79     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.80     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.81     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.82     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.83     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.84     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.85     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.86     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.87     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.88     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.89     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.90     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.91     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.92     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.93     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.94     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.95     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.96     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.97     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.98     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.99     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.100    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.101    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.102    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.103    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.104    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.105    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.106    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.107    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.109    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.110    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.111    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.112    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.113    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.114    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.115    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.117    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.118    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.119    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.120    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.121    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.122    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.123    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.124    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.125    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.126    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.127    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.128    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.129    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.130    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.131    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.132    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.133    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.134    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.135    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.136    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.137    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.138    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.139    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.141    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.142    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.143    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.144    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.145    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.146    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.147    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.148    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.149    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.150    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.151    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.152    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.153    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.154    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.155    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.156    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.157    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.158    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.159    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.160    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.161    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.162    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.163    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.164    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.165    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.166    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.167    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.168    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.169    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.170    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.171    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.172    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.173    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.174    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.175    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.176    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.177    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.178    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.179    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.180    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.181    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.182    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.183    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.185    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.186    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.188    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.189    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.190    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.191    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.192    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.193    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.195    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.196    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.197    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.198    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.200    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.201    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.202    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.203    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.205    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.207    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.208    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.209    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.210    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.211    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.212    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.213    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.214    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.215    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.216    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.217    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.218    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.219    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.220    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.221    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.222    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.223    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.224    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.225    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.226    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.227    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.228    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.229    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.230    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.231    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.232    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.233    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.234    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.235    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.236    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.237    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.238    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.239    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.240    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.241    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.242    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.243    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.244    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.122.245    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.246    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.247    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.248    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.249    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.250    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.251    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.252    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.253    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.254    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.122.255    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.1      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.2      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.3      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.4      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.5      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.6      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.7      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.8      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.9      00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.10     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.11     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.12     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.13     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.15     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.16     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.17     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.18     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.19     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.20     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.21     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.22     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.23     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.24     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.26     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.27     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.28     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.29     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.31     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.32     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.33     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.35     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.36     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.37     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.38     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.39     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.40     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.41     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.42     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.43     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.44     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.45     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.46     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.47     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.48     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.49     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.50     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.51     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.52     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.53     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.55     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.56     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.57     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.58     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.59     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.60     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.61     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.62     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.63     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.64     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.65     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.66     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.68     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.69     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.70     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.72     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.73     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.74     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.75     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.76     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.77     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.78     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.79     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.80     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.81     00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.82     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.83     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.84     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.86     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.87     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.88     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.89     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.90     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.91     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.92     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.93     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.94     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.95     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.96     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.97     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.98     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.99     00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.100    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.102    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.103    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.104    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.107    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.108    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.109    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.110    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.111    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.112    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.113    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.114    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.115    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.116    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.117    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.118    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.119    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.120    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.121    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.122    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.123    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.124    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.125    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.126    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.127    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.136    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.159    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.179    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.184    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.195    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.199    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.204    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.207    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.211    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.214    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.216    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.217    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.219    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.220    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.221    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.222    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.223    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.224    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.226    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.228    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.229    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.230    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.231    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.232    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.233    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.234    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.235    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.236    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.237    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.238    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.239    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.240    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.241    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.242    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.243    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.244    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.245    00:16:24  0013.3e12.4b60  Vlan375         
+10.2.123.246    00:16:25  0013.3e12.4b60  Vlan375         
+10.2.123.247    0.620962  a036.9fee.93c8  Vlan375         
+10.2.123.248    0.285040  a036.9fee.a578  Vlan375         
+10.2.123.250    00:15:51  0012.448a.f800  Vlan375         
+10.2.123.252    00:00:02  0008.25a2.2373  Vlan375         
+10.2.123.253    00:00:04  0008.25a2.234e  Vlan375         
+10.7.24.253     00:00:02  4055.3955.0507  Vlan375         
+10.2.124.164    00:00:14  d849.0bb5.9a84  Vlan359         
+10.2.124.132    00:00:01  d849.0bb5.98f3  Vlan357         
+10.2.124.133    00:00:01  d849.0b8b.be2d  Vlan357         
+10.2.124.134    0.266319  00e0.fce0.7fb4  Vlan357         
+10.2.124.135    00:00:02  18c5.8a13.64c1  Vlan357         
+10.2.124.147    00:07:36  0019.e765.7368  Vlan357         
+10.2.124.225    00:18:06  00f6.63f6.247f  Vlan293         
+10.2.124.226    00:18:05  00a6.caf6.53ff  Vlan293         
+10.2.124.238    00:11:46  0000.0c9f.f125  Vlan293         
+10.2.124.209    00:16:20  4055.3955.0507  Vlan261         
+10.2.124.211    00:11:33  40f2.e9b8.75aa  Vlan261         
+10.2.124.215    00:17:22  40f2.e9bb.85ea  Vlan261         
+10.2.124.216    00:16:24  40f2.e9ba.d942  Vlan261         
+10.2.124.220    00:06:46  0021.5e95.81d0  Vlan261         
+10.2.124.222    00:04:52  0021.5e95.81d0  Vlan261         
+10.6.124.1      00:02:21  0017.6111.9b1d  Vlan251         
+10.6.124.2      00:00:27  e050.8be5.d5d1  Vlan251         
+10.6.124.3      00:02:04  b0d5.ccc4.ffd3  Vlan251         
+10.6.124.4      00:09:15  0090.eac3.0d1c  Vlan251         
+10.6.124.7      00:09:38  38c8.5c30.f1f4  Vlan251         
+10.6.124.9      00:18:35  0020.8500.57c0  Vlan251         
+10.6.124.10     00:16:18  38c8.5c30.c6cd  Vlan251         
+10.6.124.11     00:01:09  0002.7c01.732a  Vlan251         
+10.1.124.162    00:00:26  INCOMPLETE      Vlan100         
+10.1.124.232    00:00:04  INCOMPLETE      Vlan100         
+201.165.0.2     00:00:07  INCOMPLETE      Vlan92          
+201.165.0.3     00:00:21  INCOMPLETE      Vlan92          
+201.165.0.5     00:00:25  INCOMPLETE      Vlan92          
+201.165.0.6     00:00:24  INCOMPLETE      Vlan92          
+201.165.0.8     00:00:01  INCOMPLETE      Vlan92          
+201.165.0.9     00:00:13  INCOMPLETE      Vlan92          
+201.165.0.12    00:00:08  INCOMPLETE      Vlan92          
+201.165.0.14    00:00:05  INCOMPLETE      Vlan92          
+201.165.0.15    00:00:07  INCOMPLETE      Vlan92          
+201.165.0.16    00:00:27  INCOMPLETE      Vlan92          
+201.165.0.19    00:00:07  INCOMPLETE      Vlan92          
+201.165.0.24    00:00:28  INCOMPLETE      Vlan92          
+201.165.0.25    00:00:01  INCOMPLETE      Vlan92          
+201.165.0.26    00:00:01  INCOMPLETE      Vlan92          
+201.165.0.27    00:00:02  INCOMPLETE      Vlan92          
+201.165.0.28    00:00:05  INCOMPLETE      Vlan92          
+201.165.0.29    00:00:03  INCOMPLETE      Vlan92          
+201.165.0.34    00:00:29  INCOMPLETE      Vlan92          
+201.165.0.35    00:00:16  INCOMPLETE      Vlan92          
+201.165.0.36    00:00:27  INCOMPLETE      Vlan92          
+201.165.0.37    00:00:04  INCOMPLETE      Vlan92          
+201.165.0.39    00:00:17  INCOMPLETE      Vlan92          
+201.165.0.40    00:00:12  INCOMPLETE      Vlan92          
+201.165.0.41    00:00:19  INCOMPLETE      Vlan92          
+201.165.0.42    00:00:12  INCOMPLETE      Vlan92          
+201.165.0.43    00:00:08  INCOMPLETE      Vlan92          
+201.165.0.44    00:00:06  INCOMPLETE      Vlan92          
+201.165.0.46    00:00:20  INCOMPLETE      Vlan92          
+201.165.0.47    00:00:02  INCOMPLETE      Vlan92          
+201.165.0.49    00:00:01  INCOMPLETE      Vlan92          
+201.165.0.52    00:00:05  INCOMPLETE      Vlan92          
+201.165.0.55    00:00:04  INCOMPLETE      Vlan92          
+201.165.0.56    00:00:19  INCOMPLETE      Vlan92          
+201.165.0.59    00:00:03  INCOMPLETE      Vlan92          
+201.165.0.61    00:00:13  INCOMPLETE      Vlan92          
+201.165.0.62    00:00:19  INCOMPLETE      Vlan92          
+201.165.118.3   00:00:12  INCOMPLETE      Vlan92          
+201.165.118.4   00:07:11  1866.da80.097f  Vlan92          
+201.165.118.5   00:08:51  1866.da7f.fe36  Vlan92          
+201.165.118.6   00:13:46  1866.da7f.feea  Vlan92          
+201.165.118.8   00:00:20  INCOMPLETE      Vlan92          
+201.165.118.10  00:00:22  INCOMPLETE      Vlan92          
+201.165.118.11  00:00:27  INCOMPLETE      Vlan92          
+201.165.118.12  00:00:03  1866.da80.097f  Vlan92          
+201.165.118.13  00:00:02  1866.da7f.fe36  Vlan92          
+201.165.118.14  00:00:03  1866.da7f.feea  Vlan92          
+201.165.118.16  00:00:27  INCOMPLETE      Vlan92          
+201.165.118.17  00:00:13  INCOMPLETE      Vlan92          
+201.165.118.18  00:00:17  INCOMPLETE      Vlan92          
+201.165.118.19  00:00:04  INCOMPLETE      Vlan92          
+201.165.118.21  00:00:12  INCOMPLETE      Vlan92          
+201.165.118.24  00:00:23  INCOMPLETE      Vlan92          
+201.165.118.25  00:00:20  INCOMPLETE      Vlan92          
+201.165.118.27  00:00:10  INCOMPLETE      Vlan92          
+201.165.118.29  00:00:14  INCOMPLETE      Vlan92          
+201.165.118.32  00:00:12  INCOMPLETE      Vlan92          
+201.165.118.33  00:00:13  INCOMPLETE      Vlan92          
+201.165.118.36  00:00:04  INCOMPLETE      Vlan92          
+201.165.118.37  00:00:13  INCOMPLETE      Vlan92          
+201.165.118.39  00:00:29  INCOMPLETE      Vlan92          
+201.165.118.40  00:00:14  INCOMPLETE      Vlan92          
+201.165.118.41  00:00:01  INCOMPLETE      Vlan92          
+201.165.118.42  00:00:09  INCOMPLETE      Vlan92          
+201.165.118.43  00:00:07  INCOMPLETE      Vlan92          
+201.165.118.44  00:00:22  INCOMPLETE      Vlan92          
+201.165.118.45  00:00:03  INCOMPLETE      Vlan92          
+201.165.118.47  00:00:10  INCOMPLETE      Vlan92          
+201.165.118.48  00:00:11  INCOMPLETE      Vlan92          
+201.165.118.51  00:00:14  INCOMPLETE      Vlan92          
+201.165.118.52  00:00:11  INCOMPLETE      Vlan92          
+201.165.118.53  00:00:14  INCOMPLETE      Vlan92          
+201.165.118.54  00:00:09  INCOMPLETE      Vlan92          
+201.165.118.55  00:00:26  INCOMPLETE      Vlan92          
+201.165.118.56  00:00:30  INCOMPLETE      Vlan92          
+201.165.118.58  00:00:25  INCOMPLETE      Vlan92          
+201.165.118.59  00:00:13  INCOMPLETE      Vlan92          
+201.165.118.60  00:00:05  INCOMPLETE      Vlan92          
+201.165.118.61  00:00:05  INCOMPLETE      Vlan92          
+201.165.118.62  00:00:04  1866.da80.097f  Vlan92          
+201.165.116.49  00:00:08  INCOMPLETE      Vlan73          
+201.165.116.51  00:18:02  248a.072f.d356  Vlan73          
+201.165.116.52  00:03:00  248a.072f.d3f2  Vlan73          
+201.165.116.53  00:18:01  248a.072f.d0ae  Vlan73          
+201.165.116.54  00:18:01  248a.072f.d342  Vlan73          
+201.165.116.55  00:00:12  INCOMPLETE      Vlan73          
+201.165.116.57  00:00:10  INCOMPLETE      Vlan73          
+201.165.116.59  00:00:06  INCOMPLETE      Vlan73          
+201.165.116.60  00:00:18  INCOMPLETE      Vlan73          
+201.165.116.61  00:00:15  INCOMPLETE      Vlan73          
+10.1.126.11     0.622329  a036.9fee.93c8  Vlan25          
+10.1.126.12     0.004475  a036.9fee.a578  Vlan25          
+10.1.126.13     00:00:17  0013.3e12.4b60  Vlan25          
+10.1.126.123    00:00:04  0008.25a2.234e  Vlan25          
+10.1.126.125    00:00:02  0008.25a2.2373  Vlan25          
+10.1.124.1      0.581473  a036.9fee.93c8  Vlan23          
+10.1.124.2      0.994688  a036.9fee.a578  Vlan23          
+10.1.124.3      00:13:24  0013.3e12.4b60  Vlan23          
+10.1.124.15     00:00:09  INCOMPLETE      Vlan23          
+10.1.124.16     00:00:09  INCOMPLETE      Vlan23          
+10.1.124.17     00:00:19  INCOMPLETE      Vlan23          
+10.1.124.18     00:00:23  INCOMPLETE      Vlan23          
+10.1.124.24     00:00:10  INCOMPLETE      Vlan23          
+10.1.124.34     00:18:40  000c.2983.35e7  Vlan23          
+10.1.124.35     00:02:02  000c.29e2.1b73  Vlan23          
+10.1.124.37     00:09:54  000c.29f5.327a  Vlan23          
+10.1.124.39     00:00:27  INCOMPLETE      Vlan23          
+10.1.124.40     00:00:07  INCOMPLETE      Vlan23          
+10.1.124.44     00:01:42  0003.ba78.8055  Vlan23          
+10.1.124.45     00:02:47  0003.ba78.8055  Vlan23          
+10.1.124.46     00:02:50  0003.baf1.20d7  Vlan23          
+10.1.124.47     00:01:50  0090.8f12.59d8  Vlan23          
+10.1.124.48     00:01:50  0090.8f12.59bb  Vlan23          
+10.1.124.49     00:01:50  0090.8f08.7431  Vlan23          
+10.1.124.50     00:01:50  0090.8f08.742f  Vlan23          
+10.1.124.51     00:01:50  0090.8f0a.4b3d  Vlan23          
+10.1.124.52     00:01:50  0090.8f0a.4b49  Vlan23          
+10.1.124.53     00:01:50  0090.8f16.c371  Vlan23          
+10.1.124.54     00:01:50  0090.8f16.c372  Vlan23          
+10.1.124.55     00:08:47  0090.8f13.2c6f  Vlan23          
+10.1.124.56     00:13:43  0090.8f13.2d7c  Vlan23          
+10.1.124.57     00:13:06  0090.8f1e.6d6b  Vlan23          
+10.1.124.58     00:16:30  0090.8f1e.6d62  Vlan23          
+10.1.124.102    00:00:04  0008.25a2.234e  Vlan23          
+10.1.124.104    00:00:02  0008.25a2.2373  Vlan23          
+10.1.124.113    00:07:54  0014.5e23.af0c  Vlan23          
+10.1.124.121    00:07:49  0011.93dc.9339  Vlan23          
+10.1.124.122    00:07:29  0018.7414.60c0  Vlan23          
+10.0.127.132    00:00:19  d849.0bb5.99a9  Vlan22          
+10.0.127.133    00:00:32  781d.baa6.df45  Vlan22          
+10.0.127.134    00:00:01  d849.0bb5.99a9  Vlan22          
+10.0.127.135    00:01:55  6c3b.e53a.dbd4  Vlan22          
+10.0.127.138    00:01:55  d849.0b86.ab32  Vlan22          
+10.0.127.139    00:01:52  e468.a383.5a28  Vlan22          
+10.0.127.140    00:01:51  e468.a382.1628  Vlan22          
+10.0.127.141    00:00:41  246e.9673.715c  Vlan22          
+10.0.127.142    00:01:05  246e.9673.717c  Vlan22          
+10.0.127.143    00:00:41  246e.9673.715c  Vlan22          
+10.0.127.144    00:07:36  246e.9673.717c  Vlan22          
+10.0.127.145    00:00:20  246e.9673.717d  Vlan22          
+10.0.127.146    00:07:36  246e.9673.715c  Vlan22          
+10.0.127.147    00:00:45  246e.9673.715d  Vlan22          
+10.0.127.148    00:01:15  509a.4cac.2420  Vlan22          
+10.0.127.149    00:12:08  509a.4cac.2532  Vlan22          
+10.0.127.150    00:02:22  4cd9.8f19.087e  Vlan22          
+10.0.127.151    00:00:43  4cd9.8f19.01f4  Vlan22          
+10.0.127.152    00:15:05  000c.29c4.f28d  Vlan22          
+10.0.127.153    00:10:48  000c.2983.35dd  Vlan22          
+10.0.127.154    00:01:49  000c.29e2.1b69  Vlan22          
+10.0.127.155    00:08:20  000c.29f5.3270  Vlan22          
+10.0.127.156    00:01:55  e443.4b1c.dd40  Vlan22          
+10.0.127.157    00:07:36  e443.4b1c.d56c  Vlan22          
+10.0.127.191    00:00:05  INCOMPLETE      Vlan22          
+10.0.127.211    00:01:55  0018.7414.60c0  Vlan22          
+10.0.127.214    00:17:28  0008.25a2.2340  Vlan22          
+10.0.127.215    00:12:32  0008.25a2.2370  Vlan22          
+10.0.127.232    00:02:19  0020.d231.ee25  Vlan22          
+10.0.127.233    00:08:43  0020.d224.b6ae  Vlan22          
+10.0.127.234    00:05:16  0020.d22e.da47  Vlan22          
+10.0.127.235    00:09:19  0020.d22b.c87a  Vlan22          
+10.0.127.236    00:04:42  0020.d225.3176  Vlan22          
+10.0.127.239    00:07:58  0020.d228.17ed  Vlan22          
+10.0.127.242    00:03:49  0020.d237.591f  Vlan22          
+10.0.127.246    00:07:36  78ba.f99b.79a0  Vlan22          
+10.0.127.247    00:07:36  0005.9b0d.fe80  Vlan22          
+10.0.127.249    00:07:36  0005.9b0d.fe80  Vlan22          
+10.0.127.250    00:01:55  0006.28f5.ccc0  Vlan22          
+10.0.126.197    00:10:54  0035.1abc.e9bf  Vlan14          
+10.0.126.198    00:16:11  0032.17c7.da46  Vlan14          
+10.0.126.199    00:10:49  80e0.1d6b.af7f  Vlan14          
+10.0.126.200    00:10:53  a89d.21c1.dbff  Vlan14          
+10.0.126.201    00:10:53  a89d.213f.863f  Vlan14          
+10.0.126.230    00:10:54  78da.6e15.e03f  Vlan14          
+10.0.126.231    00:10:54  6412.25ce.2cbf  Vlan14          
+10.0.126.248    00:16:42  00f6.63f6.247f  Vlan14          
+10.0.126.249    00:10:55  00a6.caf6.53ff  Vlan14          
+10.0.126.251    00:10:18  3cce.7316.3000  Vlan14          
+10.0.126.252    00:10:53  0035.1abc.df7f  Vlan14          
+10.0.126.253    00:10:20  0012.448a.f800  Vlan14          
+10.0.124.66     00:00:39  0017.101a.7e80  Vlan9           
+10.0.124.67     00:00:38  0017.100a.72c0  Vlan9           
+10.0.124.68     00:02:59  0001.5cab.09e7  Vlan9           
+10.0.124.70     00:00:02  0017.100d.c800  Vlan9           
+10.0.124.71     00:10:16  5c83.8f5e.47c0  Vlan9           
+10.0.124.72     00:00:42  0017.100b.e700  Vlan9           
+10.0.124.75     00:10:18  00ca.e5c8.67c0  Vlan9           
+10.0.124.76     00:10:15  d42c.447d.97c0  Vlan9           
+10.0.124.77     00:00:14  0017.100d.bf80  Vlan9           
+10.0.124.78     00:00:04  0017.100d.5180  Vlan9           
+10.0.124.79     00:00:27  0017.1010.f100  Vlan9           
+10.0.124.80     00:10:16  0087.3190.93c0  Vlan9           
+10.0.124.81     00:10:16  2c0b.e914.07c0  Vlan9           
+10.0.124.82     00:10:15  2c0b.e914.03c0  Vlan9           
+10.0.124.83     00:10:11  0076.8645.afc0  Vlan9           
+10.0.124.126    00:10:20  0011.93dc.931b  Vlan9           
+10.2.124.195    00:02:06  d867.d94c.a9b5  Vlan6           
+10.0.124.129    00:00:13  INCOMPLETE      Vlan4           
+10.0.124.133    00:12:16  d094.662a.2758  Vlan4           
+10.0.124.136    00:12:16  00c1.6484.c172  Vlan4           
+10.0.124.139    00:04:19  380e.4d9c.2706  Vlan4           
+10.0.124.140    00:12:16  00c1.6484.c172  Vlan4           
+10.0.124.141    00:01:16  d094.662a.2758  Vlan4           
+10.0.124.143    00:00:25  INCOMPLETE      Vlan4           
+10.0.124.144    00:00:36  40f2.e9b8.7090  Vlan4           
+10.0.124.145    00:00:36  40f2.e9b8.75a8  Vlan4           
+10.0.124.146    00:12:16  00c1.6484.c172  Vlan4           
+10.0.124.147    00:12:16  00c1.6484.c172  Vlan4           
+10.0.124.148    00:12:16  00c1.6484.c172  Vlan4           
+10.0.124.149    00:12:16  00c1.6484.c172  Vlan4           
+10.0.124.150    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.151    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.152    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.153    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.154    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.155    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.156    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.157    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.158    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.159    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.160    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.161    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.164    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.165    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.166    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.167    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.168    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.169    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.170    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.171    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.172    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.173    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.174    00:00:14  40f2.e9bb.85e8  Vlan4           
+10.0.124.175    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.176    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.177    00:00:23  d094.662a.275b  Vlan4           
+10.0.124.178    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.180    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.181    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.182    00:00:14  40f2.e9ba.d940  Vlan4           
+10.0.124.183    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.184    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.185    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.186    00:00:04  INCOMPLETE      Vlan4           
+10.0.124.187    00:12:15  00c1.6484.c172  Vlan4           
+10.0.124.189    00:03:17  00c1.6484.be72  Vlan4           
+10.0.124.190    00:12:15  00c1.6484.c172  Vlan4           
+10.0.126.130    00:12:15  00c1.6484.c172  Vlan4           
+10.0.126.131    00:12:15  00c1.6484.c172  Vlan4           
+10.0.126.132    00:12:15  d867.d94c.a9b5  Vlan4           
+10.0.126.133    00:00:57  0021.5e95.81cf  Vlan4           
+10.0.124.1      00:00:04  INCOMPLETE      Vlan2           
+10.0.124.2      00:00:39  0017.101a.7e80  Vlan2           
+10.0.124.3      00:00:38  0017.100a.72c0  Vlan2           
+10.0.124.4      00:10:21  0001.5cab.09e7  Vlan2           
+10.0.124.5      00:00:26  INCOMPLETE      Vlan2           
+10.0.124.6      00:00:02  0017.100d.c800  Vlan2           
+10.0.124.7      00:10:16  5c83.8f5e.47c0  Vlan2           
+10.0.124.8      00:00:42  0017.100b.e700  Vlan2           
+10.0.124.10     00:00:09  INCOMPLETE      Vlan2           
+10.0.124.11     00:10:18  00ca.e5c8.67c0  Vlan2           
+10.0.124.12     00:10:15  d42c.447d.97c0  Vlan2           
+10.0.124.13     00:00:14  0017.100d.bf80  Vlan2           
+10.0.124.14     00:00:04  0017.100d.5180  Vlan2           
+10.0.124.15     00:00:27  0017.1010.f100  Vlan2           
+10.0.124.16     00:10:16  0087.3190.93c0  Vlan2           
+10.0.124.17     00:10:16  2c0b.e914.07c0  Vlan2           
+10.0.124.18     00:10:15  2c0b.e914.03c0  Vlan2           
+10.0.124.19     00:10:19  0076.8645.afc0  Vlan2           
+10.0.124.33     00:00:07  INCOMPLETE      Vlan2           
+10.0.124.34     00:10:21  0027.0dd0.3a11  Vlan2           
+10.1.125.225    00:16:52  4055.3955.0507  Vlan260         
+10.1.125.226    00:13:25  40f2.e9b8.7091  Vlan260         
+10.1.125.227    00:16:24  40f2.e9b8.75a9  Vlan260         
+10.1.125.228    00:13:16  40f2.e9bb.85e9  Vlan260         
+10.1.125.229    00:16:24  40f2.e9ba.d941  Vlan260         
+10.1.124.106       -      0005.e700.7689  Vlan23 
+10.0.127.241       -      0005.9b0d.fe80  Vlan22 
+10.0.127.248       -      0005.9b0d.fe80  Vlan22 
+10.0.127.251       -      0005.9b0d.fe80  Vlan22 
+10.2.123.254       -      0000.0c07.ac04  Vlan375         
+NEXUS9K-CLN-DATOS-1# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD    ECMP Redirect
+                                                         Priority Capable State     Capable
+NEXUS9K-CLN-DATOS-1# show ip igmp groups
+NEXUS9K-CLN-DATOS-1# 
+NEXUS9K-CLN-DATOS-1# exit

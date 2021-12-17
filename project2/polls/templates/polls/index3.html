@@ -1,0 +1,13 @@
+{% extends "polls/index.html" %}
+
+{% block content %}
+{% if device_list %}
+    <ul>
+    {% for device in device_list %}
+        <li><a href="/polls/{{ device.ip_address }}/">{{ device.hostname }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,121 @@
+
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Copyright (C) 2002-2018, Cisco and/or its affiliates.
+All rights reserved.
+The copyrights to certain works contained in this software are
+owned by other third parties and used and distributed under their own
+licenses, such as open source.  This software is provided "as is," and unless
+otherwise stated, there is no warranty, express or implied, including but not
+limited to warranties of merchantability and fitness for a particular purpose.
+Certain components of this software are licensed under
+the GNU General Public License (GPL) version 2.0 or 
+GNU General Public License (GPL) version 3.0  or the GNU
+Lesser General Public License (LGPL) Version 2.1 or 
+Lesser General Public License (LGPL) Version 2.0. 
+A copy of each such license is available at
+http://www.opensource.org/licenses/gpl-2.0.php and
+http://opensource.org/licenses/gpl-3.0.html and
+http://www.opensource.org/licenses/lgpl-2.1.php and
+http://www.gnu.org/licenses/old-licenses/library.txt.
+TVD-SW-N9K-VIDEO2-TOL# terminal length 0
+TVD-SW-N9K-VIDEO2-TOL# terminal width 510
+TVD-SW-N9K-VIDEO2-TOL# show ip mroute detail
+IP Multicast Routing Table for VRF "default"
+
+Total number of routes: 9
+Total number of (*,G) routes: 2
+Total number of (S,G) routes: 3
+Total number of (*,G-prefix) routes: 4
+
+(*, 239.2.1.0/24), uptime: 17w1d, pim(0) ip(0) 
+  RPF-Source: 0.0.0.0 [0/0]
+  Data Created: No
+  SSM route
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0) (bridge-only: 0)
+
+
+(*, 239.45.2.0/24), uptime: 17w1d, pim(0) ip(0) 
+  RPF-Source: 0.0.0.0 [0/0]
+  Data Created: No
+  SSM route
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0) (bridge-only: 0)
+
+
+(*, 239.56.1.0/24), uptime: 17w1d, pim(0) ip(0) 
+  RPF-Source: 0.0.0.0 [0/0]
+  Data Created: No
+  SSM route
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0) (bridge-only: 0)
+
+
+(*, 239.57.3.0/24), uptime: 17w1d, pim(0) ip(0) 
+  RPF-Source: 0.0.0.0 [0/0]
+  Data Created: No
+  SSM route
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0) (bridge-only: 0)
+
+
+(*, 239.197.6.1/32), uptime: 1w3d, igmp(1) pim(0) ip(0) 
+  RPF-Source: 192.168.197.148 [0/200]
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.198.66
+  Outgoing interface list: (count: 1) (bridge-only: 0)
+    Vlan120, uptime: 1w3d, igmp
+
+
+(192.168.120.2/32, 239.197.6.1/32), uptime: 17w6d, ip(0) mrib(1) pim(0) 
+  RPF-Source: 192.168.120.2 [0/0]
+  Data Created: Yes
+  Stats: 2900665/147948138 [Packets/Bytes], 108.800 bps
+  Stats: Active Flow
+  Incoming interface: Vlan120, RPF nbr: 192.168.120.2
+  Outgoing interface list: (count: 1) (bridge-only: 0)
+    Vlan120, uptime: 1w3d, mrib, (RPF)
+
+
+(*, 239.197.6.2/32), uptime: 1w3d, igmp(1) pim(0) ip(0) 
+  RPF-Source: 192.168.197.148 [0/200]
+  Data Created: No
+  Stats: 0/0 [Packets/Bytes], 0.000   bps
+  Stats: Inactive Flow
+  Incoming interface: port-channel1, RPF nbr: 10.5.198.66
+  Outgoing interface list: (count: 1) (bridge-only: 0)
+    Vlan120, uptime: 1w3d, igmp
+
+
+(192.168.120.2/32, 239.197.6.2/32), uptime: 17w6d, ip(0) mrib(1) pim(0) 
+  RPF-Source: 192.168.120.2 [0/0]
+  Data Created: Yes
+  Stats: 2900666/147946896 [Packets/Bytes], 108.800 bps
+  Stats: Active Flow
+  Incoming interface: Vlan120, RPF nbr: 192.168.120.2
+  Outgoing interface list: (count: 1) (bridge-only: 0)
+    Vlan120, uptime: 1w3d, mrib, (RPF)
+
+
+(192.168.198.3/32, 239.197.71.1/32), uptime: 17w6d, ip(0) pim(0) 
+  RPF-Source: 192.168.198.3 [0/0]
+  Data Created: Yes
+  Stats: 1450082/73960647 [Packets/Bytes], 54.400  bps
+  Stats: Active Flow
+  Incoming interface: Vlan392, RPF nbr: 192.168.198.3
+  Outgoing interface list: (count: 0) (bridge-only: 0)
+
+
+TVD-SW-N9K-VIDEO2-TOL# 
+TVD-SW-N9K-VIDEO2-TOL# exit

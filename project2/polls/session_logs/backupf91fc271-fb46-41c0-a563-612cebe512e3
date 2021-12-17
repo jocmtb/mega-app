@@ -1,0 +1,3355 @@
+
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Copyright (C) 2002-2017, Cisco and/or its affiliates.
+All rights reserved.
+The copyrights to certain works contained in this software are
+owned by other third parties and used and distributed under their own
+licenses, such as open source.  This software is provided "as is," and unless
+otherwise stated, there is no warranty, express or implied, including but not
+limited to warranties of merchantability and fitness for a particular purpose.
+Certain components of this software are licensed under
+the GNU General Public License (GPL) version 2.0 or 
+GNU General Public License (GPL) version 3.0  or the GNU
+Lesser General Public License (LGPL) Version 2.1 or 
+Lesser General Public License (LGPL) Version 2.0. 
+A copy of each such license is available at
+http://www.opensource.org/licenses/gpl-2.0.php and
+http://opensource.org/licenses/gpl-3.0.html and
+http://www.opensource.org/licenses/lgpl-2.1.php and
+http://www.gnu.org/licenses/old-licenses/library.txt.
+TVD-SW-N9K-VIDEO1-GDL# terminal length 0
+TVD-SW-N9K-VIDEO1-GDL# terminal width 510
+TVD-SW-N9K-VIDEO1-GDL# show running-config
+
+!Command: show running-config
+!Time: Mon May 25 13:06:20 2020
+
+version 7.0(3)I5(2)
+hostname TVD-SW-N9K-VIDEO1-GDL
+policy-map type network-qos Jumbo-nq-policy
+  class type network-qos c-nq3
+    mtu 9216
+  class type network-qos c-nq2
+    mtu 9216
+  class type network-qos c-nq1
+    mtu 9216
+  class type network-qos c-nq-default
+    mtu 9216
+vdc TVD-SW-N9K-VIDEO1-GDL id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature bash-shell
+feature tacacs+
+feature ospf
+feature bgp
+feature pim
+feature pbr
+feature port-security
+feature udld
+feature interface-vlan
+feature hsrp
+feature lacp
+feature dhcp
+feature tunnel
+feature lldp
+feature vtp
+feature bfd
+clock timezone Mexico -6 0
+clock summer-time Mexico 1 Sun Apr 2:00 4 Sun Oct 2:00 60
+
+username admin password 5 $5$cqtGLMTM$rQhTaIcKaun3Dr.YnmzvFSYRqcEDB/Ks1bbeFLMibO9  role network-admin
+username recovery password 5 $5$CljDlbeM$Q49FGktC/vJ3nlzsyB7PNpQpTOMiNU87ZiF4LxUmYt3  role priv-15
+username recovery2 password 5 $5$xu4tLb6O$4zs8rSNWzkS18lIsEhh5s0xFsVvfKcZsC3xMIYv2qA3  role priv-15
+
+banner motd ^C
+Advertencia: Este es un equipo de Acceso Restringido.
+Acceso no autorizado sera severamente penalizado.
+La sesion esta siendo registrada.
+Warning: This is a restricted access device. Unauthorized
+access will be vigorously prosecuted.
+The session is being logged.
+=====================
+= M E G A C A B L E =
+=====================
+^
+
+no ip domain-lookup
+ip domain-name megacable.com.mx
+ip tacacs source-interface Vlan14
+tacacs-server host 10.1.63.12 key 7 "pakfydg" 
+tacacs-server host 10.1.63.11 key 7 "pakfydg" 
+aaa group server tacacs+ ISE-MEGACABLE 
+    server 10.1.63.12 
+    server 10.1.63.11 
+crypto key param rsa label TVD-SW-N9K-VIDEO1-GDL.megacable.com.mx modulus 512 
+errdisable recovery interval 180
+errdisable recovery cause udld
+errdisable recovery cause bpduguard
+errdisable recovery cause storm-control
+ip access-list 105
+  10 permit tcp 10.0.70.0 0.0.0.255 any range 22 telnet 
+  20 permit tcp 10.0.56.0 0.0.0.255 any range 22 telnet 
+  30 permit tcp 10.0.60.128 0.0.0.127 any range 22 telnet 
+  40 permit tcp 10.0.56.128 0.0.0.63 any range 22 telnet 
+  50 permit tcp 200.52.192.211/32 any range 22 telnet 
+  60 permit tcp 200.52.192.150/32 any range 22 telnet 
+  70 permit tcp 200.52.192.155/32 any range 22 telnet 
+  80 permit tcp 200.52.192.195/32 any range 22 telnet 
+  90 permit tcp 200.52.192.241/32 any range 22 telnet 
+  100 permit tcp 200.52.192.182/32 any range 22 telnet 
+  110 permit tcp 189.199.79.147/32 any range 22 telnet 
+  120 permit tcp 200.52.192.176/32 any range 22 telnet 
+  130 permit tcp 200.52.205.1/32 any range 22 telnet 
+  140 permit tcp 200.52.192.129/32 any range 22 telnet 
+  150 permit tcp 200.52.192.156/32 any range 22 telnet 
+  160 permit tcp 200.52.192.233/32 any range 22 telnet 
+  170 permit tcp 200.52.192.215/32 any range 22 telnet 
+  180 permit tcp 200.52.192.232/32 any range 22 telnet 
+  190 deny ip any any 
+ip access-list 98
+  10 permit ip 10.0.70.179/32 any 
+  20 permit ip 10.0.70.180/32 any 
+ip access-list 99
+  5 permit ip 10.0.70.0 0.0.0.255 any 
+  10 permit ip 200.52.207.51/32 any 
+  20 permit ip 200.52.193.14/32 any 
+  30 permit ip 10.0.60.182/32 any 
+  40 permit ip 10.0.56.179/32 any 
+  50 permit ip 10.0.60.183/32 any 
+  60 permit ip 10.0.60.181/32 any 
+  70 permit ip 200.52.196.176/32 any 
+  80 permit ip 10.0.60.186/32 any 
+  90 permit ip 10.0.60.187/32 any 
+  100 permit ip 10.0.56.163/32 any 
+  110 permit ip 200.52.196.172/32 any 
+  120 permit ip 10.0.56.167/32 any 
+  130 permit ip 200.52.196.173/32 any 
+  140 permit ip 200.52.196.174/32 any 
+  150 permit ip 200.52.196.175/32 any 
+  160 permit ip 10.0.60.174/32 any 
+  170 permit ip 10.0.60.175/32 any 
+  180 permit ip 10.0.56.175/32 any 
+  190 permit ip 200.52.193.144/32 any 
+  200 permit ip 10.0.56.129/32 any 
+  210 permit ip 10.0.56.140/32 any 
+  220 permit ip 10.0.60.226/32 any 
+  230 permit ip 10.0.60.225/32 any 
+  240 permit ip 200.52.192.192 0.0.0.63 any 
+  250 permit ip 200.52.193.136 0.0.0.7 any 
+  260 deny ip any any 
+ip access-list MEGA_NTP_SERVERS
+  10 permit ip 10.1.63.13/32 any 
+  20 permit ip 10.1.63.121/32 any 
+ip access-list TO-INTERNET
+  10 permit ip any any 
+ip access-list TO-LAN-MEGA
+  10 permit ip any 10.0.56.128/26 
+  20 permit ip any 10.0.60.128/25 
+  30 permit ip any 10.2.56.212/31 
+  40 permit ip any 10.1.63.13/32 
+  50 permit ip any 10.1.63.121/32 
+ip access-list TO-VPN-LAN-DTEC
+  10 permit ip any 10.0.70.0/24 
+class-map type qos match-any video
+  match dscp 32,34
+class-map type qos match-any datos-high
+  match dscp 24
+class-map type qos match-any management
+  match dscp 8
+class-map type qos match-any CM_QOS_Video
+  match cos 4
+  match dscp 32,34
+class-map type qos match-any datos-medium
+  match dscp 16
+class-map type qos match-any Real_Time_Video
+  match dscp 32,34,46-47
+class-map type qos match-any network-control
+  match dscp 48,56
+class-map type qos match-any real-time-class
+  match dscp 46
+class-map type qos match-any CM_QOS_Real_Time
+  match cos 5
+  match dscp 46-47
+class-map type qos match-any CM_QOS_Datos_High
+  match cos 3
+  match dscp 24
+class-map type qos match-any CM_QOS_Management
+  match cos 1
+  match dscp 8
+class-map type qos match-any CM_QOS_Datos_Medium
+  match cos 2
+  match dscp 16
+class-map type qos match-any CM_QOS_Network_Control
+  match cos 6-7
+  match dscp 48,56
+policy-map type qos QSP_QOS_REMARK_IN
+  class CM_QOS_Network_Control
+    set qos-group 1
+  class CM_QOS_Real_Time
+    set qos-group 3
+  class CM_QOS_Video
+    set qos-group 3
+  class CM_QOS_Datos_High
+    set qos-group 2
+  class CM_QOS_Datos_Medium
+    set qos-group 2
+  class CM_QOS_Management
+    set qos-group 1
+policy-map type qos QSP-ALL-IN-TRAFFIC
+  class datos-high
+    set dscp 24
+    set qos-group 2
+  class datos-medium
+    set dscp 16
+    set qos-group 2
+  class management
+    set dscp 8
+    set qos-group 1
+  class network-control
+    set dscp 48
+    set qos-group 3
+  class real-time-class
+    set dscp 46
+    set qos-group 3
+  class video
+    set dscp 32
+    set qos-group 3
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-MGMT
+  class class-default
+    set dscp 8
+    set qos-group 1
+policy-map type qos QSP-IN-RMK-TRAFFIC-VOICE
+  class class-default
+    set dscp 46
+    set qos-group 3
+    set cos 5
+policy-map type qos QSP-IN-RMK-TRAFFIC-DEFAULT
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-SDV
+  class class-default
+    set dscp 32
+    set qos-group 3
+    set cos 4
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  class class-default
+    set dscp 34
+    set qos-group 3
+    set cos 4
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  class class-default
+    set dscp 24
+    set qos-group 2
+policy-map type qos QSP-IN-TRAFFIC-RMK-DATOS-HIGH
+  class class-default
+    set cos 3
+    set qos-group 2
+    set dscp 24
+policy-map type qos QSP-IN-TRAFFIC-RMK-MANAGEMENT
+  class class-default
+    set cos 1
+    set qos-group 1
+    set dscp 8
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  class class-default
+    set dscp 16
+    set qos-group 2
+policy-map type qos QSP-IN-TRAFFIC-RMK-DATOS-MEDIUM
+  class class-default
+    set cos 2
+    set qos-group 2
+    set dscp 16
+policy-map type queuing PM_QUEUING_SYSTEM_OUT
+  class type queuing c-out-q3
+    priority level 1
+    queue-limit 2516582 bytes
+  class type queuing c-out-q2
+    bandwidth remaining percent 75
+    queue-limit 2516582 bytes
+  class type queuing c-out-q1
+    bandwidth remaining percent 15
+    queue-limit 2516582 bytes
+  class type queuing c-out-q-default
+    bandwidth remaining percent 10
+    queue-limit 5033164 bytes
+policy-map type queuing PM_QUEUING_SYSTEM_OUT_WRED
+  class type queuing c-out-q3
+    priority level 1
+    queue-limit 2516582 bytes
+  class type queuing c-out-q2
+    bandwidth remaining percent 75
+    queue-limit 2516582 bytes
+  class type queuing c-out-q1
+    bandwidth remaining percent 15
+    queue-limit 2516582 bytes
+  class type queuing c-out-q-default
+    bandwidth remaining percent 10
+    random-detect threshold burst-optimized
+system qos
+  service-policy type queuing output PM_QUEUING_SYSTEM_OUT
+  service-policy type network-qos Jumbo-nq-policy
+track 1 interface port-channel30 line-protocol
+copp profile strict
+vtp domain MEGAREDGDL
+snmp-server user admin network-admin auth md5 0x4e20960b399e268a4a4da2a7a27eac32 priv 0x4e20960b399e268a4a4da2a7a27eac32 localizedkey
+snmp-server user recovery priv-15 auth md5 0x167433df968da6dfca72ec1771d5b62f priv 0x167433df968da6dfca72ec1771d5b62f localizedkey
+snmp-server user recovery2 priv-15 auth md5 0x7c8c392731963fb99d7ca49cea7f4278 priv 0x7c8c392731963fb99d7ca49cea7f4278 localizedkey
+snmp-server host 10.0.60.183 traps version 2c gdlKsunM650
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+snmp-server community GD!_4cc3s0_c0!3cT0r group network-operator
+snmp-server community GdlThoR650X group network-admin
+snmp-server community gdlKsunM650 group network-operator
+snmp-server community GdlThoR650X use-acl 99
+snmp-server community gdlKsunM650 use-acl 99
+snmp-server community GD!_4cc3s0_c0!3cT0r use-ipv4acl 98
+ntp server 10.1.63.13 prefer use-vrf default
+ntp server 10.1.63.121 use-vrf default
+ntp source-interface  Vlan14
+ntp access-group peer MEGA_NTP_SERVERS
+aaa authentication login default group ISE-MEGACABLE 
+aaa authorization config-commands default group ISE-MEGACABLE local 
+aaa authorization commands default group ISE-MEGACABLE local 
+aaa accounting default group ISE-MEGACABLE 
+tacacs-server directed-request 
+
+ip pim rp-address 10.2.56.254 prefix-list CANALES-LOCALES-REG-GDL
+ip pim rp-address 10.9.127.116 prefix-list OUT-MCAST-TO-SSH-SRVR
+ip pim rp-address 192.168.56.1 prefix-list MCAST-ANY
+ip pim rp-address 192.168.57.160 prefix-list MCAST-OLDHE
+ip pim rp-address 192.168.58.254 prefix-list MCAST-MASTERHEADEND
+ip pim rp-address 192.168.65.30 prefix-list PWK-CTRL-GDL
+ip pim ssm prefix-list SSM
+ip pim bsr forward listen
+vlan 1,8,11-12,14-18,30,32,35,37-38,53-57,59,61-66,68-69,74-75,78,81,85,87-90,96,99,112-113,120,244-249,251-254,260-262,267,269,290-295,297-298,370-373,383,386,451-452,473-474,486,565-567,570,680,701,861,1700-1702,1705-1706,1710-1711
+vlan 8
+  name TVD-MOT-NETWORK
+vlan 11
+  shutdown
+  name TVD-MOTOROLA
+vlan 12
+  shutdown
+  name Insercion-Comercial
+vlan 14
+  name GESTION-HUBS
+vlan 15
+  shutdown
+  name SCHG_CTRL
+vlan 16
+  shutdown
+  name SCHG_PROPAGA
+vlan 17
+  shutdown
+  name SCHG_VDO
+vlan 18
+  name ADINSERTION-TVD
+vlan 30
+  name Back2Back-OSPF
+vlan 32
+  name MGT-ZW
+vlan 35
+  name HD-Adinsertion
+vlan 37
+  name TVD-BNP_SEM
+vlan 38
+  name TVD-CISCO_MNGT
+vlan 53
+  name TVD-BIGBAND
+vlan 54
+  name DNCS-1-ATN
+vlan 55
+  name REP-DB-DNCS-1
+vlan 56
+  name DNCS-ATM
+vlan 57
+  name TVD-IXN_HUBS
+vlan 59
+  name MHE-PCG
+vlan 61
+  name MHE-DCM1-IN
+vlan 62
+  name DCM1-OUT
+vlan 63
+  name APEX3000-MAIN
+vlan 64
+  name RFGW#1-Redundancia
+vlan 65
+  name ROSA-SIM-VLAN-PUBLIC
+vlan 66
+  name ROSA-SIM2-VLAN-PUBLIC
+vlan 68
+  name DCM3-IN
+vlan 69
+  name DCM3-OUT
+vlan 74
+  name ROSA-SIM-VLAN-MGT
+vlan 75
+  name REP-DB
+vlan 78
+  name ROSA-SIM-DEKTEC
+vlan 81
+  name TVD-P2-TV_CORTOS_PUBLIC0
+vlan 85
+  name TVD-FTP-SPOOLER
+vlan 87
+  name HUB-DCM2-IN
+vlan 88
+  name HUB-DCM2-OUT
+vlan 89
+  name APEX3000-STBY
+vlan 90
+  name RFGW#2-Redundancia
+vlan 96
+  shutdown
+  name TVD-SEACHANGE-PUB
+vlan 99
+  name PUBLICA
+vlan 112
+  name DCM4-IN
+vlan 113
+  name DCM4-OUT
+vlan 120
+  name ATSC-LOCALES-SD-HD
+vlan 244
+  shutdown
+  name TVD-RADD01
+vlan 245
+  shutdown
+  name TVD-RADD02
+vlan 246
+  shutdown
+  name TVD-RADD03
+vlan 247
+  shutdown
+  name TVD-RADD04
+vlan 248
+  shutdown
+  name TVD-RADD05
+vlan 249
+  shutdown
+  name TVD-RADD06
+vlan 251
+  shutdown
+  name TVD-RADD7
+vlan 252
+  shutdown
+  name TVD-RADD8
+vlan 253
+  shutdown
+  name TVD-RADD9
+vlan 254
+  shutdown
+  name TVD-RADD10
+vlan 260
+  shutdown
+  name APROV-BCC-MOR
+vlan 261
+  shutdown
+  name APROV-BCC-GDL
+vlan 262
+  shutdown
+  name MHE-OUT-GDL-PLAZAS
+vlan 267
+  shutdown
+  name TVD_Megacanal_Ctrl
+vlan 269
+  name TVD-CISCO-CTRL
+vlan 290
+  name MHE-VIDEO-1
+vlan 291
+  shutdown
+  name MHE-OUT-VER-GDL
+vlan 292
+  name MHE-VIDEO-2
+vlan 293
+  shutdown
+  name TVD-PDS-VOD
+vlan 294
+  shutdown
+  name TVD_Megacanal_Telepto
+vlan 295
+  shutdown
+  name VPN-POWERKEY-UNICAST
+vlan 297
+  shutdown
+  name TVD-NGV-CAS
+vlan 298
+  shutdown
+  name TVD-SD-HD-RAC
+vlan 370
+  shutdown
+  name Unicast-VGHE
+vlan 371
+  shutdown
+  name Multicast-PK1
+vlan 372
+  shutdown
+  name Multicast-PK2
+vlan 373
+  shutdown
+  name Unicast-VGHE-2
+vlan 383
+  name TVD-IXN-PE-VIDEO-iptv-lc-gdl
+vlan 386
+  name OTT_LOCAL
+vlan 451
+  shutdown
+  name TVD-NMX
+vlan 452
+  shutdown
+  name TVD-NMX02
+vlan 473
+  name VIDEO-PWK-2-CONTROL
+vlan 474
+  shutdown
+  name VIDEO-PWK-2-UNICAST
+vlan 486
+  shutdown
+  name TVD-LOCAL-CHANNELS-GTO
+vlan 565
+  shutdown
+  name Unicast-VGHE-HUB-GDL
+vlan 566
+  shutdown
+  name Unicast-VGHE-Resp
+vlan 570
+  name B2B-OSPF-NEXUS
+vlan 680
+  shutdown
+  name VIDEO-TCZ
+vlan 701
+  shutdown
+  name MHE-PRUEBAS
+vlan 861
+  name STB-NETFLIX-RTR
+vlan 1700
+  name MGMT-SSH_SERVER-NGV+
+vlan 1701
+  name PUBLICA-SSH_SERVER-NGV+
+vlan 1702
+  name SERV-SSH_SERVER-NGV+
+vlan 1705
+  name MGMT-RTR-NETFLIX
+vlan 1706
+  name PUBLIC_SERV-RTR-NETFLIX
+vlan 1710
+  name P2P_NX-DATOS-1_SSH_SRVR_NGV+
+
+spanning-tree vlan 37,54-56,65-66,74-75 priority 4096
+spanning-tree vlan 68-69,112-113,120 priority 8192
+ip prefix-list CANALES-LOCALES-REG-GDL seq 10 permit 239.57.70.69/32 
+ip prefix-list CANALES-LOCALES-REG-GDL seq 20 permit 239.57.70.71/32 
+ip prefix-list CANALES-LOCALES-REG-GDL seq 30 permit 239.57.70.98/32 
+ip prefix-list CANALES-LOCALES-REG-GDL seq 40 permit 239.57.70.99/32 
+ip prefix-list CONECTADA seq 10 permit 192.168.56.0/27 
+ip prefix-list CONECTADA seq 15 permit 192.168.56.48/28 
+ip prefix-list CONECTADA seq 20 permit 192.168.56.32/28 
+ip prefix-list CONECTADA seq 35 permit 10.0.62.224/28 
+ip prefix-list CONECTADA seq 40 permit 10.0.61.128/27 
+ip prefix-list CONECTADA seq 45 permit 10.0.61.176/28 
+ip prefix-list CONECTADA seq 50 permit 10.0.61.160/28 
+ip prefix-list CONECTADA seq 60 permit 172.20.57.0/27 
+ip prefix-list IN_VRF_CTRL-VIDEO seq 5 permit 192.168.60.64/27 
+ip prefix-list IN_VRF_CTRL-VIDEO seq 10 permit 192.168.65.48/28 
+ip prefix-list IN_VRF_CTRL-VIDEO seq 15 permit 192.168.65.64/27 
+ip prefix-list IN_VRF_CTRL-VIDEO seq 20 permit 192.168.65.208/30 
+ip prefix-list IN_VRF_VIDEO-1 seq 5 permit 192.168.80.32/29 
+ip prefix-list IN_VRF_VIDEO-1 seq 10 permit 10.5.58.2/31 
+ip prefix-list IN_VRF_VIDEO-CISCO-CTRL seq 5 permit 192.168.65.0/27 
+ip prefix-list IN_VRF_VIDEO-MHE seq 5 permit 192.168.58.240/28 
+ip prefix-list IN_VRF_VIDEO-MHE seq 10 permit 192.168.106.160/29 
+ip prefix-list MCAST-ANY seq 5 deny 239.57.20.0/27 le 32 
+ip prefix-list MCAST-ANY seq 10 deny 239.57.20.32/29 le 32 
+ip prefix-list MCAST-ANY seq 15 deny 239.20.10.0/27 le 32 
+ip prefix-list MCAST-ANY seq 20 deny 239.20.10.32/29 le 32 
+ip prefix-list MCAST-ANY seq 24 permit 224.0.0.0/4 le 32 
+ip prefix-list MCAST-ANY seq 25 permit 0.0.0.0/0 
+ip prefix-list MCAST-MASTERHEADEND seq 5 permit 239.57.20.0/27 le 32 
+ip prefix-list MCAST-MASTERHEADEND seq 10 permit 239.57.20.32/29 le 32 
+ip prefix-list MCAST-MASTERHEADEND seq 15 permit 239.20.10.0/27 le 32 
+ip prefix-list MCAST-MASTERHEADEND seq 20 permit 239.20.10.32/29 le 32 
+ip prefix-list MCAST-OLDHE seq 5 permit 239.255.255.250/32 
+ip prefix-list MCAST-OLDHE seq 10 permit 239.100.10.1/32 
+ip prefix-list MCAST-OLDHE seq 15 permit 239.57.3.81/32 
+ip prefix-list MCAST-OLDHE seq 20 permit 239.57.3.65/32 
+ip prefix-list MCAST-OLDHE seq 25 permit 239.17.1.102/32 
+ip prefix-list MCAST-OLDHE seq 30 permit 239.57.3.20/32 
+ip prefix-list MCAST-OLDHE seq 35 permit 239.57.3.23/32 
+ip prefix-list MCAST-OLDHE seq 40 permit 239.57.3.17/32 
+ip prefix-list MCAST-OLDHE seq 45 permit 239.57.3.16/32 
+ip prefix-list MCAST-OLDHE seq 50 permit 239.57.3.19/32 
+ip prefix-list MCAST-OLDHE seq 55 permit 239.57.3.18/32 
+ip prefix-list MCAST-OLDHE seq 60 permit 239.57.3.29/32 
+ip prefix-list MCAST-OLDHE seq 65 permit 239.57.3.28/32 
+ip prefix-list MCAST-OLDHE seq 70 permit 224.0.1.40/32 
+ip prefix-list MCAST-OLDHE seq 75 permit 239.57.3.30/32 
+ip prefix-list MCAST-OLDHE seq 80 permit 239.57.3.25/32 
+ip prefix-list MCAST-OLDHE seq 85 permit 239.57.3.24/32 
+ip prefix-list MCAST-OLDHE seq 90 permit 239.57.3.27/32 
+ip prefix-list MCAST-OLDHE seq 95 permit 239.57.3.26/32 
+ip prefix-list MCAST-OLDHE seq 100 permit 239.57.3.5/32 
+ip prefix-list MCAST-OLDHE seq 105 permit 239.57.3.4/32 
+ip prefix-list MCAST-OLDHE seq 110 permit 239.57.3.7/32 
+ip prefix-list MCAST-OLDHE seq 115 permit 239.57.3.6/32 
+ip prefix-list MCAST-OLDHE seq 120 permit 239.57.3.1/32 
+ip prefix-list MCAST-OLDHE seq 125 permit 239.57.3.3/32 
+ip prefix-list MCAST-OLDHE seq 130 permit 239.57.3.2/32 
+ip prefix-list MCAST-OLDHE seq 135 permit 239.57.3.13/32 
+ip prefix-list MCAST-OLDHE seq 140 permit 239.57.3.12/32 
+ip prefix-list MCAST-OLDHE seq 145 permit 239.57.3.15/32 
+ip prefix-list MCAST-OLDHE seq 150 permit 239.57.3.14/32 
+ip prefix-list MCAST-OLDHE seq 155 permit 239.57.3.9/32 
+ip prefix-list MCAST-OLDHE seq 160 permit 239.57.3.8/32 
+ip prefix-list MCAST-OLDHE seq 165 permit 239.57.3.11/32 
+ip prefix-list MCAST-OLDHE seq 170 permit 239.1.50.2/32 
+ip prefix-list MCAST-OLDHE seq 175 permit 239.57.3.10/32 
+ip prefix-list MCAST-OLDHE seq 180 permit 239.1.50.3/32 
+ip prefix-list MCAST-OLDHE seq 185 permit 239.57.3.48/32 
+ip prefix-list MCAST-OLDHE seq 190 permit 239.57.3.51/32 
+ip prefix-list MCAST-OLDHE seq 195 permit 239.9.9.9/32 
+ip prefix-list MCAST-OLDHE seq 200 permit 239.57.3.50/32 
+ip prefix-list MCAST-OLDHE seq 205 permit 239.1.7.14/32 
+ip prefix-list MCAST-OLDHE seq 210 permit 239.7.7.7/32 
+ip prefix-list MCAST-OLDHE seq 215 permit 239.5.5.5/32 
+ip prefix-list MCAST-OLDHE seq 220 permit 239.255.251.1/32 
+ip prefix-list MCAST-OLDHE seq 225 permit 239.57.3.62/32 
+ip prefix-list MCAST-OLDHE seq 230 permit 239.255.250.1/32 
+ip prefix-list MCAST-OLDHE seq 235 permit 239.1.1.1/32 
+ip prefix-list MCAST-OLDHE seq 240 permit 239.1.10.11/32 
+ip prefix-list MCAST-OLDHE seq 245 permit 239.57.3.37/32 
+ip prefix-list MCAST-OLDHE seq 250 permit 239.57.3.36/32 
+ip prefix-list MCAST-OLDHE seq 255 permit 239.57.3.39/32 
+ip prefix-list MCAST-OLDHE seq 260 permit 239.57.3.38/32 
+ip prefix-list MCAST-OLDHE seq 265 permit 239.57.3.35/32 
+ip prefix-list MCAST-OLDHE seq 270 permit 239.57.3.34/32 
+ip prefix-list MCAST-OLDHE seq 275 permit 239.57.3.45/32 
+ip prefix-list MCAST-OLDHE seq 280 permit 239.57.3.47/32 
+ip prefix-list MCAST-OLDHE seq 285 permit 239.57.3.46/32 
+ip prefix-list MCAST-OLDHE seq 290 permit 239.57.3.41/32 
+ip prefix-list MCAST-OLDHE seq 295 permit 239.57.3.40/32 
+ip prefix-list MCAST-OLDHE seq 300 permit 239.57.3.43/32 
+ip prefix-list MCAST-OLDHE seq 305 permit 239.57.3.42/32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 5 permit 239.95.2.0/25 le 32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 10 permit 239.95.3.0/25 le 32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 15 permit 239.95.4.0/25 le 32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 20 permit 239.95.6.0/25 le 32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 25 permit 239.95.8.0/25 le 32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 30 permit 239.95.10.0/24 le 32 
+ip prefix-list OUT-MCAST-TO-SSH-SRVR seq 35 permit 239.95.11.0/25 le 32 
+ip prefix-list OUT_VRF_CTRL-VIDEO seq 5 permit 10.5.58.16/31 
+ip prefix-list OUT_VRF_CTRL-VIDEO seq 10 permit 192.168.56.160/29 
+ip prefix-list OUT_VRF_CTRL-VIDEO seq 15 permit 192.168.56.168/29 
+ip prefix-list OUT_VRF_VIDEO-1 seq 5 permit 192.168.56.0/27 
+ip prefix-list OUT_VRF_VIDEO-CISCO-CTRL seq 5 deny 0.0.0.0/0 le 32 
+ip prefix-list OUT_VRF_VIDEO-MHE seq 5 permit 10.5.58.2/31 
+ip prefix-list OUT_VRF_VIDEO-PK-UNICAST seq 5 permit 10.0.62.32/28 
+ip prefix-list OUT_VRF_VIDEO-PK-UNICAST seq 10 permit 10.1.57.16/28 
+ip prefix-list OUT_VRF_VIDEO-PK-UNICAST-2 seq 5 permit 10.1.57.216/29 
+ip prefix-list OUT_VRF_VIDEO-PK-UNICAST-2 seq 10 permit 10.1.57.16/28 
+ip prefix-list PWK-CTRL-GDL seq 5 permit 239.56.1.1/32 
+ip prefix-list PWK-CTRL-GDL seq 10 permit 239.56.1.2/32 
+ip prefix-list PWK-CTRL-GDL seq 15 permit 239.56.1.50/32 
+ip prefix-list PWK-CTRL-GDL seq 20 permit 239.56.1.201/32 
+ip prefix-list PWK-CTRL-GDL seq 25 permit 239.56.1.202/32 
+ip prefix-list PWK-CTRL-GDL seq 30 permit 239.56.1.211/32 
+ip prefix-list PWK-CTRL-GDL seq 35 permit 239.56.1.240/32 
+ip prefix-list SSM seq 5 permit 238.57.101.1/32 
+ip prefix-list SSM seq 10 permit 239.0.0.1/32 
+ip prefix-list SSM seq 15 permit 232.0.0.0/8 le 32 
+ip prefix-list SSM seq 20 permit 239.7.1.0/24 le 32 
+ip prefix-list SSM seq 35 permit 239.20.10.0/27 le 32 
+ip prefix-list SSM seq 40 permit 239.20.10.32/29 le 32 
+ip prefix-list SSM seq 45 permit 239.2.1.0/24 le 32 
+ip prefix-list SSM seq 50 permit 239.57.3.0/24 le 32 
+ip prefix-list SSM seq 55 permit 239.57.2.0/27 le 32 
+ip prefix-list SSM seq 60 permit 239.57.30.0/28 le 32 
+ip prefix-list SSM seq 70 permit 237.57.70.0/28 le 32 
+ip prefix-list SSM seq 75 permit 239.57.20.0/28 le 32 
+ip prefix-list SSM seq 80 permit 239.57.20.16/31 le 32 
+ip prefix-list SSM seq 85 permit 239.57.20.19/32 le 32 
+ip prefix-list SSM seq 90 permit 239.57.20.20/30 le 32 
+ip prefix-list SSM seq 95 permit 239.57.20.24/29 le 32 
+ip prefix-list SSM seq 100 permit 239.57.20.32/31 le 32 
+ip prefix-list SSM seq 105 permit 239.57.20.34/32 le 32 
+ip prefix-list SSM seq 110 permit 239.57.20.37/32 le 32 
+ip prefix-list SSM seq 115 permit 239.57.20.38/31 le 32 
+ip prefix-list SSM seq 120 permit 239.57.41.0/24 le 32 
+ip prefix-list VGS seq 5 permit 192.168.69.0/24 le 32 
+ip prefix-list connected_DIGIHUB seq 5 permit 192.168.56.48/28 
+ip prefix-list connected_DIGIHUB seq 10 permit 10.0.61.176/28 
+ip prefix-list connected_DIGIHUB seq 15 permit 192.168.56.80/28 
+ip prefix-list connected_DIGIHUB seq 20 permit 10.0.61.80/28 
+ip prefix-list in_DIGIHUB seq 5 permit 10.5.60.0/24 ge 25 
+ip prefix-list in_DIGIHUB seq 10 permit 10.5.61.0/24 ge 25 
+ip prefix-list in_DIGIHUB seq 15 permit 10.5.62.128/25 ge 26 
+route-map IN_NEXUS permit 10
+route-map IN_VRF_CTRL-VIDEO permit 10
+  match ip address prefix-list IN_VRF_CTRL-VIDEO 
+route-map IN_VRF_VIDEO-1 permit 10
+  match ip address prefix-list IN_VRF_VIDEO-1 
+route-map IN_VRF_VIDEO-CISCO-CTRL permit 10
+  match ip address prefix-list IN_VRF_VIDEO-CISCO-CTRL 
+route-map IN_VRF_VIDEO-MHE permit 10
+  match ip address prefix-list IN_VRF_VIDEO-MHE 
+route-map IN_VRF_VIDEO-PK-UNICAST permit 10
+route-map IN_VRF_VIDEO-PK-UNICAST-2 permit 10
+route-map NETFLIX-PUBLIC permit 10
+  match ip address TO-LAN-MEGA 
+  set ip next-hop 10.9.12.8 
+route-map NETFLIX-PUBLIC permit 20
+  match ip address TO-INTERNET 
+  set ip next-hop 10.9.12.1 
+route-map OUT_NEXUS permit 10
+route-map OUT_VRF_CTRL-VIDEO permit 10
+  match ip address prefix-list OUT_VRF_CTRL-VIDEO 
+  set community 65056:120 
+route-map OUT_VRF_VIDEO-1 permit 10
+  match ip address prefix-list OUT_VRF_VIDEO-1 
+  set community 65056:120 
+route-map OUT_VRF_VIDEO-CISCO-CTRL permit 10
+  match ip address prefix-list OUT_VRF_VIDEO-CISCO-CTRL 
+  set community 65056:120 
+route-map OUT_VRF_VIDEO-MHE permit 10
+  match ip address prefix-list OUT_VRF_VIDEO-MHE 
+  set community 65056:120 
+route-map OUT_VRF_VIDEO-PK-UNICAST permit 10
+  match ip address prefix-list OUT_VRF_VIDEO-PK-UNICAST 
+  set community 65056:120 
+route-map OUT_VRF_VIDEO-PK-UNICAST-2 permit 10
+  match ip address prefix-list OUT_VRF_VIDEO-PK-UNICAST-2 
+  set community 65056:120 
+route-map SSH-PUBLIC pbr-statistics
+route-map SSH-PUBLIC permit 10
+  match ip address TO-VPN-LAN-DTEC 
+  set ip next-hop 10.0.57.254 
+route-map SSH-PUBLIC permit 20
+  match ip address TO-INTERNET 
+  set ip next-hop 10.9.12.1 
+route-map SSH-SERV permit 10
+  match ip address TO-LAN-MEGA 
+  set ip next-hop 10.9.12.8 
+route-map SSH-SERV permit 20
+  match ip address TO-INTERNET 
+  set ip next-hop 10.9.12.1 
+route-map VGS permit 10
+  match ip address prefix-list VGS 
+route-map VGS deny 20
+route-map conectadas permit 10
+  match ip address prefix-list CONECTADA 
+route-map connected_DIGIHUB permit 10
+  match ip address prefix-list connected_DIGIHUB 
+route-map in_DIGIHUB permit 10
+  match ip address prefix-list in_DIGIHUB 
+vlan configuration 1702
+service dhcp
+ip dhcp relay
+ip dhcp relay information option
+ipv6 dhcp relay
+vrf context management
+hardware access-list tcam region racl 512
+hardware access-list tcam region qos-lite 1024
+hardware rate-limiter access-list-log 2000 
+
+
+interface Vlan1
+
+interface Vlan14
+  description MEGARED-VLAN-HUBS
+  no shutdown
+  no ip redirects
+  ip address 10.0.57.251/26
+
+interface Vlan30
+  description Back2Back-OSPF
+  no shutdown
+  ip address 10.0.69.252/31
+  ip ospf message-digest-key 1 md5 7 0506250E0E5F5E0F
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 2 area 0.0.0.30
+  ip pim sparse-mode
+
+interface Vlan35
+  description Canales-HD-Adin
+  no shutdown
+  ip address 10.1.58.225/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan37
+  description SD-ADIN-LOCAL
+  no shutdown
+  ip address 192.168.57.142/26
+  ip pim sparse-mode
+  ip pim dr-priority 100
+
+interface Vlan53
+  no shutdown
+  no ip redirects
+  ip address 172.20.56.14/24
+  ip pim sparse-mode
+  ip pim dr-priority 100
+
+interface Vlan55
+  description REP-DB
+  no shutdown
+  ip address 192.168.56.150/27
+  hsrp bfd
+  hsrp version 2
+  hsrp 55 
+    authentication text hsrpmega
+    preempt 
+    priority 110
+    ip 192.168.56.129
+
+interface Vlan59
+  description MHE-PCG
+  no shutdown
+  no ip redirects
+  ip address 192.168.56.164/29
+  ip address 192.168.56.170/29 secondary
+  ip router ospf 2 area 0.0.0.30
+  hsrp version 2
+  hsrp 159 
+    authentication text hsrpmega
+    preempt 
+    priority 90
+    ip 192.168.56.169
+
+interface Vlan61
+  description DCM1-IN
+  no shutdown
+  ip address 192.168.56.1/27
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan62
+  description DCM1-OUT
+  no shutdown
+  ip address 192.168.56.49/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan63
+  description APEX3000-MAIN
+  no shutdown
+  ip address 192.168.56.34/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan65
+  description ROSA-SIM1-VLAN-PUBLIC
+  no shutdown
+  ip address 10.0.62.45/28
+  ip router ospf 3 area 0.0.0.0
+  hsrp bfd
+  hsrp version 2
+  hsrp 65 
+    authentication text hsrpmega
+    preempt delay minimum 20 reload 50 
+    priority 110
+    ip 10.0.62.33
+    track 1 decrement 30 
+
+interface Vlan66
+  description ROSA-SIM2-VLAN-PUBLIC
+  no shutdown
+  ip address 10.1.57.220/29
+  ip router ospf 3 area 0.0.0.0
+  hsrp bfd
+  hsrp version 2
+  hsrp 66 
+    authentication text hsrpmega
+    preempt delay minimum 20 reload 50 
+    priority 110
+    ip 10.1.57.217
+    track 1 decrement 30 
+
+interface Vlan68
+  description DCM3-IN
+  no shutdown
+  ip address 192.168.56.65/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan69
+  description DCM3-OUT
+  no shutdown
+  ip address 192.168.56.81/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan74
+  description ROSA-SIM-VLAN-MGT
+  no shutdown
+  ip address 10.1.57.18/28
+  ip router ospf 3 area 0.0.0.0
+  hsrp bfd
+  hsrp version 2
+  hsrp 74 
+    authentication text hsrpmega
+    preempt delay minimum 20 reload 50 
+    priority 110
+    ip 10.1.57.17
+    track 1 decrement 30 
+
+interface Vlan75
+  description REP-DB
+  no shutdown
+  ip address 192.168.10.2/24
+  hsrp bfd
+  hsrp version 2
+  hsrp 75 
+    authentication text hsrpmega
+    preempt 
+    priority 110
+    ip 192.168.10.1
+
+interface Vlan78
+  description ROSA-SIM-DECTEK
+  no shutdown
+  ip address 10.0.62.226/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+
+interface Vlan89
+  description APEX3000-STBY
+  no shutdown
+  ip address 10.0.61.161/28
+  ip pim sparse-mode
+  ip pim dr-priority 50
+  ip igmp version 3
+
+interface Vlan120
+  description TVD-P1-ATSC-LOCALES-SD-HD
+  no shutdown
+  ip address 192.168.120.1/28
+  ip pim sparse-mode
+  ip pim dr-priority 100
+  ip igmp version 3
+
+interface Vlan290
+  description VLAN-MHE-VIDEO-1
+  no shutdown
+  ip address 172.20.57.29/27
+  ip pim sparse-mode
+  ip pim dr-priority 100
+
+interface Vlan386
+  description TVD-CANALES-LOCALES-IPTV
+  no shutdown
+  ip address 10.2.56.190/28
+  ip pim bfd-instance
+  ip pim sparse-mode
+  ip pim dr-priority 100
+
+interface Vlan567
+  description Unicast-VGHE
+  no shutdown
+  ip address 10.0.69.250/31
+  ip ospf message-digest-key 1 md5 7 0506250E0E5F5E0F
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 2 area 0.0.0.30
+  ip pim sparse-mode
+
+interface Vlan570
+  description Back2Back-OSPF-4948-1
+  no shutdown
+  ip address 10.0.69.246/31
+  ip ospf message-digest-key 1 md5 7 0506250E0E5F5E0F
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 3 area 0.0.0.0
+  ip pim sparse-mode
+
+interface Vlan861
+  description TVD_P5-STB-NETFLIX-RTR
+  no shutdown
+  no ip redirects
+  ip address 10.9.13.1/27
+  ip policy route-map SSH-SERV
+  ip dhcp relay address 10.2.56.212 
+  ip dhcp relay address 10.2.56.213 
+
+interface Vlan1700
+  description TVP-P5-MGMT-SSH_SERVER-NGV+
+  no shutdown
+  no ip redirects
+  ip address 10.9.12.22/29
+
+interface Vlan1701
+  description TVP-P5-PUBLICA-SSH_SERVER-NGV+
+  no shutdown
+  no ip redirects
+  ip address 10.9.12.30/29
+  ip policy route-map SSH-PUBLIC
+
+interface Vlan1702
+  description TVP-P5-SERV-SSH_SERVER-NGV+
+  no shutdown
+  no ip redirects
+  ip address 10.9.13.254/25
+  ip pim sparse-mode
+  ip igmp version 3
+  ip policy route-map SSH-SERV
+  ip dhcp relay address 10.2.56.212 
+  ip dhcp relay address 10.2.56.213 
+
+interface Vlan1705
+  description TVP_P5-MGMT-RTR-NETFLIX
+  no shutdown
+  no ip redirects
+  ip address 10.9.12.33/31
+  ip policy route-map SSH-PUBLIC
+
+interface Vlan1706
+  description TVP_P5-PUBLIC_SERV-RTR-NETFLIX
+  no shutdown
+  no ip redirects
+  ip address 10.9.12.35/31
+  ip policy route-map NETFLIX-PUBLIC
+
+interface Vlan1710
+  description P2p NX-DATOS-1_SSH_SRVR_NGV+
+  no shutdown
+  no ip redirects
+  ip address 10.9.12.9/31
+
+interface Vlan1711
+  description TVD_P2P_N9K-VIDEO1-GDL<>FW_GDL
+  no shutdown
+  no ip redirects
+  ip address 10.9.12.3/29
+
+interface port-channel1
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Po1 <> TVD-SW-N9K-VIDEO2-GDL Po1
+  logging event port link-status
+  mtu 9216
+  ip address 10.5.58.2/31
+  ip pim sparse-mode
+
+interface port-channel2
+  description ACC-P1-TVD-SW-N9K-VIDEO2-TRUNK-20GB
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 14,18,30,32,35,37-38,53-57,59,61-69,74-75,78,87-90,112-113,120,290,292,386
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel30
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Po30 <> PE_VIDEO_ASR9K10_GDL_CTC Bu301
+  logging event port link-status
+  mtu 9216
+
+interface port-channel30.10
+  description vrf  video-pk-unicast
+  mtu 9216
+  encapsulation dot1q 10
+  ip address 10.5.58.5/31
+  no shutdown
+
+interface port-channel30.13
+  description vrf  video-cisco-ctrl
+  mtu 9216
+  encapsulation dot1q 13
+  ip address 10.5.58.11/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel30.30
+  description vrf  video-pk-unicast-2
+  mtu 9216
+  encapsulation dot1q 30
+  ip address 10.5.58.45/31
+  no shutdown
+
+interface port-channel30.40
+  description vrf  video-1
+  mtu 9216
+  encapsulation dot1q 40
+  ip address 10.5.58.13/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel30.50
+  description vrf  video-mhe
+  mtu 9216
+  encapsulation dot1q 50
+  ip address 10.5.58.15/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel30.60
+  description vrf  ctrl-video
+  mtu 9216
+  encapsulation dot1q 60
+  ip address 10.5.58.17/31
+  no shutdown
+
+interface port-channel30.80
+  description TVD-IXN-PE-VIDEO-iptv-lc-gdl
+  mtu 9216
+  encapsulation dot1q 80
+  ip address 10.2.58.33/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel30.1715
+  description vrf IPTV-MULTICAST
+  mtu 9216
+  encapsulation dot1q 1715
+  ip address 10.9.12.11/31
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel51
+  description ACC-P1-CAT6KGDL-10G_02-1-TRUNK-20GB
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 8,14,32,35,37-38,53,57,65,81,99,290,383,567,570,1710
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel104
+  description TVD-NX01CTC-HUB04
+  logging event port link-status
+  mtu 9216
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel104.150
+  description TVD-NX01-Digitalizacion-HUB04
+  mtu 9216
+  encapsulation dot1q 150
+  ip address 10.5.62.5/31
+  ip ospf message-digest-key 1 md5 7 060B2C20635D191F
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 56 area 0.0.0.4
+  ip pim bfd-instance disable
+  ip pim sparse-mode
+  no shutdown
+
+interface port-channel108
+  description TVD-NX01CTC-HUB08
+  logging event port link-status
+  mtu 9216
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel108.150
+  description TVD-NX01-Digitalizacion-HUB08
+  mtu 9216
+  encapsulation dot1q 150
+  ip address 10.5.62.1/31
+  ip ospf message-digest-key 1 md5 7 060B2C20635D191F
+  ip ospf network point-to-point
+  no ip ospf passive-interface
+  ip router ospf 56 area 0.0.0.8
+  ip pim bfd-instance disable
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/1
+  description -TVD_P1-DCM3-IN1/1
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/2
+  description -TVD_P1-DCM3-IN1/2
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/3
+  description TVD-P1-DCM3-IN1/3-V68
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/4
+  description -TVD_P1-DCM3-IN1/4
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/5
+  description -TVD_P1-DCM3-OUT2/1
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/6
+  description -TVD_P1-DCM3-OUT2/2
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/7
+  description -TVD_P1-DCM3-OUT2/3
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/8
+  description -TVD_P1-DCM3-OUT2/4
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/9
+  description -TVD_P3-DCM3-MGMT
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/10
+  description TVD-P3-DCM#1_HUB-MGM_Vlan_38
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/11
+  description PCG-HUB3 E1
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/12
+  description TVD-P3-DCM#1_GB1/1
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/13
+  description TVD-P3-DCM#1_GB1/2
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/14
+  description TVD-P3-DCM#1_GB1/3
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/15
+  description TVD-P3-DCM#1_GB1/4
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/16
+  description TVD-P3-DCM#1_GB2/1_OUT_Vlan_62
+  switchport
+  switchport access vlan 62
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/17
+  description TVD-P3-DCM#1_GB2/2_OUT_Vlan_62
+  switchport
+  switchport access vlan 62
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/18
+  description TVD-P3-DCM#1_GB2/3_OUT_Vlan_62
+  switchport
+  switchport access vlan 62
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/19
+  description TVD-P3-DCM#1_GB2/4_OUT_Vlan_62
+  switchport
+  switchport access vlan 62
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/20
+  description TVD-P3-RFGW1_Gig1_Vlan_63
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/21
+  description TVD-P3-RFGW1_Gig3_Vlan_63
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/22
+  description IMP_TEST-HUAWEI_V63_042018
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  logging event port link-status
+  no shutdown
+
+interface Ethernet1/23
+  description TVD-P1-ROSA_SIM_REG1-DekTec
+  switchport
+  switchport access vlan 78
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/24
+  description TVD_P3-APEX3000-MAIN-MGT
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/25
+  description TVD-TEST_AWS_HEUN-V8-032020
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/26
+  description TVD-P3-SUMA_2_ATSC_CTRL-V8-011520
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/27
+  description TVD-P5-MGMT-ADIN-NAC-MAIN2-V18-032919
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/28
+  description TVD-P3-RFGW1_Gig1_Vlan_64
+  switchport
+  switchport access vlan 64
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/29
+  description TVD-P3-RFGW1_Gig3_Vlan_64
+  switchport
+  switchport access vlan 64
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/30
+  description TVD-P3-RFGW1_CTRL_Vlan_38
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/31
+  description TVD-CONDUCTORMHE-GDL-Eth0
+  switchport
+  switchport access vlan 8
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/32
+  description TVD-ELMLIVEMHE-HD01-Eth0
+  switchport
+  switchport access vlan 8
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/33
+  description TVD-ELMLIVEMHE-HD02-Eth0
+  switchport
+  switchport access vlan 8
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/34
+  description TVD-ELMLIVEMHE-HD03-Eth0
+  switchport
+  switchport access vlan 8
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/35
+  description TVD-ELMLIVEIPTV-HD01-Eth0
+  switchport
+  switchport access vlan 8
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/36
+  description TVD-ELMLIVEMHEBU-HD01-Eth0
+  switchport
+  switchport access vlan 8
+  duplex full
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/37
+  description TVD-P3-ROSA-SIM-CEN1-MAIN_E0_Vlan_65
+  switchport
+  switchport access vlan 65
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/38
+  description TVD-P3-ROSA-SIM-CEN2-MAIN_E0_Vlan_66
+  switchport
+  switchport access vlan 66
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/39
+  description TVD-P3-ROSA-NMS-CEN1-MAIN_E0_Vlan_74
+  switchport
+  switchport access vlan 74
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/40
+  description TVD-P3-ABG1-TEMP-V8-042219
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/41
+  description TVD-P1-ABG1-TEMP-V120-042219
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/42
+  description TVD-P3-IPGUARD-Pruebas-V8-070219
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet1/43
+  description TVD-HCT2-CAPTURAS-V290
+  switchport
+  switchport access vlan 290
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/44
+  description TVD-P3-iDNCS_M300_#3 _E3-052714
+  switchport
+  switchport access vlan 473
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/45
+  description TVD-P3-iDNCS_M300_#3 _E1-052714
+  switchport
+  switchport access vlan 56
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/46
+  description TVD-P3-iDNCS_M300_#3 _E4-052714
+  switchport
+  switchport access vlan 75
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/47
+  description TVD-P2-BARKER-02-OUTPUT-V53-041520
+  switchport
+  switchport access vlan 53
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/48
+  description TVD_P1_Adin_CAP1000-v18-MGMT.26072018
+  switchport
+  switchport access vlan 18
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet2/1
+  description -TVD_P1-DCM3-IN3/1
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/2
+  description -TVD_P1-DCM3-IN3/2
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/3
+  description -TVD_P1-DCM3-IN3/3
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/4
+  description -TVD_P1-DCM3-IN3/4
+  switchport
+  switchport access vlan 68
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/5
+  description -TVD_P1-DCM3-OUT4/1
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet2/6
+  description -TVD_P1-DCM3-OUT4/2
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet2/7
+  description -TVD_P1-DCM3-OUT4/3
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet2/8
+  description -TVD_P1-DCM3-OUT4/4
+  switchport
+  switchport access vlan 69
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  no shutdown
+
+interface Ethernet2/9
+  description -TVD_P3-DCM3-MGMT
+  switchport
+  switchport access vlan 59
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/10
+  description TVD-P3-DCM#1_MHE-PCG_Vlan_59
+  switchport
+  switchport access vlan 59
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/11
+  description PCG-HUB3 E0
+  switchport
+  switchport access vlan 59
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/12
+  description TVD-P3-DCM#1_GB3/1
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/13
+  description TVD-P3-DCM#1_GB3/2
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/14
+  description TVD-P3-DCM#1_GB3/3
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/15
+  description TVD-P3-DCM#1_GB3/4
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/16
+  description TVD-P3-DCM#1_GB4/1
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/17
+  description TVD-P3-DCM#1_GB4/2
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/18
+  description TVD-P3-DCM#1_GB4/3
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/19
+  description TVD-P3-DCM#1_GB4/4
+  switchport
+  switchport access vlan 61
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/20
+  description TVD-P3-RFGW1_Gig2_Vlan_63
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/21
+  description TVD-P1-TV-CORTOS-GDL-V81-112919
+  switchport
+  switchport access vlan 81
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/22
+  description TVD-P1-ROSA_SIM_REG1_E1
+  switchport
+  switchport access vlan 65
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/23
+  description TVD-P1-ROSASIM-REG1-111313
+  switchport
+  switchport access vlan 32
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/24
+  description TVD-P3-RFGW1_CTRL_Vlan_38
+  switchport
+  switchport access vlan 38
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/25
+  description TVD-P2-CAP1-V53-072219
+  switchport
+  switchport access vlan 53
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/26
+  description TVD-P1-DVR_PUBLICIDAD_GOB-V18-021420
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/27
+  description TVD-P5-TEST_AWSHEUN_COND-V18-051420
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/28
+  description TVD-P3-RFGW1_Gig2_Vlan_64
+  switchport
+  switchport access vlan 64
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/29
+  switchport
+  switchport access vlan 64
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/30
+  description TVD-P5-Adin-SCDB1-V18_010319
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/31
+  description TVD-P5-Adin-SCMVL-V18_010319
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/32
+  description TVD-P5-Adin_SCFF-V18_010319
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/33
+
+interface Ethernet2/34
+  description TVD-MGM-SMV-IPTV-BKP-V8-110719
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/35
+  description TVD-P3-ASI-IP-V8-091719
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security maximum 5
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet2/36
+  description TVD-P2-SONDA-LOCALGDL-V8-102519
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/37
+
+interface Ethernet2/38
+
+interface Ethernet2/39
+
+interface Ethernet2/40
+  description TVD-P1-SENALES-LOCALES-V37-112219---Antes 3/10
+  switchport
+  switchport access vlan 37
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet2/41
+  description DCM-3-IN-1
+
+interface Ethernet2/42
+  description DCM-3-IN-2
+
+interface Ethernet2/43
+  description DCM-3-IN-3
+
+interface Ethernet2/44
+  description DCM-3-IN-4
+
+interface Ethernet2/45
+  description DCM-3-IN-5
+
+interface Ethernet2/46
+  description DCM-3-IN-6
+
+interface Ethernet2/47
+  description DCM-3-IN-7
+
+interface Ethernet2/48
+  description DCM-3-IN-8
+
+interface Ethernet2/49
+  description DCM-3-OUT-1
+
+interface Ethernet2/50
+  description DCM-3-OUT-2
+
+interface Ethernet2/51
+  description DCM-3-OUT-3
+
+interface Ethernet2/52
+  description DCM-3-OUT-4
+
+interface Ethernet3/1
+  description TVD-ANALISIS-DTEC61-050718
+  switchport
+  switchport access vlan 290
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+
+interface Ethernet3/2
+  description TVD-ANALISIS-DTEC63-050718
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+
+interface Ethernet3/3
+  description TVD_OTT_LOCAL_01_V386_PRI_051818
+  switchport
+  switchport access vlan 386
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/4
+  description TVD-ATSC_INPUT_V120_052318
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/5
+  description TVD_ATSC_MGMT_V8_052218
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/6
+  description TVD_CAP1K-LOCAL-IN_V120_052318
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  logging event port link-status
+  no shutdown
+
+interface Ethernet3/7
+  description TVD-ATSC_TEST-V120
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  logging event port link-status
+
+interface Ethernet3/8
+  description TVD_P5_IPTVLOCALES01-V120-PRI_060518
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/9
+  description TVD_P5_IPTVLOCALES02-V120-PRI_060518
+  switchport
+  switchport access vlan 120
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/10
+  description TVD-P1-SENALES-LOCALES-V37-112219
+  switchport
+  switchport access vlan 37
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet3/11
+
+interface Ethernet3/12
+  description TVD-P3-IPTV_LOCALES_LMP_MAIN-V35-100119
+  switchport
+  switchport access vlan 35
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security maximum 3
+  switchport port-security
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/13
+
+interface Ethernet3/14
+  description IMP-TVD_BNP2-VID_GigE7TEST
+  switchport
+  switchport access vlan 37
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet3/15
+  description TVD-P1-RTVD-TVCORTOS-V8-111319
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+
+interface Ethernet3/16
+
+interface Ethernet3/17
+
+interface Ethernet3/18
+  switchport
+  switchport monitor
+  no shutdown
+
+interface Ethernet3/19
+
+interface Ethernet3/20
+  description TVD-P3-AD_SERVER-V18-080118
+  switchport
+  switchport access vlan 18
+  spanning-tree port type edge
+  logging event port link-status
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet3/21
+
+interface Ethernet3/22
+
+interface Ethernet3/23
+
+interface Ethernet3/24
+
+interface Ethernet3/25
+  description TVP-P5-MGMT-SSH_SERVER-NGV+
+  switchport
+  switchport access vlan 1700
+  logging event port link-status
+  no shutdown
+
+interface Ethernet3/26
+  description TVP-P5-PUBLIC-SSH_SERVER-NGV+
+  switchport
+  switchport access vlan 1701
+  logging event port link-status
+  no shutdown
+
+interface Ethernet3/27
+  description TVP-P5-SERVICIO-SSH_SERVER-NGV+
+  switchport
+  switchport access vlan 1702
+  logging event port link-status
+  no shutdown
+
+interface Ethernet3/28
+
+interface Ethernet3/29
+  switchport
+  speed 1000
+  duplex full
+
+interface Ethernet3/30
+  description TVD-PS9K-ADIN-01-MGT-090618
+  switchport
+  switchport access vlan 18
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/31
+  description TVD-P3-MGMT-SMV-IPTV-HARMONIC-V8
+  switchport
+  switchport access vlan 8
+  spanning-tree port type edge
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/32
+  description P2P_TVD-SW-N9K-VIDEO1-GDL<>FW_GDL-Act
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1711
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet3/33
+  description P2P_TVD-SW-N9K-VIDEO1-GDL<>FW_GDL-Stby
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1711
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet3/34
+  description P2P_TVD-SW-N9K-VIDEO1-GDL<>NEXUS9K-GDL-DATOS-1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1710
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+
+interface Ethernet3/35
+  description TEST-VLAN68
+  switchport
+  switchport access vlan 37
+  no shutdown
+
+interface Ethernet3/36
+  description TEST-CAP-VLAN63
+  switchport
+  switchport access vlan 69
+  no shutdown
+
+interface Ethernet3/37
+  description TVD-P1-FTP_SPOOLER-V85-050720
+  switchport
+  switchport access vlan 85
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/38
+
+interface Ethernet3/39
+
+interface Ethernet3/40
+
+interface Ethernet3/41
+  description TVP_P5-MGMT-RTR-NETFLIX
+  switchport
+  switchport access vlan 1705
+  no shutdown
+
+interface Ethernet3/42
+  description TVD_P5-PUBLICA-RTR-NETFLIX
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 861,1706
+  no shutdown
+
+interface Ethernet3/43
+  description APARTADO-SSH-SERVER-TVD-NGV+
+
+interface Ethernet3/44
+  description OIT Interface
+  switchport
+  switchport access vlan 269
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/45
+  description ATN Interface
+  switchport
+  switchport access vlan 54
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/46
+  description MHE Interface
+  switchport
+  switchport access vlan 55
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet3/47
+
+interface Ethernet3/48
+
+interface Ethernet3/49
+
+interface Ethernet3/50
+
+interface Ethernet3/51
+
+interface Ethernet3/52
+
+interface Ethernet7/1
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth7/1 <> TVD-SW-N9K-VIDEO2-GDL Eth7/1
+  mtu 9216
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet7/2
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth7/2 <> TVD-SW-N9K-VIDEO2-GDL Eth7/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 14,18,30,32,35,37-38,53-57,59,61-69,74-75,78,87-90,112-113,120,290,292,386
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/3
+  description ACC-P1-TVD-SW-N9K-VIDEO1-GDL Eth7/3 <> CAT6KGDL-10G_02 Te7/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 8,14,32,35,37-38,53,57,65,81,99,290,383,567,570,1710
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 51 mode active
+  no shutdown
+
+interface Ethernet7/4
+  description TVD_P1-APEX3000-MAIN
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet7/5
+  description TVD_P1-APEX3000-MAIN
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet7/6
+
+interface Ethernet7/7
+
+interface Ethernet7/8
+
+interface Ethernet7/9
+
+interface Ethernet7/10
+
+interface Ethernet7/11
+
+interface Ethernet7/12
+
+interface Ethernet7/13
+
+interface Ethernet7/14
+
+interface Ethernet7/15
+
+interface Ethernet7/16
+
+interface Ethernet7/17
+  description LIBRE
+
+interface Ethernet7/18
+  description LIBRE
+
+interface Ethernet7/19
+  description APARTADO-SSH-TUNEL-NX-DATOS-1
+
+interface Ethernet7/20
+  description APARTADO-SSH-TUNEL-FW-GDL
+
+interface Ethernet7/21
+  description APARTADO-SSH-TUNEL-SERVER
+
+interface Ethernet7/22
+  description APARTADO-SSH-TUNEL-SERVER
+
+interface Ethernet7/23
+  description APARTADO-SSH-TUNEL-SERVER
+
+interface Ethernet7/24
+
+interface Ethernet7/25
+
+interface Ethernet7/26
+
+interface Ethernet7/27
+
+interface Ethernet7/28
+
+interface Ethernet7/29
+
+interface Ethernet7/30
+
+interface Ethernet7/31
+
+interface Ethernet7/32
+
+interface Ethernet7/33
+
+interface Ethernet7/34
+
+interface Ethernet7/35
+
+interface Ethernet7/36
+
+interface Ethernet7/37
+
+interface Ethernet7/38
+
+interface Ethernet7/39
+
+interface Ethernet7/40
+
+interface Ethernet7/41
+
+interface Ethernet7/42
+
+interface Ethernet7/43
+  description TEST Oper. Video
+  switchport
+  switchport access vlan 292
+
+interface Ethernet7/44
+
+interface Ethernet7/45
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth7/45 <> PE_VIDEO_ASR9K10_GDL_CTC Te1/3/0/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 269,473
+  mtu 9216
+  logging event port link-status
+  no shutdown
+
+interface Ethernet7/46
+  description TVD_P1_Adin_CAP1000-v290.26072018
+  switchport
+  switchport access vlan 290
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet7/47
+  description TVD-P1-Adin-CAP1000-v292-26072018
+  switchport
+  switchport access vlan 292
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet7/48
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth7/48 <> PE_VIDEO_ASR9K10_GDL_CTC Te1/2/1/7
+  mtu 9216
+  channel-group 30 mode active
+  no shutdown
+
+interface Ethernet7/49
+
+interface Ethernet7/50
+
+interface Ethernet7/51
+
+interface Ethernet7/52
+
+interface Ethernet8/1
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth8/1 <> TVD-SW-N9K-VIDEO2-GDL Eth8/1
+  mtu 9216
+  udld aggressive
+  channel-group 1 mode active
+  no shutdown
+
+interface Ethernet8/2
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth8/2 <> TVD-SW-N9K-VIDEO2-GDL Eth8/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 14,18,30,32,35,37-38,53-57,59,61-69,74-75,78,87-90,112-113,120,290,292,386
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/3
+  description ACC-P1-TVD-SW-N9K-VIDEO1-GDL Eth8/3 <> CAT6KGDL-10G_02 Te7/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 8,14,32,35,37-38,53,57,65,81,99,290,383,567,570,1710
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 51 mode active
+  no shutdown
+
+interface Ethernet8/4
+  description TVD-P1-APEX3000-MAIN
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet8/5
+  description TVD-P1-APEX3000-MAIN
+  switchport
+  switchport access vlan 63
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet8/6
+
+interface Ethernet8/7
+
+interface Ethernet8/8
+
+interface Ethernet8/9
+
+interface Ethernet8/10
+  description TVD-P1-N9K-GDL-MATAMOROS-HUB08-Eth8/13
+  mtu 9216
+  channel-group 108 mode active
+  no shutdown
+
+interface Ethernet8/11
+  description TVD-P1-N9K-GDL-HUB04NEW-Eth8/10
+  mtu 9216
+  channel-group 104 mode active
+  no shutdown
+
+interface Ethernet8/12
+
+interface Ethernet8/13
+
+interface Ethernet8/14
+
+interface Ethernet8/15
+
+interface Ethernet8/16
+
+interface Ethernet8/17
+
+interface Ethernet8/18
+
+interface Ethernet8/19
+
+interface Ethernet8/20
+
+interface Ethernet8/21
+
+interface Ethernet8/22
+
+interface Ethernet8/23
+
+interface Ethernet8/24
+
+interface Ethernet8/25
+
+interface Ethernet8/26
+
+interface Ethernet8/27
+
+interface Ethernet8/28
+
+interface Ethernet8/29
+
+interface Ethernet8/30
+
+interface Ethernet8/31
+
+interface Ethernet8/32
+
+interface Ethernet8/33
+
+interface Ethernet8/34
+
+interface Ethernet8/35
+
+interface Ethernet8/36
+
+interface Ethernet8/37
+
+interface Ethernet8/38
+
+interface Ethernet8/39
+
+interface Ethernet8/40
+
+interface Ethernet8/41
+
+interface Ethernet8/42
+
+interface Ethernet8/43
+
+interface Ethernet8/44
+
+interface Ethernet8/45
+
+interface Ethernet8/46
+  description TVD_P1_Adin_CAP1000-v35.26072018
+  switchport
+  switchport access vlan 35
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet8/47
+  description TVD_P1_Adin_CAP1000-v37.26072018
+  switchport
+  switchport access vlan 37
+  storm-control broadcast level 20.00
+  no shutdown
+
+interface Ethernet8/48
+  description ACC_P1-TVD-SW-N9K-VIDEO1-GDL Eth8/48 <> PE_VIDEO_ASR9K10_GDL_CTC Te0/2/1/7
+  mtu 9216
+  channel-group 30 mode active
+  no shutdown
+
+interface Ethernet8/49
+
+interface Ethernet8/50
+
+interface Ethernet8/51
+
+interface Ethernet8/52
+
+interface mgmt0
+  vrf member management
+
+interface loopback0
+  description Loopback for Router-ID
+  ip address 10.5.58.254/32
+cli alias name environment show environment | inc alarm
+cli alias name disponible1 show int status | inc not|dis | include "10g"
+cli alias name image show version | inc image
+cli alias name cpu show process cpu | inc "CPU util"
+cli alias name disponible2 show int status | exclude "Eth1/|Eth2/|connected"
+cli alias name uptime sh ver | inc uptime
+cli alias name disponible3 show int status | exc (connected|10/100|_Gi|_Po)
+cli alias name s show ip int brief
+cli alias name wr copy run start
+line console
+  exec-timeout 5
+  speed 38400
+line vty
+  session-limit 15
+  exec-timeout 5
+  access-class 105 in
+boot nxos bootflash:/nxos.7.0.3.I5.2.bin sup-1
+boot nxos bootflash:/nxos.7.0.3.I5.2.bin sup-2
+ip route 0.0.0.0/0 10.0.57.254
+ip route 10.0.56.142/32 10.0.57.250
+ip route 10.2.56.254/32 10.2.58.32 name RP-vrf-iptv-lc-gdl
+ip route 10.9.1.160/27 10.9.12.10 name SRC-MULTICAST-RTES-VMx
+ip route 10.9.5.176/28 10.9.12.10 name SRC-MULTICAST-ABR-NGV+
+ip route 10.9.127.116/32 10.9.12.10 name RP-MULTICAST-RTES-VMx
+router ospf 2
+  router-id 10.0.69.252
+  area 0.0.0.30 authentication message-digest
+  table-map VGS filter
+  passive-interface default
+router ospf 3
+  router-id 10.0.69.250
+  redistribute direct route-map conectadas
+  area 0.0.0.0 authentication message-digest
+  passive-interface default
+router ospf 56
+  router-id 10.5.58.254
+  redistribute direct route-map connected_DIGIHUB
+  log-adjacency-changes
+  area 0.0.0.4 authentication message-digest
+  area 0.0.0.8 authentication message-digest
+  table-map in_DIGIHUB filter
+  auto-cost reference-bandwidth 100000 Mbps
+  passive-interface default
+router bgp 65056
+  router-id 10.5.58.254
+  log-neighbor-changes
+  address-family ipv4 unicast
+    network 10.0.62.32/28
+    network 10.1.57.16/28
+    network 10.1.57.216/29
+    network 10.5.58.2/31
+    network 172.20.57.0/27
+    network 192.168.56.0/27
+    network 192.168.56.48/28
+    network 192.168.56.64/28
+    network 192.168.56.80/28
+    network 192.168.56.160/29
+    network 192.168.56.168/29
+  neighbor 10.5.58.3
+    remote-as 65056
+    description iBGP peer to TVD-SW-N9K-VIDEO2-GDL
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_NEXUS in
+      route-map OUT_NEXUS out
+      next-hop-self
+  neighbor 10.5.58.4
+    remote-as 13999
+    description eBGP peer to video-pk-unicast
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_VRF_VIDEO-PK-UNICAST in
+      route-map OUT_VRF_VIDEO-PK-UNICAST out
+  neighbor 10.5.58.10
+    remote-as 13999
+    description eBGP peer to video-cisco-ctrl
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_VRF_VIDEO-CISCO-CTRL in
+      route-map OUT_VRF_VIDEO-CISCO-CTRL out
+  neighbor 10.5.58.12
+    remote-as 13999
+    description eBGP peer to video-1
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_VRF_VIDEO-1 in
+      route-map OUT_VRF_VIDEO-1 out
+  neighbor 10.5.58.14
+    remote-as 13999
+    description eBGP peer to video-mhe
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_VRF_VIDEO-MHE in
+      route-map OUT_VRF_VIDEO-MHE out
+  neighbor 10.5.58.16
+    remote-as 13999
+    description eBGP peer to ctrl-video
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_VRF_CTRL-VIDEO in
+      route-map OUT_VRF_CTRL-VIDEO out
+  neighbor 10.5.58.44
+    remote-as 13999
+    description eBGP peer to video-pk-unicast-2
+    password 3 10e7c99140cf91732d03b2749f5219be
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-map IN_VRF_VIDEO-PK-UNICAST-2 in
+      route-map OUT_VRF_VIDEO-PK-UNICAST-2 out
+monitor session 1 
+  source interface Ethernet2/40 both
+  destination interface Ethernet3/18
+  no shut
+logging logfile messages 5 size 2000000
+logging server 10.0.60.224
+logging server 10.0.70.99
+logging source-interface Vlan14
+logging timestamp milliseconds
+logging level syslog 5
+
+
+TVD-SW-N9K-VIDEO1-GDL# show ip arp
+
+Flags: * - Adjacencies learnt on non-active FHRP router
+       + - Adjacencies synced via CFSoE
+       # - Adjacencies Throttled for Glean
+       CP - Added via L2RIB, Control plane Adjacencies
+       PS - Added via L2RIB, Peer Sync
+       RO - Dervied from L2RIB Peer Sync Entry
+       D - Static Adjacencies attached to down interface
+
+IP ARP Table for context default
+Total number of entries: 138
+Address         Age       MAC Address     Interface       Flags
+10.0.57.195     00:13:27  f44e.052d.d87f  Vlan14          
+10.0.57.196     00:03:57  dca5.f439.8943  Vlan14          
+10.0.57.197     00:04:11  5017.ff32.fd43  Vlan14          
+10.0.57.200     00:01:39  00d0.bbe2.a5ff  Vlan14          
+10.0.57.203     00:04:28  0021.a12d.51c2  Vlan14          
+10.0.57.214     00:13:17  0026.cb31.2200  Vlan14          
+10.0.57.228     00:09:14  f875.88e3.a51f  Vlan14          
+10.0.57.229     00:04:08  7c95.f3f2.c3c2  Vlan14          
+10.0.57.234     00:06:03  c08c.60d2.1c3f  Vlan14          
+10.0.57.235     00:15:47  c08c.60d2.107f  Vlan14          
+10.0.57.236     00:15:52  c08c.60d2.127f  Vlan14          
+10.0.57.237     00:01:30  c08c.60d2.11bf  Vlan14          
+10.0.57.238     00:05:16  e4c7.22b5.6641  Vlan14          
+10.0.57.239     00:04:02  c067.afe8.f9c1  Vlan14          
+10.0.57.240     00:04:25  0025.8397.2741  Vlan14          
+10.0.57.241     00:04:23  0025.b412.3c41  Vlan14          
+10.0.57.243     00:10:40  3c08.f68c.31bf  Vlan14          
+10.0.57.244     00:09:56  3c08.f68c.31ff  Vlan14          
+10.0.57.245     00:09:27  3c08.f68c.3abf  Vlan14          
+10.0.57.246     00:01:38  a89d.2198.5aff  Vlan14          
+10.0.57.247     00:15:48  5017.ff2a.f0c3  Vlan14          
+10.0.57.248     00:12:28  a03d.6f1b.013f  Vlan14          
+10.0.57.249     00:07:47  00d7.8f6a.027f  Vlan14          
+10.0.57.250     00:07:39  00a6.caf6.6c3f  Vlan14          
+10.0.57.252     00:12:33  8875.563d.b940  Vlan14          
+10.0.57.254     00:13:14  0026.cb31.2b80  Vlan14          
+10.5.58.3       00:07:44  00a6.caf6.6c3f  port-channel1   
+10.1.58.226     00:09:05  00a6.caf6.6c3f  Vlan35          
+10.1.58.229     00:09:05  00d0.8806.c804  Vlan35          
+10.1.58.230     00:16:11  00d0.8807.5343  Vlan35          
+192.168.57.130  00:09:05  0011.0702.a4b6  Vlan37          
+192.168.57.131  00:09:05  0011.0702.a4b6  Vlan37          
+192.168.57.135  00:01:30  3c75.4a72.8848  Vlan37          
+192.168.57.138  00:09:06  0023.be62.b90d  Vlan37          
+192.168.57.139  00:09:35  00a6.caf6.6c3f  Vlan37          
+192.168.57.143  00:09:05  0011.0703.1396  Vlan37          
+192.168.57.144  00:09:05  0011.0703.1396  Vlan37          
+192.168.57.158  00:09:06  00d0.8806.c803  Vlan37          
+192.168.57.159  00:09:36  00d0.8807.5342  Vlan37          
+192.168.57.160  00:09:38  0026.cb31.2b80  Vlan37          
+192.168.57.161  00:09:06  026d.502b.a122  Vlan37          
+192.168.57.165  00:09:38  0026.cb31.2200  Vlan37          
+192.168.57.167  00:09:06  d867.d972.2f58  Vlan37          
+192.168.57.168  00:09:06  d867.d973.3416  Vlan37          
+192.168.57.175  00:09:06  0cc4.7a84.be63  Vlan37          
+192.168.57.177  00:09:04  0011.0702.c6e3  Vlan37          
+192.168.57.178  00:09:04  0020.a323.c7d4  Vlan37          
+192.168.57.182  00:09:05  0020.a323.c7e6  Vlan37          
+192.168.57.183  00:09:05  0020.a323.c72c  Vlan37          
+192.168.57.184  00:09:04  0020.a324.f9af  Vlan37          
+172.20.56.22    00:06:39  0011.0703.1394  Vlan53          
+172.20.56.23    00:07:39  0011.0703.1394  Vlan53          
+172.20.56.33    00:05:29  0026.cb31.2200  Vlan53          
+172.20.56.120   00:07:35  00a6.caf6.6c3f  Vlan53          
+172.20.56.254   00:13:45  026d.502b.a123  Vlan53          
+192.168.56.26   00:00:38  0023.be60.7e55  Vlan61          
+192.168.56.62   00:08:17  0023.be60.19b2  Vlan62          
+192.168.56.33   00:01:55  00a6.caf6.6c3f  Vlan63          
+192.168.56.40   00:00:46  5ce3.0eb2.39f4  Vlan63          
+192.168.56.41   00:01:29  5ce3.0eb2.39f6  Vlan63          
+10.0.62.225     00:11:41  00a6.caf6.6c3f  Vlan78          
+10.0.62.228     00:13:29  0014.f404.04b1  Vlan78          
+10.0.62.229     00:05:32  0014.f404.0473  Vlan78          
+192.168.56.161  00:14:36  00a6.caf6.6c3f  Vlan59          
+192.168.56.163  00:04:57  0023.be60.1e13  Vlan59          
+192.168.56.166  00:04:57  38c8.5c29.8920  Vlan59          
+192.168.56.172  00:04:58  843d.c628.b75c  Vlan59          
+192.168.56.173  00:04:57  843d.c628.b88c  Vlan59          
+10.0.61.162     00:16:05  00a6.caf6.6c3f  Vlan89          
+172.20.57.6     00:01:06  cc7d.3781.c35f  Vlan290         
+172.20.57.16    00:09:07  00a6.caf6.6c3f  Vlan290         
+172.20.57.30    00:09:07  d46d.502e.dd85  Vlan290         
+10.0.69.251     00:11:54  0026.cb31.2200  Vlan567         
+10.0.69.253     00:07:53  00a6.caf6.6c3f  Vlan30          
+10.0.69.247     00:02:28  6412.25cd.b87f  Vlan570         
+192.168.120.2   00:15:01  00a6.caf6.6c3f  Vlan120         
+192.168.120.4   0.280311  0024.680a.7a08  Vlan120         
+10.2.56.177     00:07:46  0020.a323.c7e7  Vlan386         
+10.2.56.178     00:07:46  0020.a323.c72d  Vlan386         
+10.2.56.189     00:07:59  00a6.caf6.6c3f  Vlan386         
+10.2.58.32      00:08:32  d46d.502e.dd81  port-channel30.80
+10.5.58.4       00:02:23  d46d.502e.dd81  port-channel30.10
+10.5.58.44      00:02:11  d46d.502e.dd81  port-channel30.30
+10.0.62.34      00:12:02  000a.f771.f5b6  Vlan65          
+10.0.62.36      00:00:24  0010.18cf.77ae  Vlan65          
+10.0.62.37      00:00:35  0010.18c0.f20e  Vlan65          
+10.0.62.38      00:00:13  0010.18e1.ed7e  Vlan65          
+10.0.62.46      00:11:52  00a6.caf6.6c3f  Vlan65          
+10.1.57.221     00:08:14  00a6.caf6.6c3f  Vlan66          
+10.1.57.222     00:00:14  0010.18cf.5fee  Vlan66          
+10.1.57.19      00:04:16  00a6.caf6.6c3f  Vlan74          
+10.1.57.29      00:07:35  000a.f74a.561c  Vlan74          
+10.5.58.10      00:08:47  d46d.502e.dd81  port-channel30.13
+10.5.62.0       00:05:20  a03d.6f1a.f6bf  port-channel108.150
+192.168.10.3    00:00:14  00a6.caf6.6c3f  Vlan75          
+192.168.10.101  00:01:58  0010.e070.bf6f  Vlan75          
+192.168.10.102  00:12:33  0010.e070.ea8f  Vlan75          
+192.168.10.113  00:09:06  0010.e070.ea8f  Vlan75          
+192.168.10.116  00:13:24  0010.e070.ea8f  Vlan75          
+192.168.10.118  00:12:17  0010.e070.ea8f  Vlan75          
+192.168.10.119  00:10:36  0010.e070.ea8f  Vlan75          
+192.168.10.122  00:08:21  0010.e070.ea8f  Vlan75          
+192.168.10.124  00:13:03  0010.e070.ea8f  Vlan75          
+192.168.56.130  00:01:08  0010.e057.1519  Vlan55          
+192.168.56.133  00:03:43  0010.e05d.7ea5  Vlan55          
+192.168.56.142  00:03:46  0010.e057.1519  Vlan55          
+192.168.56.143  00:05:19  0010.e057.1519  Vlan55          
+192.168.56.145  00:02:54  0010.e057.1519  Vlan55          
+192.168.56.151  00:04:21  00a6.caf6.6c3f  Vlan55          
+10.9.12.17      00:00:40  b083.fee0.23f6  Vlan1700        
+10.9.12.8       00:15:22  7070.8b5c.087f  Vlan1710        
+10.9.12.1       00:07:44  0015.17dd.bacf  Vlan1711        
+10.9.12.25      00:05:04  b083.fee0.23f4  Vlan1701        
+10.9.13.132     00:14:54  7c2e.bd27.7e23  Vlan1702        
+10.9.13.134     00:00:01  dcdf.d661.a786  Vlan1702        
+10.9.13.135     00:00:50  b667.cc50.1ac3  Vlan1702        
+10.9.13.139     00:01:21  dcdf.d621.10e1  Vlan1702        
+10.9.13.143     00:10:48  f018.9878.2ee8  Vlan1702        
+10.9.13.144     00:10:49  dcdf.d621.1153  Vlan1702        
+10.9.13.152     00:14:41  4c32.75c2.b311  Vlan1702        
+10.9.13.154     00:00:38  0024.0117.8c52  Vlan1702        
+10.9.13.165     00:00:17  908c.4395.b568  Vlan1702        
+10.9.13.169     00:14:49  e037.17f0.9202  Vlan1702        
+10.9.13.180     00:00:42  a85e.450d.c1a8  Vlan1702        
+10.9.12.10      00:12:06  d46d.502e.dd81  port-channel30.1715
+10.5.62.4       00:07:58  a03d.6f1a.f67f  port-channel104.150
+192.168.56.92   00:08:16  38c8.5c30.57cb  Vlan69          
+192.168.56.94   00:08:15  38c8.5c30.57c9  Vlan69          
+10.5.58.12      00:02:22  d46d.502e.dd81  port-channel30.40
+10.5.58.14      00:02:18  d46d.502e.dd81  port-channel30.50
+10.5.58.16      00:00:41  d46d.502e.dd81  port-channel30.60
+10.9.12.32      00:06:51  308b.b2d7.4e20  Vlan1705        
+10.9.12.34      00:01:49  308b.b2d7.4e21  Vlan1706        
+10.0.62.33         -      0000.0c9f.f041  Vlan65          
+10.1.57.217        -      0000.0c9f.f042  Vlan66          
+10.1.57.17         -      0000.0c9f.f04a  Vlan74          
+192.168.10.1       -      0000.0c9f.f04b  Vlan75          
+192.168.56.129     -      0000.0c9f.f037  Vlan55          
+TVD-SW-N9K-VIDEO1-GDL# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD
+                                                         Priority Capable State
+10.5.58.3       port-channel1        1y13w     00:01:33  1        yes     n/a
+10.1.58.226     Vlan35               44w4d     00:01:31  50       yes     n/a
+192.168.57.139  Vlan37               2y6w      00:01:20  50       yes     n/a
+192.168.57.160  Vlan37               44w6d     00:01:24  1        no     n/a
+192.168.57.161  Vlan37               44w4d     00:01:29  1        yes     n/a
+192.168.57.165  Vlan37               1y45w     00:01:24  1        no     n/a
+172.20.56.32    Vlan53               44w6d     00:01:19  1        no     n/a
+172.20.56.33    Vlan53               1y45w     00:01:34  1        no     n/a
+172.20.56.120   Vlan53               1y46w     00:01:26  50       yes     n/a
+192.168.56.33   Vlan63               44w4d     00:01:31  50       yes     n/a
+10.0.62.225     Vlan78               44w4d     00:01:27  50       yes     n/a
+10.0.61.162     Vlan89               44w4d     00:01:35  100      yes     n/a
+172.20.57.16    Vlan290              2w0d      00:01:32  50       yes     n/a
+172.20.57.30    Vlan290              2w0d      00:01:28  1        yes     n/a
+10.0.69.251     Vlan567              1y45w     00:01:38  1        no     n/a
+10.0.69.253     Vlan30               44w4d     00:01:43  1        yes     n/a
+10.0.69.247     Vlan570              1y37w     00:01:20  1        no     n/a
+192.168.120.2   Vlan120              2w0d      00:01:31  50       yes     n/a
+10.2.56.189     Vlan386              44w4d     00:01:24  50       yes     Up
+10.2.58.32      port-channel30.80    1w0d      00:01:43  1        yes     n/a
+10.5.58.10      port-channel30.13    1y13w     00:01:25  1        yes     n/a
+10.5.62.0       port-channel108.150  22w6d     00:01:33  1        yes     n/a
+10.9.12.10      port-channel30.1715  9w3d      00:01:21  1        yes     n/a
+10.5.62.4       port-channel104.150  5w0d      00:01:44  1        yes     n/a
+10.5.58.12      port-channel30.40    1w0d      00:01:39  1        yes     n/a
+10.5.58.14      port-channel30.50    1w0d      00:01:18  1        yes     n/a
+TVD-SW-N9K-VIDEO1-GDL# show ip igmp groups
+IGMP Connected Group Membership for VRF "default" - 238 total entries
+Type: S - Static, D - Dynamic, L - Local, T - SSM Translated
+Group Address      Type Interface           Uptime    Expires   Last Reporter
+225.0.0.1          D    Vlan120             33w6d     00:03:09  192.168.67.241
+225.0.0.1          D    Vlan37              33w6d     00:02:29  192.168.57.184
+225.0.0.2          D    Vlan120             1y47w     00:03:08  192.168.67.242
+225.0.0.2          D    Vlan386             1y36w     00:03:13  10.2.56.177
+225.0.0.2          D    Vlan37              23w2d     00:02:35  192.168.57.182
+237.57.70.1        D    Vlan120             4d19h     00:03:10  192.168.120.7
+  192.168.120.4    D    Vlan120             35w6d     00:03:09  192.168.67.241
+237.57.70.2        D    Vlan120             4d19h     00:03:10  192.168.120.7
+  192.168.120.4    D    Vlan120             35w6d     00:03:09  192.168.67.241
+238.57.101.1
+  192.168.69.113   D    Vlan61              2w0d      00:04:03  192.168.56.27
+  192.168.69.114   D    Vlan61              2w0d      00:04:03  192.168.56.27
+239.0.0.1
+  10.0.62.228      D    Vlan68              2w0d      00:04:17  192.168.56.77
+  10.0.62.228      D    Vlan61              2w0d      00:04:03  192.168.56.27
+239.1.50.2         D    Vlan37              50w0d     00:02:30  192.168.57.142
+239.1.50.3         D    Vlan37              50w0d     00:02:28  192.168.57.142
+239.1.50.4         D    Vlan37              1y46w     00:02:27  192.168.57.130
+239.1.50.5         D    Vlan37              1y46w     00:02:28  192.168.57.142
+239.2.1.1
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.2
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.3
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.4
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.5
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.6
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.7
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.8
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.9
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.10
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.11
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.12
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.13
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.14
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.15
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.16
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.17
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.18
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.19
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.20
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.21
+  192.168.56.62    D    Vlan63              2w0d      00:03:39  192.168.56.40
+239.2.1.41
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.42
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.43
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.44
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.45
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.46
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.47
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.48
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.49
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.50
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.51
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.52
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.53
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.54
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.55
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.56
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.57
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.58
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.59
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.60
+  192.168.56.94    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.61
+  192.168.56.92    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.2.1.62
+  192.168.56.92    D    Vlan63              2w0d      00:03:41  192.168.56.41
+239.5.5.5          D    Vlan37              1y45w     00:02:31  192.168.57.177
+239.56.1.1
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.2
+  192.168.65.2     D    Vlan68              2w0d      00:04:19  192.168.56.75
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.14
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.50
+  192.168.65.2     D    Vlan68              2w0d      00:04:19  192.168.56.75
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.99
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.201
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.202
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.211
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.56.1.240
+  192.168.65.2     D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.57.3.3         D    Vlan37              1y45w     00:02:28  192.168.57.147
+239.57.3.10        D    Vlan37              2y6w      00:02:34  192.168.57.67
+239.57.3.15        D    Vlan37              2y6w      00:02:30  192.168.57.67
+239.57.3.24        D    Vlan53              1y45w     00:03:14  192.168.57.49
+239.57.3.25        D    Vlan53              1y45w     00:03:13  192.168.57.49
+239.57.3.29        D    Vlan53              1y45w     00:03:21  192.168.57.51
+239.57.3.30        D    Vlan53              1y40w     00:03:14  192.168.1.35
+239.57.3.36        D    Vlan53              1y9w      00:03:13  200.52.57.42
+239.57.3.41        D    Vlan53              1y45w     00:03:13  192.168.57.51
+239.57.3.42        D    Vlan53              1y45w     00:03:19  192.168.57.51
+239.57.3.45        D    Vlan53              1y45w     00:03:13  192.168.57.51
+239.57.3.47        D    Vlan53              1y45w     00:03:22  192.168.57.51
+239.57.3.50        D    Vlan37              23w2d     00:02:35  192.168.57.130
+239.57.3.51        D    Vlan53              1y46w     00:03:19  172.20.56.55
+239.57.3.53        D    Vlan37              1y43w     00:02:32  192.168.57.177
+239.57.3.111       D    Vlan37              23w2d     00:02:35  192.168.57.130
+239.57.3.117       D    Vlan37              2y6w      00:02:35  192.168.57.67
+239.57.3.118       D    Vlan37              2y6w      00:02:36  192.168.57.67
+239.57.3.119       D    Vlan37              2y6w      00:02:32  192.168.57.67
+239.57.3.120       D    Vlan37              2y6w      00:02:28  192.168.57.67
+239.57.3.121       D    Vlan37              2y6w      00:02:32  192.168.57.67
+239.57.3.122       D    Vlan37              23w2d     00:02:33  192.168.57.67
+239.57.3.135       D    Vlan37              2y6w      00:02:29  192.168.57.67
+239.57.3.136       D    Vlan37              2y6w      00:02:28  192.168.57.67
+239.57.3.137       D    Vlan37              2y6w      00:02:32  192.168.57.67
+239.57.5.1         D    Vlan37              44w3d     00:02:34  192.168.57.157
+239.57.5.2         D    Vlan37              44w3d     00:02:28  192.168.57.157
+239.57.7.1
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.228      D    Vlan61              2w0d      00:03:55  192.168.56.30
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan61              2w0d      00:03:55  192.168.56.30
+239.57.7.2
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.3
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.4
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.5
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.6
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.228      D    Vlan35              4d10h     00:02:18  10.1.58.231
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.7
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.9
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.228      D    Vlan35              4d10h     00:02:18  10.1.58.231
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.10
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.11
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.12
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.14
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.15
+  10.1.58.228      D    Vlan68              2w0d      00:04:12  192.168.56.72
+  10.1.58.229      D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.17        D    Vlan37              1y46w     00:02:33  192.168.57.134
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.20
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.18        D    Vlan37              1y34w     00:02:28  192.168.57.170
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.19        D    Vlan37              1y34w     00:02:28  192.168.57.135
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.20        D    Vlan37              1y34w     00:02:27  192.168.57.169
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.21        D    Vlan37              1y34w     00:02:33  192.168.57.135
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.22        D    Vlan37              1y34w     00:02:27  192.168.57.170
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.23        D    Vlan37              33w4d     00:02:31  192.168.57.178
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.24        D    Vlan37              23w2d     00:02:32  192.168.57.178
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.35        D    Vlan37              2y6w      00:02:32  192.168.57.131
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.36        D    Vlan37              1y44w     00:02:29  192.168.57.131
+  192.168.57.157   D    Vlan61              2w0d      00:04:02  192.168.56.21
+  192.168.57.159   D    Vlan61              2w0d      00:04:02  192.168.56.21
+239.57.7.49        D    Vlan37              1y6w      00:02:30  192.168.57.170
+239.57.7.51        D    Vlan37              23w4d     00:02:32  192.168.57.131
+  192.168.57.157   D    Vlan68              2w0d      00:04:12  192.168.56.72
+  192.168.57.159   D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.52        D    Vlan37              1w3d      00:02:28  192.168.57.131
+  192.168.57.157   D    Vlan68              2w0d      00:04:12  192.168.56.72
+  192.168.57.159   D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.53        D    Vlan37              1y16w     00:02:29  192.168.57.131
+  192.168.57.157   D    Vlan68              2w0d      00:04:12  192.168.56.72
+  192.168.57.159   D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.54        D    Vlan37              1w3d      00:02:31  192.168.57.131
+  192.168.57.157   D    Vlan68              2w0d      00:04:12  192.168.56.72
+  192.168.57.159   D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.7.55        D    Vlan37              1y35w     00:02:30  192.168.57.131
+  192.168.57.157   D    Vlan68              2w0d      00:04:12  192.168.56.72
+  192.168.57.159   D    Vlan68              2w0d      00:04:12  192.168.56.72
+239.57.20.9        D    Vlan290             2w0d      00:02:37  172.20.57.2
+239.57.20.11       D    Vlan290             2w0d      00:02:40  172.20.57.1
+239.57.20.17       D    Vlan290             2w0d      00:02:42  172.20.57.24
+239.57.20.18       D    Vlan290             2w0d      00:02:40  172.20.57.24
+239.57.20.19       D    Vlan290             2w0d      00:02:42  172.20.57.24
+239.57.20.20       D    Vlan290             2w0d      00:02:39  172.20.57.24
+239.57.20.21       D    Vlan290             2w0d      00:02:43  172.20.57.24
+239.57.20.22       D    Vlan290             2w0d      00:02:40  172.20.57.24
+239.57.20.23       D    Vlan290             2w0d      00:02:41  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.24       D    Vlan290             2w0d      00:02:44  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.25       D    Vlan290             2w0d      00:02:46  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.26       D    Vlan290             2w0d      00:02:45  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.27       D    Vlan290             2w0d      00:02:37  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.28       D    Vlan290             2w0d      00:02:37  172.20.57.3
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.29       D    Vlan290             2w0d      00:02:37  172.20.57.6
+  192.168.58.243   D    Vlan61              2w0d      00:04:02  192.168.56.26
+  192.168.106.162  D    Vlan61              2w0d      00:04:02  192.168.56.26
+239.57.20.30       D    Vlan290             2w0d      00:02:37  172.20.57.4
+  192.168.58.243   D    Vlan61              2w0d      00:03:58  192.168.56.24
+  192.168.106.162  D    Vlan61              2w0d      00:03:58  192.168.56.24
+239.57.20.32       D    Vlan290             2w0d      00:02:43  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:03:58  192.168.56.24
+  192.168.106.162  D    Vlan61              2w0d      00:03:58  192.168.56.24
+239.57.20.33       D    Vlan290             2w0d      00:02:38  172.20.57.24
+  192.168.58.243   D    Vlan61              2w0d      00:03:58  192.168.56.24
+  192.168.106.162  D    Vlan61              2w0d      00:03:58  192.168.56.24
+239.57.20.35       D    Vlan290             2w0d      00:02:46  172.20.57.24
+239.57.20.36       D    Vlan290             2w0d      00:02:46  172.20.57.24
+239.57.20.37       D    Vlan290             2w0d      00:02:40  172.20.57.2
+  192.168.58.243   D    Vlan61              2w0d      00:03:58  192.168.56.24
+  192.168.106.162  D    Vlan61              2w0d      00:03:58  192.168.56.24
+239.57.20.42
+  192.168.58.241   D    Vlan68              2w0d      00:04:15  192.168.56.74
+  192.168.106.161  D    Vlan68              2w0d      00:04:15  192.168.56.74
+239.57.20.43
+  192.168.58.243   D    Vlan68              2w0d      00:04:15  192.168.56.74
+  192.168.106.162  D    Vlan68              2w0d      00:04:15  192.168.56.74
+239.57.20.44
+  192.168.58.243   D    Vlan68              2w0d      00:04:15  192.168.56.74
+  192.168.106.162  D    Vlan68              2w0d      00:04:15  192.168.56.74
+239.57.20.45
+  192.168.58.241   D    Vlan68              2w0d      00:04:15  192.168.56.74
+  192.168.106.161  D    Vlan68              2w0d      00:04:15  192.168.56.74
+239.57.30.1
+  192.168.80.34    D    Vlan61              2w0d      00:04:03  192.168.56.27
+  192.168.80.35    D    Vlan61              2w0d      00:04:03  192.168.56.27
+239.57.41.1        D    Vlan1702            07:51:16  00:03:25  10.9.13.139
+239.57.50.13       D    Vlan1702            07:52:55  00:02:41  121.240.146.129
+239.57.50.27       D    Vlan1702            07:52:47  00:02:41  121.240.146.129
+239.57.60.13       D    Vlan1702            07:52:53  00:02:40  121.240.146.129
+239.57.61.28       D    Vlan1702            07:52:48  00:02:45  121.240.146.129
+239.57.61.38       D    Vlan1702            07:52:51  00:02:43  121.240.146.129
+239.57.80.80       D    Vlan53              1y46w     00:03:19  172.20.56.40
+239.255.3.22       D    Vlan1702            06:39:44  00:02:45  121.240.146.131
+239.255.255.250    D    Vlan1702            06:39:37  00:03:09  10.9.13.132
+239.255.255.250    D    Vlan53              00:25:14  00:03:11  172.20.56.55
+
+TVD-SW-N9K-VIDEO1-GDL# 
+TVD-SW-N9K-VIDEO1-GDL# exit

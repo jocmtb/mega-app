@@ -1,0 +1,34 @@
+{% extends "polls/index.html" %}
+
+{% block content %}
+
+<h1>Pagina para submitir valor:</h1>
+
+{% if type_var == "addon" %}
+<h3>Page to add/update host:</h3>
+<form action="/polls/get_name/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
+{% endif %}
+
+{% if type_var == "delete" %}
+<h3>Page to delete host:</h3>
+<form action="/polls/delete_device/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
+{% endif %}
+
+{% if type_var == "traffic" %}
+<h3>Get Traffic from host:</h3>
+<form action="/polls/traffic_interface/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "nxos/index.html" %}
+
+{% block content %}
+
+<style>
+  #login2{
+        max-width: 400px;
+        margin: auto;
+        width: 50%;
+        /*border: 2px solid #2E86C1;*/
+        border: 2px solid #17202A;
+        padding: 20px;
+        border-radius: 25px;
+        background-color: #D0D3D4;
+    }
+      #login1{
+            max-width: 250px;
+        }
+        #login2 .form-group a{
+          text-align: center;
+          font-weight: bold;
+          font-size: 32px;
+        }
+</style>
+  <div id=login2 >
+
+        <form action="/nxos/login/" method="post">
+          <fieldset class="form-group">
+              <a><legend class="border-bottom mb-4">User Authentication
+              </legend></a>
+          </fieldset>
+          <!--<hr class="separator"> -->
+          <div id=login1 class="content-section">
+            <div class="form-group">
+              {% csrf_token %}
+              {{ form }}
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary" value="Log In">
+            </div>
+            <div class="border-top pt-3">
+
+                <small class="text-muted">
+                    Need An Account? <a class="ml-2" href="">Sign Up Now
+                    </a>
+                </small>
+
+            </div>
+          </div>
+          </form>
+    </div>
+
+
+
+{% endblock %}

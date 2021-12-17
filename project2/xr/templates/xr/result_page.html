@@ -1,0 +1,17 @@
+{% extends "xr/index2.html" %}
+
+{% block content %}
+<h1>Page Response</h1>
+<p>Thanks for adding a new device your request {{ user_id }}</p>
+
+{% if file_name %}
+    <p>Hacer click en el siguiente enlace para descargar:</p>
+    <li><a href="/xr/download/{{ file_name }}">Link to Download</a></li>
+{% endif  %}
+
+{% if join_igmp %}
+    <p>Acceso a base de datos de manera correcta:</p>
+    <p>Thanks for requesting JOIN IGMP on device: {{ user_id }}</p>
+{% endif  %}
+
+{% endblock %}

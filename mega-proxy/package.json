@@ -1,0 +1,33 @@
+{
+	"name": "noa3",
+	"version": "1.0.0",
+	"description": "Network Operations Automations",
+	"main": "index.js",
+	"scripts": {
+		"dev": "mix",
+		"watch": "mix watch",
+		"watch-poll": "mix watch -- --watch-options-poll=1000",
+		"hot": "mix watch --hot",
+		"prod": "mix --production"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"axios": "^0.21.4",
+		"cross-env": "^5.2.1",
+		"laravel-mix": "^6.0.39",
+		"mix": "^0.0.1",
+		"moment": "^2.29.1",
+		"vue": "^2.6.14",
+		"vue-loader": "^15.9.8",
+		"vue-template-compiler": "^2.6.14",
+		"vuex": "^3.6.2",
+		"vuex-persistedstate": "^4.1.0",
+		"webpack": "^5.53.0",
+		"webpack-bundle-analyzer": "^4.4.2",
+		"webpack-cli": "^4.8.0"
+	},
+	"dependencies": {
+		"vue-select": "^3.16.0"
+	}
+}

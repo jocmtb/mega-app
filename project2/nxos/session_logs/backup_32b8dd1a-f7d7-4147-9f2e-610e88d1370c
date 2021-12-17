@@ -1,0 +1,2200 @@
+
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Copyright (C) 2002-2018, Cisco and/or its affiliates.
+All rights reserved.
+The copyrights to certain works contained in this software are
+owned by other third parties and used and distributed under their own
+licenses, such as open source.  This software is provided "as is," and unless
+otherwise stated, there is no warranty, express or implied, including but not
+limited to warranties of merchantability and fitness for a particular purpose.
+Certain components of this software are licensed under
+the GNU General Public License (GPL) version 2.0 or 
+GNU General Public License (GPL) version 3.0  or the GNU
+Lesser General Public License (LGPL) Version 2.1 or 
+Lesser General Public License (LGPL) Version 2.0. 
+A copy of each such license is available at
+http://www.opensource.org/licenses/gpl-2.0.php and
+http://opensource.org/licenses/gpl-3.0.html and
+http://www.opensource.org/licenses/lgpl-2.1.php and
+http://www.gnu.org/licenses/old-licenses/library.txt.
+NEXUS9K-CLN-DATOS-2# terminal length 0
+NEXUS9K-CLN-DATOS-2# terminal width 510
+NEXUS9K-CLN-DATOS-2# show clock
+14:40:55.031 Mexico Thu Jun 04 2020
+Time source is NTP
+NEXUS9K-CLN-DATOS-2# show running-config
+
+!Command: show running-config
+!Time: Thu Jun  4 14:40:55 2020
+
+version 7.0(3)I7(5a) Bios:version 08.34 
+hostname NEXUS9K-CLN-DATOS-2
+policy-map type network-qos Jumbo-nq-policy
+  class type network-qos c-nq3
+    mtu 9216
+  class type network-qos c-nq2
+    mtu 9216
+  class type network-qos c-nq1
+    mtu 9216
+  class type network-qos c-nq-default
+    mtu 9216
+vdc NEXUS9K-CLN-DATOS-2 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature tacacs+
+cfs eth distribute
+feature ospf
+feature bgp
+feature pim
+feature pbr
+feature port-security
+feature udld
+feature interface-vlan
+feature hsrp
+feature lacp
+feature tunnel
+feature vpc
+feature lldp
+feature vtp
+clock timezone Mexico -7 0
+clock summer-time Mexico 1 Sun Apr 2:00 4 Sun Oct 2:00 60
+
+username admin password 5 $5$LWOeL7dP$0nxeXF8LwTbAIUSOxujmMjR5Gum4iNtypJ1VxrqUxd0  role network-admin
+username recovery password 5 $5$jsZ5x3ku$d0pU7bAEYWEBVOhZGiuS6JpKbbBucWmVey6uKc0wBk6  role network-admin
+username recovery2 password 5 $5$KNzRX8yA$pwCueN1ILZSKeNhY9suvn1cd3tPJ9J7JYH.U/bojArA  role network-admin
+
+banner motd ^
+                                   
+                                ###########            
+                             ################            
+                           ############  ######          
+                          ###  #####       ######       
+                         ###  ###        #########     
+                        ###  ###     ##############   
+                        ##  ##    ####### #########               
+                        ## ##   #####       #######                                
+                        # ##   ###      ###########  
+                          ##  ###   ##############     
+                          #  ##   ##############               
+                            ##  ###############          
+                               #############               
+                                 ########                        
+                __  ___                            __    __
+               /  |/  /__  ____ _____ __________ _/ /_  / /__
+              / /|_/ / _ |/ __ `/ __ `/ ___/ __ `/ __ |/ / _ |
+             / /  / /  __/ /_/ / /_/ / /__/ /_/ / /_/ / /  __/
+            /_/  /_/|___/|__, /|__,_/|___/|__,_/_.___/_/|___/
+                        |____/                     EVOLUTION
+
+          Advertencia: Este es un equipo de acceso restringido.
+            Acceso no autorizado sera severamente penalizado.
+             La sesion esta siendo registrada y monitoreada
+              Warning: This is a restricted access device.
+            Unauthorized access will be vigorously prosecuted.
+                The session is being logged & monitored.                     
+                     ==============================
+                            NEXUS9K-CLN-DATOS-2
+                     ==============================
+
+^
+
+ip domain-lookup
+ip domain-name megacable.com.mx
+ip tacacs source-interface Vlan14
+tacacs-server host 10.1.63.12 key 7 "pakfuli" 
+tacacs-server host 10.1.63.11 key 7 "pakfuli" 
+aaa group server tacacs+ ISE-MEGACABLE 
+    server 10.1.63.11 
+    server 10.1.63.12 
+errdisable recovery interval 180
+errdisable recovery cause udld
+errdisable recovery cause bpduguard
+errdisable recovery cause storm-control
+ip access-list 105
+  10 permit tcp 10.0.124.128 0.0.0.63 any eq 22 
+  20 permit tcp 200.52.192.211/32 any eq 22 
+  30 permit tcp 10.0.126.192 0.0.0.63 any eq 22 
+  40 permit tcp 10.0.56.128 0.0.0.63 any eq 22 
+  50 permit tcp 10.0.60.128 0.0.0.127 any eq 22 
+  60 permit tcp 23.92.124.1/32 any eq 22 
+  70 permit tcp 10.0.70.0 0.0.0.255 any eq 22 
+  80 permit tcp 23.92.124.1/32 any eq 22 
+  90 deny ip any any log 
+ip access-list 98
+  10 permit ip 10.0.70.179/32 any 
+  20 permit ip 10.0.70.180/32 any 
+ip access-list 99
+  10 permit ip 200.52.193.14/32 any 
+  20 permit ip 200.52.176.20/32 any 
+  30 permit ip 200.52.196.176/32 any 
+  40 permit ip 200.52.196.172/32 any 
+  50 permit ip 200.52.196.173/32 any 
+  60 permit ip 200.52.196.174/32 any 
+  70 permit ip 200.52.196.175/32 any 
+  80 permit ip 200.52.193.144/32 any 
+  90 permit ip 10.0.124.183/32 any 
+  100 permit ip 10.0.124.181/32 any 
+  110 permit ip 10.0.124.184/32 any 
+  120 permit ip 10.0.124.185/32 any 
+  130 permit ip 10.0.124.175/32 any 
+  140 permit ip 10.0.124.156/32 any 
+  150 permit ip 10.0.124.157/32 any 
+  160 permit ip 10.0.124.129/32 any 
+  170 permit ip 10.0.124.143/32 any 
+  180 permit ip 10.0.124.140/32 any 
+  190 permit ip 10.0.70.0 0.0.0.255 any 
+  200 permit ip 200.52.192.192 0.0.0.63 any 
+  210 permit ip 200.52.193.136 0.0.0.7 any 
+  220 permit ip 10.0.70.0 0.0.0.255 any 
+class-map type qos match-any video
+  match dscp 32,34
+class-map type qos match-any datos-high
+  match dscp 24
+class-map type qos match-any management
+  match dscp 8
+class-map type qos match-any datos-medium
+  match dscp 16
+class-map type qos match-any Real_Time_Video
+  match dscp 32,34,46-47
+class-map type qos match-any network-control
+  match dscp 48,56
+class-map type qos match-any real-time-class
+  match dscp 46
+policy-map type qos QSP-ALL-IN-TRAFFIC
+  class datos-high
+    set dscp 24
+    set qos-group 2
+  class datos-medium
+    set dscp 16
+    set qos-group 2
+  class management
+    set dscp 8
+    set qos-group 1
+  class network-control
+    set dscp 48
+    set qos-group 1
+  class real-time-class
+    set dscp 32
+    set qos-group 3
+  class Real_Time_Video
+    set dscp 32
+    set qos-group 3
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-MGMT
+  class class-default
+    set dscp 8
+    set qos-group 1
+policy-map type qos QSP-IN-RMK-TRAFFIC-VOICE
+  class class-default
+    set dscp 46
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-DEFAULT
+  class class-default
+    set dscp 0
+    set qos-group 0
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-SDV
+  class class-default
+    set dscp 32
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  class class-default
+    set dscp 34
+    set qos-group 3
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  class class-default
+    set dscp 24
+    set qos-group 2
+policy-map type qos QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  class class-default
+    set dscp 16
+    set qos-group 2
+policy-map type queuing PM_QUEUING_SYSTEM_OUT
+  class type queuing c-out-q3
+    priority level 1
+    queue-limit 2516582 bytes
+  class type queuing c-out-q2
+    bandwidth remaining percent 75
+    queue-limit 2516582 bytes
+  class type queuing c-out-q1
+    bandwidth remaining percent 15
+    queue-limit 2516582 bytes
+  class type queuing c-out-q-default
+    bandwidth remaining percent 10
+    queue-limit 5033164 bytes
+system qos
+  service-policy type queuing output PM_QUEUING_SYSTEM_OUT
+  service-policy type network-qos Jumbo-nq-policy
+copp profile strict
+vtp domain MEGAREDCLN
+snmp-server location Pacifico
+snmp-server user admin network-admin auth md5 0xa1bc393c38249a2ae1c235188b55444b priv 0xa1bc393c38249a2ae1c235188b55444b localizedkey
+snmp-server user recovery network-admin auth md5 0xe3580cccddd1fa00de4d841e6299cd23 priv 0xe3580cccddd1fa00de4d841e6299cd23 localizedkey
+snmp-server user recovery2 network-admin auth md5 0xa1bc393c38249a2ae1c235188b55444b priv 0xa1bc393c38249a2ae1c235188b55444b localizedkey
+snmp-server host 10.0.124.143 traps version 2c clnKsunM421
+rmon event 1 description FATAL(1) owner PMON@FATAL
+rmon event 2 description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 description ERROR(3) owner PMON@ERROR
+rmon event 4 description WARNING(4) owner PMON@WARNING
+rmon event 5 description INFORMATION(5) owner PMON@INFO
+snmp-server community ClnThoR421X group network-admin
+snmp-server community C0L_4cc3s0_c0!3cT0r group network-operator
+snmp-server community clnKsunM421 group network-admin
+snmp-server community C!N_4cc3s0_c0!3cT0r group network-operator
+snmp-server community ClnThoR421X use-acl 99
+snmp-server community clnKsunM421 use-acl 99
+snmp-server community C!N_4cc3s0_c0!3cT0r use-ipv4acl 98
+snmp-server community C0L_4cc3s0_c0!3cT0r use-ipv4acl 98
+ntp server 10.1.63.13 prefer use-vrf default
+ntp server 10.1.63.121 use-vrf default
+ntp source-interface  Vlan14
+aaa authentication login default group ISE-MEGACABLE 
+aaa authorization config-commands default group ISE-MEGACABLE local 
+aaa authorization commands default group ISE-MEGACABLE local 
+aaa accounting default group ISE-MEGACABLE 
+tacacs-server directed-request 
+system login block-for 45 attempts 3 within 60 
+
+ip route 0.0.0.0/0 10.0.126.254
+ip pim ssm range 232.0.0.0/8
+vlan 1-10,14-19,22-23,25-26,73,92,95-96,99-103,105,110,112,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,568,650,666,1000-1001,1018,1021,1035,1800,1954,2008,2015,2017,2019
+vlan 2
+  name MEGARED
+vlan 3
+  name MSFC-ROCO
+vlan 4
+  name MSFC-ALLOT
+vlan 5
+  name ALLOT-PIX
+vlan 6
+  name 6500-ASR-CORE
+vlan 7
+  name MS-NETWORK
+vlan 8
+  name MOT-NETWORK
+vlan 9
+  name MPLS
+vlan 10
+  name CORP-NET
+vlan 14
+  name HUBS-MGNT
+vlan 15
+  name SCHG_CTRL
+vlan 16
+  name SCHG_PROPAGA
+vlan 17
+  name Video_unicast_VOD
+vlan 18
+  name ADINSERTION-TVD
+vlan 19
+  name VIDEO/INET
+vlan 22
+  name Gestion-NOC
+vlan 23
+  name MEGAFON
+vlan 25
+  name MFN-UM
+vlan 26
+  name MFN-NFS_UM
+vlan 73
+  name Cache-NETFLIX
+vlan 92
+  name VLAN-GOOGLE-CACHES
+vlan 95
+  name MCA_INET_CLIENTES
+vlan 96
+  name TVD-SEACHANGE-PUB
+vlan 99
+  name PUBLICA
+vlan 100
+  name GESTION-RFGW-3G60
+vlan 101
+  name ETH-CONSTRURAMA
+vlan 102
+  name ETH-CHICS
+vlan 103
+  name ETH-HONDA_VISION
+vlan 105
+  name ETH-MFN-ALESTRA
+vlan 112
+  name FARMACON
+vlan 251
+  name MTTO-MONIT-CTC-HUBS-MEGA-ALTAN
+vlan 252
+  name MTTO-SONDA-QUAM-PINTERNA
+vlan 260
+  name APROV-SAC-BCC
+vlan 261
+  name APROV-BCC-LEON
+vlan 279
+  name MFN-RAC
+vlan 280
+  name RAC-IT-LAN
+vlan 292
+  name MHE-VIDEO-2
+vlan 293
+  name TVD-PDS-VOD
+vlan 352
+  name IRD-MONITORING
+vlan 357
+  name MFN-ACCESS-BORDER
+vlan 359
+  name MFN-BILLING-PROV
+vlan 375
+  name MFN-VLAN-SIG-SIP-CLN
+vlan 376
+  name MFN-SIG-SIP-CLIEN
+vlan 399
+  name IT_CUBES
+vlan 460
+  name MFN-IMS-HUAWEI-GDL-CLN
+vlan 471
+  name MRD-SERVERS-2
+vlan 481
+  name SONDAS-QAM
+vlan 482
+  name R-SONDAS-QAM
+vlan 490
+  name CORE-RAC_VER-VRF-NOC-GESTION
+vlan 568
+  name MCA_nativa
+vlan 650
+  name MRD-CAMARAS
+vlan 666
+  name PROV_FLP
+vlan 1000
+  name ETH-INTERNET
+vlan 1001
+  name ETH-MFN_SIP
+vlan 1018
+  name CORE-LAN-EBGP-MHOP-3
+vlan 1021
+  name MFN-SBC-TRONCAL-SIP-MCA
+vlan 1035
+  name MCA-to-SBC-LPAZ
+vlan 1800
+  name GESTION-DWDM-CORE-NOKIA
+vlan 1954
+  name TVD-P1_TVDL_Culiacan_Mochis
+vlan 2008
+  name IPV6-CMTS_08
+vlan 2015
+  name IPV6-CMTS_15
+vlan 2017
+  name IPV6-CMTS_17
+vlan 2019
+  name IPV6-CMTS_19
+
+spanning-tree pathcost method long
+spanning-tree port type edge bpduguard default
+spanning-tree vlan 1,5-8,10-13,15-21,24,27-72,74-91,93-99,101-250,252-260,262-356,358,360-374,377-470,472-1017,1019-2018,2020-3967 priority 61440
+spanning-tree vlan 2-4,9,14,22-23,25-26,73,92,100,251,261,357,359,375-376,471,1018 priority 8192
+spanning-tree vlan 2019 priority 28672
+vrf context management
+hardware access-list tcam region racl 512
+hardware access-list tcam region qos-lite 1024
+hardware rate-limiter access-list-log 2000 
+vlan configuration 260
+  ip igmp snooping static-group 224.255.0.125 interface port-channel2
+  ip igmp snooping static-group 224.255.0.125 interface Ethernet1/15
+  ip igmp snooping static-group 224.255.0.125 interface Ethernet2/16
+vlan configuration 261
+  ip igmp snooping querier 10.2.124.212
+
+
+interface Vlan1
+
+interface Vlan14
+  description MRD-GESTION-HUBS-NX-2
+  no shutdown
+  no ip redirects
+  ip address 10.0.126.252/26
+
+interface Vlan375
+  description MFN-VLAN-SIG-SIP-CLIEN2.CLN
+  no ip redirects
+  ip address 10.2.123.250/24
+  hsrp 4 
+    authentication text mCaHsrp
+    priority 101
+    timers  1  4
+    ip 10.2.123.254
+
+interface port-channel1
+  description ACC-P1-Po1-N9K-DATOS2-CLN<>Core-ASR9K-CLN-2-BE1
+  shutdown
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel2
+  description ACC-P1-Po2-N9K-DATOS2-CLN<BRD-LAN-TO-LAN>N9K-DATOS1-CLN4~Po2-130GB
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  spanning-tree port type network
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel12
+  description ACC-P1-SW-DATOS-CLN-01-NX02
+  switchport
+  switchport trunk allowed vlan 2,8-10,14,17-18,22-23,25,35,99,251,359,375-376,399,1001,1021,1800
+  no snmp trap link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel22
+  description ACC-P1-Po22-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Po22
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel35
+  description P2_MFN-Perimeta-B-Core-Emp
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface port-channel36
+  description P2_MFN-Perimeta-B-Access-Emp
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 399,1021
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface port-channel50
+  description ACC-P1-Po50-N9K-DATOS2-CLN<>CAT6K-CLN-02-Po50
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel100
+  description ACC-P1-Po100-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Po100
+  shutdown
+  mtu 9216
+  speed 1000
+  duplex full
+  vrf member peer-keepalive
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+  ip address 1.1.1.2/30
+
+interface port-channel131
+  description ACC-P1-Po131-N9K-DATOS2-CLN<>CACHE-NETFLIX-01
+  switchport
+  switchport access vlan 73
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface port-channel132
+  description ACC-P1-Po132-N9K-DATOS2-CLN<>CACHE-NETFLIX-02
+  switchport
+  switchport access vlan 73
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface port-channel200
+  description ACC-P1-Po200-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Po200
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2008,2015,2017
+  spanning-tree port type network
+  logging event port link-status
+  mtu 9216
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel300
+  description ACC-P1-Po300-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Po300
+  logging event port link-status
+  mtu 9216
+  service-policy type qos input QSP-ALL-IN-TRAFFIC
+
+interface port-channel300.10
+  description L3 Point-to-Point NEXUS9K-CLN-DATOS-2 <> NEXUS9K-CLN-DATOS-1
+  mtu 9216
+  encapsulation dot1q 10
+
+interface Ethernet1/1
+  description MFN_P1-RPE_SIPPROXY-B1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 22-23
+  spanning-tree guard root
+  spanning-tree bpdufilter enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet1/2
+  description MFN-P1-RPE_SIPPROXY-A2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 22-23
+  spanning-tree guard root
+  spanning-tree bpdufilter enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet1/3
+  description MFN-P2-iDRAC-RPE-B1
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/4
+  description SIP-P1-DNS1-IDRAC-V4-080919
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  no shutdown
+
+interface Ethernet1/5
+  description SIP-P1-DNS1-MGMT-V4-080919
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  no shutdown
+
+interface Ethernet1/6
+  description TLP-P1-IPPUBL-V99-100919
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  no shutdown
+
+interface Ethernet1/7
+  description P2_MFN-Perimeta-B1-Core-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 35 mode active
+  no shutdown
+
+interface Ethernet1/8
+  description P2_MFN-Perimeta-B2-Core-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 23,25,375-376
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 35 mode active
+  no shutdown
+
+interface Ethernet1/9
+  description MFN-P1-RPE_SIPPROXY-B2-V22,23-011819
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 22-23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/10
+  description SIP-P1-SPTST-CIMC-V4-092019
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  no shutdown
+
+interface Ethernet1/11
+  description MFN-Perimeta-B1-Gestion-Empresarial-221117
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/12
+  description MFN-SBC2-wancom0
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/13
+  description MFN-P1-AUDIOCODE-MEDIAN5K1-ACT-V23-270520
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  flowcontrol receive on
+  flowcontrol send on
+  speed 100
+  duplex full
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/14
+  description MFN-7604_IXN_MNGT
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 22-23,25,99,105,110,279,460,1001
+  mtu 9216
+  speed 1000
+  duplex full
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet1/15
+  description SIP-P2-bcc2v260
+  switchport
+  switchport access vlan 260
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/16
+  description SIP-P2-bcc1v261
+  switchport
+  switchport access vlan 261
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/17
+  description SIP-P1-bcc4v261
+  switchport
+  switchport access vlan 261
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/18
+  description SIP-P1-bcc4v4
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/19
+  description MCA-ME3400_CTC
+  switchport
+  switchport mode trunk
+  switchport trunk native vlan 568
+  switchport trunk allowed vlan 22,95,99-103,110,112,1000-1001,1035
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet1/20
+  description MFN-RTR_IXN_ALESTRA
+  switchport
+  switchport access vlan 105
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/21
+  description TEST_SONDA_DEL_CAT-1
+  switchport
+  switchport access vlan 292
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VIDEO-VOD
+  no shutdown
+
+interface Ethernet1/22
+  description ACC-P1-M1-SW-DATOS-CLN-01-NX02
+  switchport
+  switchport trunk allowed vlan 2,8-10,14,17-18,22-23,25,35,99,251,359,375-376,399,1001,1021,1800
+  storm-control broadcast level 20.00
+  channel-group 12 mode active
+  no shutdown
+
+interface Ethernet1/23
+  description LIBRE
+
+interface Ethernet1/24
+  description RAC-IT-LAN-ACCESS
+  switchport
+  switchport access vlan 280
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-MGMT
+  no shutdown
+
+interface Ethernet1/25
+  description IT-P2-CUBESOU.TI-2
+  switchport
+  switchport access vlan 399
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-MGMT
+  no shutdown
+
+interface Ethernet1/26
+  description LIBRE
+
+interface Ethernet1/27
+  description MFN-Perimeta-A2-Gestion-Empresarial-221117
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet1/28
+  description LIBRE
+
+interface Ethernet1/29
+  description LIBRE
+
+interface Ethernet1/30
+  description LIBRE
+
+interface Ethernet1/31
+  description LIBRE
+  switchport
+  switchport access vlan 261
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface Ethernet1/32
+  description LIBRE
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface Ethernet1/33
+  description SIP-P1-bcc3v260
+  switchport
+  switchport access vlan 260
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface Ethernet1/34
+  description LIBRE
+
+interface Ethernet1/35
+  description LIBRE
+
+interface Ethernet1/36
+  description LIBRE
+
+interface Ethernet1/37
+  description LIBRE
+
+interface Ethernet1/38
+  description LIBRE
+
+interface Ethernet1/39
+  description LIBRE
+
+interface Ethernet1/40
+  description PRUEBAS-CAPTURA MFON Eth 1/8
+  switchport
+  switchport monitor
+
+interface Ethernet1/41
+  description LIBRE
+
+interface Ethernet1/42
+  description LIBRE
+
+interface Ethernet1/43
+  description LIBRE
+
+interface Ethernet1/44
+  description LIBRE
+
+interface Ethernet1/45
+  description LIBRE
+
+interface Ethernet1/46
+  description LIBRE
+
+interface Ethernet1/47
+  description LIBRE
+
+interface Ethernet1/48
+  description ACC-P1-Eth1/48(Po100)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth1/48
+  mtu 9216
+  speed 1000
+  duplex full
+  udld aggressive
+  channel-group 100 mode active
+
+interface Ethernet1/49
+  description LIBRE
+
+interface Ethernet1/50
+  description LIBRE
+
+interface Ethernet1/51
+  description LIBRE
+
+interface Ethernet1/52
+  description LIBRE
+
+interface Ethernet2/1
+  description LIBRE
+
+interface Ethernet2/2
+  description LIBRE
+
+interface Ethernet2/3
+  description LIBRE
+
+interface Ethernet2/4
+  description LIBRE
+
+interface Ethernet2/5
+  description LIBRE
+
+interface Ethernet2/6
+  description MTTO-P3_HUNTER-MGM-MONITOREO-110812
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DEFAULT
+  no shutdown
+
+interface Ethernet2/7
+  description MRD-PIX-CRP_OUTSIDE
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DEFAULT
+  no shutdown
+
+interface Ethernet2/8
+  description MRD-P1-SRVR-TFTP-PUB_VL4
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DEFAULT
+  no shutdown
+
+interface Ethernet2/9
+  description MRD-P1-SRVR-TFTP-PRIV
+  switchport
+  switchport access vlan 261
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DEFAULT
+  no shutdown
+
+interface Ethernet2/10
+  description P2_MFN-Perimeta-B1-Acceso-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 399,1021
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 36 mode active
+  no shutdown
+
+interface Ethernet2/11
+  description LIBRE
+
+interface Ethernet2/12
+  description MFN-Perimeta-B2-Gestion-Empresarial-221117
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/13
+  description MFN-MEDIAN5K_1
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet2/14
+  description MFN-7206_RTP_BSTL
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet2/15
+  description SIP-P2-bcc1v4
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet2/16
+  description SIP-P1-bcc4v260
+  switchport
+  switchport access vlan 260
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet2/17
+  description IMP-MFN_P2-MFON-911-IT
+  switchport
+  switchport access vlan 357
+  spanning-tree port type edge
+  spanning-tree bpduguard disable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/18
+  description MFN-SBC1-wancom0
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/19
+  description SIP-P5-SERV-IP-PUBLICA-V99-011119
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DEFAULT
+  no shutdown
+
+interface Ethernet2/20
+  description LIBRE
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface Ethernet2/21
+  description SIP-P2-bcc2v260-01092015
+  switchport
+  switchport access vlan 260
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+
+interface Ethernet2/22
+  description ACC-P1-M2-SW-DATOS-CLN-01-NX02
+  switchport
+  switchport trunk allowed vlan 2,8-10,14,17-18,22-23,25,35,99,251,359,375-376,399,1001,1021,1800
+  storm-control broadcast level 20.00
+  channel-group 12 mode active
+  no shutdown
+
+interface Ethernet2/23
+  description P2_MFN-Perimeta-B2-Acceso-Empresarial
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 399,1021
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  channel-group 36 mode active
+  no shutdown
+
+interface Ethernet2/24
+  description IRR-MRD_MCR-RR-CIS-VID10
+  switchport
+  switchport access vlan 10
+  mtu 9216
+  speed 100
+  duplex full
+  no negotiate auto
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/25
+  description MCA-RR_ETH2VPN
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 19,23,101-103,112
+  speed 100
+  duplex full
+  no negotiate auto
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/26
+  description LIBRE
+
+interface Ethernet2/27
+  description LIBRE
+  switchport
+  switchport access vlan 10
+  flowcontrol receive on
+  flowcontrol send on
+  speed 100
+  duplex full
+  no negotiate auto
+
+interface Ethernet2/28
+  description MFN-Perimeta-A1-Gestion-Empresarial-221117
+  switchport
+  switchport access vlan 22
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet2/29
+  description LIBRE
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  no shutdown
+
+interface Ethernet2/30
+  description SIP-P1-DNS-APP-Serv
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-MEDIUM
+  no shutdown
+
+interface Ethernet2/31
+  description LIBRE
+
+interface Ethernet2/32
+  description LIBRE
+
+interface Ethernet2/33
+  description LIBRE
+
+interface Ethernet2/34
+  description LIBRE
+
+interface Ethernet2/35
+  description LIBRE
+
+interface Ethernet2/36
+  description LIBRE
+
+interface Ethernet2/37
+  description LIBRE
+
+interface Ethernet2/38
+  description LIBRE
+
+interface Ethernet2/39
+  description LIBRE
+
+interface Ethernet2/40
+  description LIBRE
+
+interface Ethernet2/41
+  description LIBRE
+
+interface Ethernet2/42
+  description LIBRE
+
+interface Ethernet2/43
+  description LIBRE
+
+interface Ethernet2/44
+  description LIBRE
+
+interface Ethernet2/45
+  description LIBRE
+
+interface Ethernet2/46
+  description LIBRE
+
+interface Ethernet2/47
+  description MFN-PROXY_IT
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  speed 100
+  logging event port link-status
+  storm-control broadcast level 20.00
+  switchport port-security aging time 15
+  switchport port-security
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet2/48
+  description ACC-P1-Eth2/48(Po100)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth2/48
+  mtu 9216
+  speed 1000
+  duplex full
+  udld aggressive
+  channel-group 100 mode active
+
+interface Ethernet2/49
+  description LIBRE
+
+interface Ethernet2/50
+  description LIBRE
+
+interface Ethernet2/51
+  description LIBRE
+
+interface Ethernet2/52
+  description LIBRE
+
+interface Ethernet7/1
+  description ACC-P1-Eth7/1(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/2
+  description ACC-P1-Eth7/2(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/3
+  description ACC-P1-Eth7/3(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/4
+  description ACC-P1-Eth7/4(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/5
+  description ACC-P1-Eth7/5(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/0/0/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/6
+  description ACC-P1-Eth7/6(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/0/1/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/7
+  description ACC-P1-Eth7/7(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/0/1/5
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/8
+  description ACC-P1-Eth7/8(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/0/1/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/9
+  description ACC-P1-Eth7/9(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/0/1/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/10
+  description ACC-P1-Eth7/10(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/0/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/11
+  description ACC-P1-Eth7/11(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/0/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet7/12
+  description APARTADO_NETFLIX
+
+interface Ethernet7/13
+  description APARTADO_NETFLIX
+
+interface Ethernet7/14
+  description ACC-P3-Eth7/14(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten2/11
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet7/15
+  description MFN-P2-LAN-SX-NETWORK-SW2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1,22,357
+  spanning-tree port type edge
+  spanning-tree bpduguard disable
+  speed 1000
+  duplex full
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet7/16
+  description ACC-P2-Eth7/16(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten2/5
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet7/17
+  description LIBRE
+
+interface Ethernet7/18
+  description MFN-P2-UMG-STBY
+  switchport
+  switchport access vlan 357
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+  no shutdown
+
+interface Ethernet7/19
+  description ACC-P6-Eth7/19(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten3/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet7/20
+  description LIBRE
+
+interface Ethernet7/21
+  description MFN-P2-LAN-SX-NETWORK-SW1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1,22,357
+  spanning-tree guard root
+  spanning-tree bpdufilter enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet7/22
+  description MFN-MEDIAN5K_1
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet7/23
+  description ACC-P1-Eth7/23(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth1/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/24
+  description ACC-P1-Eth7/24(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth1/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/25
+  description ACC-P1-Eth7/25(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth1/8
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet7/26
+  description MFN-MEDIAN5K_1
+  switchport
+  switchport access vlan 23
+  spanning-tree port type edge
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-VOICE
+
+interface Ethernet7/27
+  description SIP-GOOGLE-CACHE-3-NODO-1
+  switchport
+  switchport access vlan 92
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet7/28
+  description SIP-GOOGLE-CACHE-3-NODO-2
+  switchport
+  switchport access vlan 92
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet7/29
+  description ACC-P1-5585-2-OUTSIDE
+  switchport
+  switchport access vlan 99
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet7/30
+  description SIP-NETFLIX-CACHE1-Te1
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 131 mode active
+  no shutdown
+
+interface Ethernet7/31
+  description SIP-NETFLIX-CACHE1-Te2
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 131 mode active
+  no shutdown
+
+interface Ethernet7/32
+  description SIP-NETFLIX-CACHE2-Te1
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 132 mode active
+  no shutdown
+
+interface Ethernet7/33
+  description SIP-NETFLIX-CACHE2-Te2
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 132 mode active
+  no shutdown
+
+interface Ethernet7/34
+  description LIBRE
+
+interface Ethernet7/35
+  description ACC-P1-Eth7/35(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten5/10
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet7/36
+  description LIBRE
+
+interface Ethernet7/37
+  description ACC-P1-Eth7/37(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/37
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/38
+  description ACC-P1-Eth7/38(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/38
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/39
+  description ACC-P1-Eth7/39(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/39
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/40
+  description ACC-P1-Eth7/40(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/40
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/41
+  description ACC-P1-Eth7/41(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/41
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/42
+  description ACC-P1-Eth7/42(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/42
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/43
+  description ACC-P1-Eth7/43(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/43
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet7/44
+  description ACC-P1-Eth7/44(Po200)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/44
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 200 mode active
+  no shutdown
+
+interface Ethernet7/45
+  description ACC-P1-Eth7/45(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2-Ten7/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+  no shutdown
+
+interface Ethernet7/46
+  description ACC-P1-Eth7/46(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2-Ten 9/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet7/47
+  description ACC-P1-Eth7/47(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2- Te7/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet7/48
+  description ACC-P1-Eth7/48(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2-Te7/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+  no shutdown
+
+interface Ethernet7/49
+  description LIBRE
+
+interface Ethernet7/50
+  description LIBRE
+
+interface Ethernet7/51
+  description LIBRE
+
+interface Ethernet7/52
+  description LIBRE
+
+interface Ethernet8/1
+  description ACC-P1-Eth8/1(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth8/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/2
+  description ACC-P1-Eth8/2(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth8/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/3
+  description ACC-P1-Eth8/3(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth8/3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/4
+  description ACC-P1-Eth8/4(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth8/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/5
+  description ACC-P1-Eth8/5(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/0/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/6
+  description ACC-P1-Eth8/6(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/0/3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/7
+  description ACC-P1-Eth8/7(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/1/0
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/8
+  description ACC-P1-Eth8/8(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/1/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/9
+  description ACC-P1-Eth8/9(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/1/2
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/10
+  description ACC-P1-Eth8/10(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/1/3  
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/11
+  description ACC-P1-Eth8/11(Po1)-N9K-DATOS2-CLN<>Core-ASR9K-CLN2-Te0/1/1/4  
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan none
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  no shutdown
+
+interface Ethernet8/12
+  description ACC-P1-Eth8/12(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth2/11
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/13
+  description ACC-P1-Eth8/13(Po2)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth2/12
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,1800,2019
+  mtu 9216
+  storm-control broadcast level 20.00
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet8/14
+  description ACC-P6-Eth8/14(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten2/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet8/15
+  description LIBRE
+
+interface Ethernet8/16
+  description ACC-P5-Eth8/16(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten5/1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet8/17
+  description LIBRE
+
+interface Ethernet8/18
+  description ACC-P6-Eth8/18(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten5/4
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet8/19
+  description APARTADO_NETFLIX
+
+interface Ethernet8/20
+  description APARTADO_NETFLIX
+
+interface Ethernet8/21
+  description LIBRE
+
+interface Ethernet8/22
+  description APARTADO_HUB02
+
+interface Ethernet8/23
+  description LIBRE
+
+interface Ethernet8/24
+  description ACC-P1-Eth8/24(Po22)-N9K-DATOS2-CLN<>CAT4K-HUB02-HUMAYA-Ten5/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2,8-10,14-15,17,99,481-482,650,2008,2015,2019
+  spanning-tree port type network
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  channel-group 22 mode active
+  no shutdown
+
+interface Ethernet8/25
+  description LIBRE
+
+interface Ethernet8/26
+  description LIBRE
+
+interface Ethernet8/27
+  description SIP-GOOGLE-CACHE-3-NODO-3
+  switchport
+  switchport access vlan 92
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet8/28
+  description ACC-P1-5585-2-CABLE
+  switchport
+  switchport access vlan 4
+  spanning-tree port type edge
+  spanning-tree bpduguard enable
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  service-policy type qos input QSP-IN-RMK-TRAFFIC-DATOS-HIGH
+  no shutdown
+
+interface Ethernet8/29
+  description LIBRE
+
+interface Ethernet8/30
+  description SIP-NETFLIX-CACHE1-Te3
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 131 mode active
+  no shutdown
+
+interface Ethernet8/31
+  description SIP-NETFLIX-CACHE1-Te4
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 131 mode active
+  no shutdown
+
+interface Ethernet8/32
+  description SIP-NETFLIX-CACHE2-Te3
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 132 mode active
+  no shutdown
+
+interface Ethernet8/33
+  description SIP-NETFLIX-CACHE2-Te4
+  switchport
+  switchport access vlan 73
+  mtu 9216
+  logging event port link-status
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 132 mode active
+  no shutdown
+
+interface Ethernet8/34
+  description LIBRE
+
+interface Ethernet8/35
+  description LIBRE
+
+interface Ethernet8/36
+  description LIBRE
+
+interface Ethernet8/37
+  description ACC-P1-Eth7/37(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/37
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/38
+  description ACC-P1-Eth7/38(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/38
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/39
+  description ACC-P1-Eth7/39(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/39
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/40
+  description ACC-P1-Eth7/40(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/40
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/41
+  description ACC-P1-Eth7/41(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/41
+  mtu 9216
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/42
+  description ACC-P1-Eth7/42(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/42
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/43
+  description ACC-P1-Eth7/43(Po300)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth7/43
+  mtu 9216
+  udld aggressive
+  channel-group 300 mode active
+  no shutdown
+
+interface Ethernet8/44
+  description ACC-P1-Eth8/44(Po200)-N9K-DATOS2-CLN<>N9K-DATOS1-CLN-Eth8/44
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 200 mode active
+  no shutdown
+
+interface Ethernet8/45
+  description ACC-P1-Eth8/45(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2-Te8/3
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/46
+  description ACC-P1-Eth8/46(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2- Te9/8
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/47
+  description ACC-P1-Eth8/47(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2-Ten 8/6
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/48
+  description ACC-P1-Eth8/48(Po50)-N9K-DATOS2-CLN<>CAT6K-CLN-2-Ten 8/7
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 1-4,6,8-10,14-18,22-23,25-26,60,73,77,92,96,99-100,251-252,260-261,279-280,292-293,352,357,359,375-376,399,460,471,481-482,490,650,1000-1001,1021,1035,2008,2015,2017
+  mtu 9216
+  storm-control broadcast level 20.00
+  udld aggressive
+  channel-group 50 mode active
+
+interface Ethernet8/49
+  description LIBRE
+
+interface Ethernet8/50
+  description LIBRE
+
+interface Ethernet8/51
+  description LIBRE
+
+interface Ethernet8/52
+  description LIBRE
+
+interface mgmt0
+  vrf member management
+cli alias name image show version | inc image
+cli alias name environment show environment | inc alarm
+cli alias name disponible1 show int status | inc not|dis | include "10g"
+cli alias name cpu show process cpu | inc "CPU util"
+cli alias name uptime sh ver | inc uptime
+cli alias name disponible2 show int status | exclude "Eth1/|Eth2/|connected"
+cli alias name s show ip int brief
+cli alias name wr copy running-config startup-config
+cli alias name disponiblec show interface status dow | in Eth | exclude /49 |exclude /50 |exclude /51 |exclude /52 | count
+cli alias name used2c show inter status up | include Eth | include connected | include 1000base | count
+cli alias name used2 show inter status up | include Eth | include connected | include 1000base
+cli alias name used1c show inter status up | include Eth | include connected | include 1000 | include 10g | count
+cli alias name used3 show inter status up | include Eth | include connected | include 10G
+cli alias name used3c show inter status up | include Eth | include connected | include 10G | count
+cli alias name used1 show inter status up | include Eth | include connected | include 1000 | include 10g
+cli alias name disponible4 show inter desc | in 40G
+cli alias name disponible4c show inter desc | in 40G | count
+cli alias name disponible5 show inter desc | in 100G
+cli alias name disponible5c show inter desc | in 100G | count
+cli alias name disponible show interface status dow | in Eth | exclude /49 |exclude /50 |exclude /51 |exclude /52
+line console
+  exec-timeout 5
+  speed 38400
+line vty
+  session-limit 15
+  exec-timeout 5
+  access-class 105 in
+boot nxos bootflash:/nxos.7.0.3.I7.5a.bin sup-1
+boot nxos bootflash:/nxos.7.0.3.I7.5a.bin sup-2
+monitor session 1 
+  destination interface Ethernet1/40
+
+logging logfile messages 5 size 2000000
+logging server 10.0.124.136
+logging server 10.0.70.179
+logging server 10.0.70.99
+logging source-interface Vlan14
+logging timestamp milliseconds
+logging level syslog 5
+logging console 5
+
+
+NEXUS9K-CLN-DATOS-2# show ip arp
+
+Flags: * - Adjacencies learnt on non-active FHRP router
+       + - Adjacencies synced via CFSoE
+       # - Adjacencies Throttled for Glean
+       CP - Added via L2RIB, Control plane Adjacencies
+       PS - Added via L2RIB, Peer Sync
+       RO - Re-Originated Peer Sync Entry
+       D - Static Adjacencies attached to down interface
+
+IP ARP Table for context default
+Total number of entries: 8
+Address         Age       MAC Address     Interface       Flags
+10.0.126.197    00:17:48  0035.1abc.e9bf  Vlan14          
+10.0.126.200    00:17:48  a89d.21c1.dbff  Vlan14          
+10.0.126.201    00:17:48  a89d.213f.863f  Vlan14          
+10.0.126.230    00:17:47  78da.6e15.e03f  Vlan14          
+10.0.126.231    00:17:47  6412.25ce.2cbf  Vlan14          
+10.0.126.251    00:17:14  3cce.7316.3000  Vlan14          
+10.0.126.253    00:17:16  0012.448a.f800  Vlan14          
+10.0.126.254    00:17:49  7070.8b5c.037f  Vlan14          
+NEXUS9K-CLN-DATOS-2# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD    ECMP Redirect
+                                                         Priority Capable State     Capable
+NEXUS9K-CLN-DATOS-2# show ip igmp groups
+NEXUS9K-CLN-DATOS-2# 
+NEXUS9K-CLN-DATOS-2# exit

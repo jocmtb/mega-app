@@ -1,0 +1,236 @@
+.ajaxProgress{
+  display: none;
+  /* visibility: hidden; */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  padding-top: 10px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto;   /* Enable scroll if needed */
+  /* background-color: rgb(0,0,0); Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-joc {
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+.modal-header{
+  display: initial !important;
+}
+#multi-select {
+  height: 120px;
+}
+.form-group .form-group__text #reset-btn button{
+  width: 40px;
+}
+#myBtn {
+  display: none;
+}
+
+/* The Modal (background) */
+/*
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgb(0,0,0);
+background-color: rgba(0,0,0,0.4);
+} */
+
+/* Modal Content/Box
+.modal-content {
+background-color: #fefefe;
+background-color: #122639;
+margin: 15% auto;
+padding: 20px;
+font-size: 24px;
+color: white;
+border: 1px solid #888;
+border: 2px solid white;
+font-family: sans-serif;
+border-radius: 25px;
+width: 406px;
+}   */
+
+/* The Close Button */
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+
+.d-none{
+display: none;
+}
+
+.color-white{
+background-color: white;
+}
+
+.color-grey{
+background-color: #F2F3F4;
+}
+
+.bg-green{
+background-color: rgb(74, 240, 74);
+border-radius: 8px;
+margin: 3px;
+font-size: 8px;
+width: 100px;
+height: 20px;
+padding: 0px;
+border: 0px;
+}
+
+.bg-yellow{
+background-color: #FFFF00; /* #D4AC0D */
+color: grey;
+border-radius: 8px;
+margin: 3px;
+font-size: 8px;
+width: 100px;
+height: 20px;
+padding: 0px;
+border: 0px;
+}
+
+.bg-orange{
+background-color: #ff8d03;
+border-radius: 8px;
+margin: 3px;
+font-size: 8px;
+width: 100px;
+height: 20px;
+padding: 0px;
+border: 0px;
+}
+
+button.bg-green:hover{
+/* background-color: rgb(29, 197, 29); */
+transform: translate(0px, 2px);
+}
+
+button.bg-yellow:hover{
+/*background-color: #FFFF00;*/
+color: black;
+transform: translate(0px, 2px);
+}
+
+button.bg-orange:hover{
+/* background-color: #CA6F1E; */
+transform: translate(0px, 2px);
+}
+
+.table-style{
+border-collapse: collapse;
+border: 1px solid black;
+}
+
+.table-style td {
+vertical-align: top;
+text-align: left;
+padding-left: 2px;
+}
+
+.table-style td:hover {
+/*background-color: azul #0029AD azul #3162FF; verde #00DDDE
+border: 3px solid  #99A3A4; */
+background-clip: content-box;
+box-shadow: inset 0 0 0 7px #E5E7E9; /* #E5E7E9 */
+}
+
+.table-style th#dias:hover {
+background-color: black;
+color: white;
+}
+
+.panel-style {
+padding-left: 4px;
+}
+.imagen1{
+width: 100px;
+}
+rating-box{
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background-color: #20152d;
+}
+.rating{
+position: relative;
+display: flex;
+flex-direction: row-reverse;
+}
+.rating input{
+display: none;
+}
+.rating label{
+position: relative;
+width: 0;
+height: 128px;
+cursor: pointer;
+transition: 0.5s;
+filter: grayscale(1);
+text-align: center;
+opacity: 0;
+}
+.rating:hover label{
+width: 160px;
+opacity: 0.2;
+}
+.rating input:hover + label,
+.rating input:checked + label{
+filter: grayscale(0);
+opacity: 1;
+width: 160px;
+}
+.rating label h4 {
+color: #fff;
+font-size: 24px;
+padding-top: 10px;
+font-weight: 500;
+white-space: nowrap;
+opacity: 0;
+transform: translateY(-50px) scale(0);
+transition: 0.5s;
+}
+.rating input:hover + label h4,
+.rating input:checked + label h4{
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+.text{
+position: absolute;
+top: -50px;
+left: 50%;
+transform: translateX(-50%);
+color: #fff;
+width: 500px;
+font-weight: 700;
+letter-spacing: 2px;
+text-align: center;
+white-space: nowrap;
+font-size: 36px;
+}
+
+

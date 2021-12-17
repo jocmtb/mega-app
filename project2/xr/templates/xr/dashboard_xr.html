@@ -1,0 +1,166 @@
+{% extends "xr/index2.html" %}
+
+{% block content %}
+{% load static %}
+<h2>Please select an option from the XR menu</h2>
+<div class=joc1>
+<div class="row">
+              <div class="col-sm-8">
+                <h3>XR Devices Inventory</h3>
+                <table id="datatableHosts" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+                <thead>
+                    <tr bgcolor="#18599A">
+                        <th><font color="#fff">Hostname</font></th>
+                        <th><font color="#fff">IP Address</font></th>
+                        <th><font color="#fff">Platform</font></th>
+                        <th><font color="#fff">IOS Version</font></th>
+                    </tr>
+                </thead>
+                </table>
+              </div>
+              <div class="col-sm-4">
+                <h3>XR Version Donut-Graph</h3>
+                <p id="demo"></p>
+                 <div id="container-donut"></div>
+                 <p id="demo1"></p>
+              </div>
+           </div>
+
+</div>
+<div class=joc2>
+<h3>Multicast Flows on XR devices</h3>
+<table id="Mcast_flows_Table" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+<thead>
+    <tr bgcolor="#bee5eb">
+        <th width="10%">Host</th>
+        <th>Mcast Source</th>
+        <th>Mcast Group</th>
+        <th>Input Interface</th>
+        <th>RPF Neighbor</th>
+        <th>Output Interface</th>
+        <th>VRF ID</th>
+        <th width="20%">Datetime</th>
+    </tr>
+</thead>
+</table>
+</div>
+<div class=joc3>
+<h3>Scripts Logs</h3>
+<table id="Script_Logs_Table" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+<thead>
+    <tr bgcolor="#18599A">
+        <th width="10%"><font color="#fff">Host</font></th>
+        <th><font color="#fff">Script Type</font></th>
+        <th><font color="#fff">FileName</font></th>
+        <th width="40%"><font color="#fff">Datetime</font></th>
+    </tr>
+</thead>
+</table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function() {
+  $('#datatableHosts').DataTable( {
+    "processing": true,
+    "paging": true,
+    "ajax": "/xr/ajax_hostnames",
+    // add column definitions to map your json to the table
+    "columns": [
+      {data: "hostname"},
+      {data: "IP_Address"},
+      {data: "platform"},
+      {data: "version"},
+    ]
+  } );
+  });
+
+  $(document).ready(function() {
+    $('#Mcast_flows_Table').DataTable( {
+      "processing": true,
+      "paging": true,
+      "ajax": "/xr/ajax_mcast_flows",
+      // add column definitions to map your json to the table
+      "columns": [
+        {data: "host"},
+        {data: "mcast_src"},
+        {data: "mcast_grp"},
+        {data: "in_intf"},
+        {data: "rpf_nei"},
+        {data: "out_intf"},
+        {data: "flow_stat"},
+        {data: "datetime"},
+      ]
+    } );
+    });
+
+    $(document).ready(function() {
+      $('#Script_Logs_Table').DataTable( {
+        "processing": true,
+        "paging": true,
+        "ajax": "/xr/script_logs",
+        // add column definitions to map your json to the table
+        "columns": [
+          {data: "host"},
+          {data: "sc_type"},
+          {data: "file_name",
+        		"render": function(data, type, row, meta){
+            			if(type === 'display'){
+                		data = '<a href="../session_logs/?file_name=' + data + '"><img src="{% static 'file.png' %}"></a>';
+            			}
+
+            		return data;
+         		}},
+          {data: "datetime"},
+        ]
+      } );
+      });
+
+    $.ajax({
+                            url: '/xr/api/hosts/statsxr',
+                            type: 'GET',
+                            async: true,
+                            dataType: "json",
+                            success: function (data) {
+                            document.getElementById("demo").innerHTML = data['data'][0][0]
+                                            joc(data['data'])
+                            }
+                    });
+
+
+    function joc (data) {
+
+                Highcharts.chart('container-donut', {
+                    chart: {
+                        type: 'pie',
+                        options3d: {
+                            enabled: true,
+                            alpha: 45
+                        }
+                    },
+                    title: {
+                        text: 'IOS-XR Version Distribution'
+                    },
+                    subtitle: {
+                        text: '3D donut for IOS-XR'
+                    },
+                    plotOptions: {
+                        pie: {
+                            innerSize: 100,
+                            depth: 45
+                        }
+                    },
+                    series: [{
+                        name: 'Number amount',
+                        data: data
+                    }]
+                });
+
+                }
+
+  </script>
+
+{% endblock %}

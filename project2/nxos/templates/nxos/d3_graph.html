@@ -1,0 +1,615 @@
+{% extends 'nxos/index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="column menu">
+      <div class="row">
+          <!-- <div class="col-sm-12">  -->
+          <div class="container">
+            <meta charset="utf-8" />
+            <h1>Network Mega Topology</h1>
+            <div class="contenedor">
+                <div class="form-group">
+                  <form action="/nxos/d3_graph/" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                  </div>
+                  <input type="submit" class="btn btn-success" value="Submit">
+                </form>
+
+            </div>
+            <p>A <a>force-directed</a> layout of a tree using <a>hierarchy.links.</a></p>
+            <svg width="1060" height="500" class="estilo_caja"></svg>
+            <div class="contenedor2">
+              <input type="button" class="btn btn-primary" value="Save/Clear" id="saveBtn"/>
+              <input type="button" class="btn btn-primary" value="Load" id="loadBtn"/>
+              <button class="btn btn-primary" id='saveButton'>Export to PNG</button>
+            </div>
+            <script src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js"></script>
+            <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+            <script src="https://d3js.org/d3.v4.js"></script>
+					</div>
+		    </div>
+	  </div>
+
+
+<style type="text/css">
+  h1{
+    font-family: "Averia Sans Libre";
+  }
+  h1:hover {
+    color: red;
+    text-decoration: underline;
+  }
+.link {
+  stroke: #ccc; }
+
+.nodetext {
+  pointer-events: none; font: 10px sans-serif; }
+
+.estilo_caja {
+  border-left: 2px solid #2E86C1;
+  background-color: white;
+  padding: 5px;
+}
+
+.contenedor {
+  width: 200px;
+  padding-bottom:  10px;
+  /*background-color: white;*/
+}
+
+.contenedor2 {
+  width: 300px;
+  padding-bottom: 5px;
+}
+
+.solid{
+   stroke:solid;
+}
+
+.dashed{
+   stroke-dasharray: 5,5;
+}
+.dashed2{
+   stroke-dasharray: 10,10;
+}
+</style>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+  //initilize svg or grab svg
+  var svg = d3.select("svg");
+  var width = svg.attr("width");
+  var height = svg.attr("height");
+
+  var data2 = {
+    nodes: [{  id:1, name: "ASR01",  image: "taipan"},
+            {  id:2, name: "ASR02",  image: "taipan"},
+             {  id:3, name: "ASR03",  image: "taipan" },
+              {  id:4, name: "ASR04",  image: "router" },
+               {  id:5, name: "ASR05",  image: "router" }
+          ],
+    links: [
+      { source: 1, target: 2, color:'orange', type:'solid' },
+      { source: 1, target: 3, color:'#909497', type:'solid' },
+      { source: 1, target: 4, color:'#34495E', type:'dashed' },
+	  { source: 1, target: 5, color:'#34495E', type:'dashed' },
+	  { source: 2, target: 3, color:'#34495E', type:'dashed2' },
+      { source: 2, target: 4, color:'#34495E', type:'dashed2' },
+	  { source: 2, target: 5, color:'#34495E', type:'solid' }
+    ]
+  };
+
+  var data = {{ data | safe }};
+
+
+  var simulation = d3
+    .forceSimulation(data.nodes)
+    .force("charge", d3.forceManyBody().strength(-400))
+    //.force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("link", d3.forceLink(data.links).id(d => d.id))
+    .force("collide", d3.forceCollide().radius(d => d.r + 20).iterations(3))
+    .on("tick", ticked);
+
+    //add encompassing group for the zoom
+    var g = svg.append("g")
+        .attr("class", "everything");
+
+  var links = g
+    .append("g")
+    .selectAll("line")
+    .data(data.links)
+    .enter()
+    .append("line")
+    .attr("stroke-width", 3)
+    .style("stroke", (d) => {return d.color }  )
+    .attr('class', (d) => {return d.type });
+
+      //  function (d, i){
+      //            if( i == 1){ return "#909497"; }
+      //            else if( i == 0){ return "orange"; }
+      //            else{ return "#34495E"; }
+      //          }
+
+  links.append("text").text(d => d.name);
+
+  var defs = svg.append("svg:defs");
+
+
+  var figuras = ["cmts","switch","switch1","switch2","switch3","taipan","phone","router","nexus","ncs"];
+          for(var i = 0; i< figuras.length ; i++){
+            console.log(`/static/${figuras[i]}.png`)
+            defs.append("svg:pattern")
+                   .attr("width", 1)
+                   .attr("height", 1)
+                   //.attr("patternUnits", "userSpaceOnUse")
+                   .attr("id", `${figuras[i]}`)
+                   .append("svg:image")
+                   .attr("xlink:href", `/static/${figuras[i]}.png`)
+                   .attr("width", "48px")
+                   .attr("height", "48px")
+                   .attr("x", 0)
+                 .attr("y", 0);
+          }
+
+
+  var nodes = g
+    .append("g")
+    .selectAll("circle")
+    .data(data.nodes)
+    .enter()
+    .append("circle")
+    .attr("r", 24)
+    .attr('fill', chooseIcon);
+    //.attr("fill", function(d){
+		//if (d.name == "A") { return "#69b3a2"; }
+		//else{ return "#5DADE2"; }
+	//});
+
+	var label = g.append("g")
+          .selectAll("text")
+          .data(data.nodes)
+          .enter()
+          .append("text")
+          .text( function(d){   return d.name   })
+          .style("text-anchor", "middle")
+          //.style("fill", "#555")
+          .style("font-family", "Arial")
+          .style("font-size", 12);
+
+  var drag = d3
+    .drag()
+    .on("start", dragstarted)
+    .on("drag", dragged);
+    //.on("end", dragended);
+
+  nodes.call(drag).on("click", click);
+
+  //add zoom capabilities
+  var zoom_handler = d3.zoom()
+      .on("zoom", zoom_actions);
+
+  zoom_handler(svg);
+
+  function chooseIcon(d){
+  	if(d.image == "router"){
+  		return "url(#router)";
+  	} else if(d.image == "nexus"){
+  		return "url(#nexus)";
+  	} else if(d.image == "switch"){
+  		return "url(#switch)";
+  	} else if(d.image == "switch2"){
+  		return "url(#switch2)";
+  	}else if(d.image == "cmts"){
+  		return "url(#cmts)";
+  	} else if(d.image == "phone"){
+  		return "url(#phone)";
+  	}else if(d.image == "ncs"){
+  		return "url(#ncs)";
+  	}else if(d.image == "switch1"){
+  		return "url(#switch1)";
+  	} else if(d.image == "switch3"){
+  		return "url(#switch3)";
+  	} else {
+  		return "url(#taipan)";
+  	}
+  }
+
+  function click(event, d) {
+    delete d.fx;
+    delete d.fy;
+    d.fixed = false;
+    console.log('click')
+    d3.select(this).classed("fixed", false);
+    simulation.alpha(1).restart();
+  }
+
+  //Zoom functions
+  function zoom_actions(){
+      g.attr("transform", d3.event.transform)
+  }
+
+  function ticked() {
+    //updating the position
+    nodes
+      .attr("cx", function(d) {
+        return d.x;
+      })
+      .attr("cy", function(d) {
+        return d.y;
+      });
+
+    links
+      .attr("x1", function(d) {
+        return d.source.x;
+      })
+      .attr("y1", function(d) {
+        return d.source.y;
+      })
+      .attr("x2", function(d) {
+        return d.target.x;
+      })
+      .attr("y2", function(d) {
+        return d.target.y;
+      });
+	label
+        .attr("x", function (d) { return d.x; })
+        .attr("y", function(d) { return d.y+30; });
+    //console.log(simulation.alpha());
+  }
+
+  function dragstarted(d) {
+    //your alpha hit 0 it stops! make it run again
+    simulation.alphaTarget(0.3).restart();
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+  function dragged( d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+    //d.fx = clamp(event.x, 0, width);
+    //d.fy = clamp(event.y, 0, height);
+    simulation.alpha(1).restart();
+  }
+
+  function clamp(x, lo, hi) {
+  	return x < lo ? lo : x > hi ? hi : x;
+  }
+
+  function dragended(d) {
+	d.fixed = true;
+    // alpha min is 0, head there
+    //simulation.alphaTarget(0);
+    //d.fx = null;
+    //d.fy = null;
+	 ticked();
+  }
+
+
+
+  var data = { nodes: [], links: [] };
+  d3.select("#saveBtn").on('click',function(){
+    console.log(nodes.data())
+    data.nodes = nodes.data();
+    data.links = links.data();
+    svg.selectAll("*").remove();
+    /*
+    $.ajax({
+          url: '/portal/save_nodes2/',
+          type: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify(savedGraph),
+          dataType: 'text',
+          success: function(result) {
+              alert(result);
+          }
+      });
+      */
+  });
+
+  d3.select("#loadBtn").on('click',function(){
+    //console.log(savedGraph);
+     draw(data);
+  });
+
+
+  // Set-up the export button
+  d3.select('#saveButton').on('click', function(){
+  	var svgString = getSVGString(svg.node());
+  	svgString2Image( svgString, 2*width, 2*height, 'png', save ); // passes Blob and filesize String to the callback
+
+  	function save( dataBlob, filesize ){
+  		saveAs( dataBlob, 'd3_topology.png' ); // FileSaver.js function
+  	}
+  });
+
+  // Below are the functions that handle actual exporting:
+  // getSVGString ( svgNode ) and svgString2Image( svgString, width, height, format, callback )
+  function getSVGString( svgNode ) {
+  	svgNode.setAttribute('xlink', 'http://www.w3.org/1999/xlink');
+  	var cssStyleText = getCSSStyles( svgNode );
+  	appendCSS( cssStyleText, svgNode );
+
+  	var serializer = new XMLSerializer();
+  	var svgString = serializer.serializeToString(svgNode);
+  	svgString = svgString.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
+  	svgString = svgString.replace(/NS\d+:href/g, 'xlink:href'); // Safari NS namespace fix
+
+  	return svgString;
+
+  	function getCSSStyles( parentElement ) {
+  		var selectorTextArr = [];
+
+  		// Add Parent element Id and Classes to the list
+  		selectorTextArr.push( '#'+parentElement.id );
+  		for (var c = 0; c < parentElement.classList.length; c++)
+  				if ( !contains('.'+parentElement.classList[c], selectorTextArr) )
+  					selectorTextArr.push( '.'+parentElement.classList[c] );
+
+  		// Add Children element Ids and Classes to the list
+  		var nodes = parentElement.getElementsByTagName("*");
+  		for (var i = 0; i < nodes.length; i++) {
+  			var id = nodes[i].id;
+  			if ( !contains('#'+id, selectorTextArr) )
+  				selectorTextArr.push( '#'+id );
+
+  			var classes = nodes[i].classList;
+  			for (var c = 0; c < classes.length; c++)
+  				if ( !contains('.'+classes[c], selectorTextArr) )
+  					selectorTextArr.push( '.'+classes[c] );
+  		}
+
+  		// Extract CSS Rules
+  		var extractedCSSText = "";
+  		for (var i = 0; i < document.styleSheets.length; i++) {
+  			var s = document.styleSheets[i];
+
+  			try {
+  			    if(!s.cssRules) continue;
+  			} catch( e ) {
+  		    		if(e.name !== 'SecurityError') throw e; // for Firefox
+  		    		continue;
+  		    	}
+
+  			var cssRules = s.cssRules;
+  			for (var r = 0; r < cssRules.length; r++) {
+  				if ( contains( cssRules[r].selectorText, selectorTextArr ) )
+  					extractedCSSText += cssRules[r].cssText;
+  			}
+  		}
+
+
+  		return extractedCSSText;
+
+  		function contains(str,arr) {
+  			return arr.indexOf( str ) === -1 ? false : true;
+  		}
+
+  	}
+
+  	function appendCSS( cssText, element ) {
+  		var styleElement = document.createElement("style");
+  		styleElement.setAttribute("type","text/css");
+  		styleElement.innerHTML = cssText;
+  		var refNode = element.hasChildNodes() ? element.children[0] : null;
+  		element.insertBefore( styleElement, refNode );
+  	}
+  }
+
+
+  function svgString2Image( svgString, width, height, format, callback ) {
+  	var format = format ? format : 'png';
+
+  	var imgsrc = 'data:image/svg+xml;base64,'+ btoa( unescape( encodeURIComponent( svgString ) ) ); // Convert SVG string to data URL
+
+  	var canvas = document.createElement("canvas");
+  	var context = canvas.getContext("2d");
+
+  	canvas.width = width;
+  	canvas.height = height;
+
+  	var image = new Image();
+  	image.onload = function() {
+  		context.clearRect ( 0, 0, width, height );
+  		context.drawImage(image, 0, 0, width, height);
+
+  		canvas.toBlob( function(blob) {
+  			var filesize = Math.round( blob.length/1024 ) + ' KB';
+  			if ( callback ) callback( blob, filesize );
+  		});
+
+
+  	};
+
+  	image.src = imgsrc;
+  }
+
+function draw(data){
+
+
+    var simulation = d3
+      .forceSimulation(data.nodes)
+      .force("charge", d3.forceManyBody().strength(-400))
+      //.force("charge", d3.forceManyBody())
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("link", d3.forceLink(data.links).id(d => d.id))
+      .force("collide", d3.forceCollide().radius(d => d.r + 20).iterations(3))
+      .on("tick", ticked);
+
+      //add encompassing group for the zoom
+      var g = svg.append("g")
+          .attr("class", "everything");
+
+    var links = g
+      .append("g")
+      .selectAll("line")
+      .data(data.links)
+      .enter()
+      .append("line")
+      .attr("stroke-width", 3)
+      .style("stroke", (d) => {return d.color }  )
+      .attr('class', (d) => {return d.type });
+
+        //  function (d, i){
+        //            if( i == 1){ return "#909497"; }
+        //            else if( i == 0){ return "orange"; }
+        //            else{ return "#34495E"; }
+        //          }
+
+    links.append("text").text(d => d.name);
+
+    var defs = svg.append("svg:defs");
+
+
+     defs.append("svg:pattern")
+            .attr("width", 1)
+            .attr("height", 1)
+            //.attr("patternUnits", "userSpaceOnUse")
+            .attr("id", "taipan")
+            .append("svg:image")
+            .attr("xlink:href", "{% static 'taipan.png' %}")
+            .attr("width", "48px")
+            .attr("height", "48px")
+            .attr("x", 0)
+            .attr("y", 0);
+
+      defs.append("svg:pattern")
+             .attr("width", 1)
+             .attr("height", 1)
+             //.attr("patternUnits", "userSpaceOnUse")
+             .attr("id", "router")
+             .append("svg:image")
+             .attr("xlink:href", "{% static 'router.png' %}")
+             .attr("width", "48px")
+             .attr("height", "48px")
+             .attr("x", 0)
+           .attr("y", 0);
+
+
+    var nodes = g
+      .append("g")
+      .selectAll("circle")
+      .data(data.nodes)
+      .enter()
+      .append("circle")
+      .attr("r", 32)
+      //.attr('fill', chooseIcon);
+      .attr("fill", function(d){
+  		if (d.image == "router") { return "#69b3a2"; }
+  		else{ return "#5DADE2"; }
+  	  });
+
+  	var label = g.append("g")
+            .selectAll("text")
+            .data(data.nodes)
+            .enter()
+            .append("text")
+            .text( function(d){   return d.name   })
+            .style("text-anchor", "middle")
+            //.style("fill", "#555")
+            .style("font-family", "Arial")
+            .style("font-size", 12);
+
+    var drag = d3
+      .drag()
+      .on("start", dragstarted)
+      .on("drag", dragged);
+      //.on("end", dragended);
+
+    nodes.call(drag).on("click", click);
+
+    //add zoom capabilities
+    var zoom_handler = d3.zoom()
+        .on("zoom", zoom_actions);
+
+    zoom_handler(svg);
+
+    function chooseIcon(d){
+    	if(d.image == "router"){
+    		return "url(#router)";
+    	} else {
+    		return "url(#taipan)";
+    	}
+    }
+
+    function click(event, d) {
+      delete d.fx;
+      delete d.fy;
+      d.fixed = false;
+      console.log('click')
+      d3.select(this).classed("fixed", false);
+      simulation.alpha(1).restart();
+    }
+
+    //Zoom functions
+    function zoom_actions(){
+        g.attr("transform", d3.event.transform)
+    }
+
+    function ticked() {
+      //updating the position
+      nodes
+        .attr("cx", function(d) {
+          return d.x;
+        })
+        .attr("cy", function(d) {
+          return d.y;
+        });
+
+      links
+        .attr("x1", function(d) {
+          return d.source.x;
+        })
+        .attr("y1", function(d) {
+          return d.source.y;
+        })
+        .attr("x2", function(d) {
+          return d.target.x;
+        })
+        .attr("y2", function(d) {
+          return d.target.y;
+        });
+  	label
+          .attr("x", function (d) { return d.x; })
+          .attr("y", function(d) { return d.y+30; });
+      //console.log(simulation.alpha());
+    }
+
+    function dragstarted(d) {
+      //your alpha hit 0 it stops! make it run again
+      simulation.alphaTarget(0.3).restart();
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+    function dragged( d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+      //d.fx = clamp(event.x, 0, width);
+      //d.fy = clamp(event.y, 0, height);
+      simulation.alpha(1).restart();
+    }
+
+    function clamp(x, lo, hi) {
+    	return x < lo ? lo : x > hi ? hi : x;
+    }
+
+    function dragended(d) {
+  	d.fixed = true;
+      // alpha min is 0, head there
+      //simulation.alphaTarget(0);
+      //d.fx = null;
+      //d.fy = null;
+  	 ticked();
+    }
+}
+
+</script>
+
+{% endblock %}

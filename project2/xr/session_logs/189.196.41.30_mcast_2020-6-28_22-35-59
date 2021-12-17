@@ -1,0 +1,1545 @@
+
+
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#terminal length 0
+Sun Jun 28 22:35:56.607 CST
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#terminal width 510
+Sun Jun 28 22:35:56.793 CST
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf ?
+  WORD                   VRF name
+  video-1                VRF name
+  video-2                VRF name
+  video-mhe              VRF name
+  ngv-lc-gdl             VRF name
+  iptv-lc-gdl            VRF name
+  vod-control            VRF name
+  vod-trafico            VRF name
+  digital-Leon-Hub       VRF name
+  video-cisco-ctrl       VRF name
+  IPTV-MULTICAST-SW      VRF name
+  video-telepto-trafico  VRF name
+  WORD                   VRF name
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf 
+% Incomplete command.
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#### Connection terminated
+                                    ^
+% Invalid input detected at '^' marker.
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf video-1 route
+Sun Jun 28 22:35:57.532 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.11 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(*,239.57.3.64) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-1 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.11 (0/0/CPU0) Flags: LI, Up: 4w3d
+
+(*,239.57.3.65) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-1 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.11 (0/2/CPU0) Flags: LI, Up: 4w3d
+
+(192.168.80.34,239.57.30.1) RPF nbr: 189.196.41.93 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-1 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.11 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.80.35,239.57.30.1) RPF nbr: 189.196.41.93 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-1 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.11 (0/0/CPU0) Flags: F NS, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf video-2 route
+Sun Jun 28 22:35:57.769 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(*,239.57.3.23) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.3.25) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(172.20.56.19,239.57.3.25) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 1d04h
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 1d04h
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 1d04h
+
+(*,239.57.3.36) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(172.20.56.19,239.57.3.36) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 1d04h
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 1d04h
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 1d04h
+
+(*,239.57.3.41) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(172.20.56.23,239.57.3.41) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.3.42) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-2 Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.21 (0/2/CPU0) Flags: F NS, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf video-mhe route
+Sun Jun 28 22:35:58.021 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(*,239.20.10.0/24) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,239.57.10.0/24) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,239.57.20.0/24) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,239.57.20.1) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.1) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.2) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.2) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.3) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.4) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.242,239.57.20.4) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.5) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.5) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.6) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.6) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.161,239.57.20.6) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 14:28:19
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 14:28:19
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 14:28:19
+
+(*,239.57.20.7) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.7) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.9) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.9) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.161,239.57.20.9) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 14:28:19
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 14:28:19
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 14:28:19
+
+(*,239.57.20.10) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.10) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.11) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.11) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.161,239.57.20.11) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 14:28:19
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 14:28:19
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 14:28:19
+
+(*,239.57.20.12) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.12) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.14) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.14) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.15) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.15) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.17) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.17) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.161,239.57.20.17) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 00:11:13
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 00:11:13
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 00:11:13
+
+(*,239.57.20.18) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.18) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.19) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.19) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.20) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.20) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.21) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.21) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.22) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.22) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.22) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.23) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.23) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.23) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.24) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.24) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.24) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.25) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.25) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.25) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.26) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.26) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.26) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.27) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.27) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.27) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.28) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 2w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 2w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 2w3d
+
+(192.168.58.243,239.57.20.28) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.28) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.29) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.29) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.29) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.30) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.30) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.30) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.32) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 2w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 2w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 2w3d
+
+(192.168.58.243,239.57.20.32) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.32) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.33) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.33) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.33) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.35) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 2w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 2w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 2w3d
+
+(192.168.58.243,239.57.20.35) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.35) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.36) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 2w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 2w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 2w3d
+
+(192.168.58.243,239.57.20.36) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.36) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.37) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.37) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.37) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.40) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.40) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.42) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.241,239.57.20.42) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.161,239.57.20.42) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.43) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.43) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.43) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(*,239.57.20.44) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.58.243,239.57.20.44) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.106.162,239.57.20.44) RPF nbr: 189.196.41.76 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-mhe Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.12 (0/2/CPU0) Flags: F NS, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf ngv-lc-gdl route
+Sun Jun 28 22:35:58.477 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.23 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(192.168.214.3,239.213.71.1) RPF nbr: 10.5.214.35 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    Bundle-Ether32.23 Flags: A, Up: 4w3d
+  Outgoing Interface List
+    mdtngv-lc-gdl Flags: F NS MI, Up: 4w3d
+
+(192.168.214.4,239.213.71.1) RPF nbr: 10.5.214.35 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 4w3d
+  Incoming Interface List
+    Bundle-Ether32.23 Flags: A, Up: 4w3d
+  Outgoing Interface List
+    mdtngv-lc-gdl Flags: F NS MI MT MA, Up: 4w3d
+
+(192.168.214.3,239.213.71.2) RPF nbr: 10.5.214.35 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    Bundle-Ether32.23 Flags: A, Up: 4w3d
+  Outgoing Interface List
+    mdtngv-lc-gdl Flags: F NS MI, Up: 4w3d
+
+(192.168.214.4,239.213.71.2) RPF nbr: 10.5.214.35 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 4w3d
+  Incoming Interface List
+    Bundle-Ether32.23 Flags: A, Up: 4w3d
+  Outgoing Interface List
+    mdtngv-lc-gdl Flags: F NS MI MT MA, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf iptv-lc-gdl route
+Sun Jun 28 22:35:58.721 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.94 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.19 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(10.2.212.245,239.213.70.1) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.2) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.7) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.31) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.33) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.35) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.37) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.39) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.41) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.43) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.45) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.47) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.49) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.50) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.51) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.53) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.55) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.57) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.58) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.59) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.60) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.61) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.62) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.63) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.64) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.70) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+
+(10.2.212.245,239.213.70.71) RPF nbr: 10.5.214.21 Flags: RPF MT
+  MT Slot: 0/0/CPU0
+  Up: 3d04h
+  Incoming Interface List
+    Bundle-Ether32.19 Flags: A, Up: 3d04h
+  Outgoing Interface List
+    mdtiptv-lc-gdl Flags: F NS MI MT MA, Up: 3d04h
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf vod-control route
+Sun Jun 28 22:35:59.014 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.16 Flags: II LI, Up: 4w3d
+
+(*,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.16 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(10.0.213.9,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(10.0.213.11,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(10.2.212.245,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(10.2.212.246,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(192.168.120.8,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(192.168.120.9,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(192.168.213.151,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(192.168.213.156,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(192.168.214.3,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(192.168.214.4,225.0.0.3) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(*,239.255.0.8) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-control Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.16 (0/0/CPU0) Flags: LI, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf vod-trafico route
+Sun Jun 28 22:35:59.262 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.17 Flags: II LI, Up: 4w3d
+
+(*,225.25.25.25) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-trafico Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.17 (0/2/CPU0) Flags: LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(*,237.1.1.212) RPF nbr: 189.196.41.62 Flags: C RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvod-trafico Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.17 (0/0/CPU0) Flags: LI, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf digital-Leon-Hub route
+Sun Jun 28 22:35:59.517 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf video-cisco-ctrl route
+Sun Jun 28 22:35:59.741 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.62 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(192.168.65.2,239.56.1.1) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.4) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.50) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.99) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.201) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/2/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.202) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.217) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/0/CPU0) Flags: F NS, Up: 4w3d
+
+(192.168.65.2,239.56.1.240) RPF nbr: 189.196.41.62 Flags: RPF
+  Up: 4w3d
+  Incoming Interface List
+    mdtvideo-cisco-ctrl Flags: A MI, Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.14 (0/2/CPU0) Flags: F NS, Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf IPTV-MULTICAST-SW route
+Sun Jun 28 22:35:59.994 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.93 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.18 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#show mrib vrf video-telepto-trafico route
+Sun Jun 28 22:36:00.226 CST
+
+IP Multicast Routing Information Base
+Entry flags: L - Domain-Local Source, E - External Source to the Domain,
+    C - Directly-Connected Check, S - Signal, IA - Inherit Accept,
+    IF - Inherit From, D - Drop, ME - MDT Encap, EID - Encap ID,
+    MD - MDT Decap, MT - MDT Threshold Crossed, MH - MDT interface handle
+    CD - Conditional Decap, MPLS - MPLS Decap, EX - Extranet
+    MoFE - MoFRR Enabled, MoFS - MoFRR State, MoFP - MoFRR Primary
+    MoFB - MoFRR Backup, RPFID - RPF ID Set, X - VXLAN
+Interface flags: F - Forward, A - Accept, IC - Internal Copy,
+    NS - Negate Signal, DP - Don't Preserve, SP - Signal Present,
+    II - Internal Interest, ID - Internal Disinterest, LI - Local Interest,
+    LD - Local Disinterest, DI - Decapsulation Interface
+    EI - Encapsulation Interface, MI - MDT Interface, LVIF - MPLS Encap,
+    EX - Extranet, A2 - Secondary Accept, MT - MDT Threshold Crossed,
+    MA - Data MDT Assigned, LMI - mLDP MDT Interface, TMI - P2MP-TE MDT Interface
+    IRMI - IR MDT Interface
+
+(*,224.0.0.0/4) RPF nbr: 189.196.41.17 Flags: C RPF P
+  Up: 4w3d
+
+(*,224.0.0.0/24) Flags: D P
+  Up: 4w3d
+
+(*,224.0.1.39) Flags: S P
+  Up: 4w3d
+
+(*,224.0.1.40) Flags: S P
+  Up: 4w3d
+  Outgoing Interface List
+    Bundle-Ether32.22 Flags: II LI, Up: 4w3d
+
+(*,232.0.0.0/8) Flags: D P
+  Up: 4w3d
+
+(192.168.66.75,239.1.100.25) RPF nbr: 10.5.214.33 Flags: RPF MT
+  MT Slot: 0/2/CPU0
+  Up: 1w2d
+  Incoming Interface List
+    Bundle-Ether32.22 Flags: A, Up: 1w2d
+  Outgoing Interface List
+    mdtvideo-telepto-trafico Flags: F NS MI MT MA, Up: 1w2d
+RP/0/RSP0/CPU0:RAC_ASR9K10_Leon_CTC#exit
+
