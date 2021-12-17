@@ -22,6 +22,7 @@ import json
 from django.conf import settings
 import os
 import re
+from mysite.settings import BASE_DIR
 
 
 
@@ -342,7 +343,7 @@ def show_logs(request):
                 return HttpResponse('Hit Exception: {0} {1}'.format(output_data[0],output_data[1] ) )
             lista_MCAST_GRP,dict_MCAST_GRP=parse(output_data)
             file_name='mcastflow_'+str(uuid.uuid4())
-            file_path='./nxos/session_logs/'+file_name
+            file_path = os.path.join(BASE_DIR, "nxos/session_logs", file_name)
             with open(file_path,'w') as file:
                 file.write(output_data)
             date_now=timezone.now()
@@ -378,8 +379,8 @@ def session_logs(request):
             return render(request, 'nxos/show_logs.html', {'form': form, 'log_file_contents': output_data, 'type_form': 'session_logs'} )
     else:
         form = IPForm()
-        file_name=request.GET.get('file_name', '')
-        file_path='./nxos/session_logs/'+file_name
+        file_name = request.GET.get('file_name', '')
+        file_path = os.path.join(BASE_DIR, "nxos/session_logs", file_name)
         with open(file_path,'r') as file:
             file_data=file.read()
     return render(request, 'nxos/show_logs.html', {'form': form, 'type_form': 'session_logs', 'log_file_contents': file_data} )
@@ -395,8 +396,8 @@ def backup(request):
             if type(output_data)==tuple:
                 return HttpResponse('Hit Exception: {0} {1}'.format(output_data[0],output_data[1] ) )
             date_now=timezone.now()
-            file_name='backup_'+str(uuid.uuid4())
-            file_path='./nxos/session_logs/'+file_name
+            file_name = 'backup_'+str(uuid.uuid4())
+            file_path = os.path.join(BASE_DIR, "nxos/session_logs", file_name)
             with open(file_path,'w') as file:
                 file.write(output_data)
             entrada= Script_logs(host_id=ip1,script_type='backup'
@@ -415,10 +416,10 @@ def compare_mcast(request):
         if form.is_valid():
             flow1= form.cleaned_data.get('alternativas1')
             flow2= form.cleaned_data.get('alternativas2')
-            file_path1='./nxos/session_logs/'+flow1.file_location
+            file_path1=file_path = os.path.join(BASE_DIR, "nxos/session_logs", flow1.file_location)
             with open(file_path1,'r') as file:
                 lista_MCAST_GRP,dict_MCAST_GRP=parse(file.read())
-            file_path2='./nxos/session_logs/'+flow2.file_location
+            file_path2=file_path = os.path.join(BASE_DIR, "nxos/session_logs", flow2.file_location)
             with open(file_path2,'r') as file:
                 lista_MCAST_GRP2,dict_MCAST_GRP2=parse(file.read())
             joc=Compare_flows(dict_MCAST_GRP,dict_MCAST_GRP2)

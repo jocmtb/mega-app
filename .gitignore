@@ -1,6 +1,8 @@
 postgres-data/
 *.pyc
 project2/.scannerwork/*
+project2/nxos/session_logs/*
+project2/xr/session_logs/*
 project2/project2/__pycache__/
 project2/api/__pycache__/
 project2/portal/__pycache__/
