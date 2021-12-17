@@ -1,6 +1,6 @@
 FROM nginxinc/nginx-unprivileged:1-alpine
 # copy configuration for nginx
-COPY ./noa-proxy/default.conf /etc/nginx/conf.d/default.conf
+COPY ./mega-proxy/default.conf /etc/nginx/conf.d/default.conf
 # switch tmp to root for create files
 USER root
 # install openssl
@@ -16,9 +16,9 @@ RUN apk update && apk add openssl
 # create directory
 RUN mkdir -p /vol/static
 # copy all static files
-COPY noa-proxy/noa.corp.codetel.com.do.cer /etc/nginx/certificate/noa.corp.codetel.com.do.cer
-COPY noa-proxy/noa.corp.codetel.com.do.key /etc/nginx/certificate/noa.corp.codetel.com.do.key
-COPY noa-proxy/static /vol/static
+COPY mega-proxy/mega.corp.codetel.com.do.cer /etc/nginx/certificate/mega.corp.codetel.com.do.cer
+COPY mega-proxy/mega.corp.codetel.com.do.key /etc/nginx/certificate/mega.corp.codetel.com.do.key
+COPY mega-proxy/static /vol/static
 # give permissions to directory
 RUN chmod 755 /vol/static
 # switch to default user
