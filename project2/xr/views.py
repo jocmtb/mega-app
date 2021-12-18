@@ -20,6 +20,7 @@ import uuid
 import json
 from django.conf import settings
 import os
+from mysite.settings import BASE_DIR
 
 
 def index2(request):
@@ -103,7 +104,7 @@ def backup_xr(request):
                 return HttpResponse('Hit Exception: {0} {1}'.format(output_data[0],output_data[1] ) )
             date_now=timezone.now()
             file_name='backup_'+str(uuid.uuid4())
-            file_path='./xr/session_logs/'+file_name
+            file_path = os.path.join(BASE_DIR, "xr/session_logs", file_name)
             with open(file_path,'w') as file:
                 file.write(output_data)
             entrada= Script_logs(host_id=ip1,script_type='backup'
@@ -130,7 +131,7 @@ def session_logs_xr(request):
     else:
         form = IPForm()
         file_name=request.GET.get('file_name', '')
-        file_path='./xr/session_logs/'+file_name
+        file_path = os.path.join(BASE_DIR, "xr/session_logs", file_name)
         with open(file_path,'r') as file:
             file_data=file.read()
     return render(request, 'xr/show_logs.html', {'form': form, 'type_form': 'session_logs', 'log_file_contents': file_data} )
@@ -145,7 +146,7 @@ def xr_mcast(request):
             date1 = ("%s-%s-%s_%s-%s-%s" % (x.year, x.month, x.day,x.hour,x.minute,x.second) )
             router=BaseDevice(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
             output_data=router.send_command(parse_mcast,['show mrib vrf ?'])
-            docfile='./xr/session_logs/'+host_ip+'_mcast_'+date1
+            docfile = os.path.join(BASE_DIR, "xr/session_logs", f'{host_ip}_mcast_{date1}')
             file_name=host_ip+'_mcast_'+date1
             with open(docfile,'w') as file:
                 file.write(router.buffer)
@@ -183,7 +184,7 @@ def join_igmp_xr(request):
             date1 = ("%s-%s-%s_%s-%s-%s" % (x.year, x.month, x.day,x.hour,x.minute,x.second) )
             router=BaseDevice(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
             output_data=router.send_command(parse_mcast_igmp,['show mrib vrf ?'])
-            docfile='./xr/session_logs/'+host_ip+'_igmp_'+date1
+            docfile = os.path.join(BASE_DIR, "xr/session_logs", f'{host_ip}_igmp_{date1}')
             file_name=host_ip+'_igmp_'+date1
             with open(docfile,'w') as file:
                 file.write(router.buffer)
