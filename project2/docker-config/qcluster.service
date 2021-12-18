@@ -1,0 +1,13 @@
+[Unit]
+Description=qcluster runner
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/project2
+ExecStart=/usr/bin/python3 manage.py qcluster
+StandardOutput=file:/var/log/qcluster.std.log
+StandardError=file:/var/log/qcluster.err.log
+
+[Install]
+WantedBy=multi-user.target

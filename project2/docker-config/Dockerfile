@@ -9,9 +9,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 # update to the lastest code
 RUN apt update
 # install dependencys
-RUN apt install python3-pip python3-dev libpq-dev curl gunicorn iputils-ping vim nano tzdata -y
-# install requirements for noa
+RUN apt install python3-pip python3-dev libpq-dev curl gunicorn systemctl iputils-ping vim nano tzdata -y
+# install requirements for mega
 COPY ./requirements.txt /root/requirements.txt
+# Copy systemd dameon for Django-Q-Cluster
+COPY ./qcluster.service /etc/systemd/system/qcluster.service
 RUN pip3 install -r /root/requirements.txt --default-timeout=100
 # create directories for noa service discovery
 RUN mkdir /root/static && mkdir /var/log/mega && mkdir /root/project2 && cd /root/project2

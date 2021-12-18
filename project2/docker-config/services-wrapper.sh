@@ -21,6 +21,8 @@ for appFolder in os.listdir('project2'):
   python3 /root/project2/manage.py migrate --database=default
   python3 /root/project2/manage.py migrate --database=events
   echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'mega@megacable.com', 'mega123')" | python3 /root/project2/manage.py shell
+  systemctl enable qcluster.service
+  systemctl start qcluster.service
   python3 /root/project2/manage.py runserver 0.0.0.0:8000
 else
   echo "Running production environment"

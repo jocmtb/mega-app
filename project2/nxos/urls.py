@@ -5,6 +5,8 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^nx/$', views.index3, name='index3'),
+    url(r'^example-q/$', views.example_q),
+    url(r'^list-collections/$', views.list_collections),
     url(r'^nxos/$', views.index_nxos, name='index_nxos'),
     url(r'^login/$', views.login_user, name='login_user'),
     url(r'^logout/$', views.logout_user, name='logout_user'),

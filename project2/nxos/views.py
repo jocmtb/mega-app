@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
-from .models import Devices, Mcast_flows, Script_logs, Traffic_interfaces, ARP_data, IGMP_data
+from .models import Devices, Mcast_flows, Script_logs, Traffic_interfaces, ARP_data, IGMP_data, Collections
 from django.http import HttpResponse,JsonResponse
 from .forms import NameForm, IPForm, LoginForm, CompareForm, TrafficForm, IP_XR_Form, d3Form, d3Form2
 from .tests import json_data
@@ -23,8 +23,23 @@ from django.conf import settings
 import os
 import re
 from mysite.settings import BASE_DIR
+from django_q.tasks import async_task
+from .tasks import wait_and_print, return_result
 
 
+def example_q(request):
+    async_task(wait_and_print, request.user.username, hook=return_result)
+    return JsonResponse({'status':'OK','code':200})
+
+def list_collections(request):
+    data = [ {
+                'id':x.id,
+                'type':x.type,
+                'status':x.status,
+                'uuid':x.uuid,
+                'datetime':x.datetime,
+    } for x in Collections.objects.all()]
+    return JsonResponse({ 'data': data })
 
 @login_required(login_url='/nxos/login/')
 def index(request):

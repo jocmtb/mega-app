@@ -13,6 +13,15 @@ class Devices(models.Model):
     def __str__(self):
         return self.hostname
 
+class Collections(models.Model):
+    user = models.CharField(max_length=200)
+    uuid = models.CharField(max_length=200)
+    type = models.CharField(max_length=200)
+    status = models.CharField(max_length=200)
+    datetime = models.DateTimeField('date published')
+    def __str__(self):
+        return '{0} <> {1}'.format(self.uuid, self.type)
+
 class Mcast_flows(models.Model):
     host_id = models.CharField(max_length=200)
     src_mcast = models.CharField(max_length=200)
