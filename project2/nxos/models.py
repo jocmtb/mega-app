@@ -18,6 +18,7 @@ class Collections(models.Model):
     uuid = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
     status = models.CharField(max_length=200)
+    err_msg = models.CharField(max_length=200, default="na")
     datetime = models.DateTimeField('date published')
     def __str__(self):
         return '{0} <> {1}'.format(self.uuid, self.type)

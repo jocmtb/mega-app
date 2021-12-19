@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<h3>Please select one device:</h3>
+
 {% if device_list %}
     <ul>
     {% for device in device_list %}
@@ -19,13 +19,14 @@
 <div class="clearfix">
       <div class="column menu">
             <!-- All Context Menu goes Here -->
-
+              <div class="container espacio">
+                <h3>Please select one device:</h3>
                   <form action="/nxos/dashboard/" method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <input type="submit" value="Submit">
+                    <input class="btn btn-info btn-padding" type="submit" value="Submit">
                   </form>
-
+              </div>
                   <h2 class="title2">{{host1}}</h2>
                   <div  class=joc1>
                         <div class="row">

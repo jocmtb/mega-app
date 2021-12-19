@@ -5,16 +5,18 @@
     <div class="column menu">
 
 {% if type_form == "mcast_flows" %}
+<div class="container espacio">
     <h2>Mcast flow script</h2>
       <form action="/nxos/show_logs/" method="post">
         {% csrf_token %}
         {{ form }}
-        <input class="btn btn-primary" type="submit" value="Submit">
+        <input class="btn btn-primary btn-padding" type="submit" value="Submit">
       </form>
       <form action="/nxos/compare_mcast/" method="get">
-        <input class="btn btn-info" type="submit" value="Compare">
+        <input class="btn btn-info btn-padding" type="submit" value="Compare">
         {% csrf_token %}
       </form>
+  </div>
 {% endif %}
 {% if type_form == "backup" %}
 <div class="container espacio">

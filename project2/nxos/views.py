@@ -24,7 +24,7 @@ import os
 import re
 from mysite.settings import BASE_DIR
 from django_q.tasks import async_task
-from .tasks import wait_and_print, return_result, traffic_task_queue
+from .tasks import wait_and_print, return_result, traffic_task_queue, arp_task_queue, igmp_task_queue
 
 
 def example_q(request):
@@ -39,8 +39,9 @@ def get_collections(request):
                 'status':x.status,
                 'uuid':x.uuid,
                 'user':x.user,
+                'err_msg':x.err_msg,
                 'datetime':x.datetime,
-    } for x in Collections.objects.all()]
+    } for x in Collections.objects.all().order_by('-id')]
     return JsonResponse({ 'data': data })
 
 def list_collections(request):
@@ -231,23 +232,9 @@ def arp_info(request):
         form = IPForm(request.POST)
         if form.is_valid():
             host_ip= form.cleaned_data.get('alternativas').ip_address
-            router=DeviceNXOS(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
-            stdout=router.ssh_connect(['show interface description | i Vlan',
-                                        'show mac address-table ',
-                                        'show ip arp' ] )
-            if isinstance(stdout,tuple):
-                return HttpResponse('{0} > {1}'.format(stdout[0],stdout[1]) )
-            dict_ARP,lista_MAC=parse_arp(stdout)
-            for arp in lista_MAC:
-                device_now = ARP_data(host_id=host_ip,
-                                            arp_ip=arp['mac_ip'],
-                                             arp_mac=arp['mac_add'],
-                                             arp_intf=arp['mac_intf'],
-                                             arp_vlan=arp['mac_vlan'],
-                                             vlan_name=arp['vlan_name'],
-                                             datetime=timezone.now() )
-                device_now.save()
-            return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
+            async_task(arp_task_queue, request.user.username, host_ip, hook=return_result)
+            return HttpResponseRedirect('/nxos/list-collections/')
+            #return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
     else:
         form = IPForm()
         return render(request, 'nxos/launch_script.html', {'form': form, 'type_var': 'arp_data'} )
@@ -259,21 +246,9 @@ def join_igmp(request):
         form = IPForm(request.POST)
         if form.is_valid():
             host_ip= form.cleaned_data.get('alternativas').ip_address
-            router=DeviceNXOS(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
-            stdout=router.ssh_connect(['show ip igmp groups'] )
-            if isinstance(stdout,tuple):
-                return HttpResponse('{0} > {1}'.format(stdout[0],stdout[1]) )
-            lista_IGMP=parse_igmp(stdout)
-            for arp in lista_IGMP:
-                device_now = IGMP_data(host_id=host_ip,
-                                            mcast_grp=arp['mcast_grp'],
-                                             mcast_src=arp['mcast_src'],
-                                             reporter_ip=arp['reporter_ip'],
-                                             intf=arp['intf'],
-                                             version=arp['version'],
-                                             datetime=timezone.now() )
-                device_now.save()
-            return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
+            async_task(igmp_task_queue, request.user.username, host_ip, hook=return_result)
+            return HttpResponseRedirect('/nxos/list-collections/')
+            #return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
     else:
         form = IPForm()
         return render(request, 'nxos/launch_script.html', {'form': form, 'type_var': 'join_igmp'} )

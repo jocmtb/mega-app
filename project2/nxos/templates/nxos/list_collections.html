@@ -7,11 +7,12 @@
 <table id="collectionsTable" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
 <thead>
     <tr bgcolor="#85929E">
-        <th width="10%">Id</th>
+        <th width="5%">Id</th>
         <th>Type</th>
         <th>Status</th>
         <th>User</th>
         <th>UUID</th>
+        <th>Error Message</th>
         <th width="20%">Datetime</th>
     </tr>
 </thead>
@@ -30,13 +31,29 @@
       "processing": true,
       "paging": true,
       "ajax": "/nxos/get-collections/",
+      "order": [[ 0, "desc" ]],
       // add column definitions to map your json to the table
       "columns": [
         {data: "id"},
         {data: "type"},
-        {data: "status"},
+        {data: "status",
+          "render": function(data, type, row, meta){
+                if(data === 'collecting'){
+                  data = data + '<img src="{% static 'spinner.gif' %}">';
+                }
+                else if(data === 'Failed'){
+                  data = data + '<img src="{% static 'failed.png' %}">';
+                }
+                else if(data === 'completed'){
+                  data = data + '<img src="{% static 'green_check.png' %}">';
+                }
+
+              return data;
+            }
+      },
         {data: "user"},
         {data: "uuid"},
+        {data: "err_msg"},
         {data: "datetime"},
       ]
     } );

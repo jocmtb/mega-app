@@ -30,21 +30,25 @@
 {% endif %}
 
 {% if type_var == "traffic" %}
+<div class="container espacio" >
 <h3>Get Traffic from host:</h3>
 <form action="/nxos/traffic_interface/" method="post">
   {% csrf_token %}
   {{ form }}
-  <input class="btn btn-primary" type="submit" value="Submit">
+  <input class="btn btn-primary btn-padding" type="submit" value="Submit">
 </form>
+</div>
 {% endif %}
 
 {% if type_var == "arp_data" %}
+<div class="container espacio" >
 <h3>Get ARP data from host:</h3>
 <form action="/nxos/arp_info/" method="post">
   {% csrf_token %}
   {{ form }}
-  <input class="btn btn-primary" type="submit" value="Submit">
+  <input class="btn btn-primary btn-padding" type="submit" value="Submit">
 </form>
+</div>
 {% endif %}
 
 {% if type_var == "join_igmp" %}
