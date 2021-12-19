@@ -2,24 +2,31 @@
 
 {% block content %}
 
-<h1>Pagina para submitir valor:</h1>
 
 {% if type_var == "addon" %}
-<h3>Page to add/update host:</h3>
-<form action="/nxos/get_name/" method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit" value="Submit">
-</form>
+<div class="container espacio" >
+  <h3>Add/update host:</h3>
+  <form action="/nxos/get_name/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <div class="btn-padding">
+      <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+  </form>
+</div>
 {% endif %}
 
 {% if type_var == "delete" %}
-<h3>Page to delete host:</h3>
+<div class="container espacio" >
+<h3>Delete host:</h3>
 <form action="/nxos/delete_device/" method="post">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" value="Submit">
+  <div class="btn-padding">
+  <input class="btn btn-primary" type="submit" value="Submit">
+  </div>
 </form>
+</div>
 {% endif %}
 
 {% if type_var == "traffic" %}
@@ -27,35 +34,48 @@
 <form action="/nxos/traffic_interface/" method="post">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" value="Submit">
+  <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 {% endif %}
 
 {% if type_var == "arp_data" %}
-<h3>Page to get ARP data from host:</h3>
+<h3>Get ARP data from host:</h3>
 <form action="/nxos/arp_info/" method="post">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" value="Submit">
+  <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 {% endif %}
 
 {% if type_var == "join_igmp" %}
-<h3>Page to get JOIN IGMP from host:</h3>
-<form action="/nxos/join_igmp/" method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit" value="Submit">
-</form>
+<div class="container espacio" >
+  <h3>Get JOIN IGMP from host:</h3>
+  <form action="/nxos/join_igmp/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <div class="btn-padding">
+      <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+  </form>
+</div>
 {% endif %}
 
 {% if type_var == "xr_mcast" %}
-<h3>Page to get Mcast from RAC (ASR9K) devices:</h3>
+<h3>Get Mcast from RAC (ASR9K) devices:</h3>
 <form action="/nxos/xr_mcast/" method="post">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" value="Submit">
+  <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 {% endif %}
 
+<style media="screen">
+  .btn-padding{
+    padding-top: 5px !important;
+    margin-top: 8px !important;
+  }
+  .espacio{
+    width: 30%;
+  }
+</style>
 {% endblock %}

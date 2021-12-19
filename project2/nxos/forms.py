@@ -28,7 +28,8 @@ class MyForm(forms.Form):
 '''
 
 class NameForm(forms.Form):
-    your_ip = forms.CharField(label='IP Address', max_length=100)
+    your_ip = forms.CharField(label='IP Address', max_length=100
+                            , widget=forms.TextInput( attrs= {'class':'form-control'}) )
     '''alternativas = forms.ChoiceField(label="",
                                 choices=[ (x.ip_address, x.hostname) for x in Devices.objects.all()],
                                 initial='',
@@ -39,7 +40,7 @@ class NameForm(forms.Form):
 class IPForm(forms.Form):
     #your_ip = forms.CharField(label='IP Address', max_length=100)
     alternativas = forms.ModelChoiceField(required=True
-                                       , widget=forms.Select
+                                       , widget=forms.Select(attrs= {'class':'form-control'})
                                        , queryset=Devices.objects.all()
                                        ,to_field_name="hostname")
 
@@ -53,7 +54,7 @@ class d3Form(forms.Form):
 
 class d3Form2(forms.Form):
     sites = forms.ChoiceField(choices = SITES_CHOICES, label="Mega Sites"
-                            , initial='', widget=forms.Select()
+                            , initial='', widget=forms.Select(attrs= {'class':'form-control'})
                             , required=True)
 
 class TrafficForm(forms.Form):
@@ -65,11 +66,11 @@ class TrafficForm(forms.Form):
 class CompareForm(forms.Form):
     #your_ip = forms.CharField(label='IP Address', max_length=100)
     alternativas1 = forms.ModelChoiceField(required=True
-                                       , widget=forms.Select
+                                       , widget=forms.Select( attrs= {'class':'form-control'})
                                        , queryset=Script_logs.objects.filter(script_type='mcastflow').all()
                                        ,to_field_name="file_location")
     alternativas2 = forms.ModelChoiceField(required=True
-                                       , widget=forms.Select
+                                       , widget=forms.Select( attrs= {'class':'form-control'})
                                       , queryset=Script_logs.objects.filter(script_type='mcastflow').all()
                                       ,to_field_name="file_location")
 

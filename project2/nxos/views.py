@@ -29,17 +29,22 @@ from .tasks import wait_and_print, return_result
 
 def example_q(request):
     async_task(wait_and_print, request.user.username, hook=return_result)
-    return JsonResponse({'status':'OK','code':200})
+    #return JsonResponse({'status':'OK','code':200})
+    return HttpResponseRedirect('/nxos/list-collections2/')
 
-def list_collections(request):
+def get_collections(request):
     data = [ {
                 'id':x.id,
                 'type':x.type,
                 'status':x.status,
                 'uuid':x.uuid,
+                'user':x.user,
                 'datetime':x.datetime,
     } for x in Collections.objects.all()]
     return JsonResponse({ 'data': data })
+
+def list_collections(request):
+    return render(request, 'nxos/list_collections.html')
 
 @login_required(login_url='/nxos/login/')
 def index(request):
