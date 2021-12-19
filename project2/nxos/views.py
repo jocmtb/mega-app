@@ -24,13 +24,13 @@ import os
 import re
 from mysite.settings import BASE_DIR
 from django_q.tasks import async_task
-from .tasks import wait_and_print, return_result
+from .tasks import wait_and_print, return_result, traffic_task_queue
 
 
 def example_q(request):
     async_task(wait_and_print, request.user.username, hook=return_result)
     #return JsonResponse({'status':'OK','code':200})
-    return HttpResponseRedirect('/nxos/list-collections2/')
+    return HttpResponseRedirect('/nxos/list-collections/')
 
 def get_collections(request):
     data = [ {
@@ -217,20 +217,10 @@ def traffic_interface(request):
     if request.method == 'POST':
         form = IPForm(request.POST)
         if form.is_valid():
-            host_ip= form.cleaned_data.get('alternativas').ip_address
-            router=DeviceNXOS(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
-            stdout=router.ssh_connect(['show interface'])
-            if isinstance(stdout,tuple):
-                return HttpResponse('{0} > {1}'.format(stdout[0],stdout[1]) )
-            interfaces=parse_interface(stdout)
-            for interfaz in interfaces.keys():
-                device_now = Traffic_interfaces(host_id=host_ip,
-                                            interface_id=interfaz,
-                                             input_rate=interfaces[interfaz]['input_rate'],
-                                             output_rate=interfaces[interfaz]['output_rate'],
-                                             data_date=timezone.now() )
-                device_now.save()
-            return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
+            host_ip = form.cleaned_data.get('alternativas').ip_address
+            async_task(traffic_task_queue, request.user.username, host_ip, hook=return_result)
+            return HttpResponseRedirect('/nxos/list-collections/')
+            #return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
     else:
         form = IPForm()
         return render(request, 'nxos/launch_script.html', {'form': form, 'type_var': 'traffic'} )
