@@ -32,7 +32,8 @@ class NameForm(forms.Form):
 class IPForm(forms.Form):
     #your_ip = forms.CharField(label='IP Address', max_length=100)
     alternativas = forms.ModelChoiceField(required=True
-                                       , widget=forms.Select
+                                        ,label='Devices'
+                                       , widget=forms.Select( attrs= {'class':'form-control'})
                                        , queryset=Devices.objects.all()
                                        ,to_field_name="hostname")
 
@@ -59,6 +60,8 @@ class CompareForm(forms.Form):
 
 class LoginForm(forms.Form):
     your_email = forms.CharField(label='E-mail', max_length=100,
-                                 widget=forms.TextInput( attrs= {'class':'form-control'}) )
+                                 widget=forms.TextInput( attrs= {'class':'form-control'})
+                                 )
     your_password = forms.CharField(label='Password', max_length=100,
-                                  widget=forms.TextInput( attrs= {'class':'form-control'}) )
+                                  widget=forms.TextInput( attrs= {'class':'form-control'})
+                                  )

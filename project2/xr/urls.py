@@ -1,6 +1,7 @@
 
 from . import views
 from django.conf.urls import url, include
+from django.urls import path
 
 urlpatterns = [
     url(r'^$', views.index2, name='index2'),
@@ -8,6 +9,8 @@ urlpatterns = [
     url(r'^add_device/$', views.add_device, name='add_device'),
     url(r'^delete_device/$', views.delete_device_xr, name='delete_device_xr'),
     url(r'^backup/$', views.backup_xr, name='backup_xr'),
+    url(r'^backup/$', views.backup_xr, name='backup_xr'),
+    path('qos-xr/', views.qos_xr, name='qos_xr'),
     url(r'^session_logs/$', views.session_logs_xr, name='session_logs_xr'),
     url(r'^xr_mcast/$', views.xr_mcast, name='xr_mcast'),
     url(r'^traffic_interface/$', views.traffic_interface_xr, name='traffic_interface_xr'),

@@ -117,6 +117,33 @@ def backup_xr(request):
     return render(request, 'xr/show_logs.html', {'form': form, 'type_form': 'backup'} )
 
 @login_required(login_url='/nxos/login/')
+def qos_xr(request):
+    if request.method == 'POST':
+        form = IPForm(request.POST)
+        if form.is_valid():
+            ip1 = form.cleaned_data.get('alternativas').ip_address
+            router = BaseDevice(ip1, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
+            output_data = router.ssh_connect(['show mpls interfaces'])
+            if type(output_data) == tuple:
+                return HttpResponse('Hit Exception: {0} {1}'.format(output_data[0],output_data[1] ) )
+            date_now = timezone.now()
+            file_name ='qos_'+str(uuid.uuid4())
+            file_path = os.path.join(BASE_DIR, "xr/session_logs", file_name)
+            with open(file_path,'w') as file:
+                file.write(output_data)
+            entrada = Script_logs(
+                                host_id = ip1
+                                ,script_type = 'qos'
+                                ,file_location = file_name
+                                ,data_date = date_now
+                                )
+            entrada.save()
+            return render(request, 'xr/show_logs.html', {'form': form, 'log_file_contents': output_data, 'type_form': 'qos'} )
+    else:
+        form = IPForm()
+    return render(request, 'xr/show_logs.html', {'form': form, 'type_form': 'qos'} )
+
+@login_required(login_url='/nxos/login/')
 def session_logs_xr(request):
     if request.method == 'POST':
         form = IPForm(request.POST)
