@@ -54,12 +54,15 @@ def index(request):
     #context = {'latest_question_list': latest_question_list}
     return render(request, 'nxos/index.html')
 
+@login_required(login_url='/nxos/login/')
 def index3(request):
     return render(request, 'nxos/index3.html')
 
+@login_required(login_url='/nxos/login/')
 def index_nxos(request):
     return render(request, 'nxos/dashboard_nxos.html')
 
+@login_required(login_url='/nxos/login/')
 def index_xr(request):
     return render(request, 'nxos/dashboard_xr.html')
 
@@ -82,7 +85,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponse('User is now logout')
+    return HttpResponseRedirect('/nxos/login/')
 
 def parse_cdp(nodes,links,host,f):
     if host not in nodes.keys():

@@ -76,7 +76,7 @@ class CompareForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    your_email = forms.CharField(label='E-mail', max_length=100,
+    your_email = forms.CharField(label='Username', max_length=100,
                                  widget=forms.TextInput( attrs= {'class':'form-control'}) )
     your_password = forms.CharField(label='Password', max_length=100,
                                   widget=forms.PasswordInput( attrs= {'class':'form-control'}) )
