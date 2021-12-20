@@ -104,12 +104,15 @@ body{
 }
 .joc2 {
   padding : 10px;
+  margin: 10px;
   border : 6px solid #ECECEC;
   text-align: left;
   background-color: #FFF;
   border-color: #ECECEC;
+  box-shadow: 6px 6px 6px 3px rgba(0, 0, 2, 0.3);
 }
 .joc3 {
+  margin: 10px;
   padding : 10px;
   border : 6px solid #ECECEC;
   text-align: left;
@@ -117,6 +120,7 @@ body{
   background-color: #FFF;
   border-color: #ECECEC;
   border-left:5px solid #ECECEC;
+  box-shadow: 6px 6px 6px 3px rgba(0, 0, 2, 0.3);
 }
 .joc4 {
   padding : 5px;
@@ -308,10 +312,31 @@ h2{
 .size-img1{
   width: 128px;
   border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .size-img2{
   height: 32px;
   border-radius: 50%;
+}
+.centrar-texto{
+  text-align:center;
+}
+
+.acolor{
+  color: grey;
+}
+.acolor:hover{
+  color: black;
+}
+.ncolor{
+  background-color: white;
+  height: 80px;
+  width: 100%;
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>
 
@@ -389,9 +414,9 @@ h2{
                     <img class="size-img2" src="{% static 'developer.jpeg' %}">
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <h6 class="dropdown-header">{{ user.username }}</h6>
-                    <img class="dropdown-header size-img1" src="{% static 'developer.jpeg' %}">
-                    <h6 class="dropdown-header">{{ user.email }}</h6>
+                      <h6 class="dropdown-header centrar-texto" >{{ user.username }}</h6>
+                      <img class="dropdown-header size-img1" src="{% static 'developer.jpeg' %}">
+                      <h6 class="dropdown-header" >{{ user.email }}</h6>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'dashboard'  %}">Dashboard</a>
                     <a class="dropdown-item" href="{% url 'list_collections'  %}">Collections</a>
@@ -429,10 +454,38 @@ h2{
     {% endblock %}
 </div>
 
-<footer class="footer">
-    <div class="container">
+<footer class="footer" style="background-color: white; margin: 8px;">
+    <div class="container" >
         {% block footer %}
-        <p class="text-muted text-center">&copy; Copyright 2020 by <a href="https://github.com/jocmtb">Jocmtb</a>.</p>
+
+        <ul class="nav ncolor">
+          <li class="nav-item">
+            <a class="nav-link acolor active" href="https://github.com/jocmtb">
+              <img class="size-img2" src="{% static 'developer.jpeg' %}">
+              &copy; 2022 Jocmtb
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link acolor" href="https://github.com/jocmtb/mega-app">Docs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link acolor" href="{% url 'about'  %}">Contact
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link acolor" href="{% url 'about'  %}">Privacy
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link acolor" href="{% url 'about'  %}">Blog
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="{% url 'about'  %}">About
+            </a>
+          </li>
+        </ul>
         {% endblock %}
     </div>
 </footer>
