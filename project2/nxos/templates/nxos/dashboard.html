@@ -1,7 +1,5 @@
 {% extends "nxos/index.html" %}
 
-
-
 {% block content %}
 
 {% if device_list %}
@@ -13,8 +11,6 @@
 {% else %}
     <p>No nxos are available.</p>
 {% endif %}
-
-
 
 <div class="clearfix">
       <div class="column menu">
@@ -28,24 +24,25 @@
                   </form>
               </div>
                   <h2 class="title2">{{host1}}</h2>
-                  <div  class=joc1>
-                        <div class="row">
-                              <div class="col-sm-6">
-                                <!-- class="table table-striped table-bordered"-->
-                                <h3>Interface Statistics</h3>
-                        				<table id="myTable" class="display" style="width:100%" >
-                            				<thead>
-                                				<tr>
-                                					<th>Hostname</th>
-                                					<th>Input Rate</th>
-                                					<th>Output Rate</th>
-                                          <th>DateTime</th>
-                                				</tr>
-                            				</thead>
-                        				</table>
-                  		        </div>
-                              <div class="col-sm-6">
-                                   <!-- <div id="container-joc"></div> -->
+                        <div class="row zero-margin">
+                              <div class="col-sm-6 zero-margin">
+                                  <div class="joc2">
+                                  <!-- class="table table-striped table-bordered"-->
+                                  <h3>Interface Statistics</h3>
+                          				<table id="myTable" class="display" style="width:100%" >
+                              				<thead>
+                                  				<tr>
+                                  					<th>Hostname</th>
+                                  					<th>Input Rate</th>
+                                  					<th>Output Rate</th>
+                                            <th>DateTime</th>
+                                  				</tr>
+                              				</thead>
+                          				</table>
+                    		        </div>
+                              </div>
+                              <div class="col-sm-6 zero-margin">
+                                <div class="joc2">
                                    <h3>Info Device Inventory</h3>
                                    <table id="myScriptTable" class="display" style="width:100%" >
                                				<thead>
@@ -58,77 +55,70 @@
                                				</thead>
                            				</table>
                                 </div>
+                                </div>
                           </div>
-                      </div>
+
         </div>
 
       <div class="column content">
             <!-- All Context Section goes Here -->
-            <div  class=joc1>
-              <div class="row">
-                  <div  class="col-sm-6">
-                      <div id="container-chart1"></div>
+              <div class="row zero-margin" >
+                  <div  class="col-sm-6 zero-margin">
+                      <div  class=joc2>
+                        <div id="container-chart1"></div>
+                      </div>
                     </div>
-                  <div  class="col-sm-6">
-                      <div id="container-chart2"></div>
-                    </div>
-                </div>
-              </div>
-
-
-            <div  class=joc1>
-
-
-              <div class="row">
-                  <div  class="col-sm-6">
-                    <h3>ARP Table</h3>
-                    <table id="myARPTable" class="display" style="width:100%" >
-                        <thead>
-                            <tr>
-                              <th>Hostname</th>
-                              <th>Nexus Interface</th>
-                              <th>MAC Address</th>
-                              <th>IP Address</th>
-                              <th>Vlan</th>
-                              <th>Vlan Name</th>
-                              <th width="20%">DateTime</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    </div>
-                  <div  class="col-sm-6">
-                    <h3>IGMP JOIN Table</h3>
-                    <table id="myIGMPTable" class="display" style="width:100%" >
-                        <thead>
-                            <tr>
-                              <th>Hostname</th>
-                              <th>Mcast Group</th>
-                              <th>Mcast Source</th>
-                              <th>Reporter IP</th>
-                              <th>Interface</th>
-                              <th>IGMP Version</th>
-                              <th width="20%">DateTime</th>
-                            </tr>
-                        </thead>
-                    </table>
+                  <div  class="col-sm-6 zero-margin">
+                      <div  class=joc2>
+                        <div id="container-chart2"></div>
+                      </div>
                     </div>
                 </div>
 
+              <div class="row zero-margin">
+                  <div class="col-sm-6 zero-margin">
+                    <div class="joc2">
+                      <h3>ARP Table</h3>
+                      <table id="myARPTable" class="display" style="width:100%" >
+                          <thead>
+                              <tr>
+                                <th>Hostname</th>
+                                <th>Nexus Interface</th>
+                                <th>MAC Address</th>
+                                <th>IP Address</th>
+                                <th>Vlan</th>
+                                <th>Vlan Name</th>
+                                <th width="20%">DateTime</th>
+                              </tr>
+                          </thead>
+                      </table>
+                      </div>
+                    </div>
+                  <div  class="col-sm-6 zero-margin">
+                    <div class="joc2">
+                        <h3>IGMP JOIN Table</h3>
+                        <table id="myIGMPTable" class="display" style="width:100%" >
+                            <thead>
+                                <tr>
+                                  <th>Hostname</th>
+                                  <th>Mcast Group</th>
+                                  <th>Mcast Source</th>
+                                  <th>Reporter IP</th>
+                                  <th>Interface</th>
+                                  <th>IGMP Version</th>
+                                  <th width="20%">DateTime</th>
+                                </tr>
+                            </thead>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+      </div>  <!-- END Column table-->
+</div>   <!-- END CLEAR FIX-->
 
+{% endblock %}
 
-
-
-          </div>
-      </div>
-</div>
-
-
-
-<!--
-	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>-->
-
-
+{% block scripts %}
 
 	<script>
 	$(document).ready(function() {
