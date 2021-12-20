@@ -40,7 +40,7 @@ def get_collections(request):
                 'uuid':x.uuid,
                 'user':x.user,
                 'err_msg':x.err_msg,
-                'datetime':x.datetime,
+                'datetime':x.datetime.strftime('%d %B %Y, %I:%M %p'),
     } for x in Collections.objects.all().order_by('-id')]
     return JsonResponse({ 'data': data })
 
@@ -426,10 +426,12 @@ def api_traffic_table(request,hostname):
     devs = Traffic_interfaces.objects.filter(host_id=hostname).all()
     if devs.count() != 0:
         for x in devs:
-            data_list.append( { 'interface_id':x.interface_id,
-                       'input_rate':x.input_rate,
-                       'output_rate':x.output_rate,
-                       'datetime':x.data_date} )
+            data_list.append( {
+                        'interface_id':x.interface_id,
+                        'input_rate':x.input_rate,
+                        'output_rate':x.output_rate,
+                        'datetime':x.data_date.strftime('%d %B %Y, %I:%M %p')
+                        } )
     return JsonResponse( {'data':data_list} )
 
 def api_traffic(request,hostname):
@@ -439,10 +441,11 @@ def api_traffic(request,hostname):
         for x in devs:
             ts_seconds= (x.data_date - dt(1970,1,1)).total_seconds()
             tiempo= int(ts_seconds*1000)
-            data_list.append( { 'interface_id':x.interface_id,
-                       'input_rate':x.input_rate,
-                       'output_rate':x.output_rate,
-                       'datetime':tiempo} )
+            data_list.append( {
+                        'interface_id':x.interface_id,
+                        'input_rate':x.input_rate,
+                        'output_rate':x.output_rate,
+                        'datetime':tiempo} )
     return JsonResponse( {'data':data_list} )
 
 def api_host_stats(request,stat_id):
@@ -488,10 +491,15 @@ def ajax_mcast_flows(request):
     data = {'data':[]}
     query_results = Mcast_flows.objects.all();
     for x in query_results:
-        data['data'].append({'mcast_src':x.src_mcast,'mcast_grp':x.mcast_grp
-                            ,'in_intf':x.in_intf,'out_intf':x.out_intf
-                            ,'flow_stat':x.flow_status,'rpf_nei':x.rpf_neighbor
-                            ,'datetime':x.data_date,'host':x.host_id})
+        data['data'].append({
+                            'mcast_src':x.src_mcast
+                            ,'mcast_grp':x.mcast_grp
+                            ,'in_intf':x.in_intf
+                            ,'out_intf':x.out_intf
+                            ,'flow_stat':x.flow_status
+                            ,'rpf_nei':x.rpf_neighbor
+                            ,'datetime':x.data_date.strftime('%d %B %Y, %I:%M %p')
+                            ,'host':x.host_id})
     return JsonResponse(data)
 
 def script_logs(request):
@@ -499,8 +507,11 @@ def script_logs(request):
     query_results = Script_logs.objects.all();
     if query_results.count() != 0:
         for x in query_results:
-            data['data'].append({'sc_type':x.script_type,'file_name':x.file_location
-                            ,'datetime':x.data_date,'host':x.host_id})
+            data['data'].append({
+                            'sc_type':x.script_type
+                            ,'file_name':x.file_location
+                            ,'datetime':x.data_date.strftime('%d %B %Y, %I:%M %p')
+                            ,'host':x.host_id})
     return JsonResponse(data)
 
 def script_logs_by_host(request,hostname):
@@ -508,8 +519,11 @@ def script_logs_by_host(request,hostname):
     query_results = Script_logs.objects.filter(host_id=hostname).all();
     if query_results.count() != 0:
         for x in query_results:
-            data['data'].append({'sc_type':x.script_type,'file_name':x.file_location
-                            ,'datetime':x.data_date,'host':x.host_id})
+            data['data'].append({
+                            'sc_type':x.script_type
+                            ,'file_name':x.file_location
+                            ,'datetime':x.data_date.strftime('%d %B %Y, %I:%M %p')
+                            ,'host':x.host_id})
     return JsonResponse(data)
 
 def api_arp(request,hostname):
@@ -517,13 +531,15 @@ def api_arp(request,hostname):
     devs = ARP_data.objects.filter(host_id=hostname).all()
     if devs.count() != 0:
         for x in devs:
-            data_list.append( {  'host_id':x.host_id,
+            data_list.append( {
+                        'host_id':x.host_id,
                         'arp_ip':x.arp_ip,
-                       'arp_mac':x.arp_mac,
-                       'arp_vlan':x.arp_vlan,
-                       'vlan_name':x.vlan_name,
-                       'arp_intf':x.arp_intf,
-                       'datetime':x.datetime} )
+                        'arp_mac':x.arp_mac,
+                        'arp_vlan':x.arp_vlan,
+                        'vlan_name':x.vlan_name,
+                        'arp_intf':x.arp_intf,
+                        'datetime':x.datetime.strftime('%d %B %Y, %I:%M %p')
+                       } )
     return JsonResponse( {'data':data_list} )
 
 def api_join_igmp(request,hostname):
@@ -531,13 +547,15 @@ def api_join_igmp(request,hostname):
     devs = IGMP_data.objects.filter(host_id=hostname).all()
     if devs.count() != 0:
         for x in devs:
-            data_list.append( {  'host_id':x.host_id,
+            data_list.append( {
+                        'host_id':x.host_id,
                         'mcast_grp':x.mcast_grp,
-                       'mcast_src':x.mcast_src,
-                       'reporter_ip':x.reporter_ip,
-                       'version':x.version,
-                       'intf':x.intf,
-                       'datetime':x.datetime} )
+                        'mcast_src':x.mcast_src,
+                        'reporter_ip':x.reporter_ip,
+                        'version':x.version,
+                        'intf':x.intf,
+                        'datetime':x.datetime.strftime('%d %B %Y, %I:%M %p')
+                        } )
     return JsonResponse( {'data':data_list} )
 
 ###TEST defs###
