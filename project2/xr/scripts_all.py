@@ -1,6 +1,8 @@
 import re
 import sys
 import xlsxwriter
+import os
+from mysite.settings import BASE_DIR
 
 def parse(f):
   jose=[]
@@ -295,8 +297,8 @@ def parse_xr(f):
 
 def Create_Excel_Table_xr(ip1,date1,data):
 
-        filename='./xr/session_logs/'+ip1+'_'+date1+'_xr_mcast.xlsx'
-        filename2=ip1+'_'+date1+'_xr_mcast.xlsx'
+        filename = os.path.join(BASE_DIR, "xr/session_logs", f'{ip1}_{date1}_xr_mcast.xlsx')
+        filename2 = f'{ip1}_{date1}_xr_mcast.xlsx'
         filename=str(filename)
         # Create an new Excel file and add a worksheet.
         workbook = xlsxwriter.Workbook(filename)

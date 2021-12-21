@@ -13,10 +13,11 @@ from django import forms
 from django.utils import timezone
 from .forms import NameForm, IPForm, LoginForm, CompareForm, TrafficForm, IP_XR_Form
 from .models import Devices, Mcast_flows, Script_logs, Traffic_interfaces, ARP_data, IGMP_data
+from .models import QoSInterfaces
 from .scripts_all import parse_mcast, parse_xr, Create_Excel_Table_xr, parse_interface, parse_arp, parse_mcast_igmp
 from .scripts_all import parse_igmp
 from helpers.class2_device import BaseDevice
-from helpers.parse_cmd import parse_mpls_interface
+from helpers.parse_cmd import parse_mpls_interface, parse_mpls_qos, parse_mpls_qos_interface, parse_policy_map
 import uuid
 import json
 from django.conf import settings
@@ -127,7 +128,13 @@ def qos_xr(request):
             output_data = router.send_command(parse_mpls_interface, ['show mpls interfaces'])
             if type(output_data) == tuple:
                 return HttpResponse('Hit Exception: {0} {1}'.format(output_data[0],output_data[1] ) )
+            hostname = router.get_hostname()
+            lista_qos = parse_mpls_qos(output_data)
+            output_data2 = router.ssh_connect(lista_qos)
+            if type(output_data2) == tuple:
+                return HttpResponse('Hit Exception: {0} {1}'.format(output_data2[0],output_data2[1] ) )
             date_now = timezone.now()
+            output_data +=  output_data2
             file_name ='qos_'+str(uuid.uuid4())
             file_path = os.path.join(BASE_DIR, "xr/session_logs", file_name)
             with open(file_path,'w') as file:
@@ -139,10 +146,40 @@ def qos_xr(request):
                                 ,data_date = date_now
                                 )
             entrada.save()
+            dict_pm = parse_policy_map(output_data)
+            list_interfaces = parse_mpls_qos_interface(output_data)
+            data = {'interfaces':list_interfaces, 'policy-map':dict_pm}
+            for x in list_interfaces:
+                new_qos = QoSInterfaces(
+                        hostname = hostname,
+                        interface = x['interface'],
+                        description = x['description'],
+                        input_sp = x['sp_in'],
+                        output_sp = x['sp_out'],
+                        input_sp_config = dict_pm[x['sp_in']],
+                        output_sp_config = dict_pm[x['sp_out']],
+                        datetime = date_now
+                        )
+                new_qos.save()
             return render(request, 'xr/show_logs.html', {'form': form, 'log_file_contents': output_data, 'type_form': 'qos'} )
     else:
         form = IPForm()
     return render(request, 'xr/show_logs.html', {'form': form, 'type_form': 'qos'} )
+
+def get_qos(request):
+    data = [ {
+                'id':x.id,
+                'hostname':x.hostname,
+                'interface':x.interface,
+                'description':x.description,
+                'input_sp':x.input_sp,
+                'output_sp':x.output_sp,
+                'datetime':x.datetime.strftime('%d %B %Y, %I:%M %p'),
+    } for x in QoSInterfaces.objects.all().order_by('-id')]
+    return JsonResponse({ 'data': data })
+
+def list_qos(request):
+    return render(request, 'xr/list_qos.html')
 
 @login_required(login_url='/nxos/login/')
 def session_logs_xr(request):
@@ -172,10 +209,10 @@ def xr_mcast(request):
             host_ip= form.cleaned_data.get('alternativas').ip_address
             x = dt.now()
             date1 = ("%s-%s-%s_%s-%s-%s" % (x.year, x.month, x.day,x.hour,x.minute,x.second) )
-            router=BaseDevice(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
-            output_data=router.send_command(parse_mcast,['show mrib vrf ?'])
+            router = BaseDevice(host_ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
+            output_data = router.send_command(parse_mcast,['show mrib vrf ?'])
             docfile = os.path.join(BASE_DIR, "xr/session_logs", f'{host_ip}_mcast_{date1}')
-            file_name=host_ip+'_mcast_'+date1
+            file_name = host_ip+'_mcast_'+date1
             with open(docfile,'w') as file:
                 file.write(router.buffer)
             f1 = open (docfile,'r')
@@ -196,7 +233,7 @@ def xr_mcast(request):
                                      ,out_intf=item['out_intfs']
                                      ,data_date=date_now)
                     entrada.save()
-            filename=Create_Excel_Table_xr(host_ip,date1,lista_MCAST_GRP)
+            filename = Create_Excel_Table_xr(host_ip, date1, lista_MCAST_GRP)
             return render(request, 'xr/result_page.html', {'user_id': host_ip, 'file_name': filename} )
     else:
         form = IPForm()

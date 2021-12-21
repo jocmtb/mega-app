@@ -63,3 +63,15 @@ class IGMP_data(models.Model):
     datetime = models.DateTimeField('date published')
     def __str__(self):
         return '({0} , {1}) is joined by {2}'.format(self.mcast_grp, self.mcast_src, self.reporter_ip)
+
+class QoSInterfaces(models.Model):
+    hostname = models.CharField(max_length=200)
+    interface = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    input_sp = models.CharField(max_length=200)
+    output_sp = models.CharField(max_length=200)
+    input_sp_config = models.CharField(max_length=2000)
+    output_sp_config = models.CharField(max_length=2000)
+    datetime = models.DateTimeField('date published')
+    def __str__(self):
+        return self.hostname+'<>'+str(self.datetime)
