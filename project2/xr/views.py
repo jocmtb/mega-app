@@ -166,6 +166,14 @@ def qos_xr(request):
         form = IPForm()
     return render(request, 'xr/show_logs.html', {'form': form, 'type_form': 'qos'} )
 
+def qos_pm(request, type, qos_id):
+    qos_entry = QoSInterfaces.objects.get(id=qos_id)
+    if type=='input':
+        data =  {  'config':qos_entry.input_sp_config  }
+    else:
+        data =  {  'config':qos_entry.output_sp_config  }
+    return JsonResponse({ 'data': data })
+
 def get_qos(request):
     data = [ {
                 'id':x.id,

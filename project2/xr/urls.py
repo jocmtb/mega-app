@@ -13,6 +13,7 @@ urlpatterns = [
     path('list-qos/', views.list_qos, name='list_qos'),
     path('get-qos/', views.get_qos, name='get_qos'),
     path('qos-xr/', views.qos_xr, name='qos_xr'),
+    path('qos/policy-map/<str:type>/<int:qos_id>', views.qos_pm),
     url(r'^session_logs/$', views.session_logs_xr, name='session_logs_xr'),
     url(r'^xr_mcast/$', views.xr_mcast, name='xr_mcast'),
     url(r'^traffic_interface/$', views.traffic_interface_xr, name='traffic_interface_xr'),

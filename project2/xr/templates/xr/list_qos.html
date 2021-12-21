@@ -2,23 +2,45 @@
 
 {% block content %}
 {% load static %}
+<!-- MODAL POLICY-MAP CONFIG -->
+<div class="modal fade" id="qosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Policy-map Configuration</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="qosContent">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container joc2">
-<h3 class="title-table"> Collections QoS Table </h3>
-<div class="dropdown-divider"></div>
-<table id="collectionsTable" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
-<thead>
-    <tr bgcolor="#F8C471">
-        <th width="5%">Id</th>
-        <th>Hostname</th>
-        <th>Interface</th>
-        <th>Description</th>
-        <th>SP IN</th>
-        <th>SP OUT</th>
-        <th>PM Config</th>
-        <th width="20%">Datetime</th>
-    </tr>
-</thead>
-</table>
+  <h3 class="title-table"> Collections QoS Table </h3>
+  <div class="dropdown-divider"></div>
+  <table id="collectionsTable" cellspacing="0" class="table table-striped table-bordered" style="width:100%" >
+  <thead>
+      <tr bgcolor="#F8C471">
+          <th width="5%">Id</th>
+          <th>Hostname</th>
+          <th>Interface</th>
+          <th>Description</th>
+          <th>SP IN</th>
+          <th>SP OUT</th>
+          <th>PM Input Config</th>
+          <th>PM Output Config</th>
+          <th width="20%">Datetime</th>
+      </tr>
+  </thead>
+  </table>
 </div>
 
 
@@ -54,12 +76,52 @@
                 }
               return data;
             }},
-        {data: "out_cfg"},
+        {data: "id",
+          "render": function(data, type, row, meta){
+                if(type === 'display'){
+                  data = `<a href="#" onclick="showPM(${data});" data-toggle="modal" data-target="#qosModal"><img src="{% static 'file.png' %}"></a>`;
+                }
+              return data;
+            }},
+        {data: "id",
+          "render": function(data, type, row, meta){
+                if(type === 'display'){
+                  data = `<a href="#" onclick="showPMOut(${data});" data-toggle="modal" data-target="#qosModal"><img src="{% static 'file.png' %}"></a>`;
+                }
+              return data;
+            }},
         {data: "datetime"},
       ]
     } );
     });
 
+function showPM(data){
+  console.log(data);
+  qosContent = document.getElementById('qosContent');
+  fetch(`/xr/qos/policy-map/input/${data}`, {
+  method: 'GET',
+  })
+  .then(r => r.json())
+  .then(data => {
+          console.log(data.data);
+          qosContent.innerHTML = `<pre>${data.data.config}</pre>`;
+  })
+  .catch(error => console.log('API Policy-map Config failed : ' + error.message));
+}
+
+function showPMOut(data){
+  console.log(data);
+  qosContent = document.getElementById('qosContent');
+  fetch(`/xr/qos/policy-map/output/${data}`, {
+  method: 'GET',
+  })
+  .then(r => r.json())
+  .then(data => {
+          console.log(data.data);
+          qosContent.innerHTML = `<pre>${data.data.config}</pre>`;
+  })
+  .catch(error => console.log('API Policy-map Config failed : ' + error.message));
+}
   </script>
 
 {% endblock %}
