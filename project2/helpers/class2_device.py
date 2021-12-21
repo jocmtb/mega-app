@@ -3,6 +3,7 @@ import paramiko as pm
 import time
 import re
 import socket
+import sys
 '''
 Class to instance network objects
 '''
@@ -63,7 +64,7 @@ class BaseDevice():
                         client.connect(self.ip_address, username=self.user, password=self.password)
                         channel = client.invoke_shell()
                         time.sleep(1)
-                        channel.settimeout(20)
+                        channel.settimeout(30)
                         stdin = channel.makefile('wb')
                         stdout = channel.makefile('rb')
                         stdin.write(self.paging)
@@ -73,18 +74,19 @@ class BaseDevice():
                         stdin.write('### Connection terminated\n')
                         while True:
                                 x = channel.recv(1024)
-                                self.buffer += x
+                                self.buffer += x.decode("utf-8")
                                 #print x
                                 if '### Connection terminated' in self.buffer:
                                      break
-                        lista2=func1(self.buffer)
+                        lista2 = func1(self.buffer)
+                        #print(lista2, file=sys.stderr)
                         for cmd in lista2:
                                 stdin.write(cmd)
                         stdin.write('exit\n')
                         output_data = stdout.read()
-                        self.buffer += output_data
+                        self.buffer += output_data.decode("utf-8")
                         stdout.close(); stdin.close(); client.close()
-                        return output_data
+                        return self.buffer
                 except Exception as e:
                         return type(e).__name__, str(e)
         def validate_ip(self):
@@ -255,7 +257,7 @@ class DeviceJunos(BaseDevice):
                                         return host2[1]
         def __repr__(self):
                 return 'device: {0}'.format(self.ip_address)
-				
+
 class DeviceIOS(BaseDevice):
         portssh=22
         def __init__(self,ip_address,comando='',user='jcostav',password='Lima2018$'):

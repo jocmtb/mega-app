@@ -16,6 +16,7 @@ from .models import Devices, Mcast_flows, Script_logs, Traffic_interfaces, ARP_d
 from .scripts_all import parse_mcast, parse_xr, Create_Excel_Table_xr, parse_interface, parse_arp, parse_mcast_igmp
 from .scripts_all import parse_igmp
 from helpers.class2_device import BaseDevice
+from helpers.parse_cmd import parse_mpls_interface
 import uuid
 import json
 from django.conf import settings
@@ -123,7 +124,7 @@ def qos_xr(request):
         if form.is_valid():
             ip1 = form.cleaned_data.get('alternativas').ip_address
             router = BaseDevice(ip1, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
-            output_data = router.ssh_connect(['show mpls interfaces'])
+            output_data = router.send_command(parse_mpls_interface, ['show mpls interfaces'])
             if type(output_data) == tuple:
                 return HttpResponse('Hit Exception: {0} {1}'.format(output_data[0],output_data[1] ) )
             date_now = timezone.now()
@@ -330,8 +331,12 @@ def script_logs_xr(request):
     query_results = Script_logs.objects.all();
     if query_results.count() != 0:
         for x in query_results:
-            data['data'].append({'sc_type':x.script_type,'file_name':x.file_location
-                            ,'datetime':x.data_date,'host':x.host_id})
+            data['data'].append({
+                        'sc_type':x.script_type
+                        ,'file_name':x.file_location
+                        ,'datetime':x.data_date.strftime('%d %B %Y, %I:%M %p')
+                        ,'host':x.host_id
+                            })
     return JsonResponse(data)
 
 def api_traffic_table_xr(request,hostname):

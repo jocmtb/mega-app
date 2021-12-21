@@ -41,7 +41,7 @@ class Script_logs(models.Model):
     file_location = models.CharField(max_length=200)
     data_date = models.DateTimeField('date published')
     def __str__(self):
-        return Devices.objects.get(ip_address=self.host_id).hostname+'_'+str(self.data_date)
+        return Devices.objects.get(ip_address=self.host_id).hostname+'<>'+self.data_date.strftime('%d %B %Y, %I:%M %p')
 
 class Traffic_interfaces(models.Model):
     host_id = models.CharField(max_length=200)
