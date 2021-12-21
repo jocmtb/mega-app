@@ -25,10 +25,11 @@ urlpatterns = [
     url(r'^api/hosts/(?P<stat_id>\w+)/$', views.api_host_stats_xr, name='api_host_stats_xr'),
     url(r'^script_logs/$', views.script_logs_xr, name='script_logs_xr'),
     url(r'^script_logs/(?P<hostname>[]\w\.\d]+)/$', views.script_logs_by_host_xr, name='script_logs_by_host_xr'),
-    url(r'^download/(?P<path>.*)$', views.download_xr, name='download_xr'),
     url(r'^api/traffic2/(?P<hostname>[]\w\.\d]+)/$', views.api_traffic_table_xr, name='api_traffic_table_xr'),
     url(r'^api/traffic/(?P<hostname>[]\w\.\d]+)/$', views.api_traffic_xr, name='api_traffic_xr'),
     url(r'^api/arp/data/(?P<hostname>[]\w\.\d]+)/$', views.api_arp_xr, name='api_arp_xr'),
     url(r'^ajax_mcast_flows/$', views.ajax_mcast_flows_xr, name='ajax_mcast_flows_xr'),
     url(r'^api/join/igmp/(?P<hostname>[]\w\.\d]+)/$', views.api_join_igmp_xr, name='api_join_igmp_xr'),
+    #Filename API Download Files
+    path('download/<str:filename>', views.download_xr, name='download_xr'),
 ]

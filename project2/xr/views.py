@@ -456,8 +456,8 @@ def api_join_igmp_xr(request,hostname):
     return JsonResponse( {'data':data_list} )
 
 ###TEST defs###
-def download_xr(request, path):
-    file_path = os.path.join(settings.MEDIA_ROOT_XR, path)
+def download_xr(request, filename):
+    file_path = os.path.join(BASE_DIR, "xr/session_logs", filename)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
