@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<h3>Please select one device:</h3>
+
 {% if device_list %}
     <ul>
     {% for device in device_list %}
@@ -20,16 +20,20 @@
       <div class="column menu">
             <!-- All Context Menu goes Here -->
 
-                  <form action="/xr/dashboard/" method="post">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Submit">
-                  </form>
+            <div class="container espacio">
+              <h3>Select one device:</h3>
+              <form action="/xr/dashboard/" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input class="btn btn-info btn-padding" type="submit" value="Submit">
+              </form>
+            </div>
 
                   <h2 class="title2">{{host1}}</h2>
-                  <div  class=joc1>
+
                         <div class="row">
                               <div class="col-sm-6">
+                                <div class=joc2>
                                 <!-- class="table table-striped table-bordered"-->
                                 <h3>Interface Statistics</h3>
                         				<table id="myTable" class="display" style="width:100%" >
@@ -42,8 +46,10 @@
                                 				</tr>
                             				</thead>
                         				</table>
+                                </div>
                   		        </div>
                               <div class="col-sm-6">
+                                <div class=joc2>
                                    <!-- <div id="container-joc"></div> -->
                                    <h3>Info Device Inventory</h3>
                                    <table id="myScriptTable" class="display" style="width:100%" >
@@ -56,80 +62,81 @@
                                    				</tr>
                                				</thead>
                            				</table>
+                                  </div>
                                 </div>
                           </div>
-                      </div>
+
         </div>
 
       <div class="column content">
             <!-- All Context Section goes Here -->
-            <div  class=joc1>
               <div class="row">
                   <div  class="col-sm-6">
+                    <div class=joc2>
                       <div id="container-chart1"></div>
+                      </div>
                     </div>
                   <div  class="col-sm-6">
+                    <div class=joc2>
                       <div id="container-chart2"></div>
-                    </div>
-                </div>
-              </div>
-
-
-            <div  class=joc1>
-
-
-              <div class="row">
-                  <div  class="col-sm-12">
-                    <h3>ARP Table</h3>
-                    <table id="myARPTable" class="display" style="width:100%" >
-                        <thead>
-                            <tr>
-                              <th>Hostname</th>
-                              <th>Interface</th>
-                              <th>MAC Address</th>
-                              <th>IP Address</th>
-                              <th>VRF Name</th>
-                              <th>Interface Description</th>
-                              <th width="20%">DateTime</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    </div>
-                    </div>
-                    <div class="row">
-                  <div  class="col-sm-10">
-                    <h3>IGMP JOIN Table</h3>
-                    <table id="myIGMPTable" class="display" style="width:100%" >
-                        <thead>
-                            <tr>
-                              <th>Hostname</th>
-                              <th>Mcast Group</th>
-                              <th>Mcast Source</th>
-                              <th>Reporter IP</th>
-                              <th>Interface</th>
-                              <th>VRF ID</th>
-                              <th width="20%">DateTime</th>
-                            </tr>
-                        </thead>
-                    </table>
+                      </div>
                     </div>
                 </div>
 
+              <div class="row zero-box">
+                  <div  class="col-sm-12 zero-box">
+                    <div class=joc2>
+                        <h3>ARP Table</h3>
+                        <table id="myARPTable" class="display" style="width:100%" >
+                            <thead>
+                                <tr>
+                                  <th>Hostname</th>
+                                  <th>Interface</th>
+                                  <th>MAC Address</th>
+                                  <th>IP Address</th>
+                                  <th>VRF Name</th>
+                                  <th>Interface Description</th>
+                                  <th width="20%">DateTime</th>
+                                </tr>
+                            </thead>
+                        </table>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="row zero-box">
+                  <div  class="col-sm-10 zero-box">
+                    <div class=joc2>
+                        <h3>IGMP JOIN Table</h3>
+                        <table id="myIGMPTable" class="display" style="width:100%" >
+                            <thead>
+                                <tr>
+                                  <th>Hostname</th>
+                                  <th>Mcast Group</th>
+                                  <th>Mcast Source</th>
+                                  <th>Reporter IP</th>
+                                  <th>Interface</th>
+                                  <th>VRF ID</th>
+                                  <th width="20%">DateTime</th>
+                                </tr>
+                            </thead>
+                        </table>
+                      </div>
+                    </div>
+                </div>
 
 
-
-
-          </div>
       </div>
 </div>
 
+<style media="screen">
+  .zero-box{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+</style>
+{% endblock %}
 
-
-<!--
-	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>-->
-
-
+{% block scripts %}
 
 	<script>
 	$(document).ready(function() {

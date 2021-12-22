@@ -5,7 +5,7 @@
 
 {% if type_var == "addon" %}
 <div class="container espacio">
-  <h3>Page to add/update host:</h3>
+  <h3>Add/update host:</h3>
   <form action="/xr/add_device/" method="post">
     {% csrf_token %}
     {{ form }}
@@ -15,7 +15,7 @@
 {% endif %}
 
 {% if type_var == "delete" %}
-<h3>Page to delete host:</h3>
+<h3>Delete host:</h3>
 <form action="/xr/delete_device/" method="post">
   {% csrf_token %}
   {{ form }}
