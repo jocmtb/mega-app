@@ -15,6 +15,7 @@
                           <th>IP Address</th>
                           <th>Platform</th>
                           <th>IOS Version</th>
+                          <th>Actions</th>
                       </tr>
                   </thead>
                   </table>
@@ -103,6 +104,13 @@ $(document).ready(function() {
       {data: "IP_Address"},
       {data: "platform"},
       {data: "version"},
+      {data: "id",
+        "render": function(data, type, row, meta){
+              if(type === 'display'){
+                data = `<a href="/nxos/delete_device/${data}"><img src="{% static 'failed.png' %}"></a><a href="/nxos/dashboard_by_host/${data}"><img src="{% static 'calendar.png' %}"></a>`;
+              }
+            return data;
+        }},
     ]
   } );
   });

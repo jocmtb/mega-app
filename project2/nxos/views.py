@@ -179,6 +179,21 @@ def dashboard(request):
         return render(request, 'nxos/dashboard.html', context)
 
 @login_required(login_url='/nxos/login/')
+def dashboard_by_host(request, id):
+    if request.method=='GET':
+        form = TrafficForm()
+        device_list = Devices.objects.all()
+        host_exist = Devices.objects.filter(id=id)
+        if host_exist.count() == 1:
+            host_selected = Devices.objects.get(id=id)
+            host_name = host_selected.hostname
+            ip_address = host_selected.ip_address
+            context = { 'form': form, 'hostname': ip_address, 'device_list': device_list, 'host1': host_name }
+            return render(request, 'nxos/dashboard.html', context)
+        else:
+            HttpResponse('No host in database with that IP-Address')
+
+@login_required(login_url='/nxos/login/')
 def dashboard2(request,hostname):
     if request.method=='POST':
         '''form = TrafficForm(request.POST)
@@ -197,7 +212,6 @@ def dashboard2(request,hostname):
             return render(request, 'nxos/dashboard.html', context)
         else:
             HttpResponse('No host in database with that IP-Address')
-
 
 @login_required(login_url='/nxos/login/')
 def script_type(request, option_id):
@@ -295,29 +309,18 @@ def get_name(request):
     return render(request, 'nxos/launch_script.html', {'form': form, 'type_var': 'addon'} )
 
 @login_required(login_url='/nxos/login/')
-def delete_device(request):
+def delete_device(request, id):
     # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            host_ip= form.cleaned_data.get('your_ip')
-            device_now = Devices.objects.filter(ip_address=host_ip)
-            if device_now.count() == 0:
-                return HttpResponse("Device with IP: %s does not Exist." % host_ip)
-            else:
-                device_now = Devices.objects.get(ip_address=host_ip)
-                device_now.delete()
-            return render(request, 'nxos/thanks.html', {'user_id': host_ip} )
-            #return HttpResponse("Thanks for submitting your Form %s." % name1)
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = NameForm()
-    return render(request, 'nxos/launch_script.html', {'form': form, 'type_var': 'delete'} )
+    if request.method == 'GET':
+        device_now = Devices.objects.filter(id=id)
+        if device_now.count() == 0:
+            return HttpResponse("Device with ID: %s does not Exist." % id)
+        else:
+            device_now = Devices.objects.get(id=id)
+            device_now.delete()
+        # redirect to a new URL:
+        return HttpResponseRedirect('/nxos/nxos/')
+
 
 @login_required(login_url='/nxos/login/')
 def show_logs(request):
@@ -484,7 +487,13 @@ def hostnames(request):
     data = {'data':[]}
     query_results = Devices.objects.all();
     for x in query_results:
-        data['data'].append({'hostname':x.hostname,'IP_Address':x.ip_address,'platform':x.platform,'version':x.version})
+        data['data'].append({
+                        'id':x.id
+                        ,'hostname':x.hostname
+                        ,'IP_Address':x.ip_address
+                        ,'platform':x.platform
+                        ,'version':x.version
+                        })
     return JsonResponse(data)
 
 def ajax_mcast_flows(request):

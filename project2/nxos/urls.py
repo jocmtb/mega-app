@@ -1,6 +1,7 @@
 
 from . import views
 from django.conf.urls import url, include
+from django.urls import path
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -14,6 +15,7 @@ urlpatterns = [
 	# ex: /polls/
     url(r'^d3_graph/$', views.d3_graph, name='d3_graph'),
     url(r'^d3_graph2/$', views.d3_graph2, name='d3_graph2'),
+    path('dashboard_by_host/<int:id>', views.dashboard_by_host),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^dashboard/(?P<hostname>[]\w\.\d]+)/$', views.dashboard2, name='dashboard2'),
     # ex: /polls/5/
@@ -37,7 +39,7 @@ urlpatterns = [
     # ex: DEfs Routing
     url(r'^backup/$', views.backup, name='backup'),
     url(r'^get_name/$', views.get_name, name='get_name'),
-    url(r'^delete_device/$', views.delete_device, name='delete_device'),
+    path('delete_device/<int:id>', views.delete_device, name='delete_device'),
     url(r'^thanks/$', views.thanks, name='thanks'),
     url(r'^show_logs/$', views.show_logs, name='show_logs'),
     # ex: /polls/5/
