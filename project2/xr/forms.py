@@ -1,6 +1,11 @@
 from django import forms
 from .models import Devices, Script_logs
 
+SITES_CHOICES = [
+    ('VER', "Veracruz"), ('GDL', "Guadalajara"),
+    ('QRO', "Queretaro"), ('TOL', "Toluca"), ('CLN', "Culiacan")
+    , ('HMO', "Hermosillo"), ('LEON', "Leon"), ('TOR', "Torreon")
+]
 '''
 class LoadChoices(forms.ModelForm):
 
@@ -19,6 +24,10 @@ class MyForm(forms.Form):
                 get_my_choices=[ (x.file_location, Devices.objects.get(ip_address=x.host_id).hostname+'-'+str(x.data_date)) for x in Script_logs.objects.filter(script_type='mcastflow').all()]
                 self.fields['my_choice_field'] = forms.ChoiceField( choices=get_my_choices )
 '''
+class d3Form(forms.Form):
+    sites = forms.ChoiceField(choices = SITES_CHOICES, label="Mega Sites"
+                            , initial='', widget=forms.Select(attrs= {'class':'form-control'})
+                            , required=True)
 
 class NameForm(forms.Form):
     your_ip = forms.CharField(label='IP Address'

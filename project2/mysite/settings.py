@@ -25,7 +25,7 @@ else:
 MEDIA_ROOT = './nxos/session_logs/'
 MEDIA_ROOT_XR = './xr/session_logs/'
 TACACS_USER='provciscojosec'
-TACACS_PASSWORD='3g:IEqupqd'
+TACACS_PASSWORD='6_Hr5j2oHb'
 LISTA_CMD=['show clock','show running-config'
 ,'show spanning-tree'
 ,'show spanning-tree | i VLAN|root|Address'
@@ -180,7 +180,7 @@ Q_CLUSTER = {
     "name": "django_q",
     "timeout": 60,
     "redis": {
-            "host": 'redis', 
+            "host": 'redis',
             "port": 6379,
             "db": 0,
             },

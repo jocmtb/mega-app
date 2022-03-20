@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django import forms
 from django.utils import timezone
-from .forms import NameForm, IPForm, LoginForm, CompareForm, TrafficForm, IP_XR_Form
+from .forms import NameForm, IPForm, LoginForm, CompareForm, TrafficForm, IP_XR_Form, d3Form
 from .models import Devices, Mcast_flows, Script_logs, Traffic_interfaces, ARP_data, IGMP_data
 from .models import QoSInterfaces
 from .scripts_all import parse_mcast, parse_xr, Create_Excel_Table_xr, parse_interface, parse_arp, parse_mcast_igmp
@@ -20,6 +20,7 @@ from helpers.class2_device import BaseDevice
 from helpers.parse_cmd import parse_mpls_interface, parse_mpls_qos, parse_mpls_qos_interface, parse_policy_map
 import uuid
 import json
+from .helpers import json_data, parse_bgp
 from django.conf import settings
 import os
 from mysite.settings import BASE_DIR
@@ -31,6 +32,34 @@ def index2(request):
 
 def index_xr(request):
     return render(request, 'xr/dashboard_xr.html')
+
+@login_required(login_url='/nxos/login/')
+def d3_graph(request):
+    if request.method=='POST':
+        form = d3Form(request.POST)
+        if form.is_valid():
+            site = form.cleaned_data.get('sites')
+            device_list = [ x.ip_address for x in Devices.objects.filter(hostname__icontains=site+'_ctc')]
+            #return JsonResponse({'data':device_list})
+            nodes = {}
+            links=[] ; nodes2=[]
+            for ip in device_list:
+                router = BaseDevice(ip, user=settings.TACACS_USER, password=settings.TACACS_PASSWORD)
+                stdout = router.ssh_connect(['show bgp ipv4 unic neighbor | i "^BGP neighbor|Descrip"', 'show bgp summary'])
+                router.get_hostname()
+                if isinstance(stdout,tuple):
+                    return HttpResponse('{0} > {1}'.format(stdout[0],stdout[1]) )
+                nodes,links = parse_bgp(nodes, links, router.hostname, stdout)
+            for x in nodes:
+                nodes2.append(nodes[x])
+            data = json.dumps( { 'nodes':nodes2, 'links':links } )
+            context = { 'form': form, 'data': data }
+            return render(request, 'xr/d3_graph.html', context)
+    else:
+        form = d3Form()
+        data = json.dumps( json_data )
+        context = { 'form': form, 'data': data }
+        return render(request, 'xr/d3_graph.html', context)
 
 @login_required(login_url='/nxos/login/')
 def add_device(request):

@@ -5,6 +5,7 @@ from django.urls import path
 
 urlpatterns = [
     url(r'^$', views.index2, name='index2'),
+    url(r'^d3_graph/$', views.d3_graph, name='xr_d3_graph'),
     url(r'^main/$', views.index_xr, name='index_xr'),
     url(r'^add_device/$', views.add_device, name='add_device'),
     url(r'^delete_device/$', views.delete_device_xr, name='delete_device_xr'),
